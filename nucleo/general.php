@@ -6,6 +6,7 @@
 		##############################################################################		
 		public function __CONSTRUCT($option=array())
 		{
+		    #$this->__PRINT_R($_FILES);
 		    //unset($_SESSION);			
 		    
 			if(!isset($option))							$option				=array();

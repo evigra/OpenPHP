@@ -839,6 +839,7 @@
 			
 			if(is_array($_FILES))
 			{
+			    
 				$this->request["files"]=array();				
 				foreach($_FILES as $valor)
 				{
@@ -3687,7 +3688,7 @@
 					{
 						$script.="
 							$(\"#$font_id\").click(function()
-							{									
+							{				
 								var form=\"Archivo CSV <input id=\\\"import_csv_{$this->sys_name}\\\"  name=\\\"import_csv_{$this->sys_name}\\\" type=\\\"file\\\" class=\\\"formulario\\\"><font id=\\\"upload_import\\\">Cargar</font>\";								
 								$(\"#message\")
 								.html(form)
@@ -3712,8 +3713,8 @@
 											.dialog(\"destroy\")
 											.hide();										
 								
-										var formData = new FormData($(\"form\")[0]);										
-										var subiendo=datos;
+										var formData    = new FormData($(\"form\")[0]);										
+										var subiendo    =datos;
 										
 										subiendo.url		='../sitio_web/ajax/general.php&seccion_import=subiendo_archivo&sys_name={$this->sys_name}&date=".date("YmdHis")."';
 										subiendo.data		=formData;
