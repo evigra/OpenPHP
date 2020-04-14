@@ -54,9 +54,9 @@
 							LINES TERMINATED BY '{$objeto->sys_import["lines"]}'
 							IGNORE {$objeto->sys_import["ignore"]} ROWS;
 						";
-						echo $comando_sql;
+						#echo $comando_sql;
 						$objeto->__EXECUTE($comando_sql);
-						echo "<br>CARGANDO TABLA $comando_sql";
+						echo "<br>CARGANDO TABLA <br><br>$comando_sql";
 					}	
 					####################################################
 					elseif($_GET["seccion_import"]=="actualizando_datos")

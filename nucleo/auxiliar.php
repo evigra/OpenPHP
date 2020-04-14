@@ -3710,8 +3710,13 @@
 									.click(function()
 									{
 										$(\"#message\")
-											.dialog(\"destroy\")
-											.hide();										
+										.attr({\"title\":\"Estado del sistema\"})
+										.html(\"Preparando carga de archivo\")
+										.dialog({
+											width:\"400\",
+											modal: true,
+										});				
+				
 								
 										var formData    = new FormData($(\"form\")[0]);										
 										var subiendo    =datos;
