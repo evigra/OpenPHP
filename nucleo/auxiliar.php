@@ -3711,12 +3711,13 @@
 									{
 										$(\"#message\")
 										.attr({\"title\":\"Estado del sistema\"})
-										.html(\"Preparando carga de archivo\")
-										.dialog({
-											width:\"400\",
-											modal: true,
-										});				
-				
+										.html(\"Preparando carga de archivo\");				
+
+
+								        
+										$(\"#message\")
+											.dialog(\"destroy\")
+											.hide();										
 								
 										var formData    = new FormData($(\"form\")[0]);										
 										var subiendo    =datos;
