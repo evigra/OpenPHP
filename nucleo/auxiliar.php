@@ -3709,12 +3709,7 @@
 									.button()
 									.click(function()
 									{
-										$(\"#message\")
-										.attr({\"title\":\"Estado del sistema\"})
-										.html(\"Preparando carga de archivo\");				
-
-
-								        
+								
 										$(\"#message\")
 											.dialog(\"destroy\")
 											.hide();										

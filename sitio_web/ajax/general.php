@@ -1,13 +1,9 @@
 <?php	
 	require_once("nucleo/sesion.php");
 	
-	#print_r($_FILES);
-	
 	$eval="$"."objeto=new {$_GET["sys_name"]}();";
 	eval($eval);
 	
-	#$objeto->__PRINT_R($objeto);
-		
 	if(is_array($_FILES))
 	{
 		foreach($_FILES as $datas)
@@ -16,8 +12,6 @@
 			{							
 				if(isset($datas["error"]) AND $datas["error"]==0)
 				{
-                    
-
 					$uploads_dir 			= 'modulos/files/file';
 
 					$tmp_name 				= $datas["tmp_name"];
@@ -40,12 +34,12 @@
 					}		
 					elseif($_GET["seccion_import"]=="preparar_tabla")
 					{
-						echo "<br>PREPARAR TABLA";
-						
+						echo "<br>PREPARAR TABLA";						
 					}	
 					####################################################
 					elseif($_GET["seccion_import"]=="cargar_tabla")
 					{
+					    $objeto->__PRINT_R($_GET);
 						$comando_sql="
 							LOAD DATA INFILE '$path' 
 							INTO TABLE {$objeto->sys_table} 
