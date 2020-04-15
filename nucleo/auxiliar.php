@@ -16,6 +16,7 @@
 									"enclosed"	=>"\"",
 									"lines"		=>"\\n",
 									"ignore"	=>"1",
+									"path"	    =>"/var/lib/mysql/files/frame/file/",
 								);
 								
 		var $html				="";

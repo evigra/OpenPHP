@@ -9,15 +9,13 @@
 	
 	if(!isset($_SESSION))		$_SESSION=array();
 	
-	
-	
 	if(isset($_SESSION))
 	{
-		if(!isset($_SESSION["var"]))			$_SESSION["var"]					=array();
-		if(!isset($_SESSION["var"]["menu"]))	$_SESSION["var"]["menu"]			="";
-		if(isset($_REQUEST["sys_menu"]))		$_SESSION["var"]["menu"]			=$_REQUEST["sys_menu"];
-		if(isset($_REQUEST["sys_vpath"]))		$_SESSION["var"]["vpath"]			=@$_REQUEST["sys_vpath"];		
-		if($_SESSION["var"]["menu"]=="")		$_SESSION["var"]["menu"]			=2;
+		if(!isset($_SESSION["var"]))			        $_SESSION["var"]					=array();
+		if(!isset($_SESSION["var"]["menu"]))	        $_SESSION["var"]["menu"]			="";
+		if(isset($_REQUEST["sys_menu"]))		        $_SESSION["var"]["menu"]			=$_REQUEST["sys_menu"];
+		if(isset($_REQUEST["sys_vpath"]))		        $_SESSION["var"]["vpath"]			=@$_REQUEST["sys_vpath"];		
+		if($_SESSION["var"]["menu"]=="")		        $_SESSION["var"]["menu"]			=2;
 
 	    if(!isset($_SESSION["company"]))		        @$_SESSION["company"]					    =array();
 		if(!isset($_SESSION["company"]["nombre"]))		@$_SESSION["company"]["nombre"]		        =" ";
@@ -46,6 +44,7 @@
 												"enclosed"	=>"\"",
 												"lines"		=>"\\n",
 												"ignore"	=>"1",
+												"path"	    =>"/var/lib/mysql/files/frame/file/",
 		);
 		$_SESSION["var"]["modules"]			=array(
 												"historico","menu","user_group","tareas", 

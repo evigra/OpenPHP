@@ -39,9 +39,8 @@
 					####################################################
 					elseif($_GET["seccion_import"]=="cargar_tabla")
 					{
-					    $objeto->__PRINT_R($_GET);
 						$comando_sql="
-							LOAD DATA INFILE '$path' 
+							LOAD DATA INFILE '{$objeto->sys_import["fields"]}{$_GET["name"]}' 
 							INTO TABLE {$objeto->sys_table} 
 							FIELDS TERMINATED BY '{$objeto->sys_import["fields"]}' 
 							ENCLOSED BY '{$objeto->sys_import["enclosed"]}'
