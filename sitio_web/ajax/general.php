@@ -40,7 +40,7 @@
 					elseif($_GET["seccion_import"]=="cargar_tabla")
 					{
 						$comando_sql="
-							LOAD DATA INFILE '{$objeto->sys_import["fields"]}{$_GET["name"]}' 
+							LOAD DATA INFILE '{$objeto->sys_import["path"]}{$_GET["name"]}' 
 							INTO TABLE {$objeto->sys_table} 
 							FIELDS TERMINATED BY '{$objeto->sys_import["fields"]}' 
 							ENCLOSED BY '{$objeto->sys_import["enclosed"]}'
