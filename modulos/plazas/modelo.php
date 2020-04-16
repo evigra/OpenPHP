@@ -5,13 +5,15 @@
 		##  Propiedades	
 		##############################################################################
 		var $mod_menu=array();
+        /*
 		var $sys_import			=array(
 			"type"		=>"replace",
 			"fields"	=>"|",
 			"enclosed"	=>"\"",
 			"lines"		=>"\\n",
 			"ignore"	=>"1",
-		);		
+		);
+		*/		
 		var $sys_fields		=array( 
 			"matricula"	    =>array(
 			    "title"             => "Matricula",
