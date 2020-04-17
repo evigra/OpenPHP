@@ -29,6 +29,7 @@
 							echo "{
 								\"mensaje\":\"SUBIENDO ARCHIVO\",
 								\"path\":\"$path\",
+								\"path_tmp\":\"$tmp_name\",
 								\"name\":\"$name\"									
 							}";												
 					}		
@@ -39,8 +40,9 @@
 					####################################################
 					elseif($_GET["seccion_import"]=="cargar_tabla")
 					{
+					    #LOAD DATA INFILE '{$objeto->sys_import["path"]}{$_GET["name"]}' 
 						$comando_sql="
-							LOAD DATA INFILE '{$objeto->sys_import["path"]}{$_GET["name"]}' 
+							LOAD DATA INFILE '$tmp_name' 
 							INTO TABLE {$objeto->sys_table} 
 							FIELDS TERMINATED BY '{$objeto->sys_import["fields"]}' 
 							ENCLOSED BY '{$objeto->sys_import["enclosed"]}'
