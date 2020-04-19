@@ -15,13 +15,11 @@
 					success: function (response) 
 					{
 						obj = $.parseJSON( response);				
+
+                        $("#ocupante").val(obj[0].ocupante);
+                        $("#categoria").val(obj[0].categoria);
+                        $("#horario").val(obj[0].horario);
 						
-						if(obj[0].turno==null || obj[0].turno==4)			
-						{	
-							$("#trabajador_turno")
-								.removeAttr("disabled")
-								.focus();
-						}	
 					}
 				});
 			}	

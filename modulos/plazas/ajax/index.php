@@ -3,12 +3,12 @@
 	require_once("../../../nucleo/sesion.php");	
 	$objeto				=new plazas();		
 	
-	$option             =array(
-    	"where"         =>array()
+	$option         =array(
+	    #"echo"          =>"ajax plazas",
+    	"where"         =>array(),
     );	
-	$option["where"][]  ="matricula='{$_GET["matricula"]}'";
-	
-	$datas              =$objeto->__BROWSE();
+	$option["where"][]  ="matricula='{$_GET["matricula"]}'";	
+	$datas              =$objeto->__BROWSE($option);
 	
 	#$objeto->__PRINT_R($datas);
 
