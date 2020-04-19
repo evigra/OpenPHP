@@ -12,7 +12,7 @@
 					url:            "../modulos/plazas/ajax/index.php?time=" + Date.now(),
 					contentType:    "application/json",
 					data:           "&matricula="+$(this).val(),				
-					success: function (response) 
+					success:        function (response) 
 					{
 						obj = $.parseJSON( response);				
 

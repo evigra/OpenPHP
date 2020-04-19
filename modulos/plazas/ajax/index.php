@@ -16,7 +16,7 @@
 	$objeto				=new plazas();		
 	$datas              =$objeto->__BROWSE($option);
 	
-	$objeto->__PRINT_R($datas);
+	#$objeto->__PRINT_R($datas);
 
 	echo json_encode($datas["data"]);
 ?>  
