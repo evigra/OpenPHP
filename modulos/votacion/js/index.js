@@ -3,7 +3,7 @@
 
 	$(document).ready(function()
 	{		
-		$("#trabajador_clave").focusout(function() 
+		$("#matricula").focusout(function() 
 		{	
 			if($(this).val()!="")
 			{

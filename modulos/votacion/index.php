@@ -94,7 +94,7 @@
 		$module_title								="Reporte de ";
     }
     
-	$objeto->words["module_title"]              ="$module_title Usuarios";
+	$objeto->words["module_title"]              ="$module_title Voto";
 	
 	
 	
