@@ -5,6 +5,7 @@
 		{  
 			return array(
 				"user"		=>"admin_evigra",
+				#"user"		=>"root",
 				"pass"		=>"EvG30JiC06",
 				"name"		=>"admin_frame",
 				"host"		=>"solesgps.com",

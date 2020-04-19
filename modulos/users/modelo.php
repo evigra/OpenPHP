@@ -182,7 +182,9 @@
 						"status=1"
 			    	),
     	    );
-    	    $data_user	=$this->users($option);    	 
+    	    $data_user	=$this->users($option);
+    	    
+    	    #$this->__PRINT_R($data_user);	    	 
     	           	    
     	    if(is_array($data_user) AND array_key_exists("data",$data_user))
     	    {    	    	
