@@ -59,10 +59,14 @@
 			    "title"             => "Departamento",
 			    "type"              => "input",
 			),			
-			"adcripcion2"	    =>array(
-			    "title"             => "Adscripcion",
+			"adscripcion2"	    =>array(
+			    "title"             => "Departamento",
 			    "type"              => "input",
 			),			
+			"ads_progra"	    =>array(
+			    "title"             => "Adscripcion",
+			    "type"              => "input",
+			),				
 
 		);				
 		##############################################################################	

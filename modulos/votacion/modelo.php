@@ -6,7 +6,6 @@
 		##############################################################################
 		var $mod_menu=array();
 		var $sys_fields		=array( 
-
 			"plaza_id"	    =>array(
 			    "title"             => "plaza",
 				"title_filter"		=> "Matricula",
@@ -63,7 +62,11 @@
 			    "title"             => "Departamento",
 			    "type"              => "input",
 			),			
-			"adcripcion2"	    =>array(
+			"adscripcion2"	    =>array(
+			    "title"             => "Jefatura",
+			    "type"              => "input",
+			),			
+			"ads_progra"	    =>array(
 			    "title"             => "Adscripcion",
 			    "type"              => "input",
 			),			

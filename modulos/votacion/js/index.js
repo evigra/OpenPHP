@@ -18,7 +18,11 @@
 
                         $("#ocupante").val(obj[0].ocupante);
                         $("#categoria").val(obj[0].categoria);
-                        $("#horario").val(obj[0].horario);					
+                        $("#horario").val(obj[0].horario);
+                        $("#plaza_id").val(obj[0].plaza_id);
+                        $("#adscripcion2").val(obj[0].adscripcion2);
+                        $("#ar2").val(obj[0].ar2);
+                        $("#ads_progra").val(obj[0].ads_progra);
 					}
 				});
 			}	
