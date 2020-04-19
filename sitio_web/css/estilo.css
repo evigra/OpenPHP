@@ -322,7 +322,7 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	width:				-moz-calc(100% - 50px); 
 	width:				calc(100% - 50px);      
 	max-width: 			1100px;
-	min-height: 		350px;
+	min-height: 		250px;
 	/*
 	height:				-moz-calc(100% - 50px); 
 	height:				calc(100% - 50px);    
