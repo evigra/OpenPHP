@@ -16,7 +16,6 @@
 			                                                "sesion"    =>"true",
 			                                                "fields"    =>"true",
 			                                            );
-
 			
 			if(isset($option["set"]["sesion"]))
 			{

@@ -52,7 +52,7 @@
 		}
    		public function __SAVE($datas=NULL,$option=NULL)
     	{    	   
-    		$option["table"]=$datas;
+    		#$option["table"]=$datas;
     	    $return =NULL;
 			if(@is_array($datas))
 			{							
@@ -61,7 +61,7 @@
 				if(isset($datas["error"]) AND $datas["error"]==0)
 				{
 					$uploads_dir 			= 'modulos/files/file';
-					$datas					=array();
+					#$datas					=array();
 					$tmp_name 				= $datas["tmp_name"];
 					$name 					= $datas["name"];
 					$type 					= $datas["type"];
@@ -73,9 +73,9 @@
 					$datas["file"]			=$name;
 					$datas["type"]			=$type;
 					$datas["extension"]		=$extension;
-					$datas["object"]		=$option["table"];
-					$datas["company_id"]	=$_SESSION["company"]["id"];
-					$datas["user_id"]		=$_SESSION["user"]["id"];
+					$datas["object"]		=@$option["table"];
+					$datas["company_id"]	=@$_SESSION["company"]["id"];
+					$datas["user_id"]		=@$_SESSION["user"]["id"];
 					$datas["fecha"]			=$this->sys_date;
 										
 					$return					=parent::__SAVE($datas);

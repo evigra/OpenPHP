@@ -1060,7 +1060,12 @@
 			$return		=array();
     		foreach($datas as $campo=>$valor)
     		{
-				#if(isset($valor["relation"]) AND $valor["relation"]=="many2one")
+				if(isset($valor["relation"]) AND $valor["relation"]=="many2one")
+				{
+				    if($valor["type"]=="file")
+    				    $return[$campo]     =$valor["obj"]->__SAVE();
+				
+				}
 				if(isset($valor["relation"]) AND $valor["relation"]=="one2many")
 				{	
 					if(isset($_SESSION["SAVE"][$this->sys_object][$campo]["data"]))

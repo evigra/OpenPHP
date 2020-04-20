@@ -12,6 +12,15 @@
 			    "type"              => "primary key",
 			    "import"            => "10",			  
 			),
+			"files_id"	    =>array(
+			    "title"             => "Imagen",
+			    "type"              => "file",
+			    #"relation"          => "one2many",
+			    "relation"          => "many2one",
+			    "class_name"       	=> "files",
+			    "class_field_o"    	=> "files_id",
+			    "class_field_m"    	=> "id",			    
+			),
 			"matricula_titular"	    =>array(
 			    "title"             => "Matricula Titular",
 				"title_filter"		=> "Matricula Titular",
@@ -75,7 +84,12 @@
 		##############################################################################	
 		##  Metodos	
 		##############################################################################
-        
-
+		
+   		public function __SAVE($datas=NULL,$option=NULL)
+    	{
+            #$this->__PRINT_R($this);
+            #$this->__PRINT_R($datas);
+            return parent::__SAVE($datas);
+        }
 	}
 ?>
