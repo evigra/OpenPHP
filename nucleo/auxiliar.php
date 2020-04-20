@@ -1422,8 +1422,8 @@
 					    } 
 					    ################################     
 					    if($valor["type"]=="file")	
-					    {
-					        $words["$campo"]  ="$titulo<input id=\"$campo\" name=\"$campo\" type=\"file\" class=\"formulario\">";
+					    {					        
+				            $words["$campo"]  ="$titulo<input id=\"$campo\" name=\"$campo\" type=\"file\" class=\"formulario\">";
 					        $words["$campo"]  ="<input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo";
 					    } 
 					    ################################   
@@ -2095,6 +2095,11 @@
 							$this->__FIND_FIELDS($fieldvalue);																		
 						if(@$this->sys_fields[$field]["type"]=="select")
 							$row[$field]=@$this->sys_fields[$field]["source"]["$fieldvalue"];
+						if(@$this->sys_fields[$field]["type"]=="file")
+						{
+						    $data_file  =$this->sys_fields[$field]["values"][0];						
+						    $row[$field]="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						}
 						if(@$this->sys_fields[$field]["type"]=="flow")
 							$row[$field]=@$this->sys_fields[$field]["source"]["$fieldvalue"];
 
