@@ -721,6 +721,7 @@
 						if($this->sys_recursive<3)
 						{								
 							if($recursive==0)	$recursive=	$this->sys_recursive + 1;					
+							
 							$eval="
 								$"."option"."_obj_$campo	=array(
 									\"recursive\"		=>{$recursive},

@@ -487,11 +487,11 @@
 		##############################################################################		 		
 		public function __SAVE($datas=NULL,$option=NULL)
     	{
-    		$this->__PRINT_R($datas);
+    		$this->__PRINT_R($this);
     		if(!isset($this->sys_private["field"]) OR $this->sys_private["field"]=="")
 	    		$this->__FIND_FIELD_ID();
     	
-			if(!isset($this->sys_memory) OR $this->sys_memory=="")
+			if(!isset($this->sys_memory) OR $this->sys_memory=="" OR $this->sys_object=="files")
 			{	
 				###########################################################	
 				##################  REAL ##################################
@@ -502,13 +502,15 @@
 				
 				if(!isset($option) OR is_null($option))	$option=array();
 				
-				if(!array_key_exists("message",$option))   
-					$option["message"]="DATOS GUARDADOS CORRECTAMENTE";
-				if(!array_key_exists("time",$option))   
-					$option["time"]="1500";
-				if(!array_key_exists("title",$option))   
-					$option["title"]="MENSAJE DEL SISTEMA";
-								
+				if($this->sys_object!="files")
+				{
+				    if(!array_key_exists("message",$option))   
+					    $option["message"]="DATOS GUARDADOS CORRECTAMENTE";
+				    if(!array_key_exists("time",$option))   
+					    $option["time"]="1500";
+				    if(!array_key_exists("title",$option))   
+					    $option["title"]="MENSAJE DEL SISTEMA";
+                }								
 				if(!(is_null(@$this->sys_private["id"]) OR @$this->sys_private["id"]==""))
 				{
 					$option_browse=array();
