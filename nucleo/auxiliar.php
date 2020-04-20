@@ -1061,10 +1061,11 @@
     		foreach($datas as $campo=>$valor)
     		{
 				if(isset($valor["relation"]) AND $valor["relation"]=="many2one")
-				{
+				{				    
 				    if($valor["type"]=="file")
-    				    $return[$campo]     =$valor["obj"]->__SAVE();
-				
+    				    $return[$campo]     =$valor["obj"]->__SAVE($valor["obj"]->request["files"]);
+				    
+				    
 				}
 				if(isset($valor["relation"]) AND $valor["relation"]=="one2many")
 				{	

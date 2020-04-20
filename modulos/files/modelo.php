@@ -54,6 +54,7 @@
     	{    	   
     		#$option["table"]=$datas;
     	    $return =NULL;
+    	    #$this->__PRINT_R($datas);									
 			if(@is_array($datas))
 			{							
 				if(is_null($option))	$option=array();				
@@ -73,11 +74,12 @@
 					$datas["file"]			=$name;
 					$datas["type"]			=$type;
 					$datas["extension"]		=$extension;
-					$datas["object"]		=@$option["table"];
+					#$datas["object"]		=@$option["table"];
 					$datas["company_id"]	=@$_SESSION["company"]["id"];
 					$datas["user_id"]		=@$_SESSION["user"]["id"];
 					$datas["fecha"]			=$this->sys_date;
-										
+	
+	                
 					$return					=parent::__SAVE($datas);
 
 					$path					="$uploads_dir/$return.$extension";
