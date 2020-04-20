@@ -46,6 +46,13 @@
 												"ignore"	=>"1",
 												"path"	    =>"/var/lib/mysql/files/frame/file/",
 		);
+		$_SESSION["var"]["img"]			    =array(
+		                                        "grande"=>"150",
+		                                        "mediana"=>"90",
+		                                        "chica"=>"40",
+		                                        "superchica"=>"10",
+		);
+
 		$_SESSION["var"]["modules"]			=array(
 												"historico","menu","user_group","tareas", 
 												"group","modulos","permiso","sesion","cron",

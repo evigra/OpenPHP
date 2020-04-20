@@ -2098,8 +2098,14 @@
 						if(@$this->sys_fields[$field]["type"]=="file")
 						{
 						    $data_file  =$this->sys_fields[$field]["values"][0];						
-						    $row[$field]="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						    
+						    $row[$field.".superchica"]  ="<img height=\"{$_SESSION["var"]["img"]["superchica"]}\" src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						    $row[$field.".chica"]       ="<img height=\"{$_SESSION["var"]["img"]["chica"]}\" src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						    $row[$field.".mediana"]     ="<img height=\"{$_SESSION["var"]["img"]["mediana"]}\" src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						    $row[$field.".grande"]      ="<img height=\"{$_SESSION["var"]["img"]["grande"]}\" src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						    $row[$field.".original"]    ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
 						}
+						
 						if(@$this->sys_fields[$field]["type"]=="flow")
 							$row[$field]=@$this->sys_fields[$field]["source"]["$fieldvalue"];
 
