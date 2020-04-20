@@ -487,7 +487,7 @@
 		##############################################################################		 		
 		public function __SAVE($datas=NULL,$option=NULL)
     	{
-    		$this->__PRINT_R($this);
+    		#$this->__PRINT_R($this);
     		if(!isset($this->sys_private["field"]) OR $this->sys_private["field"]=="")
 	    		$this->__FIND_FIELD_ID();
     	
