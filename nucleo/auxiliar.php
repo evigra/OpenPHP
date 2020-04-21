@@ -644,7 +644,9 @@
 					
 					
 					if($menu_web==0)    $link="#";					    
-					else                $link=$data_submenu["link"];
+					else                $link			=$data_submenu["link"]."&sys_menu={$sys_menu}" . $data_submenu["variables"];
+					
+					
 					
 					
 					$submenu_html	.="
