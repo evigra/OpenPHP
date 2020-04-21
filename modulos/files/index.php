@@ -27,17 +27,17 @@
     $module_center                                  ="";
     $module_title                                   ="";
 
-    if($objeto->sys_section=="create")
+    if($objeto->sys_private["section"]=="create")
 	{
     	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
     }	
-    elseif($objeto->sys_section=="write")
+    elseif($objeto->sys_private["section"]=="write")
 	{
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
     }	
-	elseif($objeto->sys_section=="kanban")
+	elseif($objeto->sys_private["section"]=="kanban")
 	{
 	    $module_left                                ="";
 		$template_body								=$objeto->sys_module . "html/kanban";	     	
