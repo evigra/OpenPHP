@@ -15,9 +15,9 @@
 	
 	$objeto->words["module_title"]              ="WebHome";
 	
-    $objeto->words["html_head_description"] =   "EN LA EMPRESA SOLESGPS, CONTAMOS CON UN MODULO PARA ADMINISTRAR EL REGISTRO DE POSICIONES RECIBIDAS DURANTE EL RASTREO SATELITAL.";
-    $objeto->words["html_head_keywords"]    =   "GPS, RASTREO, MANZANILLO, SATELITAL, CELULAR, VEHICULAR, VEHICULO, TRACTO, LOCALIZACION, COLIMA, SOLES, SATELITE, GEOCERCAS, STREET VIEW, MAPA";
-    $objeto->words["html_head_title"]           ="{$_SESSION["company"]["abreviatura_web"]} :: {$objeto->words["module_title"]}";
+    $objeto->words["html_head_description"] =   "Raul Martinez Llereas :: Aun en las circunstancias adversas hay que tener esperanza y fe. FE en lo que somos capaces de hacer y ESPERANZA en que llegado el momento lo haremos sin titubear";
+    $objeto->words["html_head_keywords"]    =   "SNTSS, IMSS, raul martinez llerenas";
+    $objeto->words["html_head_title"]           ="RML :: {$objeto->words["module_title"]}";
     
     $objeto->html                               =$objeto->__VIEW_TEMPLATE("system", $objeto->words);
     $objeto->__VIEW($objeto->html);
