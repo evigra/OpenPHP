@@ -47,9 +47,9 @@
 												"path"	    =>"/var/lib/mysql/files/frame/file/",
 		);
 		$_SESSION["var"]["img"]			    =array(
-		                                        "grande"=>"150",
-		                                        "mediana"=>"90",
-		                                        "chica"=>"40",
+		                                        "grande"=>"450",
+		                                        "mediana"=>"290",
+		                                        "chica"=>"140",
 		                                        "superchica"=>"10",
 		);
 
