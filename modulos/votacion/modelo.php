@@ -87,8 +87,12 @@
 		
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
-            #$this->__PRINT_R($this);
-            #$this->__PRINT_R($datas);
+            $uploads_dir 			= 'modulos/files/file';
+
+            $path					="modulos/files/file/lalo.png";
+            
+            $this->sys_fields["files_id"]["obj"]->thumbs($path);
+
             return parent::__SAVE($datas);
         }
 	}
