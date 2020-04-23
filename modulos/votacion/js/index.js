@@ -5,18 +5,20 @@
 	{
 	    if($("div.img").length>0)
 	    {
-	        var path			=$(this).attr("path");					
-	        var data            ="<img src=\"" + path + "\">";
-	        
-	        $("div#message")
-	            .html(data)
-	            .dialog(
-	                {
-					    width:"700px"
-					}
-				);							
+		    $("div.img").click(function(e)
+		    {				
+
+	            var path			=$(this).attr("path");					
+	            var data            ="<img src=\"" + path + "\">";
 	            
-            
+	            $("div#message")
+	                .html(data)
+	                .dialog(
+	                    {
+					        width:"700px"
+					    }
+				    );							
+		    });
         }
 	    if($("#matricula").length>0)
 	    {		
