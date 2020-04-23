@@ -9,7 +9,7 @@
 		    {				
 
 	            var path			=$(this).attr("path");					
-	            var data            ="<img src=\"" + path + "\">";
+	            var data            ="<img src=\"" + path + "_medium.jpg\">";
 	            
 	            $("div#message")
 	                .html(data)
