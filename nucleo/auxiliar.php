@@ -2102,8 +2102,8 @@
 						    if(isset($this->sys_fields[$field]["values"]) AND isset($this->sys_fields[$field]["values"][0]))
 						    {
 						        # height=\"{$_SESSION["var"]["img"]["superchica"]}\"
-						    
-						        $data_file  =$this->sys_fields[$field]["values"][0];						
+						        $row[$field."._path"]    ="../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}";
+						        $data_file                  =$this->sys_fields[$field]["values"][0];						
 						        
 						        $row[$field."._thumb"]      ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}_thumb.jpg\">";
 						        $row[$field."._small"]      ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}_small.jpg\">";

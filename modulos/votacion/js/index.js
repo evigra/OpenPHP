@@ -2,31 +2,49 @@
 	var obj;
 
 	$(document).ready(function()
-	{		
-		$("#matricula").focusout(function() 
-		{	
-			if($(this).val()!="")
-			{
-				$.ajax({
-					type:           "GET",
-					url:            "../modulos/plazas/ajax/index.php?time=" + Date.now(),
-					contentType:    "application/json",
-					data:           "&matricula="+$(this).val(),				
-					success:        function (response) 
-					{
-						obj = $.parseJSON( response);				
-
-                        $("#ocupante").val(obj[0].ocupante);
-                        $("#categoria").val(obj[0].categoria);
-                        $("#horario").val(obj[0].horario);
-                        $("#plaza_id").val(obj[0].plaza_id);
-                        $("#adscripcion2").val(obj[0].adscripcion2);
-                        $("#ar2").val(obj[0].ar2);
-                        $("#ads_progra").val(obj[0].ads_progra);
+	{
+	    if($("div.img").length>0)
+	    {
+	        var path			=$(this).attr("path");					
+	        var data            ="<img src=\"" + path + "\">";
+	        
+	        $("div#message")
+	            .html(data)
+	            .dialog(
+	                {
+					    width:"700px"
 					}
-				});
-			}	
-		});	
+				);							
+	            
+            
+        }
+	    if($("#matricula").length>0)
+	    {		
+		    $("#matricula").focusout(function() 
+		    {	
+			    if($(this).val()!="")
+			    {
+				    $.ajax({
+					    type:           "GET",
+					    url:            "../modulos/plazas/ajax/index.php?time=" + Date.now(),
+					    contentType:    "application/json",
+					    data:           "&matricula="+$(this).val(),				
+					    success:        function (response) 
+					    {
+						    obj = $.parseJSON( response);				
+
+                            $("#ocupante").val(obj[0].ocupante);
+                            $("#categoria").val(obj[0].categoria);
+                            $("#horario").val(obj[0].horario);
+                            $("#plaza_id").val(obj[0].plaza_id);
+                            $("#adscripcion2").val(obj[0].adscripcion2);
+                            $("#ar2").val(obj[0].ar2);
+                            $("#ads_progra").val(obj[0].ads_progra);
+					    }
+				    });
+			    }	
+		    });	
+	    }
     });
     
     // ###########################################################################
