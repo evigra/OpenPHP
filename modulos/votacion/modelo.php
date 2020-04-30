@@ -15,11 +15,14 @@
 			"files_id"	    =>array(
 			    "title"             => "Imagen",
 			    "type"              => "file",
-			    #"relation"          => "one2many",
 			    "relation"          => "many2one",
 			    "class_name"       	=> "files",
 			    "class_field_o"    	=> "files_id",
-			    "class_field_m"    	=> "id",			    
+			    "class_field_m"    	=> "id",	
+			    #"agua"    	        => "1",
+			    "facebook"    	    => "1",
+			    	
+			    
 			),
 			"matricula_titular"	    =>array(
 			    "title"             => "Matricula Titular",
@@ -87,13 +90,14 @@
 		
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
+    	    /*
             $uploads_dir 			= 'modulos/files/file';
 
-            $path					="modulos/files/file/lalo.png";
-            
+            $path					="modulos/files/file/lalo.png";            
             $this->sys_fields["files_id"]["obj"]->thumbs($path);
-
+            */
             return parent::__SAVE($datas);
         }
+
 	}
 ?>

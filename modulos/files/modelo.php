@@ -7,6 +7,7 @@
 		##  Propiedades	
 		##############################################################################
 		var $sys_enviroments	="DEVELOPER";
+		var $path_file	        ="modulos/files/file";
 		var $sys_fields		=array(
 			"id"			=>array(
 			    "title"             => "id",
@@ -50,6 +51,19 @@
 		{
 			parent::__CONSTRUCT($option);
 		}
+		public function __DELETE($option=NULL)
+		{
+    	    if(!is_null($option))
+    	    {
+    	        $path=$this->path_file ."/$option".".*";    	        
+    	        
+    	        #$this->__PRINT_R($path);
+    	        array_map('unlink', glob($path));
+                #unlink();
+            }
+			parent::__DELETE($option);
+		}
+
    		public function __SAVE($datas=NULL,$option=NULL)
     	{    	   
     		#$option["table"]=$datas;
@@ -61,8 +75,6 @@
 
 				if(isset($datas["error"]) AND $datas["error"]==0)
 				{
-					$uploads_dir 			= 'modulos/files/file';
-					#$datas					=array();
 					$tmp_name 				= $datas["tmp_name"];
 					$name 					= $datas["name"];
 					$type 					= $datas["type"];
@@ -78,22 +90,23 @@
 					$datas["company_id"]	=@$_SESSION["company"]["id"];
 					$datas["user_id"]		=@$_SESSION["user"]["id"];
 					$datas["fecha"]			=$this->sys_date;
-	
-	                
+		                
 					$return					=parent::__SAVE($datas);
 
-					$path					="$uploads_dir/$return.$extension";
+					$path					=$this->path_file."/$return.$extension";
 
 					move_uploaded_file($tmp_name, $path);							
 
 				    if(in_array($extension,array("jpg","jpeg","png","gif")))		
 				    {
 				        $this->thumbs($path);
+				        if(isset($datas["agua"]))
+				        {
+				            $this->agua($path);
+				        }				        
 				    }
-                    					
 				}
 			}	
-
 		    return $return;	
 		}		
 
@@ -115,6 +128,18 @@
 			}					
 		    return $return;	
 		}	
+        public function agua($path)
+        {
+            $nombreimg = explode("/", $path);  
+            $nombreimg = $nombreimg[count($nombreimg)-1];  
+                  
+            #$this->redimensionar_imagen($nombreimg, $path, $path."_thumb.jpg",20,15);
+            #$this->redimensionar_imagen($nombreimg, $path, $path."_small.jpg",120,90);                        
+            #$this->redimensionar_imagen($nombreimg, $path, $path."_medium.jpg",400,300);            
+            #$this->redimensionar_imagen($nombreimg, $path, $path."_big.jpg",800,600);            
+            
+            $this->__PRINT_R("AGUA en files");
+        }
         public function thumbs($path)
         {
             $nombreimg = explode("/", $path);  
@@ -125,6 +150,7 @@
             $this->redimensionar_imagen($nombreimg, $path, $path."_medium.jpg",400,300);            
             $this->redimensionar_imagen($nombreimg, $path, $path."_big.jpg",800,600);            
         }
+
         public function redimensionar_imagen($nombreimg, $rutaimg, $ruta_nueva, $xmax, $ymax)
         {              
             $ext = explode(".", $nombreimg);  
@@ -142,11 +168,12 @@
             $y = imagesy($imagen);  
 
             
-
+            /*
             if($x <= $xmax && $y <= $ymax){
               echo "<center>Esta imagen ya esta optimizada para los maximos que deseas.<center>";
               return $imagen;  
             }
+            */
 
             if($x >= $y) {  
               $nuevax = $xmax;  

@@ -62,7 +62,7 @@
 	#if()
 	
 	#$objeto->__PRINT_R($_SESSION["user"]);
-	$objeto->words["html_head_title"]           ="SOLES GPS :: {$_SESSION["company"]["razonSocial"]} :: {$objeto->words["module_title"]}";
+	$objeto->words["html_head_title"]           ="IMSS	 :: {$objeto->words["module_title"]}";
 	#*/
 	
 	$objeto->words["html_head_description"]	=	"EN LA EMPRESA SOLESGPS, CONTAMOS CON UN MODULO PARA ADMINISTRAR EL REGISTRO DE ARCHIVOS.";

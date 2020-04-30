@@ -103,10 +103,10 @@
 	$objeto->words["module_center"]             =$objeto->__BUTTON($module_center);
 	$objeto->words["module_right"]              =$objeto->__BUTTON($module_right);
 	
-	$objeto->words["html_head_description"]	=	"EN LA EMPRESA SOLESGPS, CONTAMOS CON UN MODULO PARA ADMINISTRAR EL REGISTRO DE USUARIOS DE LA PLATAFORMA DE RASTREO.";
-	$objeto->words["html_head_keywords"] 	=	"GPS, RASTREO, MANZANILLO, SATELITAL, CELULAR, VEHICULAR, VEHICULO, TRACTO, LOCALIZACION, COLIMA, SOLES, SATELITE, GEOCERCAS, STREET VIEW, MAPA";
+	$objeto->words["html_head_description"]	=	"Registra tu voto con una foto, para poder defender tus derechos";
+	$objeto->words["html_head_keywords"] 	=	"SNTSS, IMSS";
 
-	$objeto->words["html_head_title"]           ="IMSS	 :: {$objeto->words["module_title"]}";
+	$objeto->words["html_head_title"]           ="{$objeto->words["module_title"]}";
     
     $objeto->html                               =$objeto->__VIEW_TEMPLATE("system", $objeto->words);
     $objeto->__VIEW($objeto->html);    

@@ -15,7 +15,7 @@
 	                .html(data)
 	                .dialog(
 	                    {
-					        width:"700px"
+					        width:"500px"
 					    }
 				    );							
 		    });

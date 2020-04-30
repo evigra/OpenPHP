@@ -519,6 +519,7 @@
 				}		
 				if(is_array($datas))
 				{
+				    #$this->__PRINT_R($datas);
 					foreach($datas as $campo=>$valor)
 					{					
 						if(is_array($valor))
@@ -534,6 +535,7 @@
 						}				
 						elseif(!isset($this->sys_fields["$campo"]["relation"]))
 						{
+						    
 							if(count(@$this->sys_fields["$campo"])>1 )
 							{
 								$fields	.="$campo='$valor',";
@@ -740,11 +742,14 @@
     	}
     	
     	##############################################################################	   	
-		public function __DELETE($option)
+		public function __DELETE($option=NULL)
     	{
-    		$this->__FIND_FIELD_ID();
-			$comando_sql	="DELETE FROM {$this->sys_table} WHERE {$this->sys_private["field"]}='$option'";					
-			$this->__EXECUTE($comando_sql);
+    	    if(!is_null($option))
+    	    {
+        		$this->__FIND_FIELD_ID();
+			    $comando_sql	="DELETE FROM {$this->sys_table} WHERE {$this->sys_private["field"]}='$option'";					
+			    $this->__EXECUTE($comando_sql);
+	        }		    
 		}
     	##############################################################################	   	
 		public function __EXECUTE($comando_sql, $option=array("open"=>1,"close"=>1))

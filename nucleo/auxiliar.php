@@ -812,7 +812,12 @@
 
 						unset($_REQUEST["auto_$campo"]);
 					}
-
+					else if(isset($_REQUEST["agua_$campo"]))
+					{
+						$valor					=$_REQUEST["agua_$campo"];						
+						$this->sys_fields["$campo"]["value_agua"]=$valor;
+						unset($_REQUEST["agua_$campo"]);
+					}
 					else if(isset($_REQUEST["sys_filter_". $request_campo]))
 					{
 						$valor					=$_REQUEST["sys_filter_". $request_campo];
@@ -1027,11 +1032,7 @@
     	{
 			# ENVIA UN ARRAY AL METODO DELETE
 			# DE LAS VARIABLES DECLARADAS EN EL MODELO 
-			# $this->sys_fields
-    					
-			$opcion=array(
-				"message"=>"DATOS GUARDADOS",
-			);	
+			# $this->sys_fields    					
 			$this->__DELETE($id);			
     	}
 
@@ -1066,9 +1067,15 @@
 				if(isset($valor["relation"]) AND $valor["relation"]=="many2one")
 				{				    
 				    if($valor["type"]=="file")
-    				    $return[$campo]     =$valor["obj"]->__SAVE($valor["obj"]->request["files"]);
-				    
-				    
+				    {
+				        if(isset($valor["value_agua"]))
+				        {
+				            $valor["obj"]->request["files"]["agua"]     =@$valor["value_agua"];    				        
+    				    }   
+    				    
+    				    $valor["obj"]->request["files"]["object"]     =$this->sys_object;
+    				    $return[$campo]      =$valor["obj"]->__SAVE($valor["obj"]->request["files"]); 
+				    }
 				}
 				if(isset($valor["relation"]) AND $valor["relation"]=="one2many")
 				{	
@@ -1425,8 +1432,31 @@
 					    ################################     
 					    if($valor["type"]=="file")	
 					    {					        
-				            $words["$campo"]  ="$titulo<input id=\"$campo\" name=\"$campo\" type=\"file\" class=\"formulario\">";
 					        $words["$campo"]  ="<input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo";
+					        $agua="";
+					        if(in_array(@$valor["agua"],$_SESSION["var"]["true"]))
+					        {
+					            $agua="
+                                        <td width=\"90\" align=\"center\">
+                                            <div class=\"checkbox-2\">
+		                    					<input type=\"checkbox\" id=\"{$this->sys_name}_$campo\" value=\"1\" name=\"agua_$campo\" />
+		                    					<label for=\"{$this->sys_name}_$campo\">".""."</label>
+							                </div>Marca de Agua
+							                {$valor["br"]}
+                                        </td>					            
+					            ";
+					        }
+					        
+                            $words["$campo"]  ="
+                                <table width=\"100%\">
+                                    <tr>
+                                        $agua
+                                        <td>
+                                            <input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo
+                                        </td>
+                                    </tr>
+                                </table>
+                            ";					        
 					    } 
 					    ################################   
 					    if($valor["type"]=="show_file")	
