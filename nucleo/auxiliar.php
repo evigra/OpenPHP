@@ -230,9 +230,8 @@
 		public function __WA($data)
     	{   
     		$apikey				="ZUYJGBXXPZ4TBFDJSQZH";		#mio
-    		 		    		    	
-			$sesion 			=array("apikey"=>"BQ0MZWAVJ1G0T3CMQ4TL");		#System
-			
+
+			$sesion 			=array("apikey"=>"BQ0MZWAVJ1G0T3CMQ4TL");		#System			
 			$url 				="https://panel.apiwha.com/send_message.php";
 			$vars 				=$sesion;				
 						
@@ -505,20 +504,20 @@
 			{
 			    
 				$comando_sql        ="
-		            select
-		            	distinct(m.id) as id_m, 
-			            m.*
-		            from 
-			            users u JOIN 
-			            user_group ug ON u.id=ug.user_id JOIN
-			            groups g ON g.id=ug.active AND g.name!='No activar' JOIN
-			            menu m ON m.id=g.menu_id 
+                    select
+	                    distinct(m.id) as id_m, 
+	                    m.*
+                    from 
+	                    users u 
+                        JOIN user_group ug ON u.id=ug.user_id     
+                        JOIN groups g ON g.id=ug.perfil AND g.name!='No disponible' 
+	                    JOIN menu m ON m.id=g.menu_id OR g.menu_id =0 AND ug.menu_id=m.id
 		            WHERE 1=1
-			            AND ug.active!=0
+			            AND ug.perfil!=0
 			            AND u.id='{$_SESSION["user"]["id"]}'
 			        GROUP BY  m.id    
 				";
-				
+				#$this->__PRINT_R($comando_sql);
 				$datas_menu =$this->__EXECUTE($comando_sql, $option_conf);			
 
                 $menu_web=0;
@@ -579,11 +578,11 @@
 		                from 
 			                users u JOIN 
 			                user_group ug ON u.id=ug.user_id JOIN
-			                groups g ON g.id=ug.active JOIN
-			                permiso p ON p.usergroup_id=ug.active AND p.s=1 JOIN
+			                groups g ON g.id=ug.perfil JOIN
+			                permiso p ON p.usergroup_id=ug.perfil AND p.s=1 JOIN
 			                menu m ON m.id=p.menu_id 
 		                WHERE  1=1
-			                AND ug.active!=0
+			                AND ug.perfil!=0
 			                AND u.id='{$_SESSION["user"]["id"]}'
 			                AND parent='$sys_menu'
 			                AND m.type='submenu'
@@ -620,11 +619,11 @@
 				        from 
 					        users u JOIN 
 					        user_group ug ON u.id=ug.user_id JOIN
-					        groups g ON g.id=ug.active JOIN
-					        permiso p ON p.usergroup_id=ug.active JOIN
+					        groups g ON g.id=ug.perfil JOIN
+					        permiso p ON p.usergroup_id=ug.perfil JOIN
 					        menu m ON m.id=p.menu_id 
 				        where  1=1
-					        AND ug.active!=0
+					        AND ug.perfil!=0
 					        AND u.id={$_SESSION["user"]["id"]}
 					        AND parent={$data_submenu["id"]}
 					        AND m.type='opcion'

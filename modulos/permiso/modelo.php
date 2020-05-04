@@ -49,17 +49,18 @@
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
     		## GUARDAR USUARIO
-    	    #echo "EJECUTA";
-    	    return parent::__SAVE($datas,$option);
+    	    if(@$datas["menu_id"]>0)
+        	    return parent::__SAVE($datas,$option);
     	}    		
 		public function __BROWSE($option=NULL)		
     	{	
     		if(is_null($option))	$option=array();
-    		
+    		/*
 			$option["select"]	=array(
 				"permiso.*",
 			);
 			$option["from"]		="permiso";
+			*/
 			return parent::__BROWSE($option);
 		}		
 		public function permisos_html($values=NULL, $menu_id=NULL)
@@ -67,7 +68,7 @@
     		$menus=$this->menu_obj->menu($menu_id);  
 			$tr="";
     		foreach($menus["data"] as $menu)
-    		{   
+    		{
 				$activeselect	="";
     			if(is_array($values))
     			{
@@ -78,7 +79,7 @@
 				}
 
     			$select		="<input type=\"checkbox\" value=\"1\" name=\"permiso_ids[{$menu["id"]}][s]\" $activeselect>";	
-    			
+
 
     			$tr.="
     				<tr>

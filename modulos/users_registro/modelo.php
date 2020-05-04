@@ -10,28 +10,36 @@
 		##  Metodos	
 		##############################################################################
 		public function __CONSTRUCT($option=null)
-		{	
-		    
+		{			    
+            $this->sys_fields["files_id"]["agua"]=1;
+
+
 			parent::__CONSTRUCT($option);
-			$this->sys_fields_l18n["email"]="Matricula";
 		}
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
     		## GUARDAR USUARIO
     		if(count($datas)>2)
     		{
-			    $datas["company_id"]    	=$_SESSION["company"]["id"];
+			    $datas["company_id"]    	=1;
+			    $datas["status"]    	    =1;
+			    $datas["sesion_start"]    	="../votacion/";
 			    if(isset($datas["password"]) AND $datas["password"]!="")
 				    $datas["password"]		=md5($datas["password"]);
 				else
 					unset($datas["password"]);    
-			    /*
-			    $files_id					=$this->obj_files_id->__SAVE();    	    
-			    if(!is_null($files_id))		$datas["files_id"]			=$files_id;    	    
-				*/
-			    return parent::__SAVE($datas,$option);
-		    }
-		}
 
+                if($datas["celular"]!="")
+                {	
+                    $vars["telefono"]   =$datas["celular"];                    
+	                $vars["mensaje"]	="Muchas gracias <b>VIZCAINO GRANADOS EDUARDO</b> por apoyarnos. 
+	                
+Con tu voto, el equipo SolesGPS tambien podra ayudar para hacer valer tu eleccion sindical SNTSS.
+	                ";
+	                $this->__WA($vars);
+	            }
+		        return parent::__SAVE($datas,$option);
+	        }
+		}
 	}
 ?>

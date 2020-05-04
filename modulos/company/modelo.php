@@ -172,22 +172,6 @@
 		{						
 			return parent::__CONSTRUCT($option);
 		}
-		public function __BROWSE($option=NULL)
-    	{    		
-    		if(is_null($option))	$option=array();			
-			if(!isset($option["where"]))    	$option["where"]	=array();
-			if(!isset($option["select"]))   	$option["select"]	=array();
-
-			$option["select"]["FN_ImgFile('http://{$_SERVER["SERVER_NAME"]}/modulos/company/img/company2.png',files_id,0,0)"]		="img_files_id";
-			$option["select"]["FN_ImgFile('http://{$_SERVER["SERVER_NAME"]}/modulos/company/img/company2.png',files_id,300,300)"]	="img_files_id_med";				
-			$option["select"]["FN_ImgFile('http://{$_SERVER["SERVER_NAME"]}/modulos/company/img/company2.png',files_id,75,75)"]		="img_files_id_chi";
-			$option["select"]["FN_ImgFile('http://{$_SERVER["SERVER_NAME"]}/modulos/company/img/company2.png',files_id,10,10)"]		="img_files_id_sup_chi";
-			$option["select"][]					="company.*";			
-
-			$return 							=parent::__BROWSE($option);		
-		
-			return	$return;     	
-		}				
 		public function __AUTOCOMPLETE()		
     	{	
     		$option								=array();

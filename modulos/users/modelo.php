@@ -5,6 +5,7 @@
 		##  Propiedades	
 		##############################################################################
 		var $mod_menu=array();
+		var $sys_enviroments="DEVELOPER";
 		var $sys_fields		=array( 
 			"id"	    =>array(
 			    "title"             => "id",			    
@@ -24,6 +25,10 @@
 			    "title"             => "Password",
 			    "type"              => "password",
 			),			
+			"celular"	    =>array(
+			    "title"             => "Celular",
+			    "type"              => "input",
+			),			
 			"files_id"	    =>array(
 			    "title"             => "Imagen",
 			    "type"              => "file",
@@ -31,10 +36,6 @@
 			    "class_name"       	=> "files",
 			    "class_field_o"    	=> "files_id",
 			    "class_field_m"    	=> "id",			    
-			),
-			"img_files_id"	    =>array(
-			    "title"             => "Imagen",
-			    "type"              => "file",
 			),
 			"sesion_start"	    =>array(
 			    "title"             => "Modulo de inicio",
@@ -86,15 +87,12 @@
     		## GUARDAR USUARIO
     		if(count($datas)>2)
     		{
-			    $datas["company_id"]    	=$_SESSION["company"]["id"];
+			    $datas["company_id"]    	=@$_SESSION["company"]["id"];
 			    if(isset($datas["password"]) AND $datas["password"]!="")
 				    $datas["password"]		=md5($datas["password"]);
 				else
 					unset($datas["password"]);    
-			    /*
-			    $files_id					=$this->obj_files_id->__SAVE();    	    
-			    if(!is_null($files_id))		$datas["files_id"]			=$files_id;    	    
-				*/
+
 			    $user_id=parent::__SAVE($datas,$option);
 			    
 			    			    
@@ -113,7 +111,8 @@
 							"company_id={$_SESSION["company"]["id"]}",
 							"menu_id={$index}",
 						);    	    		    	    		
-						$usergroup_data						=$this->sys_fields["usergroup_ids"]["obj"]->groups($usergroup_option);
+						$usergroup_data						=$this->sys_fields["usergroup_ids"]["obj"]->__BROWSE($usergroup_option);
+
 
 						if($usergroup_data["total"]>0)		$this->sys_fields["usergroup_ids"]["obj"]->sys_private["id"]=$usergroup_data["data"][0]["id"];
 						else								$this->sys_fields["usergroup_ids"]["obj"]->sys_private["id"]=NULL;
@@ -122,7 +121,7 @@
 							"user_id"		=>"$user_id",
 							"company_id"	=>"{$_SESSION["company"]["id"]}",
 							"menu_id"		=>"{$index}",
-							"active"		=>"$data"
+							"perfil"		    =>"$data"
 						);	
 						$this->sys_fields["usergroup_ids"]["obj"]->__SAVE($usergroup_save);
 					}	
@@ -142,14 +141,7 @@
 			$this->words					=parent::__INPUT($words,$sys_fields);
 			
 			$this->words["permisos"]	    =$this->menu_obj->grupos_html(@$this->sys_fields["usergroup_ids"]["values"]);
-						
-			if(@$this->sys_fields["files_id"]["value"]>0)
-			{				
-				if(isset($this->sys_fields["files_id"]["value"]))    	
-					$this->words["img_files_id"]	            =$this->sys_fields["files_id"]["obj"]->__GET_FILE($this->sys_fields["files_id"]["value"]);
-				else	
-				    $this->words["img_files_id"]                ="";	
-			}			
+
 			return $this->words;
     	}
 

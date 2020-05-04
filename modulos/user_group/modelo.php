@@ -7,6 +7,7 @@
 		##  Propiedades	
 		##############################################################################
 		var $mod_menu=array();
+		var $sys_enviroments="DEVELOPER";
 		var $sys_fields		=array(
 			"id"	    =>array(
 			    "title"             => "id",
@@ -24,9 +25,9 @@
 			    "title"             => "Compania",
 			    "type"              => "input",
 			),						
-			"active"	    =>array(
-			    "title"             => "Activo",
-			    "type"              => "password",
+			"perfil"	    =>array(
+			    "title"             => "Group",
+			    "type"              => "input",
 			),			
 
 		);				
@@ -43,21 +44,7 @@
     	{
     		if(is_array($datas))
 	    	    $datas["company_id"]    	=@$_SESSION["company"]["id"];
-    		parent::__SAVE($datas,$option);
+    		return parent::__SAVE($datas,$option);
 		}		
-		public function groups($option=NULL)		
-    	{	
-    		if(is_null($option))	$option=array();
-    		
-			$option["select"]	=array(
-				"user_group.*",
-			);
-			#$option["echo"]		="USER_GROUP";
-			$option["from"]		="user_group";
-			
-			$return =$this->__VIEW_REPORT($option);    				
-			return $return;
-		}		
-		
 	}
 ?>

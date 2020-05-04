@@ -95,19 +95,19 @@
 					foreach($values as $row)
 					{
 						if($row["menu_id"]==$menu["id"])
-							$active	=$row["active"];    				
+							$active	=$row["perfil"];    				
 					}
     			}	
 					
-				$option_conf=array();
+				$option_conf            =array();
 
 				$option_conf["open"]	=1;
 				$option_conf["close"]	=1;
 					
 					
-				$comando_sql        ="SELECT * FROM groups WHERE menu_id='{$menu["id"]}' ORDER BY nivel";				
-				$groups 			=$this->__EXECUTE($comando_sql,$option_conf);	
-				$option="";
+				$comando_sql            ="SELECT * FROM groups WHERE menu_id='{$menu["id"]}' OR menu_id='0' ORDER BY nivel";				
+				$groups 			    =$this->__EXECUTE($comando_sql,$option_conf);	
+				$option                 ="";
 				
 				foreach($groups as $group)
 				{
@@ -159,21 +159,26 @@
     		}
     		else	  						
     			$menus	=$this->data_menu();
+    			
     		    		
 			foreach($menus as $imenu => $menu)
 			{
+			    $menu["type"]           ="menu";
 			    $data[]					=$menu;
 				$submenus 				= $this->data_submenu($menu["id"]);
 								
 				foreach($submenus as $isubmenu => $submenu)
 				{
 				    $submenu["name"]	=" - &nbsp;".$submenu["name"];
+				    
+				    $submenu["type"]    ="submenu";
 					$data[]				=$submenu;
 					$opciones 			= $this->data_opcion($submenu["id"]);
 					
 					foreach($opciones as $iopcion => $opcion)
 					{
 					    $opcion["name"]	=" = &nbsp; &nbsp;".$opcion["name"];
+					    $opcion["type"] ="opcion";
 						$data[]			=$opcion;
 					}
 				}				

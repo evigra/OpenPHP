@@ -20,5 +20,5 @@
 			"report"			=>"Reporte",
 			"module_title"    	=>"Administracion de Usuarios",
 		);
-		$this->sys_view_l18n["html_head_title"]="SOLES GPS :: {$_SESSION["company"]["razonSocial"]} :: {$this->sys_view_l18n["module_title"]}";
+		$this->sys_view_l18n["html_head_title"]="{$this->sys_view_l18n["module_title"]}";
 ?>

@@ -101,10 +101,10 @@
 				    SELECT * 
 				    FROM 
 					    groups g join 
-					    user_group ug on ug.active=g.id 
+					    user_group ug on ug.group=g.id 
 				    WHERE 1=1
 					    AND user_id='{$user["id"]}'
-					    AND active>0
+					    AND group>0
 			    ";		
 
 			    $option_conf					=array();
@@ -135,7 +135,7 @@
 		        else										$sesion_start	="";
 		        
 		        if($user["sesion_start"]!="")   $locacion	=$user["sesion_start"];
-		        else							$locacion	="../alert/&sys_menu=2";
+		        else							$locacion	="../alert/&sys_menu=1";
 		        
 		        $md5_id							=$user["md5_id"];
 		        

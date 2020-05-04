@@ -63,7 +63,7 @@
 				"g.*",
 				"m.name"=>"menu_id",
 			);
-			$option["from"]		="menu m join groups g on m.id=g.menu_id";
+			$option["from"]		="groups g left join menu m on m.id=g.menu_id";
 			$option["order"]	="m.id asc, nivel asc";
 			
 			$return =parent::__VIEW_REPORT($option);    				

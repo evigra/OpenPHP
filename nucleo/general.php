@@ -51,9 +51,7 @@
 			    $this->sys_var["module_path"]				="modulos/".$this->sys_object."/";
 			    $this->sys_var["module"]					=$this->sys_object."/";
 			    $this->sys_var["l18n"]						=$this->sys_var["module_path"] . "l18n/";
-
-						    
-			    #$this->sys_l18n    		    		   		 =$this->sys_module."l18n/";			
+						   
 			    
 			    ini_set('display_errors', 1);				
 			    
@@ -75,12 +73,12 @@
 			    {
 				    $this->__REQUEST();		
 				    $this->__CREATE_OBJ();
-								    
+					@include("nucleo/l18n/" . @$_SESSION["user"]["l18n"].".php");			    
 				    if(file_exists($this->sys_var["l18n"] . @$_SESSION["user"]["l18n"].".php"))
 				    {				
 					    include($this->sys_var["l18n"] . @$_SESSION["user"]["l18n"].".php");				
 				    }	
-				    @include("nucleo/l18n/" . @$_SESSION["user"]["l18n"].".php");
+				    
 			    
 		        	if(!isset($_SESSION["pdf"]))							$_SESSION["pdf"]	=array();		    					
 				    
@@ -536,7 +534,7 @@
 						elseif(!isset($this->sys_fields["$campo"]["relation"]))
 						{
 						    
-							if(count(@$this->sys_fields["$campo"])>1 )
+							if(isset($this->sys_fields["$campo"]) AND count(@$this->sys_fields["$campo"])>1 )
 							{
 								$fields	.="$campo='$valor',";
 							}
@@ -583,7 +581,7 @@
 					}
 					if(isset($option["echo"])  AND $this->sys_enviroments	=="DEVELOPER" AND @$this->sys_private["action"]!="print_pdf")
 					{
-				    	echo "<div class=\"echo\" style=\"display:none;\" title=\"{$option["echo"]}\">".$this->sys_sql."</div>";
+				    	echo "<div class=\"developer\" title=\"Sistema :: {$this->sys_object} {$this->sys_name}\">".$this->sys_sql."</div>";
 				    }	
 
 					$option["open"]	=1;
@@ -597,9 +595,9 @@
 					{					
 						unset($option["open"]);
 									
-						$this->__MESSAGE_OPTION["text"]		=$option["message"];
-						$this->__MESSAGE_OPTION["time"]		=$option["time"];																	
-						$this->__MESSAGE_OPTION["title"]	=$option["title"];
+						$this->__MESSAGE_OPTION["text"]		=@$option["message"];
+						$this->__MESSAGE_OPTION["time"]		=@$option["time"];																	
+						$this->__MESSAGE_OPTION["title"]	=@$option["title"];
 						$option["close"]=1;
 						
 						

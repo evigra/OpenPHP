@@ -63,7 +63,7 @@
 		$objeto->words["module_body"]				=$objeto->__VIEW_WRITE();	 
 		$objeto->words               				=$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
     	
-    	#$objeto->words["permisos"]	            	=$objeto->menu_obj->grupos_html(@$objeto->sys_fields["usergroup_ids"]["values"]);
+    	$objeto->words["permisos"]	            	=$objeto->menu_obj->grupos_html(@$objeto->sys_fields["usergroup_ids"]["values"]);
     	#$objeto->words["flotilla"]	            	=$objeto->device_obj->devices_user($objeto->sys_primary_id);
     	
     	#if(isset($objeto->sys_fields["files_id"]["value"]))    	

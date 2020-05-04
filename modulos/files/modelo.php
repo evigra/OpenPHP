@@ -56,10 +56,7 @@
     	    if(!is_null($option))
     	    {
     	        $path=$this->path_file ."/$option".".*";    	        
-    	        
-    	        #$this->__PRINT_R($path);
     	        array_map('unlink', glob($path));
-                #unlink();
             }
 			parent::__DELETE($option);
 		}
@@ -99,11 +96,7 @@
 
 				    if(in_array($extension,array("jpg","jpeg","png","gif")))		
 				    {
-				        $this->thumbs($path);
-				        if(isset($datas["agua"]))
-				        {
-				            $this->agua($path);
-				        }				        
+				        $this->thumbs($path, $datas);
 				    }
 				}
 			}	
@@ -128,35 +121,22 @@
 			}					
 		    return $return;	
 		}	
-        public function agua($path)
+        public function thumbs($path, $datas)
         {
             $nombreimg = explode("/", $path);  
             $nombreimg = $nombreimg[count($nombreimg)-1];  
                   
-            #$this->redimensionar_imagen($nombreimg, $path, $path."_thumb.jpg",20,15);
-            #$this->redimensionar_imagen($nombreimg, $path, $path."_small.jpg",120,90);                        
-            #$this->redimensionar_imagen($nombreimg, $path, $path."_medium.jpg",400,300);            
-            #$this->redimensionar_imagen($nombreimg, $path, $path."_big.jpg",800,600);            
-            
-            $this->__PRINT_R("AGUA en files");
-        }
-        public function thumbs($path)
-        {
-            $nombreimg = explode("/", $path);  
-            $nombreimg = $nombreimg[count($nombreimg)-1];  
-                  
-            $this->redimensionar_imagen($nombreimg, $path, $path."_thumb.jpg",20,15);
-            $this->redimensionar_imagen($nombreimg, $path, $path."_small.jpg",120,90);                        
-            $this->redimensionar_imagen($nombreimg, $path, $path."_medium.jpg",400,300);            
-            $this->redimensionar_imagen($nombreimg, $path, $path."_big.jpg",800,600);            
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_thumb.jpg",20,15);
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_small.jpg",120,90);                        
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_medium.jpg",400,300);            
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_big.jpg",800,600);            
         }
 
-        public function redimensionar_imagen($nombreimg, $rutaimg, $ruta_nueva, $xmax, $ymax)
+        public function redimensionar_imagen($datas, $nombreimg, $rutaimg, $ruta_nueva, $xmax, $ymax)
         {              
             $ext = explode(".", $nombreimg);  
             $ext = $ext[count($ext)-1];  
-            
-            
+                                  
             if($ext == "jpg" || $ext == "jpeg")  
               $imagen = imagecreatefromjpeg($rutaimg);  
             elseif($ext == "png")  
@@ -166,14 +146,6 @@
 
             $x = imagesx($imagen);  
             $y = imagesy($imagen);  
-
-            
-            /*
-            if($x <= $xmax && $y <= $ymax){
-              echo "<center>Esta imagen ya esta optimizada para los maximos que deseas.<center>";
-              return $imagen;  
-            }
-            */
 
             if($x >= $y) {  
               $nuevax = $xmax;  
@@ -186,8 +158,22 @@
 
             $img2 = imagecreatetruecolor($nuevax, $nuevay);  
             imagecopyresized($img2, $imagen, 0, 0, 0, 0, floor($nuevax), floor($nuevay), $x, $y);      
-  
-            imagejpeg($img2, $ruta_nueva,100);    
+
+            if(isset($datas["agua"]) OR in_array($datas["agua"],$_SESSION["var"]["true"]))	
+            {
+                if(substr($ruta_nueva,-7)=="big.jpg")
+                {
+                    $estampa = imagecreatefrompng('sitio_web/img/agua.png');
+                    
+                    $margen_dcho    = 10;
+                    $margen_inf     = 10;
+                    $sx             = imagesx($estampa);
+                    $sy             = imagesy($estampa);
+
+                    imagecopy($img2, $estampa, floor($nuevax - $sx - $margen_dcho), floor($nuevay - $sy - $margen_inf), 0, 0, floor($sx), floor($sy));                    
+                }
+            }
+            imagejpeg($img2, $ruta_nueva,100);
         }        				
 	}
 ?>
