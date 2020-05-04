@@ -32,9 +32,9 @@
                 if($datas["celular"]!="")
                 {	
                     $vars["telefono"]   =$datas["celular"];                    
-	                $vars["mensaje"]	="Muchas gracias <b>VIZCAINO GRANADOS EDUARDO</b> por apoyarnos. 
+	                $vars["mensaje"]	="Muchas gracias <b>{$datas["name"]}</b> por apoyarnos. 
 	                
-Con tu voto, el equipo SolesGPS tambien podra ayudar para hacer valer tu eleccion sindical SNTSS.
+Con tu voto, nosotros el equipo SolesGPS, tambien <b>podremos ayudar para hacer valer tu eleccion sindical SNTSS - IMSS</b>.
 	                ";
 	                $this->__WA($vars);
 	            }
