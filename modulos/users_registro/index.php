@@ -42,7 +42,7 @@
 	$objeto->words["module_center"]             ="";
 	$objeto->words["module_right"]              =$objeto->__BUTTON($module_right);
 	
-	$objeto->words["html_head_description"]	=	"Forma parte de nuestra plataforma, registra tus datos";
+	$objeto->words["html_head_description"]	=	"Forma parte de nuestra plataforma, registra tus datos para que apoyemos a RML en el SNTSS Colima";
 	$objeto->words["html_head_keywords"] 	=	"SNTSS, IMSS";
 
 	$objeto->words["html_head_title"]           ="{$objeto->words["module_title"]}";
