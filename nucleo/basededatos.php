@@ -1,4 +1,9 @@
 <?php	
+
+
+
+
+
 	class basededatos 
 	{    
 		public function __SYS_DB()
