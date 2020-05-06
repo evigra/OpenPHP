@@ -31,7 +31,7 @@
 
                 if($datas["celular"]!="")
                 {	
-                    $vars["telefono"]   =$datas["celular"];                    
+                    $vars["telefono"]   ="521".$datas["celular"];                    
 	                $vars["mensaje"]	="Muchas gracias <b>{$datas["name"]}</b> por apoyarnos. 
 	                
 Con tu voto, nosotros el equipo SolesGPS, tambien <b>podremos ayudar para hacer valer tu eleccion sindical SNTSS - IMSS</b>.

@@ -4,12 +4,10 @@
 		public function __SYS_DB()
 		{  
 			return array(
-				"user"		=>"admin_evigra",
-				#"user"		=>"root",
-				"pass"		=>"EvG30JiC06",
-				"name"		=>"admin_frame",
-				"host"		=>"solesgps.com",
-				#"host"		=>"localhost",
+				"user"		=>"user",
+				"pass"		=>"password",
+				"name"		=>"database",
+				"host"		=>"localhost",
 				"type"		=>"mysql",
 			);
 		}

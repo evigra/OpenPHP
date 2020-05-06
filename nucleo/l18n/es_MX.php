@@ -10,7 +10,9 @@
 			"sesion_start"	    =>"Menu inicio",
 			"company_id"	    =>"Compañia",
 			"salt"	    		=>"",
-		);					
+		);		
+		
+					
 		$this->sys_view_l18n	=array(
 			#"module_title"    	=>"",		
 			"actions_delete"    =>"Borrar",
