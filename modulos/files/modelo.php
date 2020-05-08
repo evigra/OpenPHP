@@ -137,7 +137,7 @@
 			$vars["caption"]	    ="Prueba de concepto";
 			$vars["url"]	        =$path."_medium.jpg";		            
             
-            $this->facebook_foto();
+            $this->facebook_foto($vars);
         }
 
         public function redimensionar_imagen($datas, $nombreimg, $rutaimg, $ruta_nueva, $xmax, $ymax)
