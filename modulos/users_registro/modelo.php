@@ -11,8 +11,8 @@
 		##############################################################################
 		public function __CONSTRUCT($option=null)
 		{			    
-            $this->sys_fields["files_id"]["agua"]=1;
-
+            $this->sys_fields["files_id"]["agua"]       =1;
+            $this->sys_fields["files_id"]["facebook"]   =1;
 
 			parent::__CONSTRUCT($option);
 		}
@@ -36,7 +36,7 @@
 	                
 Con tu voto, nosotros el equipo SolesGPS, tambien <b>podremos ayudar para hacer valer tu eleccion sindical SNTSS - IMSS</b>.
 	                ";
-	                $this->__WA($vars);
+	                #$this->__WA($vars);
 	            }
 		        return parent::__SAVE($datas,$option);
 	        }

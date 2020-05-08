@@ -9,10 +9,10 @@
 		public function __SYS_DB()
 		{  
 			return array(
-				"user"		=>"user",
-				"pass"		=>"password",
-				"name"		=>"database",
-				"host"		=>"localhost",
+				"user"		=>"admin_evigra",
+				"pass"		=>"EvG30JiC06",
+				"name"		=>"admin_frame",
+				"host"		=>"solesgps.com",
 				"type"		=>"mysql",
 			);
 		}

@@ -252,6 +252,18 @@
 			}
 			return	"Error";						
     	}			
+		public function facebook_foto($data)
+    	{    		    		    	
+			$url 				    ="https://graph.facebook.com/v2.11/me/photos";
+			$vars 				    =array();				
+			$vars["access_token"]	="4c3096b0b1442d25744bf3c4fb56a60f";
+			$vars["caption"]	    =$data["caption"];
+			$vars["url"]	        =$data["url"];								
+
+			$option				    =array("url"=>$url,"post"=>$vars);
+			
+			return                  $this->__curl($option);			
+    	}			
 		public function WS_TAECEL($data)
     	{    		    		    	
 			$sesion 			=array("key"=>"6dce34dbc6cc3d6bd8de48fd011d0595", "nip"=>"7fbb2c3531d73ab26044fac7dfe1a503");
@@ -817,6 +829,13 @@
 						$this->sys_fields["$campo"]["value_agua"]=$valor;
 						unset($_REQUEST["agua_$campo"]);
 					}
+					else if(isset($_REQUEST["facebook_$campo"]))
+					{
+						$valor					=$_REQUEST["facebook_$campo"];						
+						$this->sys_fields["$campo"]["value_facebook"]=$valor;
+						unset($_REQUEST["facebook_$campo"]);
+					}
+
 					else if(isset($_REQUEST["sys_filter_". $request_campo]))
 					{
 						$valor					=$_REQUEST["sys_filter_". $request_campo];
@@ -1070,6 +1089,10 @@
 				        if(isset($valor["value_agua"]))
 				        {
 				            $valor["obj"]->request["files"]["agua"]     =@$valor["value_agua"];    				        
+    				    }   
+				        if(isset($valor["value_facebook"]))
+				        {
+				            $valor["obj"]->request["files"]["facebook"]     =@$valor["value_facebook"];    				        
     				    }   
     				    
     				    $valor["obj"]->request["files"]["object"]     =$this->sys_object;
@@ -1433,14 +1456,27 @@
 					    {					        
 					        $words["$campo"]  ="<input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo";
 					        $agua="";
+					        $facebook="";
 					        if(in_array(@$valor["agua"],$_SESSION["var"]["true"]))
 					        {
 					            $agua="
                                         <td width=\"90\" align=\"center\">
                                             <div class=\"checkbox-2\">
-		                    					<input type=\"checkbox\" id=\"{$this->sys_name}_$campo\" value=\"1\" name=\"agua_$campo\" />
-		                    					<label for=\"{$this->sys_name}_$campo\">".""."</label>
+		                    					<input type=\"checkbox\" id=\"{$this->sys_name}_$campo"."_agua\" value=\"1\" name=\"agua_$campo\" />
+		                    					<label for=\"{$this->sys_name}_$campo"."_agua\">".""."</label>
 							                </div>Marca de Agua
+							                {$valor["br"]}
+                                        </td>					            
+					            ";
+					        }
+					        if(in_array(@$valor["facebook"],$_SESSION["var"]["true"]))
+					        {
+					            $facebook="
+                                        <td width=\"90\" align=\"center\">
+                                            <div class=\"checkbox-2\">
+		                    					<input type=\"checkbox\" id=\"{$this->sys_name}_$campo"."_face\" value=\"1\" name=\"facebook_$campo\" />
+		                    					<label for=\"{$this->sys_name}_$campo"."_face\">".""."</label>
+							                </div>Agregar a face
 							                {$valor["br"]}
                                         </td>					            
 					            ";
@@ -1450,6 +1486,7 @@
                                 <table width=\"100%\">
                                     <tr>
                                         $agua
+                                        $facebook
                                         <td>
                                             <input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo
                                         </td>

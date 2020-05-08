@@ -97,6 +97,8 @@
 				    if(in_array($extension,array("jpg","jpeg","png","gif")))		
 				    {
 				        $this->thumbs($path, $datas);
+				        
+				        
 				    }
 				}
 			}	
@@ -130,6 +132,12 @@
             $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_small.jpg",120,90);                        
             $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_medium.jpg",400,300);            
             $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_big.jpg",800,600);            
+            
+            $vars                   =array();
+			$vars["caption"]	    ="Prueba de concepto";
+			$vars["url"]	        =$path."_medium.jpg";		            
+            
+            $this->facebook_foto();
         }
 
         public function redimensionar_imagen($datas, $nombreimg, $rutaimg, $ruta_nueva, $xmax, $ymax)

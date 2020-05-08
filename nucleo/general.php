@@ -525,7 +525,8 @@
 							if(isset($valor["tmp_name"]))
 							{
 								# IMAGENES
-								$this->sys_fields["$campo"]["value"]=$this->sys_fields["$campo"]["obj"]->__SAVE($valor);								
+								$this->sys_fields["$campo"]["value"]=$this->sys_fields["$campo"]["obj"]->__SAVE($valor);
+								
 							}		
 							else
 								# 
