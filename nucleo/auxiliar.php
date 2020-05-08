@@ -2170,11 +2170,11 @@
 						        $data_file                  =$this->sys_fields[$field]["values"][0];						
 						        
 						        $row[$field."._path"]       ="../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}";
-						        $row[$field."._thumb"]      ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}_thumb.jpg\">";
-						        $row[$field."._small"]      ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}_small.jpg\">";
-						        $row[$field."._medium"]     ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}_medium.jpg\">";
-						        $row[$field."._big"]        ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}_big.jpg\">";
-						        $row[$field.".original"]    ="<img src=\"../modulos/files/file/{$data_file["id"]}.{$data_file["extension"]}\">";
+						        $row[$field."._thumb"]      ="<img src=\"{$row[$field."._path"]}_thumb.jpg\">";
+						        $row[$field."._small"]      ="<img src=\"{$row[$field."._path"]}_small.jpg\">";
+						        $row[$field."._medium"]     ="<img src=\"{$row[$field."._path"]}_medium.jpg\">";
+						        $row[$field."._big"]        ="<img src=\"{$row[$field."._path"]}_big.jpg\">";
+						        $row[$field.".original"]    ="<img src=\"{$row[$field."._path"]}\">";
 						    }
 						}
 						

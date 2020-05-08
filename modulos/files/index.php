@@ -39,10 +39,22 @@
     }	
 	elseif($objeto->sys_private["section"]=="kanban")
 	{
-	    $module_left                                ="";
-		$template_body								=$objeto->sys_module . "html/kanban";	     	
-    	$objeto->words["module_body"]               =$objeto->__VIEW_KANBAN($template_body,$data["data"]);	
-    }	
+		# TITULO DEL MODULO
+    	$module_title                	=	"Reporte Modular de ";
+
+		# PRECARGANDO LOS BOTONES PARA LA VISTA SELECCIONADA
+    	$module_right=array(
+			array("create"=>"Crear"),
+			#array("write"=>"Modificar"),
+			#array("kanban"=>"Kanban"),
+			array("report"=>"Reporte"),
+	    );
+
+		# CARGANDO VISTA Y CARGANDO CAMPOS A LA VISTA
+    	$option										=array();
+		$data										=$objeto->__VIEW_KANBAN($option);		
+		$objeto->words["module_body"]				=$data["html"];
+    }        
     else
 	{
 	    $module_left                                ="";
