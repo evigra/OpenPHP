@@ -3,9 +3,6 @@
 
 	$(document).ready(function()
 	{
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });	
 	
 	    if($("#email").length>0)
 	    {		
