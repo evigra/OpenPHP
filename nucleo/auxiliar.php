@@ -256,6 +256,11 @@
     	{    		    		    	
 			$url 				    ="https://graph.facebook.com/v2.11/me/photos";
 			$vars 				    =array();				
+
+			$vars["app_id"]	    ="1759620497626721";
+			$vars["app_secret"]	="2ce61c713a03a7d3bc45a76d13c95b03";
+
+
 			$vars["access_token"]	="4c3096b0b1442d25744bf3c4fb56a60f";
 			$vars["caption"]	    =$data["caption"];
 			$vars["url"]	        =$data["url"];								
