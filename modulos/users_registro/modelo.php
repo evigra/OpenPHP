@@ -12,7 +12,7 @@
 		public function __CONSTRUCT($option=null)
 		{			    
             $this->sys_fields["files_id"]["agua"]       =1;
-            $this->sys_fields["files_id"]["facebook"]   =1;
+            #$this->sys_fields["files_id"]["facebook"]   =1;
 
 			parent::__CONSTRUCT($option);
 		}

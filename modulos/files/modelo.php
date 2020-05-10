@@ -133,11 +133,11 @@
             $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_medium.jpg",400,300);            
             $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_big.jpg",800,600);            
             
-            $vars                   =array();
-			$vars["caption"]	    ="Prueba de concepto";
-			$vars["url"]	        =$_SERVER["SERVER_NAME"] . $path."_medium.jpg";		            
+            #$vars                   =array();
+			#$vars["caption"]	    ="Prueba de concepto";
+			#$vars["url"]	        =$_SERVER["SERVER_NAME"] . $path."_medium.jpg";		            
             
-            $this->__PRINT_R($this->facebook_foto($vars));
+            #$this->__PRINT_R($this->facebook_foto($vars));
         }
 
         public function redimensionar_imagen($datas, $nombreimg, $rutaimg, $ruta_nueva, $xmax, $ymax)
