@@ -3473,6 +3473,7 @@
 				    
 				    if(file_exists($file))    						        		        		    
     				    $return.="<script src=\"$file\"></script>";    		        		    
+    				else    $return.="NO ENCONTRADO $file ";
 				        		    
 				    if(is_string($valor) AND $valor=="maps")	
 				    {
