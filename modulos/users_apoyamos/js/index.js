@@ -1,7 +1,7 @@
 	$(document).ready(function()
 	{
 	
-        $("div#div2_users_apoyamos").flipping_gallery({
+        $("div.view_report_d2").flipping_gallery({
             enableScroll: true,
             autoplay: 2000
         });	    
