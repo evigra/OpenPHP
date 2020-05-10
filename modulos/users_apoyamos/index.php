@@ -6,7 +6,7 @@
 	$objeto->words["system_module"]				=$data["html"];
 
 	$data_js=array(
-	    "../" . $this->sys_var["module_path"] . "js/index"
+	    "../" . $this->sys_var["module_path"] . "js/index"'
 	    "../sitio_web/jquery.flipping_gallery"
 	);
     
