@@ -5,9 +5,9 @@
 	$data										=$objeto->__VIEW_KANBAN($option);		
 	$objeto->words["system_module"]				=$data["html"];
 
-	$data_js=array(
-	    "../" . $objeto->sys_var["module_path"] . "js/index",
-	    "../sitio_web/js/jquery.flipping_gallery"
+	$data_js=array(	    
+	    "../sitio_web/js/jquery.flipping_gallery".
+	    "../" . $objeto->sys_var["module_path"] . "js/index"
 	);
     
 	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data_js);								# ARCHIVOS JS DEL MODULO
