@@ -9,9 +9,13 @@
 	    "../sitio_web/js/jquery.flipping_gallery",
 	    "../" . $objeto->sys_var["module_path"] . "js/index"
 	);
+	$data_css=array(	    
+	    "../sitio_web/css/galerias/flipping_gallery"
+	);
+
     
 	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data_js);								# ARCHIVOS JS DEL MODULO
-	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS();
+	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS($data_css);
 
 	$objeto->words["html_head_description"]	=	"Todos formamos parte de nuestra del proyecto, y apoyamos a RML en el SNTSS Colima";
 	$objeto->words["html_head_keywords"] 	=	"SNTSS, IMSS";
