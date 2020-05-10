@@ -7,7 +7,7 @@
 
 	$data_js=array(
 	    "../" . $objeto->sys_var["module_path"] . "js/index",
-	    "../sitio_web/jquery.flipping_gallery"
+	    "../sitio_web/js/jquery.flipping_gallery"
 	);
     
 	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data_js);								# ARCHIVOS JS DEL MODULO
