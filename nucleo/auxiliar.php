@@ -3469,8 +3469,10 @@
 				    elseif(is_string($valor) AND $valor=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
 				    elseif(is_string($field) AND $field=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
 				    else                                $file="$valor.js";
-				        		        		    
-				    $return.="<script src=\"$file\"></script>";    		        		    
+				    
+				    
+				    if(file_exists($file))    						        		        		    
+    				    $return.="<script src=\"$file\"></script>";    		        		    
 				        		    
 				    if(is_string($valor) AND $valor=="maps")	
 				    {
@@ -3572,9 +3574,10 @@
 				$data=array("../" . $this->sys_var["module_path"] . "css/index");
 		    
             foreach($data as $valor)
-    		{    		
+    		{    		    
     		    $file="$valor.css";
-    		    $return.="<link rel=\"stylesheet\" type=\"text/css\" href=\"$file\">";    		    
+    		    if(file_exists($file))    		
+    		        $return.="<link rel=\"stylesheet\" type=\"text/css\" href=\"$file\">";    		    
 			}		
 			return $return;
     	}     	     	  
