@@ -10,14 +10,14 @@
 	    "../sitio_web/css/galerias/flipping_gallery"
 	);
 
-    $template                                   =$this->sys_var["module_path"]."html/show";
+    $template                                   =$objeto->sys_var["module_path"]."html/show";
     $objeto->words["system_module"]	            =$objeto->__TEMPLATE($template);	
 
 
 
     $option=array("header"=>"false");
 	$data										=$objeto->__VIEW_KANBAN($option);		
-	$objeto->words["galery"]				=$data["html"];
+	$objeto->words["galery"]				    =$data["html"];
 
 
     
