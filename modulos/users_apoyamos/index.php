@@ -1,6 +1,7 @@
 <?php	
 	$objeto											=new users_apoyamos();
 
+    $option=array("header"=>"false");
 	$data										=$objeto->__VIEW_KANBAN($option);		
 	$objeto->words["system_module"]				=$data["html"];
 
