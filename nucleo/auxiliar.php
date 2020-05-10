@@ -3463,17 +3463,16 @@
 		    {
 		        foreach($data as $field=>$valor)
 				{    		    													   
-				    #if(is_string($valor) AND $valor=="maps")                  $file="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTDTeSJ3Uu3hHCy73RzGoJbx6vmKcmmUI";
-				    if(is_string($valor) AND $valor=="maps")                  $file="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHdbkivyRpHCuGZUbQ-DAM7MmHf_lLvwI";
-				    elseif(is_string($valor) AND $valor=="responsivevoice")  $file="https://code.responsivevoice.org/responsivevoice.js";
+				    if(is_string($valor) AND $valor=="maps")                $file="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHdbkivyRpHCuGZUbQ-DAM7MmHf_lLvwI";
+				    elseif(is_string($valor) AND $valor=="responsivevoice") $file="https://code.responsivevoice.org/responsivevoice.js";
 				    elseif(is_string($valor) AND $valor=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
 				    elseif(is_string($field) AND $field=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
-				    else                                $file="$valor.js";
+				    else                                                    $file="$valor.js";
 				    
 				    
-				    if(file_exists($file))    						        		        		    
+				    #if(file_exists($file))    						        		        		    
     				    $return.="<script src=\"$file\"></script>";    		        		    
-    				else    $return.="NO ENCONTRADO $file ";
+    				#else    $return.="NO ENCONTRADO $file ";
 				        		    
 				    if(is_string($valor) AND $valor=="maps")	
 				    {
