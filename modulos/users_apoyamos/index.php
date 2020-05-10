@@ -5,8 +5,12 @@
 	$data										=$objeto->__VIEW_KANBAN($option);		
 	$objeto->words["system_module"]				=$data["html"];
 
-
-	$objeto->words["html_head_js"]              =$objeto->__FILE_JS();								# ARCHIVOS JS DEL MODULO
+	$data_js=array(
+	    "../" . $this->sys_var["module_path"] . "js/index"
+	    "../sitio_web/jquery.flipping_gallery"
+	);
+    
+	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data_js);								# ARCHIVOS JS DEL MODULO
 	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS();
 
 	$objeto->words["html_head_description"]	=	"Todos formamos parte de nuestra del proyecto, y apoyamos a RML en el SNTSS Colima";
