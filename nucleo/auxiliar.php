@@ -3575,9 +3575,8 @@
 		    
             foreach($data as $valor)
     		{    		    
-    		    $file="$valor.css";
-    		    if(file_exists($file))    		
-    		        $return.="<link rel=\"stylesheet\" type=\"text/css\" href=\"$file\">";    		    
+    		    $file="$valor.css";	
+		        $return.="<link rel=\"stylesheet\" type=\"text/css\" href=\"$file\">";    		    
 			}		
 			return $return;
     	}     	     	  
