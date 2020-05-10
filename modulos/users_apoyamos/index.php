@@ -6,7 +6,7 @@
 	$objeto->words["system_module"]				=$data["html"];
 
 	$data_js=array(	    
-	    "../sitio_web/js/jquery.flipping_gallery".
+	    "../sitio_web/js/jquery.flipping_gallery.js".
 	    "../" . $objeto->sys_var["module_path"] . "js/index"
 	);
     
