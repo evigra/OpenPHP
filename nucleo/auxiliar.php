@@ -2561,6 +2561,14 @@
 			return $this->__SYS_REPORT($option);
         }				
     	##############################################################################    
+		public function __VIEW_GALERY($option=array())
+		{
+			if(!is_array($option))	$option=array();
+			$option["type_view"]="galery";
+			return $this->__SYS_REPORT($option);
+        }				
+
+    	##############################################################################    
     	/*
 		public function __VIEW_CREATE($template=null)
 		{
@@ -2631,9 +2639,13 @@
 				if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/report_title";
 				if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/report_body";			
 			}
-			elseif($option["type_view"]=="kanban")
+			elseif($option["type_view"]=="kanban" )
 			{
 				if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/kanban";						
+			}
+			elseif($option["type_view"]=="galery")
+			{
+				if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/galery";						
 			}
 
 			if(isset($option["template_option"]))	$template_option		=$option["template_option"];
@@ -2992,6 +3004,20 @@
 								</script>
 							";						
 						}
+						elseif($option["type_view"]=="galery")
+						{
+							$return["report"]="
+								$view_head																					
+								<div id=\"div_$name\" class=\"$report_class view_report_d1\" obj=\"$name\" style=\"height: 100%;\">
+									<div id=\"div2_$name\" class=\"view_report_d2\" style=\"padding:0px; margin:0px;\">
+											$view_body
+									</div>
+								</div>
+								<script>
+									{$return["js"]}
+								</script>
+							";												
+						}	
 						else
 						{
 							$return["report"]="
@@ -3006,6 +3032,7 @@
 								</script>
 							";												
 						}	
+
 					}
 					######### REPORTE PDF #############################################################	
 					else

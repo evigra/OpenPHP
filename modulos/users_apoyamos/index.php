@@ -16,7 +16,7 @@
 
 
     $option=array("header"=>"false");
-	$data										=$objeto->__VIEW_KANBAN($option);		
+	$data										=$objeto->__VIEW_GALERY($option);		
 	$objeto->words["galery"]				    =$data["html"];
 
 
