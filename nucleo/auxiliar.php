@@ -3061,7 +3061,7 @@
 					}					
 					if(!in_array(@$this->sys_private["action"],$_SESSION["var"]["print"]))					
 						$view="
-						<div id=\"base_$name\" class=\"render_h_origen\" diferencia_h=\"-20\" style=\"$height_render width:100%; overflow-y:auto; overflow-x:hidden; border: 	1px solid #ccc; padding:0px; margin:0px;\">
+						<div id=\"base_$name\" class=\"render_h_origen\" diferencia_h=\"-20\" style=\"$height_render width:100%; overflow-y:auto; overflow-x:hidden; border: 	0px solid #ccc; padding:0px; margin:0px;\">
 					";		
 
 			
