@@ -3007,10 +3007,17 @@
 						elseif($option["type_view"]=="galery")
 						{
 							$return["report"]="
-								$view_head																					
-									<div id=\"div2_$name\" class=\"view_report_d2\" style=\"padding:0px; margin:0px;\">
-									    $view_body
-									</div>
+								$view_head
+                                    <table width=\"100%\" height=\"100%\">
+                                        <tr>
+                                            <td align=\"center\">								    																					
+									            <div id=\"div2_$name\" class=\"view_report_d2\" style=\"padding:0px; margin:0px;\">
+									                $view_body
+									            </div>
+									        </td>
+								        </tr>
+							        </table>    
+									            
     							";												
 						}	
 						else
