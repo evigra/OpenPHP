@@ -3011,7 +3011,7 @@
                                     <table width=\"100%\" height=\"100%\">
                                         <tr>
                                             <td align=\"center\">								    																					
-									            <div id=\"div2_$name\" class=\"view_report_d2\" style=\"height:300px; padding:0px; margin:0px;\">
+									            <div id=\"div2_$name\" class=\"view_report_d2\" style=\"height:400px; padding:0px; margin:0px;\">
 									                $view_body
 									            </div>
 									        </td>
