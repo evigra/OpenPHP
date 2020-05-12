@@ -15,7 +15,6 @@
             unset($this->sys_fields["sesion_start"]);
             unset($this->sys_fields["company_id"]);
 
-            $this->__PRINT_R($this->sys_fields);
 			parent::__CONSTRUCT($option);
 		}				
 	}
