@@ -14,9 +14,18 @@
 	$data										=$objeto->__VIEW_GALERY($option);		
 	$objeto->words["galery"]				    =$data["html"];
 
-	$objeto->words["html_head_js"]              =$objeto->__FILE_JS();								# ARCHIVOS JS DEL MODULO
-	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS();
-	
+    $data_js=array(	    
+	    "../sitio_web/js/jquery.flipping_gallery",
+	    "../" . $objeto->sys_var["module_path"] . "js/index"
+	);
+	$data_css=array(	    
+	    "../sitio_web/css/galerias/flipping_gallery"
+	);
+
+
+
+	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data_js);								# ARCHIVOS JS DEL MODULO
+	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS($data_css);	
 	$objeto->words["module_title"]              ="WebHome";
 	
     $objeto->words["html_head_description"] =   "Raul Martinez Llereas :: Aun en las circunstancias adversas hay que tener esperanza y fe. FE en lo que somos capaces de hacer y ESPERANZA en que llegado el momento lo haremos sin titubear";
