@@ -3007,6 +3007,7 @@
 						elseif($option["type_view"]=="galery")
 						{
 							$return["report"]="
+							        LALO
 								    <div style=\"height:100%;\"  class=\"view_report_d2\">
 						                $view_body									            
 							        </div>
