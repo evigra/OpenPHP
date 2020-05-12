@@ -1,6 +1,6 @@
 $(document).ready(function()
 {         
-    $("td.view_report_d2").flipping_gallery({
+    $(".view_report_d2").flipping_gallery({
         enableScroll: true,
         autoplay: 2000
     });	
