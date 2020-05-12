@@ -50,10 +50,12 @@
 			"company_id"	    =>array(
 			    "title"             => "Compania",
 			    "type"              => "input",
+			    /*
 			    "relation"          => "many2one",
 			    "class_name"       	=> "company",
 			    "class_field_o"    	=> "company_id",
 			    "class_field_m"    	=> "id",
+			    */
 			),						
 			"usergroup_ids"	    	=>array(
 			    "title"             => "Permisos",
