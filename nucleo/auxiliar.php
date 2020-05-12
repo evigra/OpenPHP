@@ -3008,13 +3008,9 @@
 						{
 							$return["report"]="
 								$view_head
-                                    <table width=\"100%\" height=\"100%\">
-                                        <tr>
-                                            <td align=\"center\" class=\"view_report_d2\">								    																														            
-									                $view_body									            
-									        </td>
-								        </tr>
-							        </table>    									            
+								    <div style=\"height:100%;\"  class=\"view_report_d2\">
+						                $view_body									            
+							        </div>
     							";												
 						}	
 						else
