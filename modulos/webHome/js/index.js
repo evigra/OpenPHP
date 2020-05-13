@@ -15,10 +15,7 @@ $(document).ready(function()
 
 function siguiente()
 {
-
-
-
-    $(this).hide("slow");
+    $(this).next(".galery").hide("slow");
     $(this).next(".galery").show("slow", siguiente);
     
 }
