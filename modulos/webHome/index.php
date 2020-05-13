@@ -24,8 +24,8 @@
 
 
 
-	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data_js);								# ARCHIVOS JS DEL MODULO
-	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS($data_css);	
+	$objeto->words["html_head_js"]              =$objeto->__FILE_JS();								# ARCHIVOS JS DEL MODULO
+	$objeto->words["html_head_css"]             =$objeto->__FILE_CSS();	
 	$objeto->words["module_title"]              ="WebHome";
 	
     $objeto->words["html_head_description"] =   "Raul Martinez Llereas :: Aun en las circunstancias adversas hay que tener esperanza y fe. FE en lo que somos capaces de hacer y ESPERANZA en que llegado el momento lo haremos sin titubear";
