@@ -8,9 +8,7 @@ $(document).ready(function()
     //*/	
     
 
-    $(".galery").first().hide("slow", siguiente);
-
-    
+    $(".galery").first().show("slow", siguiente);    
 });
 
 function siguiente()
