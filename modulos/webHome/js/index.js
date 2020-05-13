@@ -6,4 +6,14 @@ $(document).ready(function()
         autoplay: 2000
     });
     //*/	
+    
+
+    $(".galery").first().hide("slow", siguiente);
+
+    
 });
+
+function siguiente()
+{
+    $(this).next(".galery").hide("slow", siguiente);
+}
