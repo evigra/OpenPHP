@@ -1,8 +1,5 @@
 $(document).ready(function()
 {  
-    $("img.galery")
-        .before("<div>" )     
-        .after("</div>");
         
         
     $(".galery").first().show("slow", siguiente);    
