@@ -1,15 +1,13 @@
-$(".galery").ready(function()
+$("img.galery").ready(function()
 {
-
     var width = 0;
     $(".galery").each(function() 
     { 
         width += $(this).width();  
         
-    }); 
-    
+    });     
     $("div.view_report_d2").width(width);
-alert(width);
+
 
 
     
