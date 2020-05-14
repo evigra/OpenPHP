@@ -11,7 +11,7 @@ $(document).ready(function()
         $( ".galery" ).stop();
     })
     .mouseout(function() {
-        $(".galery").hide("slow");
+        $(this).hide("slow");
         $(this).next(".galery").show("slow", siguiente);
     });
 
