@@ -8,7 +8,7 @@ $(document).ready(function()
 
     $( ".galery" )
     .mouseover(function() {
-        $(this).stop();
+        $( ".galery" ).stop();
     })
     .mouseout(function() {
         $(this).next(".galery").hide("slow");
