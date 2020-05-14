@@ -1,6 +1,6 @@
 $(document).ready(function()
 {  
-        
+    $(".galery").hide();    
         
     $(".galery").first().show("slow", siguiente);    
 
