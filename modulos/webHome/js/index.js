@@ -10,6 +10,7 @@ function siguiente()
 {
     if(parseInt($(".galery").index(this))== parseInt($(".galery").length) -1 )
     {
+        alert("entra");
         $(this).first().hide("slow");
         $(this).first().show("slow", siguiente);        
     }
