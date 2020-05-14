@@ -8,9 +8,6 @@ $(document).ready(function()
 
 function siguiente()
 {
-    alert(parseInt($(".galery").index(this)));
-    alert(parseInt($(".galery").length) -1 );
-
     if(parseInt($(".galery").index(this))== parseInt($(".galery").length) -1 )
     {
         $(this).first().hide("slow");
