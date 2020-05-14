@@ -1,5 +1,6 @@
 $(document).ready(function()
-{  
+{
+    /*  
     $(".galery").hide();    
         
     $(".galery").first().show("slow", siguiente);    
@@ -29,6 +30,7 @@ $(document).ready(function()
 
 function siguiente()
 {
+    /*
     if(parseInt($(".galery").index(this))== parseInt($(".galery").length) -1 )
     {
         
@@ -39,5 +41,6 @@ function siguiente()
     {        
         $(this).next(".galery").show("slow");
         $(this).next(".galery").hide("slow", siguiente);
-    }    
+    }
+    */    
 }
