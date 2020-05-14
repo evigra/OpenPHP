@@ -31,12 +31,13 @@ function siguiente()
 {
     if(parseInt($(".galery").index(this))== parseInt($(".galery").length) -1 )
     {
-        $(".galery").first().hide("slow");
-        $(".galery").first().show("slow", siguiente);        
+        
+        $(".galery").first().show("slow");        
+        $(".galery").first().hide("slow", siguiente);
     }
     else
-    {
-        $(this).next(".galery").hide("slow");
-        $(this).next(".galery").show("slow", siguiente);
+    {        
+        $(this).next(".galery").show("slow");
+        $(this).next(".galery").hide("slow", siguiente);
     }    
 }
