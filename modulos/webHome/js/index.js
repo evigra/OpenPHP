@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     //$(".galery").length;
 
-    alert($(".galery").width());    
+    alert($(".galery").first().width());    
 
     /*  
     $(".galery").hide();    
