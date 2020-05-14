@@ -7,7 +7,7 @@ $(document).ready(function()
     $(".galery").each(function() 
     { 
         width += $(this).width();  
-        $(".view_report_d2").width(width);
+        $("div.view_report_d2").width(width);
     }); 
 
 
