@@ -1,7 +1,5 @@
-$(document).ready(function()
+$(".galery").ready(function()
 {
-    //$(".galery").length;
-
 
     var width = 0;
     $(".galery").each(function() 
