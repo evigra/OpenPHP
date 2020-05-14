@@ -2,7 +2,11 @@ $(document).ready(function()
 {
     //$(".galery").length;
 
+    $(".galery").each()    
     alert($(".galery").first().width());    
+
+    var width = 0;
+    $(".galery").each(function() { width += $(this).width(); }); 
 
     /*  
     $(".galery").hide();    
