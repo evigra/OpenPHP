@@ -3,7 +3,28 @@ $(document).ready(function()
         
         
     $(".galery").first().show("slow", siguiente);    
-    //alert($(".galery").length -1);
+
+
+
+    $( ".galery" )
+    .mouseover(function() {
+        $(this).stop();
+    })
+    .mouseout(function() {
+        $(this).next(".galery").hide("slow");
+        $(this).next(".galery").show("slow", siguiente);
+    });
+
+    /*
+    $( ".galery" )
+    .mouseenter(function() {
+
+    })
+    .mouseleave(function() {
+
+    });
+    */
+
 });
 
 function siguiente()
