@@ -1,4 +1,4 @@
-$("img").ready(function()
+$("document").ready(function()
 {
     var width = 0;
     $(".galery").each(function() 
