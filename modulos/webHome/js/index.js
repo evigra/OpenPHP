@@ -7,8 +7,10 @@ $(document).ready(function()
     $(".galery").each(function() 
     { 
         width += $(this).width(); 
-        alert(width);            
+        
     }); 
+    
+    alert(width);            
 
 
     
