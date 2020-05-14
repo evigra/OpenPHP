@@ -3018,8 +3018,7 @@
 						                $view_body
 						                $view_body
 						                $view_body
-						                $view_body
-						                
+						                $view_body						                
 							        </div>
     							";												
 						}	

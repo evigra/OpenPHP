@@ -1,5 +1,9 @@
 $(document).ready(function()
 {
+    //$(".galery").length;
+
+    alert($(".galery").width());    
+
     /*  
     $(".galery").hide();    
         
