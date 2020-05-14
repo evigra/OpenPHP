@@ -2,9 +2,11 @@ $(document).ready(function()
 {  
     $("img.galery")
         .before("<div>" )     
-        .after("<div>");
+        .after("</div>");
+        
+        
     $(".galery").first().show("slow", siguiente);    
-    alert($(".galery").length -1);
+    //alert($(".galery").length -1);
 });
 
 function siguiente()
