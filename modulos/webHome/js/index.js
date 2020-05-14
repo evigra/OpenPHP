@@ -4,8 +4,12 @@ $(document).ready(function()
 
 
     var width = 0;
-    $(".galery").each(function() { width += $(this).width();  }); 
-    alert(width);
+    $(".galery").each(function() 
+    { 
+        width += $(this).width();  
+        $(".view_report_d2").width(width);
+    }); 
+
 
 
 
