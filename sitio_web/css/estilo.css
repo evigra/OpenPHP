@@ -194,13 +194,34 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	width:				calc(100% - 50px);      
 	max-width: 			1100px;
 	min-height: 		350px;
+}
+
+
+.sombra
+{
+	-webkit-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
+}
+
+
+
+/*
+
+.width
+{
+	border:				0px; 
+	width:				-moz-calc(100% - 50px); 
+	width:				calc(100% - 50px);      
+	max-width: 			1100px;
+	min-height: 		350px;
 	-webkit-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
 	-moz-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
 	box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
 
 }
 
-
+*/
 
 .mainTable
 {
