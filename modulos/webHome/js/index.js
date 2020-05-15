@@ -12,7 +12,7 @@ $(document).ready(function()
             width=parseInt(width/3);    
             $("div.view_report_d2").width(width);
         }, 500 );
-    }, 3500 );
+    }, 5500 );
 
 
 
