@@ -1,12 +1,16 @@
-$("document").ready(function()
+$(document).ready(function()
 {
-    var width = 0;
-    $(".galery").each(function() 
-    { 
+    setTimeout(function() 
+    {
+
+        var width = 0;
+        $(".galery").each(function() 
+        { 
         width += $(this).width();  
-        
-    });     
-    $("div.view_report_d2").width(width);
+
+        });     
+        $("div.view_report_d2").width(width);
+    }, 1500 );
 
 
 
