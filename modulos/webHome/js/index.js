@@ -5,7 +5,7 @@ $(document).ready(function()
         var width = 0;
         $(".galery").each(function() 
         { 
-           width += parseInt($(this).width()) + 10;  
+           width += parseInt($(this).width()) + 12;  
         });     
         setTimeout(function() 
         {
