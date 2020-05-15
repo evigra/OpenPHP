@@ -3008,7 +3008,7 @@
 						{
 							$return["report"]="
 								<div id=\"div_$name\" class=\"$report_class view_report_d1\" obj=\"$name\" style=\"width:100%; height:100%; overflow:hidden; padding:0px; margin:0px;\">
-									<div id=\"div2_$name\" class=\"view_report_d2\" style=\"width:100%;\">
+									<div id=\"div2_$name\" class=\"view_report_d2\">
 						                $view_body									            
 						                $view_body
 						                $view_body
