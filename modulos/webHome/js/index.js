@@ -2,15 +2,17 @@ $(document).ready(function()
 {
     setTimeout(function() 
     {
-
         var width = 0;
         $(".galery").each(function() 
         { 
-        width += $(this).width();  
-
+           width += $(this).width();  
         });     
-        $("div.view_report_d2").width(width);
-    }, 1500 );
+        setTimeout(function() 
+        {
+            width=parseInt(width/3);    
+            $("div.view_report_d2").width(width);
+        }, 500 );
+    }, 2000 );
 
 
 
