@@ -1,7 +1,8 @@
 $(document).ready(function()
 {
     setTimeout(function() 
-    {
+    {   
+        alert($("div.view_report_d1").width());
         var width = 0;
         $(".galery").each(function() 
         { 
