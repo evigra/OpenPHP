@@ -48,7 +48,6 @@ function siguiente(index)
     $("img.img_big").show("slow");            
     setTimeout(function() 
     {
-        alert(index);
         index+=1;
         siguiente(index);
     }, 1500 );
