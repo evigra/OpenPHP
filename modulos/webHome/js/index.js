@@ -17,7 +17,7 @@ $(document).ready(function()
         }, 500 );
     }, 5500 );
     
-    siguiente($("img.galery").first().attr("index"));        
+    siguiente(1);        
     
     /*  
     $(".galery").hide();    
@@ -41,6 +41,7 @@ $(document).ready(function()
 
 function siguiente(index)
 {
+
     $("img.img_big").hide("slow");            
     var src =$("img[index='" + index + "']").attr("path");   
     $("img.img_big").attr({"src" : src});
