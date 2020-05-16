@@ -3007,8 +3007,8 @@
 						elseif($option["type_view"]=="galery")
 						{
 							$return["report"]="
-								<div id=\"div_$name\" class=\"$report_class view_report_d1 width\" obj=\"$name\" style=\"height:100%; overflow-x:hidden; padding:0px; margin:0px;\">									
-									<div style=\"float:left; width:200px\">
+								<div id=\"div_$name\" class=\"$report_class view_report_d1 width\" obj=\"$name\" style=\"height:100%; overflow-y:hidden; padding:0px; margin:0px;\">									
+									<div style=\"float:left; width:250px\">
 						                $view_body									            
 						                $view_body
 						                $view_body
