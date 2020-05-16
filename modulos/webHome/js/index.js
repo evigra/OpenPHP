@@ -17,7 +17,7 @@ $(document).ready(function()
         }, 500 );
     }, 5500 );
     
-    siguiente($(".galery").first().attr("index"));        
+    siguiente($("img.galery").first().attr("index"));        
     
     /*  
     $(".galery").hide();    
