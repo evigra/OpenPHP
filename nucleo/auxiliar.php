@@ -3008,7 +3008,7 @@
 						{
 							$return["report"]="
 								<div id=\"div_$name\" class=\"$report_class view_report_d1 width\" obj=\"$name\" style=\"height:100%; overflow-x:hidden; padding:0px; margin:0px;\">									
-									<div id=\"div2_$name\" style=\"width:50px\">
+									<div style=\"float:left; width:50px\">
 						                $view_body									            
 						                $view_body
 						                $view_body
@@ -3021,7 +3021,9 @@
 						                $view_body
 						                $view_body						                
 							        </div>
-                                    <img src=\"\" class=\"img_big\"><br>							        
+							        <div style=\"float:left;\">
+                                        <img src=\"\" class=\"img_big\"><br>							        
+                                    </div>
 						        </div>
 							";												
 						}	
