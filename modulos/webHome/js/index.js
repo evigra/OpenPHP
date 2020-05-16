@@ -43,10 +43,11 @@ function siguiente(index)
 {
     $("img.img_big").hide("slow");            
     var src =$("img[index='" + index + "']").attr("path");   
-    $("img.img_big").attr({"src":src});
+    $("img.img_big").attr({"src" : src});
     $("img.img_big").show("slow");            
     setTimeout(function() 
     {
+        alert(index);
         index+=1;
         siguiente(index);
     }, 1500 );
