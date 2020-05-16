@@ -3021,6 +3021,7 @@
 						                $view_body
 						                $view_body						                
 							        </div>
+							        <img src=\"\" class=\"img_big\">
 						        </div>
 							";												
 						}	
