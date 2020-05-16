@@ -49,5 +49,5 @@ function siguiente(index)
     {
         index+=1;
         siguiente(index);
-    }, 700 );
+    }, 1500 );
 }
