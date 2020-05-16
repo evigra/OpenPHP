@@ -1,27 +1,14 @@
 $(document).ready(function()
 {
-    setTimeout(function() 
-    {   
-        var width = 0;
-        var index = 0;
-        $(".galery").each(function() 
-        { 
-            index+=1;
-            $(this).attr({"index":index});            
-            width += parseInt($(this).width()) + 12;  
-        });     
-        setTimeout(function() 
-        {
-            width=parseInt(width/3);    
-            $("div.view_report_d2").width(width);
-        }, 500 );
-    }, 5500 );
+    var width = 0;
+    var index = 0;
+    $(".galery").each(function() 
+    { 
+        index+=1;
+        $(this).attr({"index":index});            
+    });     
     
-    siguiente(1);        
-    
-    /*  
-    $(".galery").first().show("slow", siguiente);    
-    */
+    siguiente(1);            
 });
 
 function siguiente(index)
