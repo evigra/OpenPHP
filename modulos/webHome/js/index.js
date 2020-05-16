@@ -7,7 +7,7 @@ $(document).ready(function()
         $(".galery").each(function() 
         { 
             index+=1;
-            $(this).attr("index",index);            
+            $(this).attr({"index":index});            
             width += parseInt($(this).width()) + 12;  
         });     
         setTimeout(function() 
@@ -43,7 +43,7 @@ function siguiente(index)
 {
     $("img.img_big").hide("slow");            
     var src =$("img[index='" + index + "']").attr("path");   
-    $("img.img_big").attr("src",src);
+    $("img.img_big").attr({"src":src});
     $("img.img_big").show("slow");            
     setTimeout(function() 
     {
