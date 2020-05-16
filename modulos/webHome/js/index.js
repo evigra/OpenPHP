@@ -20,28 +20,12 @@ $(document).ready(function()
     siguiente(1);        
     
     /*  
-    $(".galery").hide();    
-        
     $(".galery").first().show("slow", siguiente);    
-
-
-
-    $( ".galery" )
-    .mouseover(function() {
-        $( ".galery" ).stop();
-    })
-    .mouseout(function() {
-        $(this).hide("slow");
-        $(this).next(".galery").show("slow", siguiente);
-    });
-
     */
-
 });
 
 function siguiente(index)
 {
-
     $("img.img_big").hide("slow");            
     var src =$("img[index='" + index + "']").attr("path");   
     $("img.img_big").attr({"src" : src});
@@ -50,5 +34,5 @@ function siguiente(index)
     {
         index+=1;
         siguiente(index);
-    }, 1500 );
+    }, 2000 );
 }
