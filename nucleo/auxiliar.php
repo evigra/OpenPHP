@@ -3022,7 +3022,6 @@
 						                $view_body						                
 							        </div>
 						        </div>
-						        <img src=\"\" class=\"big\">
 							";												
 						}	
 						else

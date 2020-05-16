@@ -2,11 +2,13 @@ $(document).ready(function()
 {
     setTimeout(function() 
     {   
-        alert($("div.view_report_d1").width());
         var width = 0;
+        var index = 0;
         $(".galery").each(function() 
         { 
-           width += parseInt($(this).width()) + 12;  
+            index+=1;
+            $(this).attr("index",index);            
+            width += parseInt($(this).width()) + 12;  
         });     
         setTimeout(function() 
         {
@@ -14,9 +16,8 @@ $(document).ready(function()
             $("div.view_report_d2").width(width);
         }, 500 );
     }, 5500 );
-
-
-
+    
+    $(".galery").first().attr("index");        
     
     /*  
     $(".galery").hide();    
@@ -34,31 +35,19 @@ $(document).ready(function()
         $(this).next(".galery").show("slow", siguiente);
     });
 
-    /*
-    $( ".galery" )
-    .mouseenter(function() {
-
-    })
-    .mouseleave(function() {
-
-    });
     */
 
 });
 
-function siguiente()
+function siguiente(index)
 {
-    /*
-    if(parseInt($(".galery").index(this))== parseInt($(".galery").length) -1 )
+    $("img.img_big").hide("slow");            
+    var src =$("img[index='" + index + "']").attr("path");   
+    $("img.img_big").attr("src",src);
+    $("img.img_big").show("slow");            
+    setTimeout(function() 
     {
-        
-        $(".galery").first().show("slow");        
-        $(".galery").first().hide("slow", siguiente);
-    }
-    else
-    {        
-        $(this).next(".galery").show("slow");
-        $(this).next(".galery").hide("slow", siguiente);
-    }
-    */    
+        index+=1;
+        siguiente(index);
+    }, 700 );
 }
