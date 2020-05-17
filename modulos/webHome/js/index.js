@@ -1,5 +1,13 @@
 $(document).ready(function()
 {
+    var imagenes=$("div.galery ul li").length;
+
+    $("div.galery ul").css("width":(imagenes*100) +"%");
+    $("div.galery ul li").css("width":(100/imagenes) +"%");
+
+
+
+/*
     var width = 0;
     var index = 0;
     $(".galery").each(function() 
@@ -9,10 +17,16 @@ $(document).ready(function()
     });     
     
     siguiente(1);            
+    */
 });
 
 function siguiente(index)
 {
+
+
+
+
+/*
     $("img.img_big").hide("slow");            
     var src =$("img[index='" + index + "']").attr("path");   
     $("img.img_big").attr({"src" : src});
@@ -22,4 +36,5 @@ function siguiente(index)
         index+=1;
         siguiente(index);
     }, 2000 );
+    */
 }
