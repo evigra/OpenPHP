@@ -1,6 +1,77 @@
-img.galery
+div.galery
 {
-    border: 			3px solid white;
-    margin:             1px;
+    position:relative;
+    margin:auto;
+    width:100%;
+    overflow:hidden;
+}
+
+div.galery ul
+{
+    position:relative;
+    margin:auto;
+    height:auto;
+    width:100%;
+}
+
+div.galery li
+{
+    float:left;
+}
+
+div.galery img
+{
+
+}
+
+div.galery .galery_text
+{
+    position:relative;
+    width:100%;
+    top:-85px;
+    text-align:center;
+    z-index:1;
+    color:white;
+    
+}
+
+
+
+
+
+/* ####################################### */
+/* ######      DESKTOP GRANDE       ###### */
+/* ####################################### */
+@media (min-width:1200px)
+{
+
+}
+
+
+/* ####################################### */
+/* ######      DESKTOP MEDIO        ###### */
+/* ####################################### */
+@media (max-width:1199px) and (min-width:992px)
+{
+
+}
+
+
+/* ####################################### */
+/* ######         TABLETS           ###### */
+/* ####################################### */
+@media (max-width:991px) and (min-width:768px)
+{
+
+}
+
+
+
+/* ####################################### */
+/* ######         MOVILES           ###### */
+/* ####################################### */
+@media (max-width:767px)
+{
+
 }
 
