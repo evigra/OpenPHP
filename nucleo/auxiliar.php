@@ -2388,10 +2388,9 @@
 					</table>
 				";
 			}
-			
-			
-			
-			$view =$this->__VIEW_INPUTSECTION($view, $option);
+					
+			if($option["type_view"]!="galery")
+    			$view =$this->__VIEW_INPUTSECTION($view, $option);
 			return $view;
 		}    	
     	##############################################################################        
@@ -2819,12 +2818,13 @@
 		    	    $template       				=$option["template_body"];
 		    	    $option_kanban					=array();
 		    	    
-		    	    if(isset($option["flow"]))		$option_kanban["flow"]		=$option["flow"];		    	    
-		    	    if(isset($option["actions"]))	$option_kanban["actions"]	=$option["actions"];
-		    	    if(isset($option["color"]))		$option_kanban["color"]		=$option["color"];
-		    	    if(isset($option["name"]))		$option_kanban["name"]		=$name;
-		    	    if(!isset($option["input"]))	$option_kanban["input"]		="true";
-		    	    if(isset($option["input"]))		$option_kanban["input"]		=$option["input"];
+		    	    if(isset($option["flow"]))		    $option_kanban["flow"]		=$option["flow"];		    	    
+		    	    if(isset($option["actions"]))	    $option_kanban["actions"]	=$option["actions"];
+		    	    if(isset($option["color"]))		    $option_kanban["color"]		=$option["color"];
+		    	    if(isset($option["name"]))		    $option_kanban["name"]		=$name;
+		    	    if(!isset($option["input"]))	    $option_kanban["input"]		="true";
+		    	    if(isset($option["input"]))		    $option_kanban["input"]		=$option["input"];		    	    
+                    if($option["type_view"]=="galery")  $option_kanban["type_view"]	=$option["type_view"];		    	    
 		    	    
 					if(isset($return["data_0"]))
 					{
