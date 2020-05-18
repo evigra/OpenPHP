@@ -3007,7 +3007,7 @@
 						elseif($option["type_view"]=="galery")
 						{
 							$return["report"]="
-                                <div id=\"div_$name\" class=\"galery\">									
+                                <div class=\"galery\">									
                                     <ul>
                                         $view_body$view_body$view_body$view_body
                                     </ul>

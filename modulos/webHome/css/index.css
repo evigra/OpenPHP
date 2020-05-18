@@ -1,38 +1,38 @@
 div.galery
 {
-    position:relative;
-    margin:auto;
-    width:100%;
-    overflow:hidden;
+    position:       relative;
+    margin:         auto;
+    width:          100%;
+    overflow:       hidden;
 }
 
 div.galery ul
 {
-    position:relative;
-    margin:auto;
-    height:auto;
-    width:400%;
+    position:       relative;
+    margin:         auto;
+    height:         auto;
+    width:          400%;
 }
 
 div.galery ul li
 {
-    float:left;
-    width:25%;
+    float:          left;
+    width:          25%;
 }
 
 div.galery ul li img
 {
-    width:100%;
+    width:          100%;
 }
 
 div.galery ul li .galery_text
 {
-    position:relative;
-    width:100%;
-    top:-85px;
-    text-align:center;
-    z-index:1;
-    color:white;
+    position:       relative;
+    width:          100%;
+    top:            -85px;
+    text-align:     center;
+    z-index:        1;
+    color:          white;
 }
 
 
