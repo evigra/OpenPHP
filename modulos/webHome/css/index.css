@@ -11,18 +11,18 @@ div.galery ul
     position:relative;
     margin:auto;
     height:auto;
-    width:100%;
+    width:400%;
 }
 
 div.galery li
 {
     float:left;
-
+    width:25%;
 }
 
 div.galery img
 {
-
+    width:100%;
 }
 
 div.galery .galery_text
