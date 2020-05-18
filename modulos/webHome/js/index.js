@@ -3,11 +3,10 @@ $(document).ready(function()
     var imagenes=$("div.galery img").length;
     console.log(imagenes*50);
 
-    var width_ul= imagenes*50 +"%"
 
-    $("div.galery ul").css({"width":width_ul});
+    $("div.galery ul").css({"width":imagenes*100 +"%"});
 
-    $("div.galery ul li").css({"width":(200/imagenes) +"%"});
+    $("div.galery ul li").css({"width":(100/imagenes) +"%"});
 /*
 
 
