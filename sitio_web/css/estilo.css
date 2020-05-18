@@ -259,7 +259,13 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 {
     text-align:         justify;
     color:              #ddd;
+    margin:             0px 10px;
 }
+.responsive4-1cols div
+{
+    margin:             10px 10px;
+}
+
 td.color1 span
 {
     color:              #ccc;
