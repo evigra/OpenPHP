@@ -10,6 +10,8 @@ $(document).ready(function()
     $("div.galery ul li").css({"display":"none"});
     
     
+    $("div.galery ul li:nth-child(1)").show();
+    
     
 /*
 
