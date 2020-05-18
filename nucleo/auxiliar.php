@@ -3008,7 +3008,9 @@
 						{
 							$return["report"]="
                                 <div class=\"galery\">									
+                                    <ul>
                                         $view_body
+                                    </ul>
                                 </div>
 							";												
 						}	
