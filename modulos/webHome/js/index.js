@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
     var imagenes=$("div.galery img").length;
-
+    alert(imagenes);
 
 
     $("div.galery ul").css("width":(imagenes*50) +"%");
