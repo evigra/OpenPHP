@@ -7,11 +7,7 @@ $(document).ready(function()
     $("div.galery ul li").css({"width":(100/imagenes) +"%"});
     
     
-    $("div.galery ul li").css({"display":"none"});
-    
-    
-    $("div.galery ul li:nth-child(1)").show();
-    
+    siguiente(1);
     
 /*
 
@@ -25,25 +21,18 @@ $(document).ready(function()
         $(this).attr({"index":index});            
     });     
     
-    siguiente(1);            
+    
 */
 });
 
 function siguiente(index)
 {
+    $("div.galery ul li").css({"display":"none"});       
+    $("div.galery ul li:nth-child("+ index +")").show();
 
-
-
-
-/*
-    $("img.img_big").hide("slow");            
-    var src =$("img[index='" + index + "']").attr("path");   
-    $("img.img_big").attr({"src" : src});
-    $("img.img_big").show("slow");            
     setTimeout(function() 
     {
         index+=1;
         siguiente(index);
-    }, 2000 );
-    */
+    }, 2500 );
 }
