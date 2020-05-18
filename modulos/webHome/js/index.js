@@ -6,9 +6,9 @@ $(document).ready(function()
     var width_ul= imagenes*50 +"%"
 
     $("div.galery ul").css({"width":width_ul});
-/*
-    $("div.galery ul li").css("width":200/imagenes +"%");
 
+    $("div.galery ul li").css({"width":(200/imagenes) +"%"});
+/*
 
 
 
