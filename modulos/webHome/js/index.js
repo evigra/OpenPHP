@@ -1,6 +1,8 @@
+var imagenes=0;
+
 $(document).ready(function()
 {
-    var imagenes=$("div.galery img").length;
+    imagenes=$("div.galery img").length;
 
 
     $("div.galery ul").css({"width":imagenes*100 +"%"});
@@ -32,7 +34,11 @@ function siguiente(index)
 
     setTimeout(function() 
     {
-        index+=1;
+        if(index<imagenes)
+            index+=1;
+        else    
+            index=1;
+            
         siguiente(index);
     }, 2500 );
 }
