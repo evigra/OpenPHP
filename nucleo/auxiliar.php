@@ -3009,7 +3009,7 @@
 							$return["report"]="
                                 <div id=\"div_$name\" class=\"galery\">									
                                     <ul>
-                                        $view_body
+                                        $view_body $view_body $view_body $view_body
                                     </ul>
                                 </div>
 
