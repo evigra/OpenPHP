@@ -6,6 +6,7 @@ div.galery
 
 }
 
+/*
 div.galery ul
 {
     position:       relative;
@@ -24,7 +25,7 @@ div.galery ul li img
 {
     width:          100%;
 }
-
+*/
 div.galery ul li .galery_text
 {
     position:       relative;
