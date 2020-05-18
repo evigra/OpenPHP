@@ -5,6 +5,12 @@ $(document).ready(function()
 
     $("div.galery ul").css({"width":imagenes*100 +"%"});
     $("div.galery ul li").css({"width":(100/imagenes) +"%"});
+    
+    
+    $("div.galery ul li").css({"display":"none"});
+    
+    
+    
 /*
 
 
