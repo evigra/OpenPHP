@@ -3,13 +3,13 @@ $(document).ready(function()
     var imagenes=$("div.galery img").length;
     console.log(imagenes);
 
-
+/*
     $("div.galery ul").css("width":(imagenes*50) +"%");
     $("div.galery ul li").css("width":(200/imagenes) +"%");
 
 
 
-/*
+
     var width = 0;
     var index = 0;
     $(".galery").each(function() 
@@ -19,7 +19,7 @@ $(document).ready(function()
     });     
     
     siguiente(1);            
-    */
+*/
 });
 
 function siguiente(index)
