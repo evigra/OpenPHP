@@ -3009,10 +3009,9 @@
 							$return["report"]="
                                 <div id=\"div_$name\" class=\"galery\">									
                                     <ul>
-                                        $view_body $view_body $view_body $view_body
+                                        $view_body$view_body$view_body$view_body
                                     </ul>
                                 </div>
-
 							";												
 /*
 								<div id=\"div_$name\" class=\"$report_class view_report_d1 width\" obj=\"$name\" style=\"height:100%; overflow-y:hidden; padding:0px; margin:0px;\">									
