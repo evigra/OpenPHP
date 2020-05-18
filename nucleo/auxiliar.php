@@ -3008,34 +3008,9 @@
 						{
 							$return["report"]="
                                 <div class=\"galery\">									
-                                    <ul>
-                                        $view_body$view_body$view_body$view_body
-                                    </ul>
+                                        $view_body
                                 </div>
 							";												
-/*
-								<div id=\"div_$name\" class=\"$report_class view_report_d1 width\" obj=\"$name\" style=\"height:100%; overflow-y:hidden; padding:0px; margin:0px;\">									
-									<div style=\"float:left; width:250px\">
-						                									            
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body
-						                $view_body						                
-							        </div>
-							        <div style=\"float:left;\">
-                                        <img src=\"\" class=\"img_big\"><br>							        
-                                    </div>
-						        </div>
-
-*/
-
-
 						}	
 						else
 						{
@@ -3083,7 +3058,6 @@
 						$view="
 						<div id=\"base_$name\" class=\"render_h_origen\" diferencia_h=\"-20\" style=\"$height_render width:100%; overflow-y:auto; overflow-x:hidden; border: 	0px solid #ccc; padding:0px; margin:0px;\">
 					";		
-
 			
 					@$view.="{$return["report"]}";
 

@@ -1,6 +1,8 @@
 $(document).ready(function()
 {
-    var imagenes=$("div.galery ul li").length;
+    var imagenes=$("div.galery img").length;
+
+
 
     $("div.galery ul").css("width":(imagenes*50) +"%");
     $("div.galery ul li").css("width":(200/imagenes) +"%");
