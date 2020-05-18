@@ -4,8 +4,8 @@ $(document).ready(function()
     console.log(imagenes*50);
 
 
-    $("div.galery ul").css("width":(imagenes*50) +"%");
-    $("div.galery ul li").css("width":(200/imagenes) +"%");
+    $("div.galery ul").css("width":imagenes*50 +"%");
+    $("div.galery ul li").css("width":200/imagenes +"%");
 /*
 
 
