@@ -4,7 +4,7 @@ $(document).ready(function()
 
 
     $("div.galery ul").css({"width":imagenes*50 +"%"});
-    $("div.galery ul li").css({"width":(200/imagenes) +"%"});
+    $("div.galery ul li").css({"width":(100/imagenes) +"%"});
 /*
 
 
