@@ -8,6 +8,10 @@
     text-decoration:        none;	
 }
 
+
+
+
+
 /*################### Menu ##############*/
 div h1{
 	letter-spacing:         -1px; 
@@ -64,8 +68,6 @@ div p{
 	opacity:                1;
 }
 
-
-<!--				-->
 
 .required
 {
@@ -250,9 +252,9 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 .responsive4-1cols
 {
     float:              left;
-	width:				24%;
-	padding:            10px; 
+	width:				25%;
 }
+
 .responsive4-1cols p
 {
     text-align:         justify;
