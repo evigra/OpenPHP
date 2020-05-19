@@ -42,7 +42,7 @@
 		}
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
-    	    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1
+    	    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;
     	
     		if(is_array($datas))
 	    	    $datas["company_id"]    	=@$_SESSION["company"]["id"];            
