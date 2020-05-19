@@ -11,20 +11,6 @@ $(document).ready(function()
     
     siguiente(1);
     
-/*
-
-
-
-    var width = 0;
-    var index = 0;
-    $(".galery").each(function() 
-    { 
-        index+=1;
-        $(this).attr({"index":index});            
-    });     
-    
-    
-*/
 });
 
 function siguiente(index)

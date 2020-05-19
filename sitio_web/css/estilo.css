@@ -5,6 +5,173 @@
     text-decoration:        none;	
 }
 
+.foto
+{
+    border-radius:          100%; 
+    border-color:           #00BFFF;
+    border:                 7px;
+}
+
+
+/* ####################################### */
+/* ######      DESKTOP GRANDE       ###### */
+/* ####################################### */
+@media (min-width:1200px)
+{
+    .foto_logo{
+        width:                  470px;
+        position:               absolute; 
+        left:                   90px; 
+        top:                    15px;
+    }
+    .logo
+    {
+        position:               absolute;  
+        right:                  90px; 
+        top:                    16px;
+        width:                  200px;
+    }
+    .cabecera{
+        height:                 230px; 
+        background-color:       #eee;
+    }
+    .responsive4-1cols
+    {
+        float:              left;
+	    width:				25%;
+    }
+
+}
+
+
+/* ####################################### */
+/* ######      DESKTOP MEDIO        ###### */
+/* ####################################### */
+@media (max-width:1199px) and (min-width:992px)
+{
+    .foto_logo{
+        width:                  470px;
+        position:               absolute; 
+        left:                   90px; 
+        top:                    15px;
+    }
+    .logo
+    {
+        position:               absolute;  
+        right:                  90px; 
+        top:                    16px;
+        width:                  200px;
+    }
+    .cabecera{
+        height:                 230px; 
+        background-color:       #eee;
+    }
+    .responsive4-1cols
+    {
+        float:              left;
+	    width:				25%;
+    }
+
+}
+
+
+/* ####################################### */
+/* ######         TABLETS           ###### */
+/* ####################################### */
+@media (max-width:991px) and (min-width:768px)
+{
+
+    .foto_logo{
+        width:                  470px;
+        position:               absolute; 
+        left:                   90px; 
+        top:                    15px;
+
+    }
+    .logo
+    {
+        position:               absolute;  
+        left:                   84px; 
+        top:                    15px;
+        width:                  200px;
+    }
+    .cabecera{
+        height:                 230px; 
+        background-color:       #eee;
+    }
+    .responsive4-1cols
+    {
+        float:              left;
+	    width:				25%;
+    }
+
+}
+
+
+
+/* ####################################### */
+/* ######         MOVILES           ###### */
+/* ####################################### */
+@media (max-width:767px)
+{
+    .foto_logo{
+        width:                  270px;
+        position:               absolute; 
+        left:                   30px; 
+        top:                    15px;
+
+    }
+    .logo
+    {
+        position:               absolute;  
+        left:                   26px; 
+        top:                    15px;
+        width:                  115px;
+    }
+
+    .cabecera{
+        height:                 150px; 
+        background-color:       #eee;
+    }
+    .responsive4-1cols
+    {
+        float:              left;
+	    width:				50%;
+    }
+
+    .responsive4-1cols:nth-child(3), .responsive4-1cols:nth-child(4) 
+    {
+        display:                none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -244,11 +411,6 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
 }
 
-.responsive4-1cols
-{
-    float:              left;
-	width:				25%;
-}
 
 .responsive4-1cols p
 {
