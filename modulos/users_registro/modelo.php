@@ -22,7 +22,7 @@
     		{
 			    $datas["company_id"]    	=1;
 			    $datas["status"]    	    =1;
-			    $datas["sesion_start"]    	="../votacion/";
+			    $datas["sesion_start"]    	="../votacion/&sys_menu=21";
 
                 $datas["usergroup_ids"] = array(
                     "1" => 4,

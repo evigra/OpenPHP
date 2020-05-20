@@ -110,6 +110,8 @@
 				    $this->__FIND_FIELDS(@$this->sys_private["id"]);
 			    }
         	}
+        	
+        	$this->__PRINT_R($_SESSION["group"]);
 		}
 		public function __BROWSE($option=array())
     	{    	
