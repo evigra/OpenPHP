@@ -128,10 +128,10 @@
             $nombreimg = explode("/", $path);  
             $nombreimg = $nombreimg[count($nombreimg)-1];  
                   
-            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_thumb.jpg",20,15);
-            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_small.jpg",120,90);                        
-            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_medium.jpg",400,300);            
-            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_big.jpg",800,600);            
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_thumb.jpg",40,30);
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_small.jpg",200,150);                        
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_medium.jpg",500,375);            
+            $this->redimensionar_imagen($datas, $nombreimg, $path, $path."_big.jpg",1000,750);            
             
             #$vars                   =array();
 			#$vars["caption"]	    ="Prueba de concepto";
