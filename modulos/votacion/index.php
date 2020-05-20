@@ -16,29 +16,7 @@
 	
 	$module_title									="";
 	
-    if($objeto->sys_private["section"]=="create")
-	{
-		#BOTONES SECCION IZQUIERDA
-		$module_left=array(
-		    array("action"=>"Guardar"),
-		    array("cancel"=>"Cancelar"),
-		);
-		
-		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    #array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);
-	
-	
-		$module_title								="Crear ";
-    	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE();	
-    	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
-    	
-    }	
-    elseif($objeto->sys_private["section"]=="write")
+    if($objeto->sys_private["section"]=="write")
 	{
 		#BOTONES SECCION IZQUIERDA
 		$module_left=array(
@@ -74,7 +52,7 @@
 		$data										=$objeto->__VIEW_KANBAN($option);		
 		$objeto->words["module_body"]				=$data["html"];
     }    
-    else
+    elseif($objeto->sys_private["section"]=="report")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -93,6 +71,29 @@
 		$data										= $objeto->__VIEW_REPORT($option);		
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de ";
+    
+    }
+    else
+    {
+		#BOTONES SECCION IZQUIERDA
+		$module_left=array(
+		    array("action"=>"Guardar"),
+		    array("cancel"=>"Cancelar"),
+		);
+		
+		#BOTONES SECCION DERECHA
+		$module_right=array(
+		    #array("create"=>"Crear"),
+		    #array("write"=>"Modificar"),
+		    array("kanban"=>"Kanban"),
+		    array("report"=>"Reporte"),
+		);
+	
+	
+		$module_title								="Crear ";
+    	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE();	
+    	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
+
     }
     
 	$objeto->words["module_title"]              ="$module_title Voto";

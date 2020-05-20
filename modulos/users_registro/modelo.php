@@ -41,7 +41,7 @@ Con tu voto, nosotros el equipo SolesGPS, tambien <b>podremos ayudar para hacer 
 	                #$this->__WA($vars);
 	            }
 	
-	            $this->__PRINT_R();
+	            #$this->__PRINT_R();
 		        return parent::__SAVE($datas,$option);
 	        }
 		}
