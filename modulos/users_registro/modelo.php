@@ -23,10 +23,6 @@
 			    $datas["company_id"]    	=1;
 			    $datas["status"]    	    =1;
 			    $datas["sesion_start"]    	="../votacion/";
-			    if(isset($datas["password"]) AND $datas["password"]!="")
-				    $datas["password"]		=md5($datas["password"]);
-				else
-					unset($datas["password"]);    
 
                 $datas["usergroup_ids"] = array(
                     "1" => 4,
@@ -44,6 +40,8 @@ Con tu voto, nosotros el equipo SolesGPS, tambien <b>podremos ayudar para hacer 
 	                ";
 	                #$this->__WA($vars);
 	            }
+	
+	            $this->__PRINT_R();
 		        return parent::__SAVE($datas,$option);
 	        }
 		}
