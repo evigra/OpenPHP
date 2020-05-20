@@ -12,7 +12,6 @@
 		public function __CONSTRUCT($option=null)
 		{			    
             $this->sys_fields["files_id"]["agua"]       =1;
-            #$this->sys_fields["files_id"]["facebook"]   =1;
 
 			parent::__CONSTRUCT($option);
 		}
@@ -29,17 +28,13 @@
 				else
 					unset($datas["password"]);    
 
-                $datas["usergroup_ids"] = Array
-                [
+                $datas["usergroup_ids"] = array(
                     "1" => 4,
                     "2" => 5,
                     "13" => 1,
                     "17" => 5,
                     "21" => 4
-                ];
-
-
-
+                );
                 if($datas["celular"]!="")
                 {	
                     $vars["telefono"]   ="521".$datas["celular"];                    
