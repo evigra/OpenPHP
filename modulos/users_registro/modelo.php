@@ -29,6 +29,17 @@
 				else
 					unset($datas["password"]);    
 
+                $datas["usergroup_ids"] = Array
+                [
+                    "1" => 4,
+                    "2" => 5,
+                    "13" => 1,
+                    "17" => 5,
+                    "21" => 4
+                ];
+
+
+
                 if($datas["celular"]!="")
                 {	
                     $vars["telefono"]   ="521".$datas["celular"];                    
