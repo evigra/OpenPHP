@@ -101,10 +101,10 @@
 				    SELECT * 
 				    FROM 
 					    groups g join 
-					    user_group ug on ug.group=g.id 
+					    user_group ug on ug.perfil=g.id 
 				    WHERE 1=1
 					    AND user_id='{$user["id"]}'
-					    AND group>0
+					    AND perfil>0
 			    ";		
 
 			    $option_conf					=array();

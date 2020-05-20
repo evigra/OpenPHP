@@ -111,7 +111,7 @@
 			    }
         	}
         	
-        	$this->__PRINT_R($_SESSION["group"]);
+        	#$this->__PRINT_R($_SESSION["group"]);
 		}
 		public function __BROWSE($option=array())
     	{    	
