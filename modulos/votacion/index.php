@@ -2,6 +2,9 @@
 	$objeto											=new votacion();
 	$objeto->__SESSION();
 	
+	$objeto->__PRINT_R($_SESION);
+	
+	
 	# CARGANDO PLANTILLAS GENERALES
 	$objeto->words["system_body"]               	=$objeto->__TEMPLATE($objeto->sys_html."system_body"); 		
 	$objeto->words["system_module"]             	=$objeto->__TEMPLATE($objeto->sys_html."system_module");	
