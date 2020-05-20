@@ -18,7 +18,7 @@
 			"create"	   		=>"Crear",
 			"kanban"			=>"Kanban",
 			"report"			=>"Reporte",
-			"module_title"    	=>"Administracion de Usuarios",
+			"module_title"    	=>"Administracion de votos",
 		);
 		$this->sys_view_l18n["html_head_title"]="SOLES GPS";
 		if(@$_SESSION["company"] and @$_SESSION["company"]["razonSocial"])

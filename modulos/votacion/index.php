@@ -85,13 +85,15 @@
 		);
 		
 		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    #array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);
-	
+		if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
+		{
+		    $module_right=array(
+		        #array("create"=>"Crear"),
+		        #array("write"=>"Modificar"),
+		        array("kanban"=>"Kanban"),
+		        array("report"=>"Reporte"),
+		    );
+        }	
 	
 		$module_title								="Crear ";
     	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE();	
