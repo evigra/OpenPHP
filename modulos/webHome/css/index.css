@@ -1,3 +1,13 @@
+h1{
+	display:        inline; 
+	color:          SteelBlue;
+}
+h3, h2{
+	display:        inline; 
+}
+
+
+
 div.galery
 {
     position:       relative;

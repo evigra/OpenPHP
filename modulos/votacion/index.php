@@ -2,7 +2,7 @@
 	$objeto											=new votacion();
 	$objeto->__SESSION();
 	
-	$objeto->__PRINT_R($_SESSION["group"]);
+	#$objeto->__PRINT_R($_SESSION["group"]);
 	
 	
 	# CARGANDO PLANTILLAS GENERALES

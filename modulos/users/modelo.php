@@ -223,13 +223,12 @@
 			$option["select"]["FN_ImgFile('../modulos/users/img/user.png',files_id,150,80)"]	="img_files_id_chi";
 			$option["select"]["FN_ImgFile('../modulos/users/img/user.png',files_id,30,16)"]		="img_files_id_sup_chi";
     		*/
-			$option["from"]		="users u";
-							
+    		
+    		if(!isset($option["from"]))	$option["from"]		="users u";
 
 
 			if(isset($_SESSION["company"]["id"]) AND isset($_SESSION["user"]["id"]))
 				$option["where"][]	="(u.company_id={$_SESSION["company"]["id"]} or u.id={$_SESSION["user"]["id"]})";									    				
-
 
             $return = parent::__BROWSE($option);
     		return $return;
