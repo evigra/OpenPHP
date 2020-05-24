@@ -2389,7 +2389,7 @@
 				";
 			}
 					
-			if($option["type_view"]!="galery")
+			if(@$option["type_view"]!="galery")
     			$view =$this->__VIEW_INPUTSECTION($view, $option);
 			return $view;
 		}    	

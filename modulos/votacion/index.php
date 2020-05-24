@@ -1,10 +1,7 @@
 <?php	
 	$objeto											=new votacion();
 	$objeto->__SESSION();
-	
-	#$objeto->__PRINT_R($_SESSION["group"]);
-	
-	
+		
 	# CARGANDO PLANTILLAS GENERALES
 	$objeto->words["system_body"]               	=$objeto->__TEMPLATE($objeto->sys_html."system_body"); 		
 	$objeto->words["system_module"]             	=$objeto->__TEMPLATE($objeto->sys_html."system_module");	
@@ -21,11 +18,13 @@
 	
     if($objeto->sys_private["section"]=="write")
 	{
+	    /*
 		#BOTONES SECCION IZQUIERDA
 		$module_left=array(
 		    array("action"=>"Guardar"),
 		    array("cancel"=>"Cancelar"),
 		);
+		*/
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
@@ -56,17 +55,13 @@
 		$objeto->words["module_body"]				=$data["html"];
     }    
     elseif($objeto->sys_private["section"]=="report")
-    {
+    {       
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
 		    #array("write"=>"Modificar"),
 		    array("kanban"=>"Kanban"),
-		    #array("report"=>"Reporte"),
-		);
-
-		$module_center=array(
-		    array("import"=>"Importar"),
+		    array("report"=>"Reporte"),
 		);    
 
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
@@ -78,12 +73,13 @@
     }
     else
     {
+        /*
 		#BOTONES SECCION IZQUIERDA
 		$module_left=array(
 		    array("action"=>"Guardar"),
 		    array("cancel"=>"Cancelar"),
 		);
-		
+		*/
 		#BOTONES SECCION DERECHA
 		if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
 		{
