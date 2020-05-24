@@ -20,10 +20,13 @@
 			    "title"             => "Mail",
 			    "title_filter"      => "Mail",
 			    "type"              => "input",
+			    "attr"              => array("required"),
+
 			),
 			"password"	    =>array(
 			    "title"             => "Password",
 			    "type"              => "password",
+			    "attr"              => array("required"),
 			),			
 			"celular"	    =>array(
 			    "title"             => "Celular",
