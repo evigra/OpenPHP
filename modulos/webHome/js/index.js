@@ -26,5 +26,5 @@ function siguiente(index)
             index=1;
             
         siguiente(index);
-    }, 2500 );
+    }, 3000 );
 }
