@@ -1,14 +1,24 @@
 div.galery_text p 
 {
 	color:				white; 
+	font-size:			15; 
+	font-weight:		bold; 
+	vertical-align:     text-top;
+	line-height:        70%;
+}
+div.galery_text p span.nombre
+{
+	color:				SteelBlue; 
+	font-size:			25; 
 	font-weight:		bold; 
 }
 
-div.galery_text p span
+div.galery_text p span.categoria
 {
-	color:				SteelBlue; 
+	color:				#afb413; 
 	font-size:			20; 
 	font-weight:		bold; 
+	vertical-align:     text-bottom;
 }
 
 div.galery_text p span.adscrito
@@ -16,6 +26,7 @@ div.galery_text p span.adscrito
 	color:				 #de5e0f ; 
 	font-size:			30; 
 	font-weight:		bold; 
+	vertical-align:     text-bottom;
 }
 
 

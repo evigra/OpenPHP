@@ -185,6 +185,7 @@ div h1{
 div h1 span{
     display:                block; 
 	font-weight:            1000;
+	color:				    SteelBlue; 
 }
 div p{
     padding-top:		    15px; 
