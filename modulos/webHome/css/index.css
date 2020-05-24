@@ -11,6 +11,13 @@ div.galery_text p span
 	font-weight:		bold; 
 }
 
+div.galery_text p span.adscrito
+{
+	color:				gray; 
+	font-size:			20; 
+	font-weight:		bold; 
+}
+
 
 div.galery
 {
