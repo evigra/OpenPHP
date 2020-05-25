@@ -19,18 +19,6 @@
 			    "class_name"       	=> "files",
 			    "class_field_o"    	=> "files_id",
 			    "class_field_m"    	=> "id",	
-			    #"agua"    	        => "1",
-			    #"facebook"    	    => "1",
-			),
-			"matricula_titular"	    =>array(
-			    "title"             => "Matricula Titular",
-				"title_filter"		=> "Matricula Titular",
-			    "type"              => "input",
-			),
-			"nombre_titular"	    =>array(
-			    "title"             => "Nombre Titular",
-				"title_filter"		=> "Nombre Titular",
-			    "type"              => "input",
 			),
 			"matricula"	    =>array(
 			    "title"             => "Matricula",
@@ -88,8 +76,21 @@
 		
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
-            return parent::__SAVE($datas);
+            return parent::__SAVE($datas);	
         }
+   		public function __REPORT($option=NULL)
+    	{
+    	    $option["select"]=array();
+    	    
+			#if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
+			{	
+			    $option["select"][]                     ="ads_progra";
+			    $option["select"]["count(ads_progra)"]  ="votos";								
+			    
+			    $option["group"]                        ="ads_progra";
+			}		
+			return $this->__VIEW_REPORT($option);
+		}				
 
 	}
 ?>

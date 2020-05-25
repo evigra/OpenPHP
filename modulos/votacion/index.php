@@ -1,6 +1,8 @@
 <?php	
 	$objeto											=new votacion();
 	$objeto->__SESSION();
+
+    #$objeto->__PRINT_R($_SESSION);
 		
 	# CARGANDO PLANTILLAS GENERALES
 	$objeto->words["system_body"]               	=$objeto->__TEMPLATE($objeto->sys_html."system_body"); 		
@@ -15,40 +17,49 @@
 	$module_center		="";
 	
 	$module_title									="";
+
+	if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
+	{
+	    $module_right=array(
+	        array("create"=>"Crear"),
+	        array("kanban"=>"Kanban"),
+	        array("report"=>"Reporte"),
+	    );    
+    	$module_center=array(
+		    array("report_pendiente"=>" ","icon"=>"ui-icon-help", "title"=>"Pendientes"),
+		    array("report_cancelados"=>" ","icon"=>"ui-icon-closethick", "title"=>"Cancelados"),
+		    array("report_group"=>"algo","icon"=>"ui-icon-check", "title"=>"Aprobados", "text"=>false ),
+		);	    
+
+
+    }	
+
+
+
+
+
+
+
+
+
+
+
 	
     if($objeto->sys_private["section"]=="write")
 	{
-	    /*
-		#BOTONES SECCION IZQUIERDA
-		$module_left=array(
-		    array("action"=>"Guardar"),
-		    array("cancel"=>"Cancelar"),
-		);
-		*/
-		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);
-		
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
-    		    
-    	$module_title								="Modificar ";
     }	
+    elseif($objeto->sys_private["action"]=="report_group")
+    {       
+		#CARGANDO VISTA PARTICULAR Y CAMPOS
+		$option                                     =array("");
+		$data										= $objeto->__REPORT($option);		
+		$objeto->words["module_body"]				=$data["html"];
+    }
 	elseif($objeto->sys_private["section"]=="kanban")
 	{
-		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    #array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);
-	
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
     	$option										=array();
 		$data										=$objeto->__VIEW_KANBAN($option);		
@@ -56,50 +67,21 @@
     }    
     elseif($objeto->sys_private["section"]=="report")
     {       
-		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);    
-
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-		$option=array();
+    	$option										=array();
 		$data										= $objeto->__VIEW_REPORT($option);		
 		$objeto->words["module_body"]				=$data["html"];
-		$module_title								="Reporte de ";
-    
     }
+
     else
-    {
-        /*
-		#BOTONES SECCION IZQUIERDA
-		$module_left=array(
-		    array("action"=>"Guardar"),
-		    array("cancel"=>"Cancelar"),
-		);
-		*/
-		#BOTONES SECCION DERECHA
-		if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
-		{
-		    $module_right=array(
-		        #array("create"=>"Crear"),
-		        #array("write"=>"Modificar"),
-		        array("kanban"=>"Kanban"),
-		        array("report"=>"Reporte"),
-		    );
-        }	
-	
+    {	
+        #CARGANDO VISTA PARTICULAR Y CAMPOS
 		$module_title								="Crear ";
     	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
-
     }
     
 	$objeto->words["module_title"]              ="$module_title Voto";
-	
-	
 	
 	$objeto->words["module_left"]               =$objeto->__BUTTON($module_left);
 	$objeto->words["module_center"]             =$objeto->__BUTTON($module_center);

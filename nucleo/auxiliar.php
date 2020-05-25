@@ -49,7 +49,7 @@
 		public function __SESSION()
 		{  
 			$redireccionar= "<script>window.location=\"../webHome/\";</script>";
-			if(is_array($_SESSION) AND isset($_SESSION["user"]) AND is_array($_SESSION["user"]) AND isset($_SESSION["user"]["name"]))
+			if(is_array($_SESSION) AND isset($_SESSION["user"]) AND is_array($_SESSION["user"]) AND isset($_SESSION["user"]["id"]) AND $_SESSION["user"]["id"]>0)
 			{
 				$redireccionar= "";					
 			}
@@ -2635,8 +2635,17 @@
 		{
 			if($option["type_view"]=="report")
 			{
-				if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/report_title";
-				if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/report_body";			
+			    if($this->sys_private["action"]=="__clean_session")
+			    {
+				    if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/report_title";
+				    if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/report_body";			
+				}
+				else    
+			    {
+				    if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/{$this->sys_private["action"]}/report_title";
+				    if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/{$this->sys_private["action"]}/report_body";		
+				}
+
 			}
 			elseif($option["type_view"]=="kanban" )
 			{

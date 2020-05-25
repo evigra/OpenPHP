@@ -115,6 +115,8 @@
 		}
 		public function __BROWSE($option=array())
     	{    	
+    	    
+    	
     		$option_conf=array();
 
 			$option_conf["open"]	=1;
@@ -362,8 +364,11 @@
     		}	
 
     		$this->sys_sql		="SELECT $select FROM $from $where  $group  $having $order $limit";
-    		
+    			            
+	            
+	            
     		if(isset($option["echo"])  AND in_array($_SERVER["SERVER_NAME"],$_SESSION["var"]["server_error"]) AND @$this->sys_private["action"]!="print_pdf")
+    		#if(isset($option["echo"]))
     		{    		
              	echo "<div class=\"echo\" title=\"{$option["echo"]}\">".$this->sys_sql."</div>";
    			}
