@@ -60,20 +60,14 @@
 			}
 			if($redireccionar!="")
 			{
-				#$_SESSION=array();
-				#$_SESSION["user"]="Invitado";
 				echo $redireccionar;
 				exit();
-			}
-			
+			}			
     	}
-		public function __MENU_SEGUIMIENTO()
-		{  
-				$view			=$this->__TEMPLATE("sitio_web/html/menu_seguimiento");				
-				$words["a"]		=$_SESSION["seguimiento_md5"];
-				return	$this->__REPLACE($view,$words);
-		}    	
-
+		public function __EXEC($comando)
+		{
+			return shell_exec($comando);
+		}					
 
 		public function __FIND_FIELD_ID()
 		{  
@@ -94,12 +88,7 @@
 				}	
 			}	
     	}  
-    	/*
-    	public function __FIND_FIELDS($id=NULL)
-    	{
-    	
-    	}
-    	*/
+
 		public function __FIND_FIELDS($id=NULL)
 		{
 		 	# ASIGNA EL ROW CON EL $id enviado
@@ -174,11 +163,6 @@
 		##############################################################################	
 		##  METODOS	
 		##############################################################################
-		public function __TABLE_MAIL($option)
-		{
-
-	
-		}
 		public function __curl($option)
 		{
 			$ch = curl_init();
@@ -257,8 +241,8 @@
 			$url 				    ="https://graph.facebook.com/v2.11/me/photos";
 			$vars 				    =array();				
 
-			$vars["app_id"]	    ="1759620497626721";
-			$vars["app_secret"]	="2ce61c713a03a7d3bc45a76d13c95b03";
+			$vars["app_id"]	        ="1759620497626721";
+			$vars["app_secret"]	    ="2ce61c713a03a7d3bc45a76d13c95b03";
 
 
 			$vars["access_token"]	="4c3096b0b1442d25744bf3c4fb56a60f";
@@ -272,7 +256,6 @@
 		public function WS_TAECEL($data)
     	{    		    		    	
 			$sesion 			=array("key"=>"6dce34dbc6cc3d6bd8de48fd011d0595", "nip"=>"7fbb2c3531d73ab26044fac7dfe1a503");
-			#$sesion 			=array("key"=>"25d55ad283aa400af464c76d713c07ad", "nip"=>"25d55ad283aa400af464");
 			$url 				="https://taecel.com/app/api/RequestTXN";
 			$vars 				=$sesion;				
 			$vars["producto"]	=$data["producto"];
@@ -1602,29 +1585,6 @@
 					    ################################
 					    if($valor["type"]=="autocomplete" AND $this->sys_recursive<3)	
 					    {
-/*
-					        if(!in_array(@$this->sys_private["action"],$_SESSION["var"]["print"]))					        
-					        {
-								if(@$this->sys_private["section"]=="show")
-								{
-									$words["$campo"]  		="{$valor["value"]}{$valor["br"]}$titulo";
-									$words["$campo.md5"]  	=strtoupper(md5($valor["value"]))."{$valor["br"]}$titulo";
-								}	
-								else
-								{					        
-									$words["$campo"]  		="<input id=\"$campo\" $style autocomplete=\"off\" type=\"text\" $attr name=\"{$this->sys_name}_$campo\" value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} {$this->sys_object} $class\">{$valor["br"]}$titulo";
-									$words["$campo.md5"]  	="<input id=\"$campo\" $style autocomplete=\"off\" type=\"text\" $attr name=\"{$this->sys_name}_$campo\" value=\"" . md5($valor["value"]) . "\" class=\"formulario {$this->sys_name} {$this->sys_object} $class\">{$valor["br"]}$titulo";
-								}					        										
-							}
-					        else	
-					        {
-					        	$words["$campo"]  		="{$valor["value"]}{$valor["br"]}$titulo";    
-					        	$words["$campo.md5"]  	=strtoupper(md5($valor["value"]))."{$valor["br"]}$titulo";
-					        }	
-
-*/
-							
-
 					    	$words["$campo"]  ="";
 					    	if(!isset($fields["auto_$campo"]["value"]))	$fields["auto_$campo"]["value"]="";
 
@@ -2568,14 +2528,6 @@
         }				
 
     	##############################################################################    
-    	/*
-		public function __VIEW_CREATE($template=null)
-		{
-			if(is_null($template))	$template=$this->sys_var["module_path"]."html/create";
-			return $this->__VIEW_FORM($template);
-		} 
-		*/  
-    	##############################################################################    
 		public function __VIEW_GRAPH($option_graph=array(),$template=NULL)
 		{
 			$html="";
@@ -3204,131 +3156,6 @@
 		} 			
 		
     	##############################################################################        
-		public function __MESSAGE($message,$option=NULL)
-		{
-			/*
-			if(is_null($option))	$option=array();
-			
-			if(isset($option["template"]))		$template 	=$option["template"];
-			else 								$template 	="message";
-		    
-		    if(isset($option["message"]))  		$message    =$option["message"];
-		    else                           		$message    ="No se ha indicado un mensaje";
-		    
-		    if(isset($option["image"]))    		$image      =$option["image"];
-		    else                           		$image      ="sitio_web/alerta_azul.png";
-		    
-			$html_template  =$this->__TEMPLATE("sitio_web/html/".$template);
-			$html_template  ="";
-		    
-		    #echo $html_template;
-		    
-		    $datas          =array("message"=>$message,"image"=>$image);
-	        $view	        =$this->__REPLACE($html_template,$datas);	
-		    
-		    $jquery="
-		    	$(\"#message\").dialog({
-					show: {
-						effect: \"shake\",
-						duration: 750
-					},		    			    	
-		    		width:\"350\",
-		    		modal: true,
-		    	});
-				setTimeout(function() 
-				{
-					$(\"#message\").dialog(\"close\")
-				}, 2500 );
-						    ";
-		    
-		    $return=array(
-		    	"html"		=>$view,
-		    	"message"	=>$message,
-		    	"js"		=>$jquery		    	
-		    );
-		    
-			
-			return $return;
-			*/
-		}    
-		function pointInPolygon($point, $polygon, $pointOnVertex = true) 
-		{
-			
-			$this->pointOnVertex = $pointOnVertex;
-
-			// Transformar la cadena de coordenadas en matrices con valores "x" e "y"
-			#PUNTO";
-			$point = $this->pointStringToCoordinates($point);
-			$vertices = array();
-			foreach ($polygon as $vertex) 
-			{
-				#POLIGONO";
-				$vertices[] = $this->pointStringToCoordinates($vertex);
-			}
-
-			// Checar si el punto se encuentra exactamente en un vértice
-			if ($this->pointOnVertex == true and $this->pointOnVertex($point, $vertices) == true) 
-			{
-				#return "vertice";
-				return "DENTRO";
-			}
-
-			// Checar si el punto está adentro del poligono o en el borde
-			$intersections = 0;
-			$vertices_count = count($vertices);
-
-			for ($i=1; $i < $vertices_count; $i++) 
-			{
-				$vertex1 = $vertices[$i-1];
-				$vertex2 = $vertices[$i];
-				if ($vertex1['y'] == $vertex2['y'] and $vertex1['y'] == $point['y'] and $point['x'] > min($vertex1['x'], $vertex2['x']) and $point['x'] < max($vertex1['x'], $vertex2['x'])) 
-				{ // Checar si el punto está en un segmento horizontal
-					#return "BORDE";
-					return "DENTRO";
-				}
-				if ($point['y'] > min($vertex1['y'], $vertex2['y']) and $point['y'] <= max($vertex1['y'], $vertex2['y']) and $point['x'] <= max($vertex1['x'], $vertex2['x']) and $vertex1['y'] != $vertex2['y']) 
-				{
-					$xinters = ($point['y'] - $vertex1['y']) * ($vertex2['x'] - $vertex1['x']) / ($vertex2['y'] - $vertex1['y']) + $vertex1['x'];
-					if ($xinters == $point['x']) 
-					{ // Checar si el punto está en un segmento (otro que horizontal)
-						#return "BORDE";
-						return "DENTRO";
-					}
-					if ($vertex1['x'] == $vertex2['x'] || $point['x'] <= $xinters) 
-					{
-						$intersections++;
-					}
-				}
-			}
-			// Si el número de intersecciones es impar, el punto está dentro del poligono.
-			if ($intersections % 2 != 0) 
-			{
-				return "DENTRO";
-			} 
-			else 
-			{
-				return "AFUERA";
-			}
-		}
-		##############################################################################
-		function pointOnVertex($point, $vertices) 
-		{
-			foreach($vertices as $vertex) 
-			{
-				if ($point == $vertex) 
-				{
-					return true;
-				}
-			}
-
-		}
-		##############################################################################
-		function pointStringToCoordinates($pointString) 
-		{
-			$pointString=trim($pointString);
-			$coordinates = explode(" ", $pointString);
-			return array("x" => $coordinates[0], "y" => $coordinates[1]);
-		}	
 		##############################################################################
 		function __SMS($sDestination, $sMessage, $debug, $sSenderId){
 			$sData ='cmd=sendsms&';
@@ -3964,10 +3791,6 @@
 
 
 
-
-
-
-
 	/*
 	$numero=valor a retornar en letras.
 	$_moneda=1=Colones, 2=Dólares 3=Euros
@@ -4177,176 +4000,106 @@
 		return $numd;
 		}
 
-		function centena($numc){
-		if ($numc >= 100)
+		function centena($numc)
 		{
-		if ($numc >= 900 && $numc <= 999)
-		{
-		$numce = "NOVECIENTOS ";
-		if ($numc > 900)
-		$numce = $numce.($this->decena($numc - 900));
-		}
-		else if ($numc >= 800 && $numc <= 899)
-		{
-		$numce = "OCHOCIENTOS ";
-		if ($numc > 800)
-		$numce = $numce.($this->decena($numc - 800));
-		}
-		else if ($numc >= 700 && $numc <= 799)
-		{
-		$numce = "SETECIENTOS ";
-		if ($numc > 700)
-		$numce = $numce.($this->decena($numc - 700));
-		}
-		else if ($numc >= 600 && $numc <= 699)
-		{
-		$numce = "SEISCIENTOS ";
-		if ($numc > 600)
-		$numce = $numce.($this->decena($numc - 600));
-		}
-		else if ($numc >= 500 && $numc <= 599)
-		{
-		$numce = "QUINIENTOS ";
-		if ($numc > 500)
-		$numce = $numce.($this->decena($numc - 500));
-		}
-		else if ($numc >= 400 && $numc <= 499)
-		{
-		$numce = "CUATROCIENTOS ";
-		if ($numc > 400)
-		$numce = $numce.($this->decena($numc - 400));
-		}
-		else if ($numc >= 300 && $numc <= 399)
-		{
-		$numce = "TRESCIENTOS ";
-		if ($numc > 300)
-		$numce = $numce.($this->decena($numc - 300));
-		}
-		else if ($numc >= 200 && $numc <= 299)
-		{
-		$numce = "DOSCIENTOS ";
-		if ($numc > 200)
-		$numce = $numce.($this->decena($numc - 200));
-		}
-		else if ($numc >= 100 && $numc <= 199)
-		{
-		if ($numc == 100)
-		$numce = "CIEN ";
-		else
-		$numce = "CIENTO ".($this->decena($numc - 100));
-		}
-		}
-		else
-		$numce = $this->decena($numc);
+		    if ($numc >= 100)
+		    {
+		        if ($numc >= 900 && $numc <= 999)
+		        {
+		            $numce = "NOVECIENTOS ";
+		            if ($numc > 900)       $numce = $numce.($this->decena($numc - 900));
+		        }
+		        else if ($numc >= 800 && $numc <= 899)
+		        {
+		            $numce = "OCHOCIENTOS ";
+		            if ($numc > 800)    		    $numce = $numce.($this->decena($numc - 800));
+		        }
+		        else if ($numc >= 700 && $numc <= 799)
+		        {
+		            $numce = "SETECIENTOS ";
+		            if ($numc > 700)		    $numce = $numce.($this->decena($numc - 700));
+		        }
+		        else if ($numc >= 600 && $numc <= 699)
+		        {
+		            $numce = "SEISCIENTOS ";
+		            if ($numc > 600)		    $numce = $numce.($this->decena($numc - 600));
+		        }
+		        else if ($numc >= 500 && $numc <= 599)
+		        {
+		            $numce = "QUINIENTOS ";
+		            if ($numc > 500)		    $numce = $numce.($this->decena($numc - 500));
+		        }
+		        else if ($numc >= 400 && $numc <= 499)
+		        {
+		            $numce = "CUATROCIENTOS ";
+		            if ($numc > 400)		    $numce = $numce.($this->decena($numc - 400));
+		        }
+		        else if ($numc >= 300 && $numc <= 399)
+		        {
+		            $numce = "TRESCIENTOS ";
+		            if ($numc > 300)		    $numce = $numce.($this->decena($numc - 300));
+		        }
+		        else if ($numc >= 200 && $numc <= 299)
+		        {
+		            $numce = "DOSCIENTOS ";
+		            if ($numc > 200)		    $numce = $numce.($this->decena($numc - 200));
+		        }
+		        else if ($numc >= 100 && $numc <= 199)
+		        {
+		            if ($numc == 100)		    $numce = "CIEN ";
+		            else		    $numce = "CIENTO ".($this->decena($numc - 100));
+		        }
+		    }
+		    else
+        		$numce = $this->decena($numc);
 
-		return $numce;
+		    return $numce;
 		}
 
 		function miles($nummero){
-		if ($nummero >= 1000 && $nummero < 2000){
-		$numm = "MIL ".($this->centena($nummero%1000));
+		    if ($nummero >= 1000 && $nummero < 2000){   $numm = "MIL ".($this->centena($nummero%1000));		}
+		    if ($nummero >= 2000 && $nummero <10000){	$numm = $this->unidad(Floor($nummero/1000))." MIL ".($this->centena($nummero%1000));		}
+		    if ($nummero < 1000)		$numm = $this->centena($nummero);
+		    return $numm;
 		}
-		if ($nummero >= 2000 && $nummero <10000){
-		$numm = $this->unidad(Floor($nummero/1000))." MIL ".($this->centena($nummero%1000));
-		}
-		if ($nummero < 1000)
-		$numm = $this->centena($nummero);
-
-		return $numm;
-		}
-
 		function decmiles($numdmero){
-		if ($numdmero == 10000)
-		$numde = "DIEZ MIL";
-		if ($numdmero > 10000 && $numdmero <20000){
-		$numde = $this->decena(Floor($numdmero/1000))."MIL ".($this->centena($numdmero%1000));
+		    if ($numdmero == 10000)		$numde = "DIEZ MIL";
+		    if ($numdmero > 10000 && $numdmero <20000){		$numde = $this->decena(Floor($numdmero/1000))."MIL ".($this->centena($numdmero%1000));		}
+		    if ($numdmero >= 20000 && $numdmero <100000){	$numde = $this->decena(Floor($numdmero/1000))." MIL ".($this->miles($numdmero%1000));		}
+		    if ($numdmero < 10000)		$numde = $this->miles($numdmero);
+		    return $numde;
 		}
-		if ($numdmero >= 20000 && $numdmero <100000){
-		$numde = $this->decena(Floor($numdmero/1000))." MIL ".($this->miles($numdmero%1000));
-		}
-		if ($numdmero < 10000)
-		$numde = $this->miles($numdmero);
-
-		return $numde;
-		}
-
 		function cienmiles($numcmero){
-		if ($numcmero == 100000)
-		$num_letracm = "CIEN MIL";
-		if ($numcmero >= 100000 && $numcmero <1000000){
-		$num_letracm = $this->centena(Floor($numcmero/1000))." MIL ".($this->centena($numcmero%1000));
+		    if ($numcmero == 100000)    		$num_letracm = "CIEN MIL";
+		    if ($numcmero >= 100000 && $numcmero <1000000){ 		$num_letracm = $this->centena(Floor($numcmero/1000))." MIL ".($this->centena($numcmero%1000));		}
+		    if ($numcmero < 100000)		$num_letracm = $this->decmiles($numcmero);
+		    return $num_letracm;
 		}
-		if ($numcmero < 100000)
-		$num_letracm = $this->decmiles($numcmero);
-		return $num_letracm;
-		}
-
 		function millon($nummiero){
-		if ($nummiero >= 1000000 && $nummiero <2000000){
-		$num_letramm = "UN MILLON ".($this->cienmiles($nummiero%1000000));
+		    if ($nummiero >= 1000000 && $nummiero <2000000){		$num_letramm = "UN MILLON ".($this->cienmiles($nummiero%1000000));		}
+		    if ($nummiero >= 2000000 && $nummiero <10000000){		$num_letramm = $this->unidad(Floor($nummiero/1000000))." MILLONES ".($this->cienmiles($nummiero%1000000));		}
+		    if ($nummiero < 1000000)		$num_letramm = $this->cienmiles($nummiero);
+		    return $num_letramm;
 		}
-		if ($nummiero >= 2000000 && $nummiero <10000000){
-		$num_letramm = $this->unidad(Floor($nummiero/1000000))." MILLONES ".($this->cienmiles($nummiero%1000000));
-		}
-		if ($nummiero < 1000000)
-		$num_letramm = $this->cienmiles($nummiero);
-
-		return $num_letramm;
-		}
-
 		function decmillon($numerodm){
-		if ($numerodm == 10000000)
-		$num_letradmm = "DIEZ MILLONES";
-		if ($numerodm > 10000000 && $numerodm <20000000){
-		$num_letradmm = $this->decena(Floor($numerodm/1000000))."MILLONES ".($this->cienmiles($numerodm%1000000));
+		    if ($numerodm == 10000000)  		$num_letradmm = "DIEZ MILLONES";
+		    if ($numerodm > 10000000 && $numerodm <20000000){   		$num_letradmm = $this->decena(Floor($numerodm/1000000))."MILLONES ".($this->cienmiles($numerodm%1000000));		}
+		    if ($numerodm >= 20000000 && $numerodm <100000000){ 		$num_letradmm = $this->decena(Floor($numerodm/1000000))." MILLONES ".($this->millon($numerodm%1000000));		}
+		    if ($numerodm < 10000000)   		$num_letradmm = $this->millon($numerodm);
+		    return $num_letradmm;
 		}
-		if ($numerodm >= 20000000 && $numerodm <100000000){
-		$num_letradmm = $this->decena(Floor($numerodm/1000000))." MILLONES ".($this->millon($numerodm%1000000));
-		}
-		if ($numerodm < 10000000)
-		$num_letradmm = $this->millon($numerodm);
-
-		return $num_letradmm;
-		}
-
 		public function cienmillon($numcmeros){
-		if ($numcmeros == 100000000)
-		$num_letracms = "CIEN MILLONES";
-		if ($numcmeros >= 100000000 && $numcmeros <1000000000){
-		$num_letracms = $this->centena(Floor($numcmeros/1000000))." MILLONES ".($this->millon($numcmeros%1000000));
+		    if ($numcmeros == 100000000)    		$num_letracms = "CIEN MILLONES";
+		    if ($numcmeros >= 100000000 && $numcmeros <1000000000){ 		$num_letracms = $this->centena(Floor($numcmeros/1000000))." MILLONES ".($this->millon($numcmeros%1000000));		}
+		    if ($numcmeros < 100000000) 		$num_letracms = $this->decmillon($numcmeros);
+		    return $num_letracms;
 		}
-		if ($numcmeros < 100000000)
-		$num_letracms = $this->decmillon($numcmeros);
-		return $num_letracms;
-		}
-
 		public function milmillon($nummierod)
 		{
-			if ($nummierod >= 1000000000 && $nummierod <2000000000){
-			$num_letrammd = "MIL ".($this->cienmillon($nummierod%1000000000));
-			}
-			if ($nummierod >= 2000000000 && $nummierod <10000000000){
-			$num_letrammd = $this->unidad(Floor($nummierod/1000000000))." MIL ".($this->cienmillon($nummierod%1000000000));
-			}
-			if ($nummierod < 1000000000)
-			$num_letrammd = $this->cienmillon($nummierod);
-
+			if ($nummierod >= 1000000000 && $nummierod <2000000000){    $num_letrammd = "MIL ".($this->cienmillon($nummierod%1000000000));	}
+			if ($nummierod >= 2000000000 && $nummierod <10000000000){   $num_letrammd = $this->unidad(Floor($nummierod/1000000000))." MIL ".($this->cienmillon($nummierod%1000000000));			}
+			if ($nummierod < 1000000000)    			$num_letrammd = $this->cienmillon($nummierod);
 			return $num_letrammd;
-		} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-						
+		} 					
 	}  	
 ?>
