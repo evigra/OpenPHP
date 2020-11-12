@@ -60,14 +60,20 @@
 			}
 			if($redireccionar!="")
 			{
+				#$_SESSION=array();
+				#$_SESSION["user"]="Invitado";
 				echo $redireccionar;
 				exit();
-			}			
+			}
+			
     	}
-		public function __EXEC($comando)
-		{
-			return shell_exec($comando);
-		}					
+		public function __MENU_SEGUIMIENTO()
+		{  
+				$view			=$this->__TEMPLATE("sitio_web/html/menu_seguimiento");				
+				$words["a"]		=$_SESSION["seguimiento_md5"];
+				return	$this->__REPLACE($view,$words);
+		}    	
+
 
 		public function __FIND_FIELD_ID()
 		{  
@@ -88,7 +94,12 @@
 				}	
 			}	
     	}  
-
+    	/*
+    	public function __FIND_FIELDS($id=NULL)
+    	{
+    	
+    	}
+    	*/
 		public function __FIND_FIELDS($id=NULL)
 		{
 		 	# ASIGNA EL ROW CON EL $id enviado
@@ -163,6 +174,11 @@
 		##############################################################################	
 		##  METODOS	
 		##############################################################################
+		public function __TABLE_MAIL($option)
+		{
+
+	
+		}
 		public function __curl($option)
 		{
 			$ch = curl_init();
@@ -215,7 +231,7 @@
     	{   
     		$apikey				="ZUYJGBXXPZ4TBFDJSQZH";		#mio
 
-			$sesion 			=array("apikey"=>"BQ0MZWAVJ1G0T3CMQ4TL");		#System			
+			$sesion 			=array("apikey"=>"1VMU0LHJW0UZHA0VMASE");		#System			
 			$url 				="https://panel.apiwha.com/send_message.php";
 			$vars 				=$sesion;				
 						
@@ -241,8 +257,8 @@
 			$url 				    ="https://graph.facebook.com/v2.11/me/photos";
 			$vars 				    =array();				
 
-			$vars["app_id"]	        ="1759620497626721";
-			$vars["app_secret"]	    ="2ce61c713a03a7d3bc45a76d13c95b03";
+			$vars["app_id"]	    ="1759620497626721";
+			$vars["app_secret"]	="2ce61c713a03a7d3bc45a76d13c95b03";
 
 
 			$vars["access_token"]	="4c3096b0b1442d25744bf3c4fb56a60f";
@@ -256,6 +272,7 @@
 		public function WS_TAECEL($data)
     	{    		    		    	
 			$sesion 			=array("key"=>"6dce34dbc6cc3d6bd8de48fd011d0595", "nip"=>"7fbb2c3531d73ab26044fac7dfe1a503");
+			#$sesion 			=array("key"=>"25d55ad283aa400af464c76d713c07ad", "nip"=>"25d55ad283aa400af464");
 			$url 				="https://taecel.com/app/api/RequestTXN";
 			$vars 				=$sesion;				
 			$vars["producto"]	=$data["producto"];
@@ -349,20 +366,56 @@
 			    $words["system_company"]       	=$_SESSION["company"]["nombre"];
 			
 			    $url                            ="";
+/*
+                <td  style="color:white; padding: 0px 5px 0px 5px; ">    
+	                <nav class="navegacion">
+		                <ul class="menu">                            
+                            
+		                </ul>
+	                </nav>            	
+                </td>
+                <td  style="color:white; padding: 0px 5px 0px 5px;"> 
+                  	<a href="&sys_action=cerrar_sesion">
+                    	<img class= "imgBox" src="../sitio_web/img/shutDown.png" title="Cerrar Sesion" height="25px">   
+                    </a>	
+                </td>
+*/
+                #if(@$_SESSION["user"]["name"]!="Iniciar Sesion" AND count($_SESSION["user"])>1)
 
-			    if(@$_SESSION["user"]["name"]!="Iniciar Sesion" AND count($_SESSION["user"])>1)
+                $cerrar_sesion="";
+                
+                if(!in_array($_SESSION["user"]["name"],array("Iniciar Sesion",""))  AND count($_SESSION["user"])>1)	
 			    {			    			    			    
-
+                    $cerrar_sesion="
+                        <td  style=\"color:white; padding: 0px 5px 0px 5px;\"> 
+                          	<a href=\"&sys_action=cerrar_sesion\">
+                            	<img class=\"imgBox\" src=\"../sitio_web/img/shutDown.png\" title=\"Cerrar Sesion\" height=\"25px\">   
+                            </a>	
+                        </td>
+                    ";
                 }			    
                 else
                 {
                     $url                        ="../sesion/";
                 }    
-				$words["system_user"]           ="<li><a href=\"$url\">{$_SESSION["user"]["name"]}</a></li>";
-				
+                
+                
+                $words["system_user"]           ="
+                    <td  style=\"color:white; padding: 0px 5px 0px 5px; \">    
+	                    <nav class=\"navegacion\">
+		                    <ul class=\"menu\">                            
+                                <li><a href=\"../sesion/\"><b>{$_SESSION["user"]["name"]}</b></a></li>
+		                    </ul>
+	                    </nav>            	
+                    </td>
+                    $cerrar_sesion
+                ";				
 				$words["system_img"]           	="";
 
+
+
                 $words							=$this->__MENU($words);
+
 			    if(@$_SESSION["user"]["name"]!="Iniciar Sesion" AND count($_SESSION["user"])>1)
 			    {			    			    			    
 				    if(isset($_SESSION["company"]["razonSocial"]) AND isset($_SESSION["user"]["name"]))
@@ -494,171 +547,199 @@
 		}	
 		public function __MENU($words)
 		{  			
-			$option_conf=array();
+            if($_SESSION["var"]["vpath"]!="instalacion/" )
+            {
+			    $option_conf=array();
 
-			$option_conf["open"]	=1;
-			$option_conf["close"]	=1;			
-			
-			#if(@$_SESSION["company"] AND @$_SESSION["company"]["id"] AND @$_SESSION["user"]["id"])
-			#if(@$_SESSION["user"]["id"])
-			{
+			    $option_conf["open"]	=1;
+			    $option_conf["close"]	=1;			
 			    
-				$comando_sql        ="
-                    select
-	                    distinct(m.id) as id_m, 
-	                    m.*
-                    from 
-	                    users u 
-                        JOIN user_group ug ON u.id=ug.user_id     
-                        JOIN groups g ON g.id=ug.perfil AND g.name!='No disponible' 
-	                    JOIN menu m ON m.id=g.menu_id OR g.menu_id =0 AND ug.menu_id=m.id
-		            WHERE 1=1
-			            AND ug.perfil!=0
-			            AND u.id='{$_SESSION["user"]["id"]}'
-			        GROUP BY  m.id    
-				";
-				#$this->__PRINT_R($comando_sql);
-				$datas_menu =$this->__EXECUTE($comando_sql, $option_conf);			
-
-                $menu_web=0;
-                if(count($datas_menu)==0)
-                {    
-                    $menu_web=1;
+			    #if(@$_SESSION["company"] AND @$_SESSION["company"]["id"] AND @$_SESSION["user"]["id"])
+			    #if(@$_SESSION["user"]["id"])
+			    {
+			        
 				    $comando_sql        ="
-		                select 	distinct(m.id) as id_m,   m.*
-		                from    menu m
-		                WHERE 1=1  AND m.name='Web'
-			            GROUP BY  m.id    
-				    ";				
-    				$datas_menu =$this->__EXECUTE($comando_sql, $option_conf);	
-    				$_SESSION["var"]["menu"]                =$datas_menu[0]["id"];    				
-    			}	
-			
-			
-				$menu_principal="";
-				$menu_html								="";
-				$option_html                ="";
-				foreach($datas_menu as $data_menu)
-				{
-				    $link								=$data_menu["link"]."&sys_menu=".$data_menu["id"] . $data_menu["variables"];				
-					if($_SESSION["var"]["menu"]==$data_menu["id"])
-
-						$menu_principal=$data_menu["name"];
-					
-					@$option_html	.="
-						<li><a href=\"{$link}\">{$data_menu["name"]}</a></li>
-					";
-				}
-				if(count($datas_menu)>1)
-				{
-				    $menu_html="
-						<ul class=\"submenu\">
-							$option_html
-						</ul>				    
-				    ";
-				
-				}
-				
-				$menu_html="				
-					<li><a href=\"#\"><font size=\"4\"> <b> {$menu_principal}</b></font></a>
-                        $menu_html
-					</li>					
-					<li>&nbsp; &nbsp; &nbsp; &nbsp; </li>					
-				";	
-
-				$words["system_menu"]		    		=$menu_html;
-						
-				$sys_menu								=@$_SESSION["var"]["menu"];			
-				
-				if($menu_web==0)
-				    $comando_sql        ="
-		                select 
-		                	m.id AS id_m, 
-			                m.*
-		                from 
-			                users u JOIN 
-			                user_group ug ON u.id=ug.user_id JOIN
-			                groups g ON g.id=ug.perfil JOIN
-			                permiso p ON p.usergroup_id=ug.perfil AND p.s=1 JOIN
-			                menu m ON m.id=p.menu_id 
-		                WHERE  1=1
+                        select
+	                        distinct(m.id) as id_m, 
+	                        m.*
+                        from 
+	                        users u 
+                            JOIN user_group ug ON u.id=ug.user_id     
+                            JOIN groups g ON g.id=ug.perfil AND g.name!='No disponible' 
+	                        JOIN menu m ON m.id=g.menu_id OR g.menu_id =0 AND ug.menu_id=m.id
+		                WHERE 1=1
 			                AND ug.perfil!=0
 			                AND u.id='{$_SESSION["user"]["id"]}'
-			                AND parent='$sys_menu'
-			                AND m.type='submenu'
-			            GROUP BY  m.id        
-				    ";				
-				else
-				    $comando_sql        ="
-		                select 
-		                	m.id AS id_m, 
-			                m.*
-		                from 
-			                menu m
-		                WHERE  1=1
-			                AND parent='$sys_menu'
-			                AND m.type='submenu'
-			            GROUP BY  m.id        
-				    ";				
+			            GROUP BY  m.id    
+				    ";
+				    #$this->__PRINT_R($comando_sql);
+				    $datas_menu =$this->__EXECUTE($comando_sql, $option_conf);			
 
-				$datas_submenu =$this->__EXECUTE($comando_sql,$option_conf);
-									
-									
-				$submenu_html							="";
-			
-				foreach($datas_submenu as $data_submenu)
-				{
-					$alertas="";
-				
-					#$datas_opcion  						=$menu->opcion_sesion($data_submenu["id"]);
-				
-					$comando_sql        ="
-				        select
-				        	distinct(m.id) AS id_m,  
-					        m.*
-				        from 
-					        users u JOIN 
-					        user_group ug ON u.id=ug.user_id JOIN
-					        groups g ON g.id=ug.perfil JOIN
-					        permiso p ON p.usergroup_id=ug.perfil JOIN
-					        menu m ON m.id=p.menu_id 
-				        where  1=1
-					        AND ug.perfil!=0
-					        AND u.id={$_SESSION["user"]["id"]}
-					        AND parent={$data_submenu["id"]}
-					        AND m.type='opcion'
-					    GROUP BY  m.id            
-					";
-					$datas_opcion =$this->__EXECUTE($comando_sql,$option_conf);
-				
-					$option_html	="";
-					foreach($datas_opcion as $data_opcion)
-					{
+                    $menu_web=0;
+                    if(count($datas_menu)==0)
+                    {    
+                        $menu_web=1;
+				        $comando_sql        ="
+		                    select 	distinct(m.id) as id_m,   m.*
+		                    from    menu m
+		                    WHERE 1=1  AND m.name='Web'
+			                GROUP BY  m.id    
+				        ";				
+        				$datas_menu =$this->__EXECUTE($comando_sql, $option_conf);	
+        				if(is_array($datas_menu) AND isset($datas_menu[0]))    				
+        				    $_SESSION["var"]["menu"]                =$datas_menu[0]["id"];    				
+        			}	
+			    
+			    
+				    $menu_principal="";
+				    $menu_html								="";
+				    $option_html                ="";
+				    foreach($datas_menu as $data_menu)
+				    {
+				        $link								=$data_menu["link"]."&sys_menu=".$data_menu["id"] . $data_menu["variables"];				
+					    if($_SESSION["var"]["menu"]==$data_menu["id"])
 
-						$link			=$data_opcion["link"]."&sys_menu={$sys_menu}" . $data_opcion["variables"];
-						$option_html	.="
-							<li><a href=\"{$link}\">{$data_opcion["name"]}</a></li>
-						";
-					}	
-					
-					
-					if($menu_web==0)    $link="#";					    
-					else                $link			=$data_submenu["link"]."&sys_menu={$sys_menu}" . $data_submenu["variables"];
-					
-					
-					
-					
-					$submenu_html	.="
-						<li><a href=\"$link\"><b>{$data_submenu["name"]}</b></a>
-							<ul class=\"submenu\">
-								$option_html
-							</ul>
-						</li>					
-					";
-				}
-				$words["system_submenu"]	    		=$submenu_html;
-			
-			}			
+						    $menu_principal=$data_menu["name"];
+					    
+					    @$option_html	.="
+						    <li><a href=\"{$link}\">{$data_menu["name"]}</a></li>
+					    ";
+				    }
+				    if(count($datas_menu)>1)
+				    {
+				        $menu_html="
+						    <ul class=\"submenu\">
+							    $option_html
+						    </ul>				    
+				        ";
+				    
+				    }
+				    
+				    $menu_html="				
+					    <li>
+					        <a href=\"#\">
+					            
+					            <font size=\"4\" style=\"color:SteelBlue;\">
+					                <i class=\"fas fa-bars\"></i>
+					                <b> {$menu_principal}</b>
+				                </font>
+				            </a>
+                            $menu_html
+					    </li>					
+					    <li>&nbsp; &nbsp; &nbsp; &nbsp; </li>					
+				    ";	
+
+				    $words["system_menu"]		    		=$menu_html;
+						    
+				    $sys_menu								=@$_SESSION["var"]["menu"];			
+				    
+				    if($menu_web==0)
+				        $comando_sql        ="
+		                    select 
+		                    	m.id AS id_m, 
+			                    m.*
+		                    from 
+			                    users u JOIN 
+			                    user_group ug ON u.id=ug.user_id JOIN
+			                    groups g ON g.id=ug.perfil JOIN
+			                    permiso p ON p.usergroup_id=ug.perfil AND p.s=1 JOIN
+			                    menu m ON m.id=p.menu_id 
+		                    WHERE  1=1
+			                    AND ug.perfil!=0
+			                    AND u.id='{$_SESSION["user"]["id"]}'
+			                    AND parent='$sys_menu'
+			                    AND m.type='submenu'
+			                GROUP BY  m.id        
+				        ";				
+				    else
+				        $comando_sql        ="
+		                    select 
+		                    	m.id AS id_m, 
+			                    m.*
+		                    from 
+			                    menu m
+		                    WHERE  1=1
+			                    AND parent='$sys_menu'
+			                    AND m.type='submenu'
+			                GROUP BY  m.id        
+				        ";				
+
+				    $datas_submenu =$this->__EXECUTE($comando_sql,$option_conf);
+									    
+									    
+				    $submenu_html							="";
+			    
+				    foreach($datas_submenu as $data_submenu)
+				    {
+					    $alertas="";
+				    
+					    #$datas_opcion  						=$menu->opcion_sesion($data_submenu["id"]);
+				    
+					    $comando_sql        ="
+				            select
+				            	distinct(m.id) AS id_m,  
+					            m.*
+				            from 
+					            users u JOIN 
+					            user_group ug ON u.id=ug.user_id JOIN
+					            groups g ON g.id=ug.perfil JOIN
+					            permiso p ON p.usergroup_id=ug.perfil JOIN
+					            menu m ON m.id=p.menu_id 
+				            where  1=1
+					            AND ug.perfil!=0
+					            AND u.id={$_SESSION["user"]["id"]}
+					            AND parent={$data_submenu["id"]}
+					            AND m.type='opcion'
+					        GROUP BY  m.id            
+					    ";
+					    $datas_opcion =$this->__EXECUTE($comando_sql,$option_conf);
+				    
+					    $option_html	="";
+					    foreach($datas_opcion as $data_opcion)
+					    {
+
+						    $link			=$data_opcion["link"]."&sys_menu={$sys_menu}" . $data_opcion["variables"];
+						    $option_html	.="
+							    <li><a href=\"{$link}\">{$data_opcion["name"]}</a></li>
+						    ";
+					    }	
+					    
+					    
+					    if($menu_web==0)    $link="#";					    
+					    else                $link			=$data_submenu["link"]."&sys_menu={$sys_menu}" . $data_submenu["variables"];
+					    
+					    
+					    
+					    
+					    $submenu_html	.="
+						    <li><a href=\"$link\"><b>{$data_submenu["name"]}</b></a>
+							    <ul class=\"submenu\">
+								    $option_html
+							    </ul>
+						    </li>					
+					    ";
+				    }
+				    $words["system_submenu"]	    		=$submenu_html;			    
+			    }
+            }
+            else
+            {
+                $words["system_submenu"]	    		="";
+             
+                
+			    $words["system_menu"]="				
+				    <li>
+				        <a href=\"#\">				            
+				            <font size=\"4\" style=\"color:SteelBlue;\">
+				                <i class=\"fas fa-bars\"></i>
+				                <b>Configuracion del FrameWork</b>
+			                </font>
+			            </a>
+				    </li>					
+			    ";	
+                
+                
+            }    		
 			return $words;
 		} 
 
@@ -1294,7 +1375,13 @@
 			        	{	
 			        		foreach($valor["attr"] as $attr_field => $attr_value)
 			        		{
-								if($attr_value=="required")		$class.=" required ";
+								if($attr_value=="required")									
+								{
+								    $required=" required ";									    
+					            	if(@$this->sys_private["section"]=="write" AND $valor["type"]=="password")								    								   
+        								$required="";    
+    								$class.=$required;
+    							}	
 								else	
 									$attr.=" $attr_field='$attr_value'";
 			        		}			        	
@@ -1524,9 +1611,9 @@
 					    } 			           
 					    ################################
 					    if($valor["type"]=="password")	
-					    {					        
+					    {					        					    	    
 					    	if(@$this->sys_private["section"]=="show")
-					    		$words["$campo"]  ="*********{$valor["br"]}$titulo";
+					    		$words["$campo"]  ="*********{$valor["br"]}$titulo";					    							    	    
 					    	else					    
 					        $words["$campo"]  ="<input type=\"password\" $style id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo";
 					    }    
@@ -1585,6 +1672,7 @@
 					    ################################
 					    if($valor["type"]=="autocomplete" AND $this->sys_recursive<3)	
 					    {
+
 					    	$words["$campo"]  ="";
 					    	if(!isset($fields["auto_$campo"]["value"]))	$fields["auto_$campo"]["value"]="";
 
@@ -2306,10 +2394,11 @@
 
 			    	if(isset($this->sys_view_l18n) AND is_array($this->sys_view_l18n))	
 			    	{
-		    		    #$actions_lang["actions_selected"]	=$this->sys_view_l18n["actions_selected"];
-			    		$actions_lang["actions_show"]		=$this->sys_view_l18n["actions_show"];
-			    		$actions_lang["actions_write"]		=$this->sys_view_l18n["actions_write"];
-			    		$actions_lang["actions_delete"]		=$this->sys_view_l18n["actions_delete"];
+			    	    
+		    		    #$actions_lang["actions_selected"]	=@$this->sys_view_l18n["actions_selected"];
+			    		$actions_lang["actions_show"]		=@$this->sys_view_l18n["actions_show"];
+			    		$actions_lang["actions_write"]		=@$this->sys_view_l18n["actions_write"];
+			    		$actions_lang["actions_delete"]		=@$this->sys_view_l18n["actions_delete"];
 			    				        		
 						$view_aux	=$this->__REPLACE($view_aux,$actions_lang);
 			    	}                                        			    
@@ -2527,6 +2616,14 @@
 			return $this->__SYS_REPORT($option);
         }				
 
+    	##############################################################################    
+    	/*
+		public function __VIEW_CREATE($template=null)
+		{
+			if(is_null($template))	$template=$this->sys_var["module_path"]."html/create";
+			return $this->__VIEW_FORM($template);
+		} 
+		*/  
     	##############################################################################    
 		public function __VIEW_GRAPH($option_graph=array(),$template=NULL)
 		{
@@ -3156,6 +3253,131 @@
 		} 			
 		
     	##############################################################################        
+		public function __MESSAGE($message,$option=NULL)
+		{
+			/*
+			if(is_null($option))	$option=array();
+			
+			if(isset($option["template"]))		$template 	=$option["template"];
+			else 								$template 	="message";
+		    
+		    if(isset($option["message"]))  		$message    =$option["message"];
+		    else                           		$message    ="No se ha indicado un mensaje";
+		    
+		    if(isset($option["image"]))    		$image      =$option["image"];
+		    else                           		$image      ="sitio_web/alerta_azul.png";
+		    
+			$html_template  =$this->__TEMPLATE("sitio_web/html/".$template);
+			$html_template  ="";
+		    
+		    #echo $html_template;
+		    
+		    $datas          =array("message"=>$message,"image"=>$image);
+	        $view	        =$this->__REPLACE($html_template,$datas);	
+		    
+		    $jquery="
+		    	$(\"#message\").dialog({
+					show: {
+						effect: \"shake\",
+						duration: 750
+					},		    			    	
+		    		width:\"350\",
+		    		modal: true,
+		    	});
+				setTimeout(function() 
+				{
+					$(\"#message\").dialog(\"close\")
+				}, 2500 );
+						    ";
+		    
+		    $return=array(
+		    	"html"		=>$view,
+		    	"message"	=>$message,
+		    	"js"		=>$jquery		    	
+		    );
+		    
+			
+			return $return;
+			*/
+		}    
+		function pointInPolygon($point, $polygon, $pointOnVertex = true) 
+		{
+			
+			$this->pointOnVertex = $pointOnVertex;
+
+			// Transformar la cadena de coordenadas en matrices con valores "x" e "y"
+			#PUNTO";
+			$point = $this->pointStringToCoordinates($point);
+			$vertices = array();
+			foreach ($polygon as $vertex) 
+			{
+				#POLIGONO";
+				$vertices[] = $this->pointStringToCoordinates($vertex);
+			}
+
+			// Checar si el punto se encuentra exactamente en un vértice
+			if ($this->pointOnVertex == true and $this->pointOnVertex($point, $vertices) == true) 
+			{
+				#return "vertice";
+				return "DENTRO";
+			}
+
+			// Checar si el punto está adentro del poligono o en el borde
+			$intersections = 0;
+			$vertices_count = count($vertices);
+
+			for ($i=1; $i < $vertices_count; $i++) 
+			{
+				$vertex1 = $vertices[$i-1];
+				$vertex2 = $vertices[$i];
+				if ($vertex1['y'] == $vertex2['y'] and $vertex1['y'] == $point['y'] and $point['x'] > min($vertex1['x'], $vertex2['x']) and $point['x'] < max($vertex1['x'], $vertex2['x'])) 
+				{ // Checar si el punto está en un segmento horizontal
+					#return "BORDE";
+					return "DENTRO";
+				}
+				if ($point['y'] > min($vertex1['y'], $vertex2['y']) and $point['y'] <= max($vertex1['y'], $vertex2['y']) and $point['x'] <= max($vertex1['x'], $vertex2['x']) and $vertex1['y'] != $vertex2['y']) 
+				{
+					$xinters = ($point['y'] - $vertex1['y']) * ($vertex2['x'] - $vertex1['x']) / ($vertex2['y'] - $vertex1['y']) + $vertex1['x'];
+					if ($xinters == $point['x']) 
+					{ // Checar si el punto está en un segmento (otro que horizontal)
+						#return "BORDE";
+						return "DENTRO";
+					}
+					if ($vertex1['x'] == $vertex2['x'] || $point['x'] <= $xinters) 
+					{
+						$intersections++;
+					}
+				}
+			}
+			// Si el número de intersecciones es impar, el punto está dentro del poligono.
+			if ($intersections % 2 != 0) 
+			{
+				return "DENTRO";
+			} 
+			else 
+			{
+				return "AFUERA";
+			}
+		}
+		##############################################################################
+		function pointOnVertex($point, $vertices) 
+		{
+			foreach($vertices as $vertex) 
+			{
+				if ($point == $vertex) 
+				{
+					return true;
+				}
+			}
+
+		}
+		##############################################################################
+		function pointStringToCoordinates($pointString) 
+		{
+			$pointString=trim($pointString);
+			$coordinates = explode(" ", $pointString);
+			return array("x" => $coordinates[0], "y" => $coordinates[1]);
+		}	
 		##############################################################################
 		function __SMS($sDestination, $sMessage, $debug, $sSenderId){
 			$sData ='cmd=sendsms&';
@@ -3302,8 +3524,8 @@
 		
 		function cerrar_conexion()
 		{
-			
-		    $this->OPHP_conexion->close();
+			if(isset($this->OPHP_conexion) AND is_object($this->OPHP_conexion) AND method_exists($this->OPHP_conexion,'query'))
+    		    $this->OPHP_conexion->close();
 		}	
 		
 		
@@ -3791,6 +4013,10 @@
 
 
 
+
+
+
+
 	/*
 	$numero=valor a retornar en letras.
 	$_moneda=1=Colones, 2=Dólares 3=Euros
@@ -4000,106 +4226,176 @@
 		return $numd;
 		}
 
-		function centena($numc)
+		function centena($numc){
+		if ($numc >= 100)
 		{
-		    if ($numc >= 100)
-		    {
-		        if ($numc >= 900 && $numc <= 999)
-		        {
-		            $numce = "NOVECIENTOS ";
-		            if ($numc > 900)       $numce = $numce.($this->decena($numc - 900));
-		        }
-		        else if ($numc >= 800 && $numc <= 899)
-		        {
-		            $numce = "OCHOCIENTOS ";
-		            if ($numc > 800)    		    $numce = $numce.($this->decena($numc - 800));
-		        }
-		        else if ($numc >= 700 && $numc <= 799)
-		        {
-		            $numce = "SETECIENTOS ";
-		            if ($numc > 700)		    $numce = $numce.($this->decena($numc - 700));
-		        }
-		        else if ($numc >= 600 && $numc <= 699)
-		        {
-		            $numce = "SEISCIENTOS ";
-		            if ($numc > 600)		    $numce = $numce.($this->decena($numc - 600));
-		        }
-		        else if ($numc >= 500 && $numc <= 599)
-		        {
-		            $numce = "QUINIENTOS ";
-		            if ($numc > 500)		    $numce = $numce.($this->decena($numc - 500));
-		        }
-		        else if ($numc >= 400 && $numc <= 499)
-		        {
-		            $numce = "CUATROCIENTOS ";
-		            if ($numc > 400)		    $numce = $numce.($this->decena($numc - 400));
-		        }
-		        else if ($numc >= 300 && $numc <= 399)
-		        {
-		            $numce = "TRESCIENTOS ";
-		            if ($numc > 300)		    $numce = $numce.($this->decena($numc - 300));
-		        }
-		        else if ($numc >= 200 && $numc <= 299)
-		        {
-		            $numce = "DOSCIENTOS ";
-		            if ($numc > 200)		    $numce = $numce.($this->decena($numc - 200));
-		        }
-		        else if ($numc >= 100 && $numc <= 199)
-		        {
-		            if ($numc == 100)		    $numce = "CIEN ";
-		            else		    $numce = "CIENTO ".($this->decena($numc - 100));
-		        }
-		    }
-		    else
-        		$numce = $this->decena($numc);
+		if ($numc >= 900 && $numc <= 999)
+		{
+		$numce = "NOVECIENTOS ";
+		if ($numc > 900)
+		$numce = $numce.($this->decena($numc - 900));
+		}
+		else if ($numc >= 800 && $numc <= 899)
+		{
+		$numce = "OCHOCIENTOS ";
+		if ($numc > 800)
+		$numce = $numce.($this->decena($numc - 800));
+		}
+		else if ($numc >= 700 && $numc <= 799)
+		{
+		$numce = "SETECIENTOS ";
+		if ($numc > 700)
+		$numce = $numce.($this->decena($numc - 700));
+		}
+		else if ($numc >= 600 && $numc <= 699)
+		{
+		$numce = "SEISCIENTOS ";
+		if ($numc > 600)
+		$numce = $numce.($this->decena($numc - 600));
+		}
+		else if ($numc >= 500 && $numc <= 599)
+		{
+		$numce = "QUINIENTOS ";
+		if ($numc > 500)
+		$numce = $numce.($this->decena($numc - 500));
+		}
+		else if ($numc >= 400 && $numc <= 499)
+		{
+		$numce = "CUATROCIENTOS ";
+		if ($numc > 400)
+		$numce = $numce.($this->decena($numc - 400));
+		}
+		else if ($numc >= 300 && $numc <= 399)
+		{
+		$numce = "TRESCIENTOS ";
+		if ($numc > 300)
+		$numce = $numce.($this->decena($numc - 300));
+		}
+		else if ($numc >= 200 && $numc <= 299)
+		{
+		$numce = "DOSCIENTOS ";
+		if ($numc > 200)
+		$numce = $numce.($this->decena($numc - 200));
+		}
+		else if ($numc >= 100 && $numc <= 199)
+		{
+		if ($numc == 100)
+		$numce = "CIEN ";
+		else
+		$numce = "CIENTO ".($this->decena($numc - 100));
+		}
+		}
+		else
+		$numce = $this->decena($numc);
 
-		    return $numce;
+		return $numce;
 		}
 
 		function miles($nummero){
-		    if ($nummero >= 1000 && $nummero < 2000){   $numm = "MIL ".($this->centena($nummero%1000));		}
-		    if ($nummero >= 2000 && $nummero <10000){	$numm = $this->unidad(Floor($nummero/1000))." MIL ".($this->centena($nummero%1000));		}
-		    if ($nummero < 1000)		$numm = $this->centena($nummero);
-		    return $numm;
+		if ($nummero >= 1000 && $nummero < 2000){
+		$numm = "MIL ".($this->centena($nummero%1000));
 		}
+		if ($nummero >= 2000 && $nummero <10000){
+		$numm = $this->unidad(Floor($nummero/1000))." MIL ".($this->centena($nummero%1000));
+		}
+		if ($nummero < 1000)
+		$numm = $this->centena($nummero);
+
+		return $numm;
+		}
+
 		function decmiles($numdmero){
-		    if ($numdmero == 10000)		$numde = "DIEZ MIL";
-		    if ($numdmero > 10000 && $numdmero <20000){		$numde = $this->decena(Floor($numdmero/1000))."MIL ".($this->centena($numdmero%1000));		}
-		    if ($numdmero >= 20000 && $numdmero <100000){	$numde = $this->decena(Floor($numdmero/1000))." MIL ".($this->miles($numdmero%1000));		}
-		    if ($numdmero < 10000)		$numde = $this->miles($numdmero);
-		    return $numde;
+		if ($numdmero == 10000)
+		$numde = "DIEZ MIL";
+		if ($numdmero > 10000 && $numdmero <20000){
+		$numde = $this->decena(Floor($numdmero/1000))."MIL ".($this->centena($numdmero%1000));
 		}
+		if ($numdmero >= 20000 && $numdmero <100000){
+		$numde = $this->decena(Floor($numdmero/1000))." MIL ".($this->miles($numdmero%1000));
+		}
+		if ($numdmero < 10000)
+		$numde = $this->miles($numdmero);
+
+		return $numde;
+		}
+
 		function cienmiles($numcmero){
-		    if ($numcmero == 100000)    		$num_letracm = "CIEN MIL";
-		    if ($numcmero >= 100000 && $numcmero <1000000){ 		$num_letracm = $this->centena(Floor($numcmero/1000))." MIL ".($this->centena($numcmero%1000));		}
-		    if ($numcmero < 100000)		$num_letracm = $this->decmiles($numcmero);
-		    return $num_letracm;
+		if ($numcmero == 100000)
+		$num_letracm = "CIEN MIL";
+		if ($numcmero >= 100000 && $numcmero <1000000){
+		$num_letracm = $this->centena(Floor($numcmero/1000))." MIL ".($this->centena($numcmero%1000));
 		}
+		if ($numcmero < 100000)
+		$num_letracm = $this->decmiles($numcmero);
+		return $num_letracm;
+		}
+
 		function millon($nummiero){
-		    if ($nummiero >= 1000000 && $nummiero <2000000){		$num_letramm = "UN MILLON ".($this->cienmiles($nummiero%1000000));		}
-		    if ($nummiero >= 2000000 && $nummiero <10000000){		$num_letramm = $this->unidad(Floor($nummiero/1000000))." MILLONES ".($this->cienmiles($nummiero%1000000));		}
-		    if ($nummiero < 1000000)		$num_letramm = $this->cienmiles($nummiero);
-		    return $num_letramm;
+		if ($nummiero >= 1000000 && $nummiero <2000000){
+		$num_letramm = "UN MILLON ".($this->cienmiles($nummiero%1000000));
 		}
+		if ($nummiero >= 2000000 && $nummiero <10000000){
+		$num_letramm = $this->unidad(Floor($nummiero/1000000))." MILLONES ".($this->cienmiles($nummiero%1000000));
+		}
+		if ($nummiero < 1000000)
+		$num_letramm = $this->cienmiles($nummiero);
+
+		return $num_letramm;
+		}
+
 		function decmillon($numerodm){
-		    if ($numerodm == 10000000)  		$num_letradmm = "DIEZ MILLONES";
-		    if ($numerodm > 10000000 && $numerodm <20000000){   		$num_letradmm = $this->decena(Floor($numerodm/1000000))."MILLONES ".($this->cienmiles($numerodm%1000000));		}
-		    if ($numerodm >= 20000000 && $numerodm <100000000){ 		$num_letradmm = $this->decena(Floor($numerodm/1000000))." MILLONES ".($this->millon($numerodm%1000000));		}
-		    if ($numerodm < 10000000)   		$num_letradmm = $this->millon($numerodm);
-		    return $num_letradmm;
+		if ($numerodm == 10000000)
+		$num_letradmm = "DIEZ MILLONES";
+		if ($numerodm > 10000000 && $numerodm <20000000){
+		$num_letradmm = $this->decena(Floor($numerodm/1000000))."MILLONES ".($this->cienmiles($numerodm%1000000));
 		}
+		if ($numerodm >= 20000000 && $numerodm <100000000){
+		$num_letradmm = $this->decena(Floor($numerodm/1000000))." MILLONES ".($this->millon($numerodm%1000000));
+		}
+		if ($numerodm < 10000000)
+		$num_letradmm = $this->millon($numerodm);
+
+		return $num_letradmm;
+		}
+
 		public function cienmillon($numcmeros){
-		    if ($numcmeros == 100000000)    		$num_letracms = "CIEN MILLONES";
-		    if ($numcmeros >= 100000000 && $numcmeros <1000000000){ 		$num_letracms = $this->centena(Floor($numcmeros/1000000))." MILLONES ".($this->millon($numcmeros%1000000));		}
-		    if ($numcmeros < 100000000) 		$num_letracms = $this->decmillon($numcmeros);
-		    return $num_letracms;
+		if ($numcmeros == 100000000)
+		$num_letracms = "CIEN MILLONES";
+		if ($numcmeros >= 100000000 && $numcmeros <1000000000){
+		$num_letracms = $this->centena(Floor($numcmeros/1000000))." MILLONES ".($this->millon($numcmeros%1000000));
 		}
+		if ($numcmeros < 100000000)
+		$num_letracms = $this->decmillon($numcmeros);
+		return $num_letracms;
+		}
+
 		public function milmillon($nummierod)
 		{
-			if ($nummierod >= 1000000000 && $nummierod <2000000000){    $num_letrammd = "MIL ".($this->cienmillon($nummierod%1000000000));	}
-			if ($nummierod >= 2000000000 && $nummierod <10000000000){   $num_letrammd = $this->unidad(Floor($nummierod/1000000000))." MIL ".($this->cienmillon($nummierod%1000000000));			}
-			if ($nummierod < 1000000000)    			$num_letrammd = $this->cienmillon($nummierod);
+			if ($nummierod >= 1000000000 && $nummierod <2000000000){
+			$num_letrammd = "MIL ".($this->cienmillon($nummierod%1000000000));
+			}
+			if ($nummierod >= 2000000000 && $nummierod <10000000000){
+			$num_letrammd = $this->unidad(Floor($nummierod/1000000000))." MIL ".($this->cienmillon($nummierod%1000000000));
+			}
+			if ($nummierod < 1000000000)
+			$num_letrammd = $this->cienmillon($nummierod);
+
 			return $num_letrammd;
-		} 					
+		} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						
 	}  	
 ?>

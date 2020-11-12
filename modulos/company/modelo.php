@@ -62,12 +62,26 @@
 			    "type"              => "input",
 			),
 			"files_id"	    =>array(
-			    "title"             => "Imagen",
+			    "title"             => "Logo",
 			    "type"              => "file",
-			    "relation"          => "many2one",
-			    "class_name"       	=> "files",
-			    "class_field_o"    	=> "files_id",
-			    "class_field_m"    	=> "id",			    
+			),			
+			#/*
+			"img_files_id"	    =>array(
+			    "title"             => "Logo",
+			    "type"              => "show_file",
+			),						
+			"img_files_id_med"	    =>array(
+			    "title"             => "Logo",
+			    "titleShow"         => "false",
+			    "type"              => "show_file",
+			),
+			"img_files_id_chi"	    =>array(
+			    "title"             => "Logo",
+			    "type"              => "show_file",
+			),
+			"img_files_id_sup_chi"	    =>array(
+			    "title"             => "Logo",
+			    "type"              => "show_file",
 			),
 			"lema"	=>array(
 			    "title"             => "Lema",
@@ -78,7 +92,7 @@
 			    "type"              => "input",
 			),						
 			"telefono_contacto"	=>array(
-			    "title"             => "Telefono Contacto",
+			    "title"             => "Telefono",
 			    "type"              => "input",
 			),						
 			"mail_from"	=>array(
@@ -172,6 +186,7 @@
     		$this->sys_fields["estatus"]["filter"]="1";    		    		    		
 			$return 				=$this->__VIEW_REPORT($option);
 			return	$return;     	
-		}								
+		}						
+		
 	}
 ?>

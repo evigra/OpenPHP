@@ -4,16 +4,13 @@
 	list-style:             none;
     text-decoration:        none;	
 }
-    .cKanban{
-        float:              left; 
-        margin:             5px; 
-        background-color:   white; 
-        border:             1px; 
-        border-radius:      5px 15px 5px 15px;     
-        border-style:       solid; 
-        border-width:       2px; 
-        overflow:           hidden;    
-    }
+
+.foto
+{
+    border-radius:          100%; 
+    border-color:           #00BFFF;
+    border:                 7px;
+}
 
 
 /* ####################################### */
@@ -21,14 +18,29 @@
 /* ####################################### */
 @media (min-width:1200px)
 {
-    .cKanban{
-        height:             130px; 
+    .foto_logo{
+        width:                  470px;
+        position:               absolute; 
+        left:                   90px; 
+        top:                    15px;
+    }
+    .logo
+    {
+        position:               absolute;  
+        left:                   45px; 
+        top:                    25px;
+        width:                  200px;
+    }
+    .cabecera{
+        height:                 230px; 
+        background-color:       #eee;
     }
     .responsive4-1cols
     {
         float:              left;
 	    width:				25%;
     }
+
 }
 
 
@@ -37,14 +49,29 @@
 /* ####################################### */
 @media (max-width:1199px) and (min-width:992px)
 {
-    .cKanban{
-        height:             130px; 
+    .foto_logo{
+        width:                  470px;
+        position:               absolute; 
+        left:                   90px; 
+        top:                    15px;
+    }
+    .logo
+    {
+        position:               absolute;  
+        right:                  90px; 
+        top:                    16px;
+        width:                  200px;
+    }
+    .cabecera{
+        height:                 230px; 
+        background-color:       #eee;
     }
     .responsive4-1cols
     {
         float:              left;
 	    width:				25%;
     }
+
 }
 
 
@@ -53,10 +80,25 @@
 /* ####################################### */
 @media (max-width:991px) and (min-width:768px)
 {
-    .cKanban{
-        height:             130px; 
-    }
 
+    .foto_logo{
+        width:                  470px;
+        position:               absolute; 
+        left:                   90px; 
+        top:                    15px;
+
+    }
+    .logo
+    {
+        position:               absolute;  
+        left:                   84px; 
+        top:                    15px;
+        width:                  200px;
+    }
+    .cabecera{
+        height:                 230px; 
+        background-color:       #eee;
+    }
     .responsive4-1cols
     {
         float:              left;
@@ -72,20 +114,35 @@
 /* ####################################### */
 @media (max-width:767px)
 {
-    .cKanban{
-        height:             100px; 
+    .foto_logo{
+        width:                  270px;
+        position:               absolute; 
+        left:                   30px; 
+        top:                    15px;
+
+    }
+    .logo
+    {
+        position:               absolute;  
+        left:                   26px; 
+        top:                    15px;
+        width:                  115px;
+    }
+
+    .cabecera{
+        height:                 150px; 
+        background-color:       #eee;
     }
     .responsive4-1cols
     {
         float:              left;
 	    width:				50%;
     }
-/*
+
     .responsive4-1cols:nth-child(3), .responsive4-1cols:nth-child(4) 
     {
         display:                none;
     }
-    */
 }
 
 

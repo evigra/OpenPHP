@@ -2,7 +2,7 @@
 
         $this->sys_fields_l18n["id"]                ="";
         $this->sys_fields_l18n["name"]              ="Nombre";
-        $this->sys_fields_l18n["email"]             ="Email";
+        $this->sys_fields_l18n["email"]             ="Matricula";
         $this->sys_fields_l18n["password"]          ="Password";
         $this->sys_fields_l18n["files_id"]          ="Imagen";
         $this->sys_fields_l18n["sesion_start"]      ="Modulo de inicio";

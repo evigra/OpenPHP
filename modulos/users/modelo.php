@@ -52,12 +52,10 @@
 			"company_id"	    =>array(
 			    "title"             => "Compania",
 			    "type"              => "input",
-/*
 			    "relation"          => "many2one",
 			    "class_name"       	=> "company",
 			    "class_field_o"    	=> "company_id",
 			    "class_field_m"    	=> "id",
-*/
 			),						
 			"usergroup_ids"	    	=>array(
 			    "title"             => "Permisos",
@@ -83,6 +81,11 @@
 				"name"			=>"menu_obj",		
 				"memory"		=>"menu_obj",
 			);						
+
+            if(@$this->sys_private["section"]=="write")    
+                unset($this->sys_fields["password"]["attr"]);
+            
+            
 			$this->menu_obj			=new menu($option_menu);
 			return parent::__CONSTRUCT($option);
 		}
