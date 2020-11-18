@@ -26,7 +26,9 @@
 		    else													        						
 			    $sys_location	="Location:sesion/";
 			    
-			$objeto->__PRINT_R($sys_location);        
+			    
+			    
+			$objeto->__PRINT_R(array($_SERVER["SERVER_NAME"],$_SESSION["var"]["server_true"]));        
         }				
 		#
 		header($sys_location);
