@@ -5,7 +5,7 @@
 	##############################################################################	
 	##  Propiedades	
 	##############################################################################
-	$objeto->__PRINT_R($_SERVER["QUERY_STRING"]);
+	#$objeto->__PRINT_R($_SERVER["QUERY_STRING"]);
 	
 	if($_SERVER["QUERY_STRING"]=="sys_vpath=" OR $_SESSION["var"]["vpath"]=="")		
 	{	
@@ -28,7 +28,7 @@
 			    
 			    
 			    
-			$objeto->__PRINT_R(array($_SERVER["SERVER_NAME"],$_SESSION["var"]["server_true"]));        
+			#$objeto->__PRINT_R(array($_SERVER["SERVER_NAME"],$_SESSION["var"]["server_true"]));        
         }				
 		#
 		header($sys_location);
