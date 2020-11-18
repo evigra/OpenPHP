@@ -5,6 +5,8 @@
 	##############################################################################	
 	##  Propiedades	
 	##############################################################################
+	$objeto->__PRINT_R($_SERVER["QUERY_STRING"]);
+	
 	if($_SERVER["QUERY_STRING"]=="sys_vpath=" OR $_SESSION["var"]["vpath"]=="")		
 	{	
 		############################################
@@ -14,6 +16,7 @@
 		if(@file_exists($path_instalacion . "index.php"))						$sys_location	="Location:instalacion/";
 		else
 		{
+		    
 		    unset($_COOKIE['SolesGPS']);
 		    
 		    if(isset($_COOKIE['SolesGPS']) AND !isset($_SESSION["var"]["action"]))
@@ -22,6 +25,8 @@
 			    $sys_location	="Location:webHome/";							
 		    else													        						
 			    $sys_location	="Location:sesion/";
+			    
+			$objeto->__PRINT_R($sys_location);        
         }				
 		#
 		header($sys_location);
