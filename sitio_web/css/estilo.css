@@ -25,7 +25,7 @@
     {        
         position:               absolute;  
         left:                   65px; 
-        top:                    45px;
+        top:                    37px;
         width:                  120px;
     }
     .cabecera{
@@ -52,7 +52,7 @@
 @media (max-width:1199px) and (min-width:992px)
 {
     .cabecera_titulo{
-        font-size:              20;
+        font-size:              25;
     }    
     .logo
     {        
@@ -92,10 +92,10 @@
         position:               absolute;  
         left:                   60px; 
         top:                    25px;
-        width:                  100px;
+        width:                  90px;
     }
     .cabecera{
-        height:                 170px; 
+        height:                 150px; 
     }
     .video{
         width:                  100%; 
@@ -128,13 +128,13 @@
     .logo
     {
         position:               absolute;  
-        left:                   26px; 
-        top:                    15px;
-        width:                  115px;
+        left:                   20px; 
+        top:                    10px;
+        width:                  50px;
     }
 
     .cabecera{
-        height:                 150px; 
+        height:                 80px; 
     }
     .responsive4-1cols
     {
