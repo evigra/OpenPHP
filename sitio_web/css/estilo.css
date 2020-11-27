@@ -27,13 +27,13 @@
     .logo
     {        
         position:               absolute;  
-        left:                   45px; 
-        top:                    60px;
-        width:                  150px;
+        left:                   65px; 
+        top:                    45px;
+        width:                  120px;
     }
+
     .cabecera{
         height:                 230px; 
-        background-color:       #eee;
     }
     .responsive4-1cols
     {
@@ -64,7 +64,6 @@
     }
     .cabecera{
         height:                 230px; 
-        background-color:       #eee;
     }
     .responsive4-1cols
     {
@@ -97,7 +96,6 @@
     }
     .cabecera{
         height:                 230px; 
-        background-color:       #eee;
     }
     .responsive4-1cols
     {
@@ -131,7 +129,6 @@
 
     .cabecera{
         height:                 150px; 
-        background-color:       #eee;
     }
     .responsive4-1cols
     {
@@ -204,14 +201,25 @@ div p{
 .menu > li > a{
 	display:                block;
 	padding:                7px 7px;
-	color:                  #fff;
+	color:                  #DDC9A3;
 	font-family:            'Open sans';
 	text-decoration:        none;
 }
 .menu li a:hover{
-	color:                  #CE7D35;
+	color:                  #98989A;
 	transition:             all .15s;
 }
+nav ul li a font{
+	color:                  #98989A;
+}
+/*9F2241*/
+
+.transparencia{
+	opacity:                0.8;
+}
+
+
+
 /*################### Submenu ##############*/
 .submenu{
 	position:               absolute;
@@ -254,13 +262,31 @@ form
 {
 	background-color:       #373737;
 }
+
+
+
 .color1 {
-	background-color:       black;
-}
-.color2 {
-	background-color:       #373737;
+	background-color:       #00594C;
 	color:                  white;
 }
+.fondo1
+{     
+    background: linear-gradient(to right, rgba(0, 89, 76,0.8), rgb(0, 89, 76,1)), url("../img/fondo_logo.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.color2 {
+	background-color:       #9F2241;
+	color:                  white;
+}
+.fondo2
+{     
+    background: linear-gradient(to right, rgba(159, 34, 65,0.8), rgb(159, 34, 65,1)), url("../img/fondo_logo.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
 .color3 {
 	background-color:       Gainsboro;
 }
@@ -428,13 +454,14 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 
 td.color1 span
 {
-    color:              #ccc;
+    background-color: rgb(0, 89, 76);
 }
+/*
 td.color2 > div.responsive4-1cols                     
 {
     border-top: 			10px solid grey;
 }
-
+*/
 text-align: justify;
 
 .alto{height: 			30px;}

@@ -619,7 +619,7 @@
 					    <li>
 					        <a href=\"#\">
 					            
-					            <font size=\"4\" style=\"color:SteelBlue;\">
+					            <font size=\"4\">
 					                <i class=\"fas fa-bars\"></i>
 					                <b> {$menu_principal}</b>
 				                </font>
