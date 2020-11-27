@@ -23,6 +23,13 @@
     }    
     .logo
     {        
+	    -webkit-top:            20px;
+	    -moz-top:               20px;
+	    top:                    37px;
+
+
+
+
         position:               absolute;  
         left:                   65px; 
         top:                    37px;
@@ -399,8 +406,6 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 	-webkit-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
 	-moz-box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
 	box-shadow: 2px 2px 20px 1px rgba(0,0,0,0.75);
-	
-
 }
 
 
