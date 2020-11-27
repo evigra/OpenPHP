@@ -22,17 +22,18 @@
         font-size:              30;
     }    
     .logo
-    {        
+    {   
+        top:                    37px;
+        -moz-top:               20px;     
 	    -webkit-top:            20px;
-	    -moz-top:               20px;
-	    top:                    37px;
+	    
+	    
 
 
 
 
         position:               absolute;  
         left:                   65px; 
-        top:                    37px;
         width:                  120px;
     }
     .cabecera{
