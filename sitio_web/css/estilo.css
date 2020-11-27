@@ -18,12 +18,9 @@
 /* ####################################### */
 @media (min-width:1200px)
 {
-    .foto_logo{
-        width:                  470px;
-        position:               absolute; 
-        left:                   90px; 
-        top:                    15px;
-    }
+    .cabecera_titulo{
+        font-size:              30;
+    }    
     .logo
     {        
         position:               absolute;  
@@ -31,16 +28,21 @@
         top:                    45px;
         width:                  120px;
     }
-
     .cabecera{
         height:                 230px; 
     }
+    .video{
+        width:                  100%; 
+        height:                 400px; 
+        z-index:                -1;             
+        overflow-y:             hidden;
+    }
+    
     .responsive4-1cols
     {
         float:              left;
 	    width:				25%;
     }
-
 }
 
 
@@ -49,27 +51,31 @@
 /* ####################################### */
 @media (max-width:1199px) and (min-width:992px)
 {
-    .foto_logo{
-        width:                  470px;
-        position:               absolute; 
-        left:                   90px; 
-        top:                    15px;
-    }
+    .cabecera_titulo{
+        font-size:              30;
+    }    
     .logo
-    {
+    {        
         position:               absolute;  
-        right:                  90px; 
-        top:                    16px;
-        width:                  200px;
+        left:                   65px; 
+        top:                    45px;
+        width:                  50px;
     }
     .cabecera{
-        height:                 230px; 
+        height:                 170px; 
     }
+    .video{
+        width:                  100%; 
+        height:                 400px; 
+        z-index:                -1;             
+        overflow-y:             hidden;
+    }    
     .responsive4-1cols
     {
         float:              left;
 	    width:				25%;
     }
+
 
 }
 
@@ -79,30 +85,31 @@
 /* ####################################### */
 @media (max-width:991px) and (min-width:768px)
 {
-
-    .foto_logo{
-        width:                  470px;
-        position:               absolute; 
-        left:                   90px; 
-        top:                    15px;
-
-    }
+    .cabecera_titulo{
+        font-size:              20;
+    }    
     .logo
-    {
+    {        
         position:               absolute;  
-        left:                   84px; 
-        top:                    15px;
-        width:                  200px;
+        left:                   60px; 
+        top:                    25px;
+        width:                  100px;
     }
     .cabecera{
-        height:                 230px; 
+        height:                 170px; 
     }
+    .video{
+        width:                  100%; 
+        height:                 320px; 
+        z-index:                -1;             
+        overflow-y:             hidden;
+    }
+    
     .responsive4-1cols
     {
         float:              left;
 	    width:				25%;
     }
-
 }
 
 
