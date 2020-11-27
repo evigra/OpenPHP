@@ -24,8 +24,9 @@
     .logo
     {   
         top:                    37px;
+        -webkit-top:            20px;
         -moz-top:               20px;     
-	    -webkit-top:            20px;
+	    
 	    
 	    
 
@@ -66,8 +67,12 @@
     {        
         position:               absolute;  
         left:                   60px; 
-        top:                    25px;
+
         width:                  100px;
+        top:                    25px;
+        -webkit-top:            20px;
+        -moz-top:               20px;     
+
     }
     .cabecera{
         height:                 170px; 
