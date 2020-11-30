@@ -22,54 +22,38 @@
 	{
 		# TITULO DEL MODULO
 		$module_title                	=	"Crear ";
-
 		# PRECARGANDO LOS BOTONES PARA LA VISTA SELECCIONADA
 		$module_left=array(
 			array("action"=>"Guardar"),
 			array("cancel"=>"Cancelar"),
 		);
 		$module_right=array(
-			#array("create"=>"Crear"),
-			#array("write"=>"Modificar"),
 			array("kanban"=>"Kanban"),
 			array("report"=>"Reporte"),
 		);
-
 		# CARGANDO VISTA Y CARGANDO CAMPOS A LA VISTA
 		$objeto->words["module_body"]				=$objeto->__VIEW_CREATE();	    	
-		$objeto->words               				=$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
-    	
-    	#$objeto->words["permisos"]	            	=$objeto->menu_obj->grupos_html();
-    	#$objeto->words["flotilla"]	            	=$objeto->device_obj->devices_user();
+		$objeto->words               				=$objeto->__INPUT($objeto->words,$objeto->sys_fields);        
     }	
     elseif($objeto->sys_private["section"]=="write")
 	{
 		# TITULO DEL MODULO
 		$module_title                	=	"Modificar ";
-
 		# PRECARGANDO LOS BOTONES PARA LA VISTA SELECCIONADA
 		$module_left=array(
 			array("action"=>"Guardar"),
 			array("cancel"=>"Cancelar"),
 		);
 		$module_right=array(
-			#array("create"=>"Crear"),
-			#array("write"=>"Modificar"),
 			array("kanban"=>"Kanban"),
 			array("report"=>"Reporte"),
 		);
-
 		# CARGANDO VISTA Y CARGANDO CAMPOS A LA VISTA
 		$objeto->words["module_body"]				=$objeto->__VIEW_WRITE();	 
 		$objeto->words               				=$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
     	
     	$objeto->words["permisos"]	            	=$objeto->menu_obj->grupos_html(@$objeto->sys_fields["usergroup_ids"]["values"]);
-    	#$objeto->words["flotilla"]	            	=$objeto->device_obj->devices_user($objeto->sys_primary_id);
-    	
-    	#if(isset($objeto->sys_fields["files_id"]["value"]))    	
-	    #	$objeto->words["img_files_id"]	            =$objeto->files_obj->__GET_FILE($objeto->sys_fields["files_id"]["value"]);
-	    #else	$objeto->words["img_files_id"]="";	
-	    
+
     	$module_title								="Modificar ";
     }	
 	elseif($objeto->sys_private["section"]=="kanban")
