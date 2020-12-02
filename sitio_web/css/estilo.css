@@ -21,14 +21,9 @@
     .cabecera_titulo{
         font-size:              30;
     }    
-    .logo
-    {   
-        top:                    37px;
-        -moz-top:               37px;     
-        -webkit-top:            37px;
-        
-
-
+    div.logo
+    {           
+        top:                    45px;        
         position:               absolute;  
         left:                   65px; 
         width:                  120px;
@@ -62,13 +57,9 @@
     .logo
     {        
         position:               absolute;  
+        top:                    25px;        
         left:                   60px; 
-
         width:                  100px;
-        top:                    25px;
-        -webkit-top:            20px;
-        -moz-top:               20px;     
-
     }
     .cabecera{
         height:                 170px; 
@@ -99,8 +90,8 @@
     .logo
     {        
         position:               absolute;  
+        top:                    25px;        
         left:                   60px; 
-        top:                    25px;
         width:                  90px;
     }
     .cabecera{
@@ -137,8 +128,8 @@
     .logo
     {
         position:               absolute;  
+        top:                    10px;        
         left:                   20px; 
-        top:                    10px;
         width:                  50px;
     }
 
