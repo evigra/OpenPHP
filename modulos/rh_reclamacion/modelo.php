@@ -10,8 +10,19 @@
 			    "title"             => "id",
 			    "type"              => "primary key",			  
 			),
-
-
+			"company_id"	    =>array(
+			    "title"             => "empresa",
+			    "titleShow"         => "no",			    
+			    "description"       => "Responsable del dispositivo",
+			    "type"              => "autocomplete",
+			    "procedure"       	=> "__AUTOCOMPLETE",
+			    "relation"          => "many2one",
+			    "recursive"         => "2",
+			    "class_name"       	=> "company",
+			    "class_field_l"    	=> "nombre",				# Label
+			    "class_field_o"    	=> "company_id",
+			    "class_field_m"    	=> "id",			    
+			),			
 			"plaza_id"	    =>array(
 			    "title"             => "plaza",
 				"title_filter"		=> "Matricula",
