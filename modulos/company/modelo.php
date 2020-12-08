@@ -120,7 +120,7 @@
 			    "type"              => "input",
 			),			
 			"domicilio_fiscal"	=>array(
-			    "title"             => "Lugar de entrega",
+			    "title"             => "Pie de pagina",
 			    "type"              => "input",
 			),			
 			"estado"	=>array(

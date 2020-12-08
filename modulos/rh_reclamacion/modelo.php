@@ -68,7 +68,6 @@
 					"color"			=>array("red"=>"1==1"),
 					"font-size"		=>array("25px"=>"1==1"),					
 			    ),			    			    
-
 			),			
 			"categoria"	    =>array(
 			    "title"             => "Categoria",
@@ -95,6 +94,24 @@
 			    "title"             => "Adscripcion",
 			    "type"              => "input",
 			),			
+			"fecha_queja"	    =>array(
+			    "title"             => "Fecha de la Queja",
+			    "type"              => "date",
+			),			
+			"fecha_queja"	    =>array(
+			    "title"             => "Fecha de la Queja",
+			    "type"              => "date",
+			),			
+			"tipo_queja"	    =>array(
+			    "title"             => "Fecha de la Queja",
+			    "type"              => "select",
+			    "source"            => array(
+                    "32"=>"32 Falta",
+                    "33"=>"33 Falta",
+                    "txt"=>"Txt Falta",			    			    
+			    ),
+			),			
+
 
 		);				
 		##############################################################################	
