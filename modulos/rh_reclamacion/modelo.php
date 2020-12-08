@@ -11,7 +11,7 @@
 			    "type"              => "primary key",			  
 			),
 			"company_id"	    =>array(
-			    "title"             => "empresa",
+			    "title"             => "Empresa",
 			    "titleShow"         => "no",			    
 			    "description"       => "Responsable del dispositivo",
 			    "type"              => "autocomplete",
