@@ -95,15 +95,11 @@
 			    "type"              => "input",
 			),			
 			"fecha_queja"	    =>array(
-			    "title"             => "Fecha de la Queja",
-			    "type"              => "date",
-			),			
-			"fecha_queja"	    =>array(
-			    "title"             => "Fecha de la Queja",
+			    "title"             => "Fecha",
 			    "type"              => "date",
 			),			
 			"tipo_queja"	    =>array(
-			    "title"             => "Fecha de la Queja",
+			    "title"             => "Tipo",
 			    "type"              => "select",
 			    "source"            => array(
                     "32"=>"32 Falta",
@@ -111,6 +107,11 @@
                     "txt"=>"Txt Falta",			    			    
 			    ),
 			),			
+			"descripcion_queja"	    =>array(
+			    "title"             => "Descripcion",
+			    "type"              => "input",
+			),			
+
 
 
 		);				
