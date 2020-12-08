@@ -144,9 +144,7 @@
 									if(isset($value["relation"]) AND $value["relation"]=="many2one" AND isset($value["class_field_m"]))
 									{
 										if($this->sys_recursive<3)
-										{
-										
-										
+										{																			
 											$eval="
 												$"."option=array();
 												$"."option[\"where\"]		=array(\"{$value["class_field_m"]}='{$datas[0][$value["class_field_o"]]}'\");
@@ -496,7 +494,7 @@
 				
 										
 				$this->__PDF($Output);		
-				#exit;
+				exit;
 			}
 			else echo $template;
 			#*/	
@@ -1250,6 +1248,9 @@
 					),			
 				);	
 			}	
+			
+			$this->__PRINT_R($_SESSION["pdf"]["template"]);
+			
 			$datos=$_SESSION["pdf"]["template"];
 			foreach($datos as $dato)
 			{
@@ -1259,13 +1260,15 @@
 
 			$pdf->lastPage();			
 
+
+            /*
 			if(!isset($_SESSION["pdf"]["save_name"]))	$_SESSION["pdf"]["save_name"]=$_SESSION["pdf"]["title"];
 
 			if($Output=="S")
 				$_SESSION["pdf"]["file"] =$pdf->Output("prueba.pdf", $Output);
 			else	
 				$pdf->Output($_SESSION["pdf"]["save_name"], $Output);
-			
+			*/
 			unset($_SESSION["pdf"]);
 			exit;
 		}		

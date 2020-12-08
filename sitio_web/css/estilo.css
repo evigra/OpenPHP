@@ -496,6 +496,7 @@ table tr.odd:hover,
 	box-sizing:			border-box;
 	border-radius:		6px;
 	height:				30px;
+	border-color:       grey;
 }
 .d_none{display:		none;}
 .d_block{display:		block;}

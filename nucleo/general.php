@@ -499,6 +499,7 @@
     	
 			if(!isset($this->sys_memory) OR $this->sys_memory=="" OR $this->sys_object=="files")
 			{	
+
 				###########################################################	
 				##################  REAL ##################################
 				###########################################################		
@@ -568,7 +569,6 @@
 						fecha='{$_SESSION["var"]["datetime"]}',
 						remote_addr='{$_SERVER["REMOTE_ADDR"]}',												
 					";
-
 					if(is_null(@$this->sys_private["id"]) OR @$this->sys_private["id"]=="") 
 					{
 						$insert=1;
