@@ -1249,7 +1249,7 @@
 				);	
 			}	
 			
-			$this->__PRINT_R($_SESSION["pdf"]["template"]);
+			#$this->__PRINT_R($_SESSION["pdf"]["template"]);
 			
 			$datos=$_SESSION["pdf"]["template"];
 			foreach($datos as $dato)
@@ -1261,14 +1261,14 @@
 			$pdf->lastPage();			
 
 
-            /*
+            #/*
 			if(!isset($_SESSION["pdf"]["save_name"]))	$_SESSION["pdf"]["save_name"]=$_SESSION["pdf"]["title"];
 
 			if($Output=="S")
 				$_SESSION["pdf"]["file"] =$pdf->Output("prueba.pdf", $Output);
 			else	
 				$pdf->Output($_SESSION["pdf"]["save_name"], $Output);
-			*/
+			#*/
 			unset($_SESSION["pdf"]);
 			exit;
 		}		
