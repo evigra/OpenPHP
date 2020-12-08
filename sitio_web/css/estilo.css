@@ -420,9 +420,10 @@ div.view_report_d1 div.view_report_d2 table.view_report_t1 tr td table.cBotones 
 
 */
 
-.mainTable
+.mainTable2
 {
 	text-align:		    left;
+	align:		        left;
 	margin:				15px;
 	padding:			10px;
 	background-color:	white; 
