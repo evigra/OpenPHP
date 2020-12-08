@@ -44,7 +44,10 @@
     if($objeto->sys_private["section"]=="write")
 	{
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-		$objeto->words["codigo_qr"]                 =$objeto->__QR("http://programing-solution.com/rh_reclamacion/&sys_action=print_pdf&sys_section_rh_reclamacion=write&sys_action_rh_reclamacion=&sys_id_rh_reclamacion=");
+        $txt="http://programing-solution.com/rh_reclamacion/&sys_action=print_pdf&sys_section_rh_reclamacion=write&sys_action_rh_reclamacion=&sys_id_rh_reclamacion=";
+		$objeto->words["codigo_qr"]                 =$objeto->__QR($txt);
+		$objeto->words["codigo_base64"]             =base64_encode($txt);
+		
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
     }	
