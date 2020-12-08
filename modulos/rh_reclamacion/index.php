@@ -40,15 +40,11 @@
 
 
 
-
-
-
-
 	
     if($objeto->sys_private["section"]=="write")
 	{
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-		$objeto->words["codigo_qr"]                 =$objeto->__QR("http://solesgps.com/orden_venta/&sys_action=print_pdf&sys_section=write&sys_action=&sys_id=101");
+		$objeto->words["codigo_qr"]                 =$objeto->__QR("http://programing-solution.com/rh_reclamacion/&sys_action=print_pdf&sys_section_rh_reclamacion=write&sys_action_rh_reclamacion=&sys_id_rh_reclamacion=");
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
     }	
