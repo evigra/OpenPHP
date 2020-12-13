@@ -102,6 +102,7 @@
 			    "title"             => "Tipo",
 			    "type"              => "select",
 			    "source"            => array(
+    			    " "=>"Selecciona una opcion",
                     "32"=>"32 Falta",
                     "33"=>"33 Falta",
                     "txt"=>"Txt Falta",			    			    
