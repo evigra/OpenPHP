@@ -874,6 +874,9 @@
 				foreach($this->sys_fields as $campo =>$valor)
 				{				
 					$request_campo		="{$this->sys_name}_$campo";
+					
+					#echo "\n <br> $request_campo";
+					
 					if(isset($_REQUEST[$request_campo]))
 					{
 						$valor					=$_REQUEST[$request_campo];
@@ -933,18 +936,22 @@
 			
 			if(is_array($_FILES))
 			{
+			    $this->request["files"]			=$_FILES;
+			    
+			    /*
+			
+			    $this->__PRINT_R($_FILES);
 			    
 				$this->request["files"]=array();				
 				foreach($_FILES as $valor)
 				{
 					$this->request["files"]			=$valor;						
-				}	
+				}
+				*/	
 			}	
 						
 			if(!isset($this->request["sys_view"]))	$this->request["sys_view"]	="";	
 			
-			#if($this->sys_name=="orden_venta")
-			#	$this->__PRINT_R($this->sys_fields);
 		} 
 		##############################################################################
 
@@ -1147,6 +1154,10 @@
     	
 			$datas		=$this->sys_fields;			
 			$return		=array();
+			
+			$this->__PRINT_R($_FILES);
+			$this->__PRINT_R($datas);
+			
     		foreach($datas as $campo=>$valor)
     		{
 				if(isset($valor["relation"]) AND $valor["relation"]=="many2one")

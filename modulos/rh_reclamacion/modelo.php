@@ -10,6 +10,7 @@
 			    "title"             => "id",
 			    "type"              => "primary key",			  
 			),
+			/*
 			"company_id"	    =>array(
 			    "title"             => "Empresa",
 			    "titleShow"         => "no",			    
@@ -22,13 +23,15 @@
 			    "class_field_l"    	=> "nombre",				# Label
 			    "class_field_o"    	=> "company_id",
 			    "class_field_m"    	=> "id",			    
-			),			
+			),
+			*/			
 			"plaza_id"	    =>array(
 			    "title"             => "plaza",
 				"title_filter"		=> "Matricula",
 			    "type"              => "primary key",
 			    "import"            => "10",			  
 			),
+            
 			"files_biometrico"	    =>array(
 			    "title"             => "Biometrico",
 			    "type"              => "file",
@@ -45,7 +48,6 @@
 			    "class_field_o"    	=> "files_tarjeton",
 			    "class_field_m"    	=> "id",	
 			),
-
 
 			"matricula"	    =>array(
 			    "title"             => "Matricula",
@@ -94,6 +96,7 @@
 			    "title"             => "Adscripcion",
 			    "type"              => "input",
 			),			
+
 			"fecha_queja"	    =>array(
 			    "title"             => "Fecha",
 			    "type"              => "date",
@@ -114,7 +117,6 @@
 			),			
 
 
-
 		);				
 		##############################################################################	
 		##  Metodos	
@@ -124,6 +126,9 @@
     	{
     	    #$option=array("echo");
             #$this->__PRINT_R($datas);
+            
+            
+            
             return parent::__SAVE($datas);	
         }
    		public function __REPORT($option=NULL)

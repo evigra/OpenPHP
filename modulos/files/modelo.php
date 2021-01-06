@@ -65,11 +65,13 @@
     	{    	   
     		#$option["table"]=$datas;
     	    $return =NULL;
-    	    #$this->__PRINT_R($datas);									
+    	    									
 			if(@is_array($datas))
 			{							
 				if(is_null($option))	$option=array();				
-
+                
+                #$this->__PRINT_R($datas);
+                
 				if(isset($datas["error"]) AND $datas["error"]==0)
 				{
 					$tmp_name 				= $datas["tmp_name"];
@@ -96,9 +98,7 @@
 
 				    if(in_array($extension,array("jpg","jpeg","png","gif")))		
 				    {
-				        $this->thumbs($path, $datas);
-				        
-				        
+				        $this->thumbs($path, $datas);				        				        
 				    }
 				}
 			}	
@@ -167,7 +167,7 @@
             $img2 = imagecreatetruecolor($nuevax, $nuevay);  
             imagecopyresized($img2, $imagen, 0, 0, 0, 0, floor($nuevax), floor($nuevay), $x, $y);      
 
-            if(isset($datas["agua"]) OR in_array($datas["agua"],$_SESSION["var"]["true"]))	
+            if(isset($datas["agua"]) OR (isset($datas["agua"]) AND in_array($datas["agua"],$_SESSION["var"]["true"])))	
             {
                 if(substr($ruta_nueva,-7)=="big.jpg")
                 {

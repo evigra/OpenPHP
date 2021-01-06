@@ -2,6 +2,8 @@
 	$objeto											=new rh_reclamacion();
 	$objeto->__SESSION();
 
+    #$objeto->__PRINT_R($objeto->request);    
+
     #$objeto->__PRINT_R($_SESSION);
 		
 	# CARGANDO PLANTILLAS GENERALES
