@@ -8,7 +8,7 @@
 	$objeto->words["system_module"]             	=$objeto->__TEMPLATE($objeto->sys_html."system_module");	
 	
 	# CARGANDO ARCHIVOS PARTICULARES		
-	$objeto->words["html_head_js"]              	=$objeto->__FILE_JS(array("../".$objeto->sys_module."js/index"));
+	$objeto->words["html_head_js"]              	=$objeto->__FILE_JS();
 	#$objeto->words["html_head_css"]             	=$objeto->__FILE_CSS(array("../sitio_web/css/basicItems"));
 		
 	$module_left		="";	
@@ -17,7 +17,7 @@
 	
 	$module_title									="";
 	
-    if($objeto->sys_section=="create")
+	if($objeto->sys_private["section"]=="create")
 	{
 		#BOTONES SECCION IZQUIERDA
 		$module_left=array(
@@ -33,11 +33,11 @@
 		);
 		
 		$module_title								="Crear ";
-    	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE($objeto->sys_module . "html/create");	
+    	$objeto->words["module_body"]               =$objeto->__VIEW_CREATE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
     	
     }	
-    elseif($objeto->sys_section=="write")
+    elseif($objeto->sys_private["section"]=="write")
 	{
 		#BOTONES SECCION IZQUIERDA
 		$module_left=array(
@@ -68,7 +68,7 @@
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
 
 		#$objeto->__PRINT_R($objeto->words["html_head_js"]);	
-    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($objeto->sys_module . "html/write");	
+    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
 
 		#$objeto->__PRINT_R($objeto->words["html_head_js"]);	
@@ -80,7 +80,7 @@
 		
     	$module_title								="Modificar ";
     }	
-    elseif($objeto->sys_section=="show")
+    elseif($objeto->sys_private["section"]=="show")
 	{
 		#BOTONES SECCION IZQUIERDA
 		$module_left=array(
@@ -95,13 +95,13 @@
 		    array("report"=>"Reporte"),
 		);		
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($objeto->sys_module . "html/show");	
+    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
     		    
     	$module_title								="Formato ";
     }	
 
-	elseif($objeto->sys_section=="kanban")
+	elseif($objeto->sys_private["section"]=="kanban")
 	{
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -116,7 +116,7 @@
 	   	$data										=$objeto->__BROWSE();
     	$objeto->words["module_body"]               =$objeto->__VIEW_KANBAN($template_body,$data["data"]);	
     }    
-    elseif($objeto->sys_section=="report_especifico")
+    elseif($objeto->sys_private["section"]=="report_especifico")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -131,7 +131,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte Especifico de ";
     }    
-    elseif($objeto->sys_section=="report_general")
+    elseif($objeto->sys_private["section"]=="report_general")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -146,7 +146,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte General de ";
     }
-    elseif($objeto->sys_section=="report_pendiente")
+    elseif($objeto->sys_private["section"]=="report_pendiente")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -161,7 +161,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }
-    elseif($objeto->sys_section=="report_aprovados")
+    elseif($objeto->sys_private["section"]=="report_aprovados")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -176,7 +176,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte Aprovados de ";
     }
-    elseif($objeto->sys_section=="report_cancelados")
+    elseif($objeto->sys_private["section"]=="report_cancelados")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
