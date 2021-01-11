@@ -563,7 +563,7 @@
                         from 
 	                        users u 
                             JOIN user_group ug ON u.id=ug.user_id     
-                            JOIN groups g ON g.id=ug.perfil AND g.name!='No disponible' 
+                            JOIN perfil g ON g.id=ug.perfil AND g.name!='No disponible' 
 	                        JOIN menu m ON m.id=g.menu_id OR g.menu_id =0 AND ug.menu_id=m.id
 		                WHERE 1=1
 			                AND ug.perfil!=0
@@ -639,7 +639,7 @@
 		                    from 
 			                    users u JOIN 
 			                    user_group ug ON u.id=ug.user_id JOIN
-			                    groups g ON g.id=ug.perfil JOIN
+			                    perfil g ON g.id=ug.perfil JOIN
 			                    permiso p ON p.usergroup_id=ug.perfil AND p.s=1 JOIN
 			                    menu m ON m.id=p.menu_id 
 		                    WHERE  1=1
@@ -680,7 +680,7 @@
 				            from 
 					            users u JOIN 
 					            user_group ug ON u.id=ug.user_id JOIN
-					            groups g ON g.id=ug.perfil JOIN
+					            perfil g ON g.id=ug.perfil JOIN
 					            permiso p ON p.usergroup_id=ug.perfil JOIN
 					            menu m ON m.id=p.menu_id 
 				            where  1=1
@@ -1155,8 +1155,8 @@
 			$datas		=$this->sys_fields;			
 			$return		=array();
 			
-			$this->__PRINT_R($_FILES);
-			$this->__PRINT_R($datas);
+			#$this->__PRINT_R($_FILES);
+			#$this->__PRINT_R($datas);
 			
     		foreach($datas as $campo=>$valor)
     		{

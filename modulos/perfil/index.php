@@ -1,5 +1,5 @@
 <?php
-	$objeto										=new groups();
+	$objeto										=new perfil();
 	$objeto->__SESSION();
 	
 	# TEMPLATES O PLANTILLAS ELEJIDAS PARA EL MODULO

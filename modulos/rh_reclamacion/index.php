@@ -20,7 +20,7 @@
 	
 	$module_title									="";
 
-	if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
+	//if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
 	{
 		$module_left=array(
 			array("action"=>"Guardar"),

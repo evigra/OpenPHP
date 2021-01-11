@@ -28,7 +28,7 @@
 			"plaza_id"	    =>array(
 			    "title"             => "plaza",
 				"title_filter"		=> "Matricula",
-			    "type"              => "primary key",
+			    "type"              => "input",
 			    "import"            => "10",			  
 			),
             

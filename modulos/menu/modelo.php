@@ -70,7 +70,7 @@
 			$comando_sql        ="
 				SELECT *, menu.name as modulo 
 				FROM 
-					menu join groups on menu.id = groups.menu_id
+					menu join perfil on menu.id = groups.menu_id
 				WHERE type='menu' 
 			";
 			$option_conf=array();
@@ -105,7 +105,7 @@
 				$option_conf["close"]	=1;
 					
 					
-				$comando_sql            ="SELECT * FROM groups WHERE menu_id='{$menu["id"]}' OR menu_id='0' ORDER BY nivel";				
+				$comando_sql            ="SELECT * FROM perfil WHERE menu_id='{$menu["id"]}' OR menu_id='0' ORDER BY nivel";				
 				$groups 			    =$this->__EXECUTE($comando_sql,$option_conf);	
 				$option                 ="";
 				
