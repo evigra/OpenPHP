@@ -37,6 +37,13 @@
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);    
     	
     }	
+    elseif($objeto->sys_private["section"]=="impresion_sindicato")
+	{
+		$template=$objeto->sys_var["module_path"]."html/".$objeto->sys_private["section"];
+    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
+    	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
+    }	
+
     elseif($objeto->sys_private["section"]=="write")
 	{
 		#BOTONES SECCION IZQUIERDA
@@ -66,8 +73,6 @@
 		    array("report"=>"Reporte"),
 		);		
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-
-		#$objeto->__PRINT_R($objeto->words["html_head_js"]);	
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
 
@@ -75,7 +80,7 @@
 
     		    							
 		
-		$objeto->__GENERAR_PDF();
+		#$objeto->__GENERAR_PDF();
 
 		
     	$module_title								="Modificar ";
@@ -202,11 +207,11 @@
 		);
 
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-		$option["template_title"]	                = $objeto->sys_module . "html/report_estatus_title";
-		$option["template_body"]	                = $objeto->sys_module . "html/report_estatus_body";
+		#$option["template_title"]	                = $objeto->sys_module . "html/report_estatus_title";
+		#$option["template_body"]	                = $objeto->sys_module . "html/report_estatus_body";
 		
 				
-		$data										= $objeto->__REPORTE($option);		
+		$data										= $objeto->__REPORTE();		
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de ";
     }

@@ -1,55 +1,66 @@
-<div class="fondo_formulario">
-	{trabajador_departamento_id}
-	{trabajador_departamento}
-	{trabajador_dependencia}
-	{estatus}
+{trabajador_departamento_id}
+{trabajador_dependencia}
+{estatus}	
+{trabajador_puesto_id}	
+{trabajador_puesto_id_1}	
+
+<div class="mainTable">
 	
-	{trabajador_puesto_id}	
-	{trabajador_puesto_id_1}	
-	
+	<table border="0"  width="100%">
+		<tr>
+			<td width="33%" colspan="3">
+				<div class="module_subtitle">TRABAJADOR </div> 
+			</td>                	
+			<td align="right" colspan="6">
+				{che_plaza}
+			</td>                	      
+		</tr>   
+		<tr>
+			<td width="33%" colspan="3">
+				{trabajador_clave}
+			</td>                	
+			<td colspan="6">
+				{trabajador_nombre}
+			</td>                	      
+		</tr>   
+
+		<tr>
+			<td>
+				{trabajador_plaza} 
+			</td>           
+			<td width="22%" colspan="2">
+				{trabajador_puesto}
+			</td>                	
+			     
+			<td  width="11%">
+				{turno}
+			</td>
+			<td colspan="2" >
+				{trabajador_horario}
+			</td>               
+			<td colspan="3">
+				{trabajador_departamento}
+			</td>               
+		</tr>   
+	</table>	
+</div>
+
+
+
+
+
+
+
+
+
+<div class="mainTable">
     <table border="0"  width="100%" >
         <tr>
             <td width="50%" valign="top">
-				<div class="subtitulo">TRABAJADOR </div>    
-				<table border="0"  width="100%">
-					<tr>
-						<td colspan="2"   width="20%">
-							{trabajador_clave}
-						</td>                	
-						<td colspan="7" align="right">
-							{che_plaza}
-						</td>                	
-						
-					</tr>   
-					<tr>
-						<td colspan="9">
-							{trabajador_nombre}
-						</td>               
-					
-					</tr>   
-					
-				</table>    		
+            	<div class="module_subtitle">CALCULO </div> 
             </td>                	
-            <td valign="top">
-				<div class="subtitulo">Plaza Actual</div>    
+            <td valign="top">				
 				<table border="0"  width="100%">
-					<tr>
-						<td colspan="2" width="20%">
-							{trabajador_plaza} 
-						</td>
-						<td colspan="2" width="20%">
-							{turno} 
-						</td>						
-						<td colspan="5">
-							{trabajador_horario}
-						</td>
-					</tr>    
-					<tr>			
-						<td colspan="9">
-							{trabajador_puesto} 
-						</td>
-
-					</tr>          							
 					<tr>      
 						<td>{sueldo}</td>        
 						<td>{b2}</td>
@@ -99,16 +110,24 @@
             </td>                	
         </tr>
         <tr> 
-            <td colspan="2">				
+            <td>
 				<table border="0"  width="100%">
-					<tr><td width="50">{che_pago}</td>		<td>{d_pago}</td><td></td>		<td width="20">{incidencia}</td> <td width="50">{proceso}</td></tr>	
-					<tr><td width="50">{che_descuento}</td>	<td>{d_descuento}</td><td></td><td>{del}</td><td>{al}</td></tr>	
-					<tr><td width="50">{che_reintegro}</td>	<td>{d_reintegro}</td><td></td><td rowspan="3" colspan="3">{motivo}</td></tr>	
+					<tr><td width="50">{che_pago}</td>		<td>{d_pago}</td><td></td></tr>	
+					<tr><td width="50">{che_descuento}</td>	<td>{d_descuento}</td></tr>	
+					<tr><td width="50">{che_reintegro}</td>	<td>{d_reintegro}</td></tr>	
 					<tr><td width="50">{che_exclusion}</td>	<td>{d_exclusion}</td></tr>	
 					<tr><td width="50">{che_ajuste}</td>	<td>{d_ajuste}</td>	</tr>	
+				</table>    						
+			</td>
+            <td >
+				<table border="0"  width="100%">
+					<tr><td width="25%" >{incidencia}</td>	<td width="25%">{proceso}</td><td rowspan="2" align="right" valign="bottom">{biometrico}</td>	</tr>	
+					<tr><td>{del}</td>	<td>{al}</td></tr>	
+					<tr><td rowspan="3" colspan="3">{motivo}</td></tr>	
 				</table>    		
 				
 			</td>
+			
 		</tr>		
         <tr> 
             <td colspan="2">
@@ -138,15 +157,7 @@
   </script> 			
 			
 			
-			
-			
-
-
-
-
-				
-				
-
+		
     		
             </td>                	
             <td>

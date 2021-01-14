@@ -14,6 +14,7 @@
         where  1=1
 			AND pe.matricula LIKE '{$_REQUEST["matricula"]}'
 	";	
+	/*
 	$comando_sql        ="
 		SELECT dep.*, pl.*, pe.*,  su.sueldo
 		FROM personal pe LEFT JOIN
@@ -26,9 +27,21 @@
 		WHERE pe.matricula='{$_REQUEST["matricula"]}'
         LIMIT 1	
 	";		
-	
-	
-	#$objeto->__PRINT_R($comando_sql);
+	*/
+
+	$comando_sql        ="
+		SELECT dep.*, pl.*, pe.*,  su.sueldo
+		FROM personal pe LEFT JOIN
+		(
+			SELECT clave_ads as departamento_id, adscripcion2 as dependencia 
+			FROM plazas pl2 WHERE pl2.clave_ads LIKE '%0000'
+			GROUP BY left(pl2.clave_ads,6)
+		) dep on left(pe.departamento_id,6)=left(dep.departamento_id,6) left join 
+		plazas pl on pe.matricula=pl.matricula left join
+        plazas su on pe.puesto=su.puesto
+		WHERE pe.matricula='{$_REQUEST["matricula"]}'
+        LIMIT 1	
+	";		
 	$data =$objeto->__EXECUTE($comando_sql, "DEVICE MODELO");	
 	
 	#$objeto->__PRINT_R($data);

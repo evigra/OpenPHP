@@ -59,6 +59,7 @@
 		
 		$("#trabajador_clave").focusout(function() 
 		{		
+			///*
 			$.ajax({
 				type: 'GET',
 				url: '../modulos/personal/ajax/personal_calculo.php',
@@ -70,6 +71,22 @@
 					valida_matricula("trabajador", obj);
 				}
 			});			
+			//*/
+			/*
+		    $.ajax({
+			    type:           "GET",
+			    url:            "../modulos/plazas/ajax/index.php?time=" + Date.now(),
+			    contentType:    "application/json",
+			    data:           "&matricula="+$(this).val(),				
+			    success:        function (response) 
+			    {
+					var obj = $.parseJSON( response);
+					valida_matricula("trabajador", obj);
+			    }
+		    });
+			*/
+
+
 		});	
 		$("#trabajador_plaza_1").focusout(function() 
 		{	
@@ -105,6 +122,17 @@
 	{
 		if(obj.length>0)
 		{		
+			/*
+                        $("#ocupante").val(obj[0].ocupante);
+                        $("#categoria").val(obj[0].categoria);
+                        $("#horario").val(obj[0].horario);
+                        $("#plaza_id").val(obj[0].plaza_id);
+                        $("#adscripcion2").val(obj[0].adscripcion2);
+                        $("#ar2").val(obj[0].ar2);
+                        $("#ads_progra").val(obj[0].ads_progra);
+			*/
+		
+		
 			$("#"+tipo+"_nombre").val(obj[0].nombre);
 			if($("#"+tipo+"_puesto").length)			$("#"+tipo+"_puesto").val(obj[0].puesto);
 			if($("#"+tipo+"_puesto_id").length)			$("#"+tipo+"_puesto_id").val(obj[0].puesto_id);

@@ -108,7 +108,7 @@
 			"trabajador_departamento"	    =>array(
 			    "title"             => "Departamento",
 			    "showTitle"         => "si",
-			    "type"              => "hidden",
+			    "type"              => "input",
 			    "default"           => "",
 			    "value"             => "",			    
 			),			
@@ -542,21 +542,55 @@
 				$datas["m_autorizo"]	=$_SESSION["user"]["matricula"];								
 			}				
 			
-    		if($this->sys_section_personal_calculo=="create")
+			if($this->sys_private["section"]=="create")
+    		
 			{
 				$datas["registro"]		=$this->sys_date;
 				$datas["elaboro"]		=$_SESSION["user"]["nombre"];
 				$datas["m_elaboro"]		=$_SESSION["user"]["matricula"];				
 			}
 			
-			$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
-			$datas["cpto_1vez"]			=count($datas["conceptos_ids"]);		
-			$datas["hist_acum"]			=count($datas["historicos_ids"]);		
+			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
+			#$datas["cpto_1vez"]			=count($datas["conceptos_ids"]);		
+			#$datas["hist_acum"]			=count($datas["historicos_ids"]);		
+			
+			
 			#$option["echo"]=$datas["total"];
 			
 			#$this->__PRINT_R($datas);
-    		
-    	    return parent::__SAVE($datas,$option);
+			##########################33    		
+    	    $save	= parent::__SAVE($datas,$option);
+
+    	    
+			if($this->sys_private["section"]=="create")    		
+			{
+				$option_print=array(
+					"id"		=>"$save",
+					"section"	=>"impresion_sindicato",
+					"module"	=>$this->sys_object,
+				);			
+				$this->PDF_PRINT($option_print);
+			}
+
+
+
+    	    
+    	    
+    	    
+    	    return $save;
+    	    
+		/*
+		public function PDF_PRINT($option=null)
+		{						
+			if(!is_array($option))
+				$option=array(
+					"id"		=>"$option",
+					"section"	=>"write",
+					"module"	=>$this->sys_object,
+				);
+		*/    	    
+    	    
+    	    
 		}
 		#*/		
    		public function __GENERAR_PDF()
@@ -576,6 +610,7 @@
 			$datos										=$this->__BROWSE($option);
 			
 			if(@$datos["data"])							$datos=$datos["data"];			
+
 						
 			foreach($datos as $dato)
 			{
@@ -859,8 +894,8 @@
    		public function __REPORTE($option="")
     	{			
 			if($option=="")	$option=array();			
-			$option["template_title"]	                = $this->sys_module . "html/report_estatus_title";
-			$option["template_body"]	                = $this->sys_module . "html/report_estatus_body";
+			#$option["template_title"]	                = $this->sys_module . "html/report_estatus_title";
+			#$option["template_body"]	                = $this->sys_module . "html/report_estatus_body";
 	
 			
 			if(!isset($option["actions"]))	
@@ -880,7 +915,8 @@
 			
 			$option["order"]="id desc";
 			
-			return $this->__VIEW_REPORT($option);
+			#return $this->__VIEW_REPORT($option);
+			return $this->__VIEW_REPORT();
 		}						
 
    		public function __REPORT_ESPECIFICO()

@@ -18,11 +18,12 @@
 		SELECT dep.*, pl.*, pe.*,  su.sueldo
 		FROM personal pe LEFT JOIN
 		(
-			SELECT departamento_id, departamento as dependencia FROM plazas pl2 WHERE pl2.departamento_id LIKE '%0000'
-			GROUP BY left(pl2.departamento_id,6)
+			SELECT clave_ads as departamento_id, adscripcion2 as dependencia 
+			FROM plazas pl2 WHERE pl2.clave_ads LIKE '%0000'
+			GROUP BY left(pl2.clave_ads,6)
 		) dep on left(pe.departamento_id,6)=left(dep.departamento_id,6) left join 
 		plazas pl on pe.matricula=pl.matricula left join
-        plazas su on pe.puesto_id=su.puesto_id
+        plazas su on pe.puesto=su.puesto
 		WHERE pe.matricula='{$_REQUEST["matricula"]}'
         LIMIT 1	
 	";		

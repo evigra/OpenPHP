@@ -154,8 +154,8 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$html = $_SESSION["pdf"]["template"];
 	#echo $_SESSION["pdf"]["template"];
 	unset($_SESSION["pdf"]["template"]);
-	#$html = "LALO";
-#echo $html;
+	$html = "LALO PDF";
+echo $html;
 // output the HTML content
 	$pdf->writeHTML($html, true, 0, true, 0);
 #echo $html;

@@ -492,7 +492,7 @@
 				$Output="I";
 				if(isset($this->sys_private["pdf"]))	$Output=$this->sys_private["pdf"];
 				
-										
+				#echo "PASA PDF";						
 				$this->__PDF($Output);		
 				exit;
 			}
@@ -1197,12 +1197,14 @@
 		{
 			$path="nucleo/tcpdf/";	
 			$carpeta="";
-			for($a=1;$a<10;$a++)
+			for($a=1;$a<5;$a++)
 			{
 				$ruta=$carpeta.$path;
-				if(@file_exists($ruta."config/tcpdf_config_alt.php")) 				
+				
+				if(file_exists($ruta."config/tcpdf_config.php")) 				
 				{
-					require_once($ruta.'config/tcpdf_config_alt.php');
+					//echo "aaaaaaaaaaaaaa";
+					require_once($ruta.'config/tcpdf_config.php');
 
 					// Include the main TCPDF library (search the library on the following directories).
 					$tcpdf_include_dirs = array(
@@ -1231,21 +1233,19 @@
 				$_SESSION["pdf"]["PDF_PAGE_FORMAT"], 
 				true, 'UTF-8', false
 			);
-
+			
 			$pdf->SetCreator(PDF_CREATOR);
 			$pdf->SetAuthor('CEO ISC Eduardo Vizcaino Granados');
 			$pdf->SetTitle($_SESSION["pdf"]["title"]);
 
 			if(isset($_SESSION["pdf"]["HEADER"]))
 				$pdf->SetMargins(PDF_MARGIN_LEFT, $_SESSION["pdf"]["PDF_MARGIN_TOP"], PDF_MARGIN_RIGHT);
-			#$pdf->SetMargins(PDF_MARGIN_LEFT, 31, PDF_MARGIN_RIGHT);
+
 			
 			if(isset($_SESSION["pdf"]["PAGE"]))
 				$pdf->SetFooterMargin($_SESSION["pdf"]["PAGE"]);
 
 			$pdf->SetFont('helvetica', '', 9);
-
-			#$this->__PRINT_R($_SESSION["pdf"]);	
 			
 			if(!is_array($_SESSION["pdf"]["template"]))
 			{
@@ -1259,27 +1259,22 @@
 					),			
 				);	
 			}	
-			
-			#$this->__PRINT_R($_SESSION["pdf"]["template"]);
-			
+						
 			$datos=$_SESSION["pdf"]["template"];
 			foreach($datos as $dato)
 			{
 				$pdf->AddPage($dato["orientation"],$dato["format"]);	
 				$pdf->writeHTML($dato["html"], true, 0, true, 0);
 			}
-
 			$pdf->lastPage();			
 
-
-            #/*
 			if(!isset($_SESSION["pdf"]["save_name"]))	$_SESSION["pdf"]["save_name"]=$_SESSION["pdf"]["title"];
 
 			if($Output=="S")
 				$_SESSION["pdf"]["file"] =$pdf->Output("prueba.pdf", $Output);
 			else	
 				$pdf->Output($_SESSION["pdf"]["save_name"], $Output);
-			#*/
+
 			unset($_SESSION["pdf"]);
 			exit;
 		}		

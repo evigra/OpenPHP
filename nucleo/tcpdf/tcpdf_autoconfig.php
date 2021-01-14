@@ -169,7 +169,7 @@ if (!defined('PDF_MARGIN_TOP')) {
 }
 
 if (!defined('PDF_MARGIN_BOTTOM')) {
-	define ('PDF_MARGIN_BOTTOM', 15);
+	define ('PDF_MARGIN_BOTTOM', 25);
 }
 
 if (!defined('PDF_MARGIN_LEFT')) {
@@ -239,4 +239,3 @@ if (!defined('K_TIMEZONE')) {
 //============================================================+
 // END OF FILE
 //============================================================+
-?>
