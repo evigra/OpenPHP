@@ -6,11 +6,21 @@
 	# CARGANDO PLANTILLAS GENERALES
 	$objeto->words["system_body"]               	=$objeto->__TEMPLATE($objeto->sys_html."system_body"); 		
 	$objeto->words["system_module"]             	=$objeto->__TEMPLATE($objeto->sys_html."system_module");	
+	//$objeto->words["module_body"]					="";
+
+
 	
 	# CARGANDO ARCHIVOS PARTICULARES		
 	$objeto->words["html_head_js"]              	=$objeto->__FILE_JS();
 	#$objeto->words["html_head_css"]             	=$objeto->__FILE_CSS(array("../sitio_web/css/basicItems"));
-		
+
+	/*
+	if(@$objeto->sys_private["id"]>0)
+	{
+    	$qr_path="http://172.24.21.184/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];    	
+    	$objeto->words["qr_calculo"]	=$objeto->__QR($qr_path);
+	}
+	#*/	
 	$module_left		="";	
 	$module_right		="";	
 	$module_center		="";	
@@ -42,6 +52,12 @@
 		$template=$objeto->sys_var["module_path"]."html/".$objeto->sys_private["section"];
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
+    }	
+    elseif($objeto->sys_private["section"]=="impresion_status")
+	{
+		$template=$objeto->sys_var["module_path"]."html/".$objeto->sys_private["section"];
+    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
+    	$objeto->words                  =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
     }	
 
     elseif($objeto->sys_private["section"]=="write")

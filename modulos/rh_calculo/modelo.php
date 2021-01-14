@@ -471,6 +471,8 @@
 			    "default"           => "",
 			    "value"             => "",			    
 			),				
+				
+
 			/*
 			"conceptos_ids"	    =>array(
 			    "title"             => "Horario",
@@ -536,6 +538,7 @@
     		## GUARDAR USUARIO
     		#$datas["total"]		=count(explode(",",$datas["dias"]));
 			#$datas["registro"]=$this->sys_date;
+			/*
 			if($datas["estatus"]=="APROVADO")
 			{
 				$datas["autorizo"]		=$_SESSION["user"]["nombre"];
@@ -549,7 +552,7 @@
 				$datas["elaboro"]		=$_SESSION["user"]["nombre"];
 				$datas["m_elaboro"]		=$_SESSION["user"]["matricula"];				
 			}
-			
+			*/
 			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
 			#$datas["cpto_1vez"]			=count($datas["conceptos_ids"]);		
 			#$datas["hist_acum"]			=count($datas["historicos_ids"]);		
@@ -560,8 +563,6 @@
 			#$this->__PRINT_R($datas);
 			##########################33    		
     	    $save	= parent::__SAVE($datas,$option);
-
-    	    
 			if($this->sys_private["section"]=="create")    		
 			{
 				$option_print=array(
@@ -570,25 +571,9 @@
 					"module"	=>$this->sys_object,
 				);			
 				$this->PDF_PRINT($option_print);
-			}
-
-
-
-    	    
-    	    
-    	    
+			}  	        	    
     	    return $save;
     	    
-		/*
-		public function PDF_PRINT($option=null)
-		{						
-			if(!is_array($option))
-				$option=array(
-					"id"		=>"$option",
-					"section"	=>"write",
-					"module"	=>$this->sys_object,
-				);
-		*/    	    
     	    
     	    
 		}
