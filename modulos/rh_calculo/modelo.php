@@ -410,7 +410,12 @@
 			    "title"             => "Elaboro",
 			    "titleShow"         => "no",
 			    "type"              => "input",
-			),				
+			),	
+			"f_elaboro"	    =>array(
+			    "title"             => "Elaboracion",
+			    "type"              => "date",
+			),
+						
 			"autorizo"	    =>array(
 			    "title"             => "Autorizo",
 			    "showTitle"         => "si",
@@ -518,11 +523,8 @@
     	{
 		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    		   
 		    $datas["company_id"]    	=@$_SESSION["company"]["id"];
-    	
-    	
+    	    	
     		## GUARDAR USUARIO
-    		#$datas["total"]		=count(explode(",",$datas["dias"]));
-			#$datas["registro"]=$this->sys_date;
 			if($datas["estatus"]=="APROVADO")
 			{
 				$datas["autorizo"]		=$_SESSION["user"]["name"];
@@ -531,8 +533,10 @@
 			if($this->sys_private["section"]=="create")    		
 			{
 				$datas["registro"]		=$this->sys_date;
+				
 				$datas["elaboro"]		=$_SESSION["user"]["name"];
 				$datas["m_elaboro"]		=$_SESSION["user"]["email"];				
+				$datas["f_elaboro"]		=$this->sys_date;
 			}
 			
 			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
