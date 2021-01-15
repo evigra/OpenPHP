@@ -11,23 +11,17 @@
 			    "title"             => "id",
 			    "showTitle"         => "si",
 			    "type"              => "primary key",
-			    "default"           => "",
-			    "value"             => "",			    
 			),
 			"estatus"	    =>array(
 			    "title"             => "Estatus",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"trabajador_nombre"	    =>array(
-			    "title"             => "Nombre",
+			    "title"             => "Trabajador",
 				"title_filter"      => "Nombre",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
 			    ),			    			    
@@ -42,8 +36,6 @@
 				"title_filter"      => "Matricula",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",		
 			    "attr"             => array(		
 					"required",					
 			    ),				
@@ -52,8 +44,6 @@
 			    "title"             => "Horario",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",
   			    "attr"             => array(
 			    	"readonly"=>"readonly"
 			    ),			    			    
@@ -62,8 +52,6 @@
 			    "title"             => "Horario",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",
   			    "attr"             => array(
 			    	"readonly"=>"readonly"
 			    ),			    			    
@@ -72,8 +60,6 @@
 			    "title"             => "Puesto",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
 			    ),			    			    			    
@@ -82,8 +68,6 @@
 			    "title"             => "Puesto",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
 			    ),			    			    			    
@@ -92,15 +76,11 @@
 			    "title"             => "Puesto",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"trabajador_puesto_id_1"	    =>array(
 			    "title"             => "Puesto",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
 			    ),			    			    			    
@@ -109,8 +89,6 @@
 			    "title"             => "Departamento",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"trabajador_dependencia"	    =>array(
 			    "title"             => "Dependencia",
@@ -424,17 +402,14 @@
 			),			
 			"elaboro"	    =>array(
 			    "title"             => "Elaboro",
-			    "showTitle"         => "si",
+			    "showTitle"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
+		    
 			),				
 			"m_elaboro"	    =>array(
 			    "title"             => "Elaboro",
-			    "showTitle"         => "si",
+			    "titleShow"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),				
 			"autorizo"	    =>array(
 			    "title"             => "Autorizo",
@@ -517,6 +492,14 @@
 			),						
 			#*/
 			
+			"company_id"	    =>array(
+			    "title"             => "Compania",
+			    "type"              => "input",
+			    "relation"          => "many2one",
+			    "class_name"       	=> "company",
+			    "class_field_o"    	=> "company_id",
+			    "class_field_m"    	=> "id",
+			),						
 			
 				
 		);				
@@ -533,21 +516,23 @@
 		#/*
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
+		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    		   
+		    $datas["company_id"]    	=@$_SESSION["company"]["id"];
+    	
+    	
     		## GUARDAR USUARIO
     		#$datas["total"]		=count(explode(",",$datas["dias"]));
 			#$datas["registro"]=$this->sys_date;
 			if($datas["estatus"]=="APROVADO")
 			{
-				$datas["autorizo"]		=$_SESSION["user"]["nombre"];
-				$datas["m_autorizo"]	=$_SESSION["user"]["matricula"];								
+				$datas["autorizo"]		=$_SESSION["user"]["name"];
+				$datas["m_autorizo"]	=$_SESSION["user"]["email"];								
 			}				
-			
-			if($this->sys_private["section"]=="create")
-    		
+			if($this->sys_private["section"]=="create")    		
 			{
 				$datas["registro"]		=$this->sys_date;
-				$datas["elaboro"]		=$_SESSION["user"]["nombre"];
-				$datas["m_elaboro"]		=$_SESSION["user"]["matricula"];				
+				$datas["elaboro"]		=$_SESSION["user"]["name"];
+				$datas["m_elaboro"]		=$_SESSION["user"]["email"];				
 			}
 			
 			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
@@ -564,6 +549,9 @@
     	    
 			if($this->sys_private["section"]=="create")    		
 			{
+				
+				$_SESSION["pdf"]["formato"]		="sitio_web/html/PDF_FORMATO_SNTSS";			
+			
 				$option_print=array(
 					"id"		=>"$save",
 					"section"	=>"impresion_sindicato",
@@ -571,26 +559,8 @@
 				);			
 				$this->PDF_PRINT($option_print);
 			}
-
-
-
-    	    
-    	    
     	    
     	    return $save;
-    	    
-		/*
-		public function PDF_PRINT($option=null)
-		{						
-			if(!is_array($option))
-				$option=array(
-					"id"		=>"$option",
-					"section"	=>"write",
-					"module"	=>$this->sys_object,
-				);
-		*/    	    
-    	    
-    	    
 		}
 		#*/		
    		public function __GENERAR_PDF()

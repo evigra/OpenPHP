@@ -1,14 +1,4 @@
-<div class="mainTable">
-	
 	<table border="0"  width="100%">
-		<tr>
-			<td width="33%" colspan="3">
-				<div class="module_subtitle">TRABAJADOR </div> 
-			</td>                	
-			<td align="right" colspan="6">
-				{che_plaza}
-			</td>                	      
-		</tr>   
 		<tr>
 			<td width="33%" colspan="3">
 				{trabajador_clave}
@@ -36,10 +26,41 @@
 				{trabajador_departamento}
 			</td>               
 		</tr>   
-	</table>	
-	{qr_calculo}
-	
-	IMPRESION SINDICATO
+		<tr>
+			<td colspan="2">
+				{qr_calculo} 
+			</td>           
+			<td colspan="7">
+				{qr_caalculo} 
+			</td>           
 
-</div>
+		</tr>   
+		<tr>
+			<td colspan="9">
+				<table border="1"  width="100%">
+					<tr>
+					<td width="45%" colspan="3" valign="bottom" height="50">&nbsp;
+					</td>                	
+					<td colspan="3" width="10%"> &nbsp;				
+					</td>			     
+					<td colspan="3" width="45%"  valign="bottom">&nbsp;
+					</td>
+					</tr>
+
+					<tr>
+					<td width="45%" colspan="3">
+						{trabajador_nombre}<br>
+						{trabajador_clave}
+					</td>                	
+					<td colspan="3" width="10%"> &nbsp;				
+					</td>			     
+					<td colspan="3" width="45%">
+						{elaboro}<br>
+						{m_elaboro}
+					</td>
+					</tr>
+				</table>
+			</td>           
+		</tr>   
+	</table>	
 

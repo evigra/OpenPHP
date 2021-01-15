@@ -467,7 +467,7 @@
 					
 					if($_SESSION["pdf"]["formato"]=="")			@$template						="{sys_modulo}";
 					else										
-					@$template						=$this->__TEMPLATE($_SESSION["pdf"]["formato"]);
+					@$template									=$this->__TEMPLATE($_SESSION["pdf"]["formato"]);
 					$template_lab              					=$this->__REPLACE($template,$words); 			
 					
 					$_SESSION["pdf"]["template"]				=$template_lab;					
@@ -2144,7 +2144,9 @@
 
 		public function __QR($option=null)
 		{			
-			$url="https://chart.googleapis.com/chart?chs=110x110&cht=qr&chl=" . urlencode($option);			
+			$url="https://chart.googleapis.com/chart?chs=110x110&cht=qr&chl=" . urlencode($option);
+			$url="http://chart.googleapis.com/chart?chs=110x110&cht=qr&chl=" . urlencode($option);										
+			//file_get_contents($url);	
 			return "<img height=\"80\" border=\"0\" src=\"$url\">";
 		} 		
 

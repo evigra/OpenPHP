@@ -17,9 +17,10 @@
 	#/*
 	if(@$objeto->sys_private["id"]>0)
 	{
+		
     	$qr_path="http://172.24.21.184/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
-    	$qr_path="http://localhost/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
-    	$qr_path="../rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];    	    	    	    	
+    	//$qr_path="http://localhost/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
+    	//$qr_path="../rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];    	    	    	    	
     	$objeto->words["qr_calculo"]	=$objeto->__QR($qr_path);
 	}
 	#*/	
@@ -51,6 +52,12 @@
     }	
     elseif($objeto->sys_private["section"]=="impresion_sindicato")
 	{
+		$objeto->sys_fields["trabajador_nombre"]["type"]	="value";
+		$objeto->sys_fields["trabajador_clave"]["type"]		="value";
+		$objeto->sys_fields["elaboro"]["type"]				="value";
+		$objeto->sys_fields["m_elaboro"]["type"]			="value";
+
+	
 		$template=$objeto->sys_var["module_path"]."html/".$objeto->sys_private["section"];
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
