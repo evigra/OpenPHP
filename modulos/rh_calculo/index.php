@@ -21,6 +21,7 @@
     	//$qr_path="http://localhost/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
     	//$qr_path="../rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];    	    	    	    	
     	$objeto->words["qr_calculo"]	=$objeto->__QR($qr_path);
+    	$objeto->words["url_calculo"]	=$qr_path;
 	}
 	#*/	
 	$module_left		="";	
@@ -38,8 +39,7 @@
 		);
 		#BOTONES SECCION DERECHA
 		$module_right=array(
-		    #array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
+		    array("create"=>"Crear"),
 		    array("kanban"=>"Kanban"),
 		    array("report"=>"Reporte"),
 		);

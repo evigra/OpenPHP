@@ -1,72 +1,88 @@
 	<table border="0"  width="100%">
 		<tr>
-			<td colspan="9">
-				Por medio de la presente se hace de acuerdo al Articulo 54 del Reglamento Interior de Trabajo mencionado en nuestro CCT, 
-				la cual marca que cada una de las partes de obliga a contestar por escrito al trabajador interesado y al Sindicato, 
-				en un plazo de 30 dias contados a partir de la fecha en que se hayan presentado, cuando asi hubiere procedido.
-				Acusaran de recibo dentro del citado plazo acordado.
-							
-			</td>           
-		</tr>   
-
-		<tr>
-			<td width="33%" colspan="3">
-				{trabajador_clave}
+			<td width="33%" colspan="3" align="left">
+				<b>{f_elaboro}</b>
 			</td>                	
-			<td colspan="6">
-				{trabajador_nombre}
+			<td colspan="6"  align="right">
+				<font size="7"><b>FOLIO {id}</b></font>
 			</td>                	      
 		</tr>   
+		<tr>
+			<td colspan="9"  align="left"  height="20">
+				&nbsp;
+			</td>                	      
+		</tr> 			
+		<tr>
+			<td colspan="9" align="justify">
+				Por medio de la presente se hace de acuerdo al Articulo 54 del Reglamento Interior de Trabajo mencionado en nuestro CCT, 
+				la cual marca que cada una de las partes de obliga a contestar por escrito al trabajador interesado y al Sindicato, 
+				en un plazo de 30 dias contados a partir de la fecha en que se hayan presentado, cuando asi hubiere procedido.<br><br>
+				Acusaran de recibo dentro del citado plazo acordado.<br><br>&nbsp;
+			</td>           
+		</tr>   
 
 		<tr>
-			<td>
-				{trabajador_plaza} 
-			</td>           
-			<td width="22%" colspan="2">
-				{trabajador_puesto}
+			<td width="33%" colspan="3" align="left">
+				<b>{trabajador_clave}</b>
 			</td>                	
-			     
-			<td  width="11%">
-				{turno}
-			</td>
-			<td colspan="2" >
+			<td colspan="6"  align="left">
+				<b>{trabajador_nombre}</b>
+			</td>                	      
+		</tr>   
+		<tr>
+			<td colspan="9"  align="left"  height="40">
+				&nbsp;
+			</td>                	      
+		</tr>   
+		<tr>
+			<td width="22%" colspan="2"  align="left">
+				{trabajador_puesto}
+			</td>                				     
+			<td colspan="1"  align="left">
 				{trabajador_horario}
 			</td>               
-			<td colspan="3">
+			<td colspan="6" width="66%"  align="left">
 				{trabajador_departamento}
 			</td>               
 		</tr>   
 		<tr>
+			<td colspan="9"  align="left"  height="20">
+				&nbsp;
+			</td>                	      
+		</tr>   
+
+		<tr>
 			<td colspan="2">
 				{qr_calculo} 
 			</td>           
-			<td colspan="7">
-				{qr_caalculo} 
+			<td colspan="7"  align="justify">
+				{reclamacion} 
 			</td>           
-
+		</tr>   
+		<tr>
+			<td colspan="9"  align="left"  height="230">
+				&nbsp;				
+			</td>                	      
 		</tr>   
 		<tr>
 			<td colspan="9">
 				<table border="1"  width="100%">
 					<tr>
-					<td width="45%" colspan="3" valign="bottom" height="50">&nbsp;
+					<td width="50%" colspan="3" valign="bottom" height="50">&nbsp;
 					</td>                	
-					<td colspan="3" width="10%"> &nbsp;				
-					</td>			     
-					<td colspan="3" width="45%"  valign="bottom">&nbsp;
+					<td colspan="3" width="50%"  valign="bottom">&nbsp;
 					</td>
 					</tr>
-
 					<tr>
-					<td width="45%" colspan="3">
+					<td width="50%" colspan="3">
 						{trabajador_nombre}<br>
-						{trabajador_clave}<br>
+						Trabajador<br>
+						{trabajador_clave}
 					</td>                	
-					<td colspan="3" width="10%"> &nbsp;				
-					</td>			     
-					<td colspan="3" width="45%">
+					<td colspan="3" width="50%">
 						{elaboro}<br>
-						{m_elaboro}<br>Representante Sindical
+						Representante Sindical<br>
+						{m_elaboro}
 					</td>
 					</tr>
 				</table>

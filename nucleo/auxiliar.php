@@ -1425,7 +1425,7 @@
 							}
 					        else	
 					        {
-					        	$words["$campo"]  		="{$valor["value"]}{$valor["br"]}$titulo";    
+					        	$words["$campo"]  		="{$valor["value"]} {$valor["br"]}$titulo";    
 					        	$words["$campo.md5"]  	=strtoupper(md5($valor["value"]))."{$valor["br"]}$titulo";
 					        }	
 					    } 
@@ -1607,11 +1607,36 @@
 					    ################################
 					    if($valor["type"]=="textarea")	
 					    {
-							if($attr=="")	$attr="style=\"height:150px;\"";
-					    	if(@$this->sys_private["section"]=="show")
-					    		$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";
-					    	else							
-						        $words["$campo"]  ="<textarea id=\"$campo\" name=\"{$this->sys_name}_$campo\" $attr class=\"formulario {$this->sys_name} $class\">{$valor["value"]}</textarea>{$valor["br"]}$titulo";
+					        if(!in_array(@$this->sys_private["action"],$_SESSION["var"]["print"]))					        
+					        {
+								if(@$this->sys_private["section"]=="show")
+								{
+									$words["$campo"]  		="{$valor["value"]}{$valor["br"]}$titulo";
+									$words["$campo.md5"]  	=strtoupper(md5($valor["value"]))."{$valor["br"]}$titulo";
+								}	
+								else
+								{					        
+									$words["$campo"]  	="<textarea id=\"$campo\" name=\"{$this->sys_name}_$campo\" $attr class=\"formulario {$this->sys_name} $class\">{$valor["value"]}</textarea>{$valor["br"]}$titulo";
+								}					        										
+							}
+					        else	
+					        {
+					        	$words["$campo"]  		="{$valor["value"]}{$valor["br"]}$titulo";
+					        	$words["$campo.md5"]  	=strtoupper(md5($valor["value"]))."{$valor["br"]}$titulo";
+					        }	
+					    
+					    
+					    
+					    
+					    
+					    
+					    
+					    
+					    
+					    
+					    
+					    
+					    
 					    } 
 					    ################################			           
 					    if($valor["type"]=="html")	
@@ -3552,6 +3577,9 @@
 		        foreach($data as $field=>$valor)
 				{    		    													   
 				    if(is_string($valor) AND $valor=="maps")                $file="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHdbkivyRpHCuGZUbQ-DAM7MmHf_lLvwI";
+				    elseif(is_string($valor) AND $valor=="vue")             $file="../sitio_web/js/vue.js";
+				    elseif(is_string($valor) AND $valor=="adapter")         $file="../sitio_web/js/adapter.min.js";
+				    elseif(is_string($valor) AND $valor=="instascan")         $file="../sitio_web/js/instascan.min.js";
 				    elseif(is_string($valor) AND $valor=="responsivevoice") $file="https://code.responsivevoice.org/responsivevoice.js";
 				    elseif(is_string($valor) AND $valor=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
 				    elseif(is_string($field) AND $field=="graph")  			$file="https://www.gstatic.com/charts/loader.js";

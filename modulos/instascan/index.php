@@ -17,10 +17,15 @@
 	#$objeto->words["galery"]				    =$data["html"];
 
 	$data=array(
-		"https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js",
-		"https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js",
-		"https://rawgit.com/schmich/instascan-builds/master/instascan.min.js",
-		"../" . $objeto->sys_var["module_path"] . "js/index"		
+		#"https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js",
+		#"https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js",
+		#"https://rawgit.com/schmich/instascan-builds/master/instascan.min.js",
+		
+		"adapter",
+		"vue",
+		"instascan",		
+		"../" . $objeto->sys_var["module_path"] . "js/index",	
+		"../" . $objeto->sys_var["module_path"] . "js/app"
 	);
 
 	$objeto->words["html_head_js"]              =$objeto->__FILE_JS($data);								# ARCHIVOS JS DEL MODULO

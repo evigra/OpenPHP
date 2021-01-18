@@ -41,7 +41,9 @@
 		#$_SESSION["var"]["server_error"]	=array("localhost","developer.solesgps.com");		
 		$_SESSION["var"]["print"]			=array("print_report","print_excel","print_pdf");		
 		$_SESSION["var"]["datetime"]		=date("Y-m-d H:i:s" , strtotime ("-7 hour", strtotime(date("Y-m-d H:i:s"))));
-		$_SESSION["var"]["date"]			=date("Y-m-d" , strtotime ("-7 hour", strtotime(date("Y-m-d H:i:s"))));		
+		$_SESSION["var"]["datetime"]		=date("Y-m-d H:i:s");
+		$_SESSION["var"]["date"]			=date("Y-m-d" , strtotime ("-7 hour", strtotime(date("Y-m-d H:i:s"))));
+		$_SESSION["var"]["date"]			=date("Y-m-d");				
 		$_SESSION["var"]["modulo"]			=substr(@$_SESSION["var"]["vpath"],0, strpos(@$_SESSION["var"]["vpath"], "/"));
 		$_SESSION["var"]["modulo_path"] 	="modulos/". $_SESSION["var"]["modulo"] ."/index.php";
 		$_SESSION["var"]["folders"] 		=substr_count(@$_SESSION["var"]["vpath"], "/");

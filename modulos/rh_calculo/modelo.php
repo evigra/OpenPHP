@@ -8,7 +8,7 @@
 		var $sys_enviroments	="DEVELOPER";
 		var $sys_fields		=array( 
 			"id"	    =>array(
-			    "title"             => "id",
+			    "title"             => "Folio",
 			    "showTitle"         => "si",
 			    "type"              => "primary key",
 			),
@@ -94,29 +94,21 @@
 			    "title"             => "Dependencia",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			),				
 			"trabajador_departamento_id"	    =>array(
 			    "title"             => "DepartamentoID",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"sueldo"	    =>array(
 			    "title"             => "Sueldo",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			),
 			"sueldo_1"	    =>array(
 			    "title"             => "Sueldo",
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"trabajador_plaza"	    =>array(
 			    "title"             => "Plaza",
@@ -353,8 +345,6 @@
 			    "title"             => "Proceso",
 			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"14",
 			    ),				
@@ -364,8 +354,6 @@
 			    "title"             => "Del",
 			    "showTitle"         => "si",
 			    "type"              => "date",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"15",
 			    ),				
@@ -375,8 +363,6 @@
 			    "title"             => "Al",
 			    "showTitle"         => "si",
 			    "type"              => "date",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"16",
 			    ),				
@@ -386,19 +372,20 @@
 			    "title"             => "Motivo",
 			    "showTitle"         => "si",
 			    "type"              => "textarea",
-			    "default"           => "",
-			    "value"             => "",	
 			    "attr"             => array(
 			    	"style"=>"height:100px;",
 					"tabindex"		=>"17",
 			    ),				
 			),			
 			"registro"	    =>array(
-			    "title"             => "Registrado",
-			    "showTitle"         => "si",
-			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
+			    "title"             => "Fecha de reclamacion",
+			    "type"              => "date",
+			    "attr"				=>array(
+			    	"placeholder"=>"AAAA-MM-DD",
+			    	"required",					
+			    
+			    ),
+
 			),			
 			"elaboro"	    =>array(
 			    "title"             => "Elaboro",
@@ -505,7 +492,10 @@
 			    "class_field_o"    	=> "company_id",
 			    "class_field_m"    	=> "id",
 			),						
-			
+			"reclamacion"	    =>array(
+			    "title"             => "Descripcion",
+			    "type"              => "textarea",
+			),			
 				
 		);				
 		##############################################################################	
@@ -536,7 +526,7 @@
 				
 				$datas["elaboro"]		=$_SESSION["user"]["name"];
 				$datas["m_elaboro"]		=$_SESSION["user"]["email"];				
-				$datas["f_elaboro"]		=$this->sys_date;
+				$datas["f_elaboro"]		=$_SESSION["var"]["datetime"];
 			}
 			
 			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
