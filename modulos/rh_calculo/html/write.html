@@ -132,38 +132,39 @@
         <tr> 
             <td colspan="2">
 			
-			<div id="tabs" class="form">
-				<ul>
-					<li  class="form"><a href="#tabs-1">Conceptos Fijos</a></li>
-					<li  class="form"><a href="#tabs-2">Historicos Acumulados</a></li>
-					<li  class="form"><a href="#tabs-3">Conceptos por 1 vez</a></li>
-				</ul>
-				<div id="tabs-1" class="form">
-					{fijos_ids}
-				</div>		
-				<div id="tabs-2" class="form">
-					{historicos_ids}
+				<div id="tabs" class="form">
+					<ul>
+						<li  class="form"><a href="#tabs-1">Conceptos Fijos</a></li>
+						<li  class="form"><a href="#tabs-2">Historicos Acumulados</a></li>
+						<li  class="form"><a href="#tabs-3">Conceptos por 1 vez</a></li>
+					</ul>
+					<div id="tabs-1" class="form">
+						{fijos_ids}
+					</div>		
+					<div id="tabs-2" class="form">
+						{historicos_ids}
+					</div>
+					<div id="tabs-3" class="form">
+						{conceptos_ids}
+					</div>
 				</div>
-				<div id="tabs-3" class="form">
-					{conceptos_ids}
-				</div>
-			</div>
 
 
-  <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
-  </script> 			
-			
-			
-		
-    		
-            </td>                	
-            <td>
-				<div id="REPORT"></div>
+				<script>
+					$(function() {
+					$( "#tabs" ).tabs();
+					});
+				</script> 			
             </td>                	
         </tr>   
+        <tr> 
+            <td colspan="2"  height="100%" >
+				<div id="REPORT">
+				
+				</div>
+            </td>                	
+        </tr>   
+
 	</table>
 	
 </div>

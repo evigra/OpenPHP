@@ -41,7 +41,7 @@
 			    if(isset($option["sys_enviroments"])) 		$this->sys_enviroments			=$option["sys_enviroments"];			
 			    if(isset($option["recursive"])) 			$this->sys_recursive			=$option["recursive"];
 			    
-			    if(!isset($this->sys_enviroments)) 			$this->sys_enviroments			="PRODUCTION";
+			    if(!isset($this->sys_enviroments)) 			$laloasfasfthis->sys_enviroments			="PRODUCTION";
 			    if(!isset($this->sys_object)) 				$this->sys_object				= get_class($this);
 			    if(!isset($this->sys_name)) 				$this->sys_name					= $this->sys_object;			
 			    if(!isset($this->sys_table)) 				$this->sys_table				= $this->sys_object;			
@@ -523,10 +523,11 @@
 					$option_browse=array();
 					$option_browse["where"]=array("{$this->sys_private["field"]}='{$this->sys_private["id"]}'");
 					$data_anterior=$this->__BROWSE($option_browse);				
+					#$this->__PRINT_R($data_anterior);
 				}		
 				if(is_array($datas))
 				{
-				    #$this->__PRINT_R($datas);
+					$modificados="";
 					foreach($datas as $campo=>$valor)
 					{					
 						if(is_array($valor))
@@ -534,22 +535,52 @@
 							if(isset($valor["tmp_name"]))
 							{
 								# IMAGENES
-								$this->sys_fields["$campo"]["value"]=$this->sys_fields["$campo"]["obj"]->__SAVE($valor);
-								
+								$this->sys_fields["$campo"]["value"]=$this->sys_fields["$campo"]["obj"]->__SAVE($valor);								
 							}		
 							else
 								# 
 								$many2one["$campo"]=$valor;						
 						}				
 						elseif(!isset($this->sys_fields["$campo"]["relation"]))
-						{
-						    
+						{						    
 							if(isset($this->sys_fields["$campo"]) AND count(@$this->sys_fields["$campo"])>1 )
 							{
 								$fields	.="$campo='$valor',";
 							}
 						}
-						else			$fields	.="$campo='$valor',";
+						else			
+						{					
+							$this->__PRINT_R("$campo='$valor'");
+																
+							$this->__PRINT_R("$campo = $campo_anterior != $valor'   ");
+							
+							
+							
+							if(isset($data_anterior) AND is_array($data_anterior) AND isset($data_anterior["data"]))
+							{
+								$campo_anterior=$data_anterior["data"][0]["$campo"];
+								
+								
+								
+								if($campo_anterior!=$valor)
+								{
+									$this->__PRINT_R("$campo_anterior!=$valor");				
+																		
+									$title=$this->sys_fields["$campo"]["title"];
+									if($campo_anterior=="")
+									{
+										
+										$modificados.="Agrego al campo \"$title\"=\"$valor\"<br>";
+									}
+									else
+									{
+										$modificados.="Modifico el campo \"$title\"=\"$valor\" con valor previo igual a \"$campo_anterior\"<br>";									
+									}										
+								}
+							}		
+							$fields	.="$campo='$valor',";
+							
+						}	
 					}    
 				}
 				if($fields!="")
@@ -578,16 +609,20 @@
 								$(this).val(\"\");                			
 							})
 						";            
-						$data_historicos="descripcion='<font>$user_name</font> <b>CREO</b> El registro'";					
-					}	
+						$data_historicos="descripcion='<font>$user_name</font><font><b>CREO</b> El registro</font>'";					
+					}						
 					else 
-					{							
+					{		
+						$this->__PRINT_R($modificados);					
 						$this->sys_sql	="UPDATE {$this->sys_table} SET $fields WHERE {$this->sys_private["field"]}='{$this->sys_private["id"]}'";					
 						if(@$modificados!="")
 						{
+							
+						
 							$data_historicos="descripcion='<font>$user_name</font> <b>MODIFICO</b> los valores $modificados'";	
 						}	
 					}
+					
 					if(isset($option["echo"])  AND $this->sys_enviroments	=="DEVELOPER" AND @$this->sys_private["action"]!="print_pdf")
 					{
 				    	echo "<div class=\"developer\" title=\"Sistema :: {$this->sys_object} {$this->sys_name}\">".$this->sys_sql."</div>";
@@ -680,8 +715,10 @@
 						
 						if(!in_array($this->sys_table,$_SESSION["var"]["modules"]))
 						{	
-							if(!isset($data_historicos))	$data_historicos="";								
-							$comando_sql="INSERT INTO historico SET $data_historico $data_historicos, clave={$this->sys_private["field"]}	";						
+							if(!isset($data_historicos))	
+								$data_historicos="";								
+							
+							$comando_sql="INSERT INTO historico SET $data_historico $data_historicos, clave={$return}	";						
 							if(@$data_historicos!="")
 							{	
 								$this->__EXECUTE($comando_sql);					
@@ -834,6 +871,7 @@
        		    #$this->__MESSAGE_EXECUTE    =$error;
        		}
        		#/*
+
     		if(is_array($option))
     		{
     			if(isset($option["close"]) AND $option["close"]==1)	

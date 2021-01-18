@@ -85,8 +85,8 @@
 			$option["actions"]="false";
 			
 			
-			$option["template_title"]	                = $this->sys_module . "html/report_title";
-			$option["template_body"]	                = $this->sys_module . "html/report_body";
+			#$option["template_title"]	                = $this->sys_module . "html/report_title";
+			#$option["template_body"]	                = $this->sys_module . "html/report_body";
 			
 			$option["order"]="id desc";			
 			return $this->__VIEW_REPORT($option);

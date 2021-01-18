@@ -1,7 +1,7 @@
 <?php	
 	$objeto											=new rh_calculo();		
 	$objeto->__SESSION();
-	#$objeto->__PRINT_R($_SESSION);
+	$objeto->__PRINT_R($_SESSION["group"]);
 	
 	# CARGANDO PLANTILLAS GENERALES
 	$objeto->words["system_body"]               	=$objeto->__TEMPLATE($objeto->sys_html."system_body"); 		
@@ -86,8 +86,7 @@
 		if($objeto->__NIVEL_SESION("<=20")==true AND $objeto->sys_fields["estatus"]["value"]=="APROVADO")	 // NIVEL ADMINISTRADOR 
 		{
 			$module_center[]=array("action_incumplir"=>"Incumplido");			
-		}		
-		
+		}				
 		
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -101,11 +100,8 @@
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
 
 		#$objeto->__PRINT_R($objeto->words["html_head_js"]);	
-
-    		    							
 		
 		#$objeto->__GENERAR_PDF();
-
 		
     	$module_title								="Modificar ";
     }	
