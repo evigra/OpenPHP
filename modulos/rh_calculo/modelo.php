@@ -782,7 +782,7 @@
 			return                  					$template;
 		}	
 		############################################################################################################
-   		public function __REPORT_PENDIENTE()
+   		public function __RECIBIR_ADSCRIPCION()
     	{
 			if(isset($this->request["rh_calculo"]))
 			{
@@ -799,6 +799,11 @@
 					$this->__SAVE($data_recibido);				
 				}			
 			}    	
+		}	
+		############################################################################################################
+   		public function __REPORT_PENDIENTE()
+    	{
+    		$this->__RECIBIR_ADSCRIPCION();
     	    	
 			$option				=array();			
 			$option["where"]	=array();
@@ -831,6 +836,8 @@
 		############################################################################################################
    		public function __REPORT_RECIBIDO()
     	{
+    		$this->__RECIBIR_ADSCRIPCION();
+    		
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();

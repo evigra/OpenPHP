@@ -86,6 +86,30 @@
 		    array("cancel"=>"Cancelar"),
 		);
 
+
+		if($objeto->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+		{					
+			$template=$objeto->sys_var["module_path"]."html/create";
+	    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
+		}
+				
+		if($objeto->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+		{			
+			$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] == ''";	
+			
+			$template=$objeto->sys_var["module_path"]."html/write";
+	    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
+			
+		}
+
+
+
+
+
+
+
+
 		/*
 		if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
 		{
@@ -103,7 +127,7 @@
 		    array("report"=>"Reporte"),
 		);		
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
-    	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
+    	#$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
 		
 		#$objeto->__GENERAR_PDF();
