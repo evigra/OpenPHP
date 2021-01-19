@@ -558,8 +558,7 @@
 
     	    
 			if($this->sys_private["section"]=="create")    		
-			{
-				
+			{				
 				$_SESSION["pdf"]["formato"]		="sitio_web/html/PDF_FORMATO_SNTSS";			
 			
 				$option_print=array(
@@ -781,6 +780,23 @@
 		}	
    		public function __REPORT_PENDIENTE()
     	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$this->sys_private["id"]=$id;
+					
+					$data_recibido					=array();
+
+					$data_recibido["p_recibio"]			=$_SESSION["user"]["name"];
+					$data_recibido["m_p_recibio"]		=$_SESSION["user"]["email"];				
+					$data_recibido["f_p_recibio"]		=$_SESSION["var"]["datetime"];
+					
+					$this->__SAVE($data_recibido);				
+				}			
+			}    	
+    	
+    	
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
@@ -789,27 +805,20 @@
 			
 			$option["where"][]				="f_p_recibio is NULL";				
 			
-			$option["color"]["red"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 2 days')) < date('Y-m-d')";
+			
+			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["black"]		="1==1";
+			
 			
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
 				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]==''";	
-				
-				
-	
 			}
-			
 				
 			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 			{			
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
-				
-				
-				
-				
-
-				
-
 			}
 			
 			#*/
@@ -822,8 +831,6 @@
 				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
 			}
 			*/
-			
-			
 			return $this->__REPORTE($option);
 		}				
    		public function __REPORT_APROVADO()

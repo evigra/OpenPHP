@@ -550,9 +550,9 @@
 						}
 						else			
 						{					
-							$this->__PRINT_R("$campo='$valor'");
+							#$this->__PRINT_R("$campo='$valor'");
 																
-							$this->__PRINT_R("$campo = $campo_anterior != $valor'   ");
+							#$this->__PRINT_R("$campo = $campo_anterior != $valor'   ");
 							
 							
 							
@@ -564,7 +564,7 @@
 								
 								if($campo_anterior!=$valor)
 								{
-									$this->__PRINT_R("$campo_anterior!=$valor");				
+									#$this->__PRINT_R("$campo_anterior!=$valor");				
 																		
 									$title=$this->sys_fields["$campo"]["title"];
 									if($campo_anterior=="")

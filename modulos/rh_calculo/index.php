@@ -148,6 +148,10 @@
     }    
     elseif($objeto->sys_private["action"]=="report_pendiente")
     {
+
+		
+
+    
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
