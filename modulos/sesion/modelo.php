@@ -96,7 +96,7 @@
 			    $comando_sql="
 				    SELECT * 
 				    FROM 
-					    groups g join 
+					    perfil g join 
 					    user_group ug on ug.perfil=g.id 
 				    WHERE 1=1
 					    AND user_id='{$user["id"]}'

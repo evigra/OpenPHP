@@ -3533,8 +3533,13 @@
 				{
 					$eval="
 						if($"."datos[\"menu_id\"]==$"."menu_activo AND $"."datos[\"nivel\"]$nivel) 
+						{
 							$"."return=true;				
+							
+							#$"."this->__PRINT_R($"."datos);
+						}	
 					";
+
 					eval($eval);
 				}		
 			}		

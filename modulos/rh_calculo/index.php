@@ -1,13 +1,21 @@
 <?php	
 	$objeto											=new rh_calculo();		
+	#if($objeto->__NIVEL_SESION("<=60")==true)	 // NIVEL USUARIO EJEMPLO
+	
+	#if($objeto->__NIVEL_SESION("==0")==true)	 // NIVEL DIOS
+	#if($objeto->__NIVEL_SESION("==10")==true)	 // NIVEL Super Admin
+	#if($objeto->__NIVEL_SESION("==20")==true)	 // NIVEL Admin
+	#if($objeto->__NIVEL_SESION("==30")==true)	 // NIVEL Admin
+	
+	
+	
 	$objeto->__SESSION();
-	$objeto->__PRINT_R($_SESSION["group"]);
+		
 	
 	# CARGANDO PLANTILLAS GENERALES
 	$objeto->words["system_body"]               	=$objeto->__TEMPLATE($objeto->sys_html."system_body"); 		
 	$objeto->words["system_module"]             	=$objeto->__TEMPLATE($objeto->sys_html."system_module");	
 	$objeto->words["module_body"]					="";
-
 
 	
 	# CARGANDO ARCHIVOS PARTICULARES		
@@ -26,7 +34,7 @@
 	#*/	
 	$module_left		="";	
 	$module_right		="";	
-	$module_center		="";	
+	$module_center		=array();	
 	
 	$module_title									="";
 	
@@ -76,6 +84,7 @@
 		    array("cancel"=>"Cancelar"),
 		);
 
+		/*
 		if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
 		{
 			$module_center=array(
@@ -87,7 +96,7 @@
 		{
 			$module_center[]=array("action_incumplir"=>"Incumplido");			
 		}				
-		
+		*/
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
@@ -235,7 +244,31 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de ";
     }
+    ###########################################################################################################
     
+    
+	if($objeto->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION
+	{
+		/*
+			$module_center=array(
+				array("action_aprovar"=>"Aprovar"),
+				array("action_cancelar"=>"Cancelar"),
+			);	 		
+		*/
+		$module_center[]=array("report_pendiente"=>"Por Recibir","icon"=>"ui-icon-arrowthickstop-1-s");
+	}				
+	if($objeto->__NIVEL_SESION("==60")==true)	 // NIVEL USUAIRO SINDICATO 
+	{
+		/*
+			$module_center=array(
+				array("action_aprovar"=>"Aprovar"),
+				array("action_cancelar"=>"Cancelar"),
+			);	 		
+		*/
+		$module_center[]=array("report_pendiente"=>"Por Enviar","icon"=>"ui-icon-arrowthickstop-1-n");
+	}				
+    
+    ###########################################################################################################
 
     if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
     {
@@ -245,11 +278,11 @@
 		    array("report_aprovados"=>"","icon"=>"ui-icon-check"),
 		);	    
 		$module_right=array_merge($module_right, $module_right_admin);		
-	/*	
+	
 	}
     if($objeto->__NIVEL_SESION("<=10")==true)   // NIVEL SUPER ADMINISTRADOR
     {
-		*/
+	
     	$module_right_admin=array(
 		    array("report_especifico"=>"R Esp."),
 		    array("report_general"=>"R Gral."),

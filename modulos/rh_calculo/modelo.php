@@ -394,7 +394,7 @@
 		    
 			),				
 			"m_elaboro"	    =>array(
-			    "title"             => "Elaboro",
+			    "title"             => "M. Elaboro",
 			    "titleShow"         => "no",
 			    "type"              => "input",
 			),	
@@ -402,6 +402,22 @@
 			    "title"             => "Elaboracion",
 			    "type"              => "date",
 			),
+			"p_recibio"	    =>array(
+			    "title"             => "Recibio",
+			    "showTitle"         => "no",
+			    "type"              => "input",
+		    
+			),				
+			"m_p_recibio"	    =>array(
+			    "title"             => "Recibio",
+			    "titleShow"         => "no",
+			    "type"              => "input",
+			),	
+			"f_p_recibio"	    =>array(
+			    "title"             => "Recibido en adscripcion",
+			    "type"              => "date",
+			),
+			
 						
 			"autorizo"	    =>array(
 			    "title"             => "Autorizo",
@@ -765,30 +781,46 @@
 		}	
    		public function __REPORT_PENDIENTE()
     	{
-			$option=array();			
-			$option["template_title"]	                = $this->sys_module . "html/report_title";
-			$option["template_body"]	                = $this->sys_module . "html/report_body";
+			$option				=array();			
+			$option["where"]	=Array();
 			
-			$option["actions"]							= array();
 			
-			$option["actions"]["write"]					="true";
-			$option["actions"]["show"]					="tre";
-			$option["actions"]["check"]					="false";
-			$option["actions"]["delete"]				="false";
+#			$option["template_title"]	                = $this->sys_module . "html/report_title";
+#			$option["template_body"]	                = $this->sys_module . "html/report_body";
 			
-			$option["order"]="id desc";
-			$option["where"]=array("estatus =''");
+			#$option["where"]=array("estatus =''");
 			
 			#/*
-			if($this->__NIVEL_SESION(">=10")==true)	 // NIVEL SUPER ADMINISTRADOR 			
-			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
+			
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
-				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
+				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]==''";	
+				$option["where"][]="$"."row[\"f_p_recibio\"]=''";				
+				
 			}
-			#$option["echo"]="PENDIENTE";
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				$this->__PRINT_R("aaa");
+					
+				$option["echo"]="PENDIENTE";				
+				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
+				#$option["where"][]="f_p_recibio=''";				
+				$option["where"][]="f_p_recibio=''";				
+			}
+			
 			#*/
 			
-			return $this->__VIEW_REPORT($option);
+			
+			/*
+			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
+			{					
+				
+				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
+			}
+			*/
+			
+			
+			return $this->__REPORTE($option);
 		}				
    		public function __REPORT_APROVADO()
     	{
@@ -857,30 +889,31 @@
 		}
    		public function __REPORTE($option="")
     	{			
-			if($option=="")	$option=array();			
-			#$option["template_title"]	                = $this->sys_module . "html/report_estatus_title";
-			#$option["template_body"]	                = $this->sys_module . "html/report_estatus_body";
-	
-			
+			if($option=="")	$option=array();
+		
 			if(!isset($option["actions"]))	
 			{	
 				$option["actions"]							= array();
-				$option["actions"]["write"]					="$"."row[\"estatus\"]==''  OR $"."this->__NIVEL_SESION(\"<=20\")==true";
-				$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
 				$option["actions"]["check"]					="false";
+
+				if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+				{					
+					$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]==''";	
+				}
+				if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+				{										
+					$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
+					$option["actions"]["check"]					="$"."row[\"f_p_recibio\"]==''";	
+				}
+								
+				
+				$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
 				$option["actions"]["delete"]				="false";
 			}	
+			if(isset($this->sys_private["order"]) AND $this->sys_private["order"]=="")
+				$option["order"]="id desc";
 			
-			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
-			{					
-				$option["where"]=Array();
-				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
-			}
-			
-			$option["order"]="id desc";
-			
-			#return $this->__VIEW_REPORT($option);
-			return $this->__VIEW_REPORT();
+			return $this->__VIEW_REPORT($option);
 		}						
 
    		public function __REPORT_ESPECIFICO()
