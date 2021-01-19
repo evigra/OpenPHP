@@ -531,11 +531,14 @@
 		    $datas["company_id"]    	=@$_SESSION["company"]["id"];
     	    	
     		## GUARDAR USUARIO
+    		/*
 			if($datas["estatus"]=="APROVADO")
 			{
 				$datas["autorizo"]		=$_SESSION["user"]["name"];
 				$datas["m_autorizo"]	=$_SESSION["user"]["email"];								
 			}				
+			*/
+			
 			if($this->sys_private["section"]=="create")    		
 			{
 				$datas["registro"]		=$this->sys_date;
@@ -778,6 +781,7 @@
 
 			return                  					$template;
 		}	
+		############################################################################################################
    		public function __REPORT_PENDIENTE()
     	{
 			if(isset($this->request["rh_calculo"]))
@@ -795,8 +799,7 @@
 					$this->__SAVE($data_recibido);				
 				}			
 			}    	
-    	
-    	
+    	    	
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
@@ -813,7 +816,36 @@
 			
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
-				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]==''";	
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+				$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] == ''";	
+			}
+			
+
+			return $this->__REPORTE($option);
+		}	
+		############################################################################################################
+   		public function __REPORT_RECIBIDO()
+    	{
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+						
+			$option["where"][]				="f_p_recibio != ''";				
+			
+			
+			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["black"]		="1==1";
+			
+			
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
 			}
 				
 			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
@@ -821,105 +853,32 @@
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
 			}
 			
-			#*/
-			
-			
-			/*
-			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
-			{					
-				
-				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
-			}
-			*/
+
 			return $this->__REPORTE($option);
-		}				
+		}						
    		public function __REPORT_APROVADO()
     	{
-			$option=array();			
-			$option["template_title"]	                = $this->sys_module . "html/report_title";
-			$option["template_body"]	                = $this->sys_module . "html/report_body";
-			
-			$option["where"]=array("estatus = 'APROVADO'");
-
-			$option["actions"]							= array();
 			$option["actions"]["write"]					="$"."row[\"estatus\"]==''  OR $"."this->__NIVEL_SESION(\"<=20\")==true";
-			$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
-			$option["actions"]["check"]					="false";
 			$option["actions"]["delete"]				="false";
 
-			$option["order"]="id desc";
-			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
-			{					
-				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
-			}
-			
-			return $this->__VIEW_REPORT($option);
 		}				
-   		public function __REPORT_CANCELADOS()
-    	{
-			$option=array();			
-			$option["template_title"]	                = $this->sys_module . "html/report_title";
-			$option["template_body"]	                = $this->sys_module . "html/report_body";
-			
-			$option["where"]=array("estatus = 'CANCELADO'");
-
-			$option["actions"]							="false";
-
-			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
-			{					
-				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
-			}			
-			return $this->__VIEW_REPORT($option);
-		}				
-   		public function __REPORT_SUSTITUTO($option="")
-    	{
-			
-			if($option=="")	$option=array();			
-			$option["template_title"]	                = $this->sys_module . "html/report_sustituto_title";
-			$option["template_body"]	                = $this->sys_module . "html/report_sustituto_body";
-			
-			
-			if(!isset($option["actions"]))	
-			{	
-				$option["actions"]							= array();
-				$option["actions"]["write"]					="$"."row[\"estatus\"]==''  OR $this->__NIVEL_SESION(\">=20\")==true";
-				$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
-				$option["actions"]["check"]					="false";
-				$option["actions"]["delete"]				="false";
-			}	
-			
-			if($this->__NIVEL_SESION(">=20")==true)	 // NIVEL ADMINISTRADOR 			
-			{					
-				$option["where"]=Array();
-				$option["where"][]="left(trabajador_departamento,6)=left('{$_SESSION["user"]["departamento_id"]}',6)";				
-			}
-			
-			$option["order"]="id desc";
-			
-			return $this->__VIEW_REPORT($option);
-		}
    		public function __REPORTE($option="")
     	{			
 			if($option=="")	$option=array();
 		
 			if(!isset($option["actions"]))				$option["actions"]							= array();
 			
-				
-			$option["actions"]["check"]					="false";
+			if(!isset($option["actions"]["check"]))
+				$option["actions"]["check"]					="false";
 			
-			
-
-			if($this->__NIVEL_SESION("=60")==true)	 // NIVEL USUARIO SINDICATO 			
-			{					
-				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]=''";	
-			}
+/*			
 			if($this->__NIVEL_SESION("=50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 			{										
 			
 				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
 				$option["actions"]["check"]					="$"."row[\"f_p_recibio\"]==''";	
 			}
-										
+*/										
 			$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
 			$option["actions"]["delete"]				="false";
 

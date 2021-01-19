@@ -148,9 +148,6 @@
     }    
     elseif($objeto->sys_private["action"]=="report_pendiente")
     {
-
-		
-
     
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -165,6 +162,22 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }
+    elseif($objeto->sys_private["action"]=="report_recibido")
+    {
+    
+		#BOTONES SECCION DERECHA
+		$module_right=array(
+		    array("create"=>"Crear"),
+		    #array("write"=>"Modificar"),
+		    #array("kanban"=>"Kanban"),
+		    array("report"=>"Reporte"),
+		);
+		
+		#CARGANDO VISTA PARTICULAR Y CAMPOS			
+		$data										= $objeto->__REPORT_RECIBIDO();
+		$objeto->words["module_body"]				=$data["html"];
+		$module_title								="Reporte de Pendientes de ";
+    }    
     elseif($objeto->sys_private["section"]=="report_aprovados")
     {
 		#BOTONES SECCION DERECHA
@@ -225,7 +238,8 @@
 				array("action_cancelar"=>"Cancelar"),
 			);	 		
 		*/
-		$module_center[]=array("report_pendiente"=>"Por Recibir","icon"=>"ui-icon-arrowthickstop-1-s");
+		$module_center[]=array("report_pendiente"	=>"Por Recibir",	"icon"=>"ui-icon-arrowthick-1-s");
+		$module_center[]=array("report_recibido"	=>"Recibido",		"icon"=>"ui-icon-arrowthickstop-1-s");
 	}				
 	if($objeto->__NIVEL_SESION("==60")==true)	 // NIVEL USUAIRO SINDICATO 
 	{
@@ -235,7 +249,8 @@
 				array("action_cancelar"=>"Cancelar"),
 			);	 		
 		*/
-		$module_center[]=array("report_pendiente"=>"Por Enviar","icon"=>"ui-icon-arrowthickstop-1-n");
+		$module_center[]=array("report_pendiente"=>"Por Enviar","icon"=>"ui-icon-arrowthick-1-n");
+		$module_center[]=array("report_recibido"=>"Enviado","icon"=>"ui-icon-arrowthickstop-1-n");
 	}				
     
     ###########################################################################################################
