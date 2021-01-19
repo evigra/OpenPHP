@@ -2351,13 +2351,13 @@
                     	         	
                     	$eval="
                     		if({$option["actions"]["show"]}) 						$"."show='$show';
-                    		else													$"."show='';
+                    		else													$"."show='&nbsp;';
                     		if({$option["actions"]["write"]}) 						$"."write='$write';
-                    		else													$"."write='';
+                    		else													$"."write='&nbsp;';
                     		if({$option["actions"]["delete"]}) 						$"."delete='$delete';
-                    		else													$"."delete='';
+                    		else													$"."delete='&nbsp;';
                     		if({$option["actions"]["check"]}) 						$"."check='$check';
-                    		else													$"."check='';                    		
+                    		else													$"."check='&nbsp;';                    		
                     	";
                     	$eval_color="";
                     	if(!isset($option["color"]))				$option["color"]=array();                    	
@@ -2376,23 +2376,42 @@
                     if(substr(@$this->sys_private["action"],0,5)!="print")
                     {
 						$actions["actions"]	="
-							<table class=\"cBotones cBodyReport\">
+						
+						
+							<table width=\"250\" border=\"1\" >
 								<tr>
-									<td class=\"cAction\" align=\"center\" width=\"22\" style=\"border-radius:10px 10px 10px 10px;\" title =\"{actions_selected}\">	
+									<td align=\"center\" width=\"150\" title =\"{actions_selected}\">	
 										$check
 									</td>								
-									<td class=\"cAction\" align=\"center\" width=\"22\"  style=\"border-radius:10px 10px 10px 10px;\"  title =\"{actions_show}\">	
+									<td  align=\"center\" width=\"70\"   title =\"{actions_show}\">	
 										$show			
 									</td>
-									<td class=\"cAction\" align=\"center\" width=\"22\" style=\"border-radius:10px 10px 10px 10px;\" title =\"{actions_write}\">	
+									<td align=\"center\" width=\"70\" title =\"{actions_write}\">	
 										$write
 									</td>
-									<td class=\"cAction\" align=\"center\" width=\"22\" style=\"border-radius:10px 10px 10px 10px;\" title =\"{actions_delete}\">	
+									<td align=\"center\" width=\"70\" style=\"border-radius:10px 10px 10px 10px;\" title =\"{actions_delete}\">	
 										$delete
 									</td>					    		
 								</tr>
 							</table>
 						";
+						$actions["actions"]	="
+							<div style=\"width:80px; margin:0px;padding:0px;\">
+									<div style=\"width:20px; float:left; \">
+										$check
+									</div>	
+									<div style=\"width:20px; float:left; \">
+										$show							
+									</div>	
+									<div style=\"width:20px; float:left; \">
+										$write
+									</div>	
+									<div style=\"width:20px; float:left; \">
+										$delete
+									</div>	
+							</div>		
+						";
+
 						$actions["actionsv"]	="
 							<table class=\"cBotones actionsv\" style=\"display:none;\">
 								<tr><td align=\"center\" class=\"cAction\" width=\"22\" style=\"border-radius:10px 10px 10px 10px;\" title =\"{actions_selected}\">$check</td></tr>

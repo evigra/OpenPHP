@@ -38,6 +38,8 @@
 	
 	$module_title									="";
 	
+	
+	
 	if($objeto->sys_private["section"]=="create")
 	{
 		#BOTONES SECCION IZQUIERDA
@@ -92,10 +94,6 @@
 				array("action_cancelar"=>"Cancelar"),
 			);	    			
 		}		
-		if($objeto->__NIVEL_SESION("<=20")==true AND $objeto->sys_fields["estatus"]["value"]=="APROVADO")	 // NIVEL ADMINISTRADOR 
-		{
-			$module_center[]=array("action_incumplir"=>"Incumplido");			
-		}				
 		*/
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -107,8 +105,6 @@
 		#CARGANDO VISTA PARTICULAR Y CAMPOS
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE();	
     	$objeto->words                              =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
-
-		#$objeto->__PRINT_R($objeto->words["html_head_js"]);	
 		
 		#$objeto->__GENERAR_PDF();
 		
@@ -150,46 +146,16 @@
 	   	$data										=$objeto->__BROWSE();
     	$objeto->words["module_body"]               =$objeto->__VIEW_KANBAN($template_body,$data["data"]);	
     }    
-    elseif($objeto->sys_private["section"]=="report_especifico")
+    elseif($objeto->sys_private["action"]=="report_pendiente")
     {
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
 		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
+		    #array("kanban"=>"Kanban"),
 		    array("report"=>"Reporte"),
 		);
-
-		#CARGANDO VISTA PARTICULAR Y CAMPOS			
-		$data										= $objeto->__REPORT_ESPECIFICO();		
-		$objeto->words["module_body"]				=$data["html"];
-		$module_title								="Reporte Especifico de ";
-    }    
-    elseif($objeto->sys_private["section"]=="report_general")
-    {
-		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);
-
-		#CARGANDO VISTA PARTICULAR Y CAMPOS			
-		$data										= $objeto->__REPORT_GENERAL();		
-		$objeto->words["module_body"]				=$data["html"];
-		$module_title								="Reporte General de ";
-    }
-    elseif($objeto->sys_private["section"]=="report_pendiente")
-    {
-		#BOTONES SECCION DERECHA
-		$module_right=array(
-		    array("create"=>"Crear"),
-		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
-		    array("report"=>"Reporte"),
-		);
-
+		
 		#CARGANDO VISTA PARTICULAR Y CAMPOS			
 		$data										= $objeto->__REPORT_PENDIENTE();
 		$objeto->words["module_body"]				=$data["html"];
@@ -216,7 +182,7 @@
 		$module_right=array(
 		    array("create"=>"Crear"),
 		    #array("write"=>"Modificar"),
-		    array("kanban"=>"Kanban"),
+		    #array("kanban"=>"Kanban"),
 		    array("report"=>"Reporte"),
 		);
 

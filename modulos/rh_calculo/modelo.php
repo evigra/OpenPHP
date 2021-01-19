@@ -782,30 +782,34 @@
    		public function __REPORT_PENDIENTE()
     	{
 			$option				=array();			
-			$option["where"]	=Array();
-			
-			
-#			$option["template_title"]	                = $this->sys_module . "html/report_title";
-#			$option["template_body"]	                = $this->sys_module . "html/report_body";
+			$option["where"]	=array();
+			$option["color"]	=array();
 			
 			#$option["where"]=array("estatus =''");
 			
-			#/*
+			$option["where"][]				="f_p_recibio is NULL";				
+			
+			$option["color"]["red"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 2 days')) < date('Y-m-d')";
 			
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
 				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]==''";	
-				$option["where"][]="$"."row[\"f_p_recibio\"]=''";				
 				
+				
+	
 			}
+			
+				
 			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 			{			
-				$this->__PRINT_R("aaa");
-					
-				$option["echo"]="PENDIENTE";				
-				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
-				#$option["where"][]="f_p_recibio=''";				
-				$option["where"][]="f_p_recibio=''";				
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+				
+				
+				
+				
+
+				
+
 			}
 			
 			#*/
@@ -891,25 +895,27 @@
     	{			
 			if($option=="")	$option=array();
 		
-			if(!isset($option["actions"]))	
-			{	
-				$option["actions"]							= array();
-				$option["actions"]["check"]					="false";
-
-				if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
-				{					
-					$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]==''";	
-				}
-				if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
-				{										
-					$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
-					$option["actions"]["check"]					="$"."row[\"f_p_recibio\"]==''";	
-				}
-								
+			if(!isset($option["actions"]))				$option["actions"]							= array();
+			
 				
-				$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
-				$option["actions"]["delete"]				="false";
-			}	
+			$option["actions"]["check"]					="false";
+			
+			
+
+			if($this->__NIVEL_SESION("=60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]=''";	
+			}
+			if($this->__NIVEL_SESION("=50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{										
+			
+				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
+				$option["actions"]["check"]					="$"."row[\"f_p_recibio\"]==''";	
+			}
+										
+			$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
+			$option["actions"]["delete"]				="false";
+
 			if(isset($this->sys_private["order"]) AND $this->sys_private["order"]=="")
 				$option["order"]="id desc";
 			
