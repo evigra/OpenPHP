@@ -7,9 +7,11 @@
 	#if($objeto->__NIVEL_SESION("==20")==true)	 // NIVEL Admin
 	#if($objeto->__NIVEL_SESION("==30")==true)	 // NIVEL Admin
 	
-	
+	#phpinfo();
 	
 	$objeto->__SESSION();
+	
+	#$objeto->__PRINT_R($_SERVER["SCRIPT_NAME"]);
 		
 	
 	# CARGANDO PLANTILLAS GENERALES
@@ -22,10 +24,18 @@
 	$objeto->words["html_head_js"]              	=$objeto->__FILE_JS();
 	#$objeto->words["html_head_css"]             	=$objeto->__FILE_CSS(array("../sitio_web/css/basicItems"));
 
+
+
 	#/*
 	if(@$objeto->sys_private["id"]>0)
 	{		
-    	$qr_path="http://172.24.21.184/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
+		if($_SERVER["SCRIPT_NAME"]=="/OpenPHP/index.php")
+			$carpeta="OpenPHP";
+		else	
+			$carpeta="produccion";
+		
+	
+    	$qr_path="http://172.24.21.184/$carpeta/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
     	//$qr_path="http://localhost/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
     	//$qr_path="../rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];    	    	    	    	
     	$objeto->words["qr_calculo"]	=$objeto->__QR($qr_path);
@@ -73,6 +83,8 @@
     }	
     elseif($objeto->sys_private["section"]=="impresion_status")
 	{
+		#$objeto->sys_fields["trabajador_nombre"]["type"]	="value";
+		
 		$template=$objeto->sys_var["module_path"]."html/".$objeto->sys_private["section"];
     	$objeto->words["module_body"]               =$objeto->__VIEW_WRITE($template);	
     	$objeto->words                  =$objeto->__INPUT($objeto->words,$objeto->sys_fields);
@@ -103,22 +115,6 @@
 			
 		}
 
-
-
-
-
-
-
-
-		/*
-		if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
-		{
-			$module_center=array(
-				array("action_aprovar"=>"Aprovar"),
-				array("action_cancelar"=>"Cancelar"),
-			);	    			
-		}		
-		*/
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
@@ -170,6 +166,7 @@
 	   	$data										=$objeto->__BROWSE();
     	$objeto->words["module_body"]               =$objeto->__VIEW_KANBAN($template_body,$data["data"]);	
     }    
+    ###################################################
     elseif($objeto->sys_private["action"]=="report_pendiente")
     {
     
@@ -187,8 +184,7 @@
 		$module_title								="Reporte de Pendientes de ";
     }
     elseif($objeto->sys_private["action"]=="report_recibido")
-    {
-    
+    {    
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
@@ -202,6 +198,40 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }    
+    elseif($objeto->sys_private["action"]=="report_enviar")
+    {
+    
+		#BOTONES SECCION DERECHA
+		$module_right=array(
+		    array("create"=>"Crear"),
+		    #array("write"=>"Modificar"),
+		    #array("kanban"=>"Kanban"),
+		    array("report"=>"Reporte"),
+		);
+		
+		#CARGANDO VISTA PARTICULAR Y CAMPOS			
+		$data										= $objeto->__REPORT_ENVIAR();
+		$objeto->words["module_body"]				=$data["html"];
+		$module_title								="Reporte de Pendientes de ";
+    }
+    elseif($objeto->sys_private["action"]=="report_enviado")
+    {
+    
+		#BOTONES SECCION DERECHA
+		$module_right=array(
+		    array("create"=>"Crear"),
+		    #array("write"=>"Modificar"),
+		    #array("kanban"=>"Kanban"),
+		    array("report"=>"Reporte"),
+		);
+		
+		#CARGANDO VISTA PARTICULAR Y CAMPOS			
+		$data										= $objeto->__REPORT_ENVIADO();
+		$objeto->words["module_body"]				=$data["html"];
+		$module_title								="Reporte de Pendientes de ";
+    }
+
+    ######################################################
     elseif($objeto->sys_private["section"]=="report_aprovados")
     {
 		#BOTONES SECCION DERECHA
@@ -264,6 +294,8 @@
 		*/
 		$module_center[]=array("report_pendiente"	=>"Por Recibir",	"icon"=>"ui-icon-arrowthick-1-s");
 		$module_center[]=array("report_recibido"	=>"Recibido",		"icon"=>"ui-icon-arrowthickstop-1-s");
+		$module_center[]=array("report_enviar"		=>"Por Enviar",		"icon"=>"ui-icon-arrowthick-1-n");
+		$module_center[]=array("report_enviado"		=>"Enviado",		"icon"=>"ui-icon-arrowthickstop-1-n");
 	}				
 	if($objeto->__NIVEL_SESION("==60")==true)	 // NIVEL USUAIRO SINDICATO 
 	{
@@ -278,7 +310,7 @@
 	}				
     
     ###########################################################################################################
-
+	/*
     if($objeto->__NIVEL_SESION("<=20")==true)	 // NIVEL ADMINISTRADOR 
     {
     	$module_right_admin=array(
@@ -299,7 +331,7 @@
 		$module_right=array_merge($module_right, $module_right_admin);		
 	}
 
-    
+    */
 	$objeto->words["module_title"]              ="$module_title Calculo";
 	
 	

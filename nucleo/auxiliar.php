@@ -1089,11 +1089,15 @@
 					$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n".$headers;				
 					$message = @$option["html"]; 			
 			}
-
+			/*
 			if(in_array($_SERVER["SERVER_NAME"],$_SESSION["var"]["server_true"]))	
-				$boSend =  @mail($option["to"], $option["title"], $message, $headers);
+				$boSend =  mail($option["to"], $option["title"], $message, $headers);
 			else	
-				$boSend =  @mail("evigra@gmail.com", $option["title"], $message, $headers);
+				$boSend =  mail("evigra@gmail.com", $option["title"], $message, $headers);
+			*/	
+			$boSend =  mail("evigra@gmail.com", $option["title"], $message, $headers);
+			
+			//sendmail -f contacto@ServerReclamaciones -t evigra@gmail.com  -m "Asunto" -u "Mensaje " -a resultados.txt
 
 		}		
 		##############################################################################
@@ -1157,7 +1161,7 @@
 			$return		=array();
 			
 			#$this->__PRINT_R($_FILES);
-			#$this->__PRINT_R($datas);
+			$this->__PRINT_R($datas);
 			
     		foreach($datas as $campo=>$valor)
     		{
@@ -1184,14 +1188,17 @@
 						$return[$campo]=$_SESSION["SAVE"][$this->sys_object][$campo]["data"];
 				}
 				else				
-				{					
+				{			
+							
 					if(isset($valor["value"]))
 					{
 						$return[$campo]=$valor["value"];
 					}					
 				}			
     		}    	
+    		
     		$this->sys_request=$return;    			
+    		$this->__PRINT_R($this->sys_request);
     	}
 		##############################################################################    
 		public function __PDF($Output="I")

@@ -26,6 +26,7 @@
 			    "title"             => "Password",
 			    "type"              => "password",
 			    "attr"              => array("required"),
+			    "value"             => "",
 			),			
 			"celular"	    =>array(
 			    "title"             => "Celular",
@@ -94,7 +95,7 @@
     		## GUARDAR USUARIO
     		if(count($datas)>2)
     		{
-    		    #$this->__PRINT_R($datas);
+    		    
     		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    
     		    
 			    $datas["company_id"]    	=@$_SESSION["company"]["id"];

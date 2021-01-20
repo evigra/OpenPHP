@@ -1,6 +1,6 @@
 <?php
 		$this->sys_fields_l18n	=array(
-			"id"	    		=>"",
+			"id"	    		=>"ID",
 			"name"	    		=>"Nombre",
 			"email"	    		=>"Mail",
 			"password"			=>"Password",

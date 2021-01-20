@@ -17,6 +17,17 @@
 			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),			
+			"f_estatus"	    =>array(
+			    "title"             => "Actualizado",
+			    "showTitle"         => "si",
+			    "type"              => "input",
+			),			
+			"d_estatus"	    =>array(
+			    "title"             => "Desc Estatus",
+			    "showTitle"         => "si",
+			    "type"              => "input",
+			),			
+			
 			"trabajador_nombre"	    =>array(
 			    "title"             => "Trabajador",
 				"title_filter"      => "Nombre",
@@ -418,6 +429,28 @@
 			    "type"              => "date",
 			),
 			
+	
+
+
+			"d_recibio"	    =>array(
+			    "title"             => "Recibio Del",
+			    "showTitle"         => "no",
+			    "type"              => "input",
+		    
+			),				
+			"m_d_recibio"	    =>array(
+			    "title"             => "Recibio Del",
+			    "titleShow"         => "no",
+			    "type"              => "input",
+			),	
+			"f_d_recibio"	    =>array(
+			    "title"             => "Recibido en delegacion",
+			    "type"              => "date",
+			),
+
+
+
+			
 						
 			"autorizo"	    =>array(
 			    "title"             => "Autorizo",
@@ -530,6 +563,7 @@
 		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    		   
 		    $datas["company_id"]    	=@$_SESSION["company"]["id"];
     	    	
+    	    $datas["f_estatus"]		=$_SESSION["var"]["datetime"];	
     		## GUARDAR USUARIO
     		/*
 			if($datas["estatus"]=="APROVADO")
@@ -541,11 +575,25 @@
 			
 			if($this->sys_private["section"]=="create")    		
 			{
+				$datas["estatus"]		="Reclamacion generada";	
 				$datas["registro"]		=$this->sys_date;
 				
 				$datas["elaboro"]		=$_SESSION["user"]["name"];
 				$datas["m_elaboro"]		=$_SESSION["user"]["email"];				
 				$datas["f_elaboro"]		=$_SESSION["var"]["datetime"];
+				
+								
+				$datas_mail=array(
+					"title"		=>"Sistema IMSS",
+					"to"		=>"evigra@gmail.com",
+					"html"		=>"Reclamaciones",
+					
+				);
+				#$this->send_mail($datas_mail);
+
+				
+				
+				
 			}
 			
 			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
@@ -782,6 +830,29 @@
 			return                  					$template;
 		}	
 		############################################################################################################
+   		public function __RECIBIR_DELEGACION()
+    	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$this->sys_private["id"]=$id;
+					
+					$data_recibido					=array();
+
+					$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+					$data_recibido["estatus"]			="Recibida por la delegacion";	
+					
+					$data_recibido["d_recibio"]			=$_SESSION["user"]["name"];
+					$data_recibido["m_d_recibio"]		=$_SESSION["user"]["email"];				
+					$data_recibido["f_d_recibio"]		=$_SESSION["var"]["datetime"];
+					
+					$this->__SAVE($data_recibido);				
+				}			
+			}    	
+		}	
+
+		############################################################################################################
    		public function __RECIBIR_ADSCRIPCION()
     	{
 			if(isset($this->request["rh_calculo"]))
@@ -792,6 +863,9 @@
 					
 					$data_recibido					=array();
 
+					$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+					$data_recibido["estatus"]			="Recibida por la adscripcion";	
+					
 					$data_recibido["p_recibio"]			=$_SESSION["user"]["name"];
 					$data_recibido["m_p_recibio"]		=$_SESSION["user"]["email"];				
 					$data_recibido["f_p_recibio"]		=$_SESSION["var"]["datetime"];
@@ -803,8 +877,6 @@
 		############################################################################################################
    		public function __REPORT_PENDIENTE()
     	{
-    		$this->__RECIBIR_ADSCRIPCION();
-    	    	
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
@@ -862,7 +934,65 @@
 			
 
 			return $this->__REPORTE($option);
+		}				
+		############################################################################################################
+   		public function __REPORT_ENVIAR()
+    	{
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+						
+			$option["where"][]				="f_p_recibio != ''";				
+			
+			
+			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["black"]		="1==1";
+			
+			
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			}
+			
+
+			return $this->__REPORTE($option);
 		}						
+   		public function __REPORT_ENVIADO()
+    	{
+    		$this->__RECIBIR_DELEGACION();
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+						
+			$option["where"][]				="f_d_recibio != ''";				
+			
+			
+			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["black"]		="1==1";
+			
+			
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_d_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				$option["actions"]["write"]		="$"."row[\"f_d_recibio\"]!=''";	
+			}
+			
+
+			return $this->__REPORTE($option);
+		}						
+
    		public function __REPORT_APROVADO()
     	{
 			$option["actions"]["write"]					="$"."row[\"estatus\"]==''  OR $"."this->__NIVEL_SESION(\"<=20\")==true";
@@ -877,6 +1007,17 @@
 			
 			if(!isset($option["actions"]["check"]))
 				$option["actions"]["check"]					="false";
+			if(!isset($option["actions"]["write"]))
+				$option["actions"]["write"]					="false";
+
+			if($this->__NIVEL_SESION("=0")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{													
+				$option["actions"]["write"]					="true";	
+
+			}
+
+
+				
 			
 /*			
 			if($this->__NIVEL_SESION("=50")==true)	 // NIVEL USUARIO ADSCRIPCION 

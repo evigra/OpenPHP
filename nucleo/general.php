@@ -613,7 +613,7 @@
 					}						
 					else 
 					{		
-						$this->__PRINT_R($modificados);					
+						#$this->__PRINT_R($modificados);					
 						$this->sys_sql	="UPDATE {$this->sys_table} SET $fields WHERE {$this->sys_private["field"]}='{$this->sys_private["id"]}'";					
 						if(@$modificados!="")
 						{

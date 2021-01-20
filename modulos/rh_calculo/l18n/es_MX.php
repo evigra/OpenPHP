@@ -1,6 +1,6 @@
 <?php
 		$this->sys_fields_l18n	=array(
-			"id"	    		=>"",
+			"id"	    		=>"FOLIO",
 			"name"	    		=>"Nombre",
 			"email"	    		=>"Mail",
 			"password"			=>"Password",
@@ -14,7 +14,7 @@
 
 		$this->sys_view_l18n	=array(
 			"action"    		=>"Guardar",
-			"cancel"	    	=>"Cancela",
+			"cancel"	    	=>"Cancelar",
 			"create"	   		=>"Crear",
 			"kanban"			=>"Kanban",
 			"report"			=>"Reporte",
