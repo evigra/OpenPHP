@@ -35,7 +35,10 @@
 			$carpeta="produccion";
 		
 	
-    	$qr_path="http://172.24.21.184/$carpeta/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
+    	$qr_path=array(
+    		"text"=>"http://172.24.21.184/$carpeta/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"],
+    		"height"=>250
+    	);	
     	//$qr_path="http://localhost/OpenPHP/rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];
     	//$qr_path="../rh_calculo/&sys_action=print_pdf&sys_section_rh_calculo=impresion_status&sys_action_rh_calculo=&sys_id_rh_calculo=".$objeto->sys_private["id"];    	    	    	    	
     	$objeto->words["qr_calculo"]	=$objeto->__QR($qr_path);

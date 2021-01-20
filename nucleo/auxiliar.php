@@ -934,7 +934,7 @@
 			{
 				$this->__REQUEST_AUX($campo,$valor);
 			}
-			
+
 			if(is_array($_FILES))
 			{
 			    $this->request["files"]			=$_FILES;
@@ -1161,7 +1161,7 @@
 			$return		=array();
 			
 			#$this->__PRINT_R($_FILES);
-			$this->__PRINT_R($datas);
+			#$this->__PRINT_R($datas);
 			
     		foreach($datas as $campo=>$valor)
     		{
@@ -1198,7 +1198,7 @@
     		}    	
     		
     		$this->sys_request=$return;    			
-    		$this->__PRINT_R($this->sys_request);
+    		#$this->__PRINT_R($this->sys_request);
     	}
 		##############################################################################    
 		public function __PDF($Output="I")
@@ -2177,11 +2177,21 @@
 		} 		
 
 		public function __QR($option=null)
-		{			
-			$url="https://chart.googleapis.com/chart?chs=110x110&cht=qr&chl=" . urlencode($option);
-			$url="http://chart.googleapis.com/chart?chs=110x110&cht=qr&chl=" . urlencode($option);										
+		{	
+			if(!is_array($option))
+			{
+				$option=array(
+					"height"	=>80,
+					"text"		=>$option,
+				);			
+			}
+			
+			
+				
+			#$url="https://chart.googleapis.com/chart?chs=110x110&cht=qr&chl=" . urlencode($option);
+			$url="http://chart.googleapis.com/chart?chs={$option["height"]}x{$option["height"]}&cht=qr&chl=" . urlencode($option["text"]);										
 			//file_get_contents($url);	
-			return "<img height=\"80\" border=\"0\" src=\"$url\">";
+			return "<img height=\"{$option["height"]}\" border=\"0\" src=\"$url\">";
 		} 		
 
 		##############################################################################    
