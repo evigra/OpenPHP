@@ -23,7 +23,7 @@
 			    "type"              => "input",
 			),			
 			"d_estatus"	    =>array(
-			    "title"             => "Desc Estatus",
+			    "title"             => "Descripcion Estatus",
 			    "showTitle"         => "si",
 			    "type"              => "input",
 			),			
@@ -545,7 +545,10 @@
 			    "title"             => "Descripcion",
 			    "type"              => "textarea",
 			),			
-				
+			"f_calculo"	    =>array(
+			    "title"             => "Calculo Procesado",
+			    "type"              => "input",
+			),					
 		);				
 		##############################################################################	
 		##  Metodos	
@@ -575,7 +578,7 @@
 			
 			if($this->sys_private["section"]=="create")    		
 			{
-				$datas["estatus"]		="Reclamacion generada";	
+				$datas["estatus"]		="Reclamacion Solicitada";	
 				$datas["registro"]		=$this->sys_date;
 				
 				$datas["elaboro"]		=$_SESSION["user"]["name"];
@@ -836,22 +839,64 @@
 			{
 				foreach($this->request["rh_calculo"] as $id)
 				{
-					$this->sys_private["id"]=$id;
-					
-					$data_recibido					=array();
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_d_recibio"]=="")
+					{											
+						$data_recibido					=array();
 
-					$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
-					$data_recibido["estatus"]			="Recibida por la delegacion";	
-					
-					$data_recibido["d_recibio"]			=$_SESSION["user"]["name"];
-					$data_recibido["m_d_recibio"]		=$_SESSION["user"]["email"];				
-					$data_recibido["f_d_recibio"]		=$_SESSION["var"]["datetime"];
-					
-					$this->__SAVE($data_recibido);				
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Recibida por la delegacion";	
+						
+						$data_recibido["d_recibio"]			=$_SESSION["user"]["name"];
+						$data_recibido["m_d_recibio"]		=$_SESSION["user"]["email"];				
+						$data_recibido["f_d_recibio"]		=$_SESSION["var"]["datetime"];
+						
+						$this->__SAVE($data_recibido);				
+					}
 				}			
 			}    	
 		}	
+		############################################################################################################
+   		public function __CALCULO_PROCESADO()
+    	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_calculo"]=="" AND $data["data"][0]["f_p_recibio"]!="")
+					{											
+						$data_recibido					=array();
 
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Reclamacion Generada";	
+						
+						$data_recibido["f_calculo"]			=$_SESSION["var"]["datetime"];
+						
+						$this->__SAVE($data_recibido);				
+					}
+				}			
+			}    	
+		}
+   		public function __CALCULO_RECHAZO()
+    	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_calculo"]=="")
+					{											
+						$data_recibido					=array();
+
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Rechazada en Adscripcion";	
+												
+						$this->__SAVE($data_recibido);				
+					}
+				}			
+			}    	
+		}	
 		############################################################################################################
    		public function __RECIBIR_ADSCRIPCION()
     	{
@@ -859,23 +904,25 @@
 			{
 				foreach($this->request["rh_calculo"] as $id)
 				{
-					$this->sys_private["id"]=$id;
-					
-					$data_recibido					=array();
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_p_recibio"]=="")
+					{											
+						$data_recibido					=array();
 
-					$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
-					$data_recibido["estatus"]			="Recibida por la adscripcion";	
-					
-					$data_recibido["p_recibio"]			=$_SESSION["user"]["name"];
-					$data_recibido["m_p_recibio"]		=$_SESSION["user"]["email"];				
-					$data_recibido["f_p_recibio"]		=$_SESSION["var"]["datetime"];
-					
-					$this->__SAVE($data_recibido);				
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Recibida por la adscripcion";	
+						
+						$data_recibido["p_recibio"]			=$_SESSION["user"]["name"];
+						$data_recibido["m_p_recibio"]		=$_SESSION["user"]["email"];				
+						$data_recibido["f_p_recibio"]		=$_SESSION["var"]["datetime"];
+						
+						$this->__SAVE($data_recibido);				
+					}
 				}			
 			}    	
 		}	
 		############################################################################################################
-   		public function __REPORT_PENDIENTE()
+   		public function __REPORT_PENDIENTE()    // PASO 1
     	{
 			$option				=array();			
 			$option["where"]	=array();
@@ -886,7 +933,7 @@
 			$option["where"][]				="f_p_recibio is NULL";				
 			
 			
-			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 2 days')) < date('Y-m-d')";
 			$option["color"]["black"]		="1==1";
 			
@@ -906,18 +953,21 @@
 			return $this->__REPORTE($option);
 		}	
 		############################################################################################################
-   		public function __REPORT_RECIBIDO()
+   		public function __REPORT_RECIBIDO() // PASO 2
     	{
     		$this->__RECIBIR_ADSCRIPCION();
     		
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
+			
+			#$option["echo"]		="REPORT RECIBIDO";		
+			
 						
-			$option["where"][]				="f_p_recibio != ''";				
-			
-			
-			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["where"][]				="f_p_recibio != ''";					
+			$option["where"][]				="f_calculo is NULL";		
+						
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
 			$option["color"]["black"]		="1==1";
 			
@@ -930,11 +980,69 @@
 			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 			{			
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+				$option["actions"]["check"]		="$"."row[\"f_p_recibio\"]!= ''";	
 			}
 			
 
 			return $this->__REPORTE($option);
-		}				
+		}	
+		############################################################################################################
+   		public function __REPORT_CALCULO() // PASO 3 -1
+    	{
+    		$this->__CALCULO_PROCESADO();
+    		
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+						
+			$option["where"][]				="f_calculo != ''";						
+			$option["where"][]				="f_d_recibio is NULL";					
+										
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["black"]		="1==1";
+						
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			}
+			
+			return $this->__REPORTE($option);
+		}						
+		############################################################################################################
+   		public function __REPORT_RECHAZO() // PASO 3 - 2
+    	{
+    		$this->__CALCULO_RECHAZO();
+    		
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+												
+			$option["where"][]				="estatus = 'Rechazada en Adscripcion'";						
+										
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["black"]		="1==1";
+						
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			}
+			
+			return $this->__REPORTE($option);
+		}	
 		############################################################################################################
    		public function __REPORT_ENVIAR()
     	{
@@ -942,14 +1050,12 @@
 			$option["where"]	=array();
 			$option["color"]	=array();
 						
-			$option["where"][]				="f_p_recibio != ''";				
-			
-			
-			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["where"][]				="f_p_recibio != ''";										
+						
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
 			$option["color"]["black"]		="1==1";
-			
-			
+						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
@@ -959,14 +1065,13 @@
 			{			
 				$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
-			}
-			
+			}			
 
 			return $this->__REPORTE($option);
 		}						
    		public function __REPORT_ENVIADO()
     	{
-    		$this->__RECIBIR_DELEGACION();
+    		#$this->__RECIBIR_DELEGACION();
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
@@ -974,7 +1079,7 @@
 			$option["where"][]				="f_d_recibio != ''";				
 			
 			
-			$option["color"]["red"]			="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 2 days')) < date('Y-m-d')";
 			$option["color"]["black"]		="1==1";
 			
@@ -1004,6 +1109,7 @@
 			if($option=="")	$option=array();
 		
 			if(!isset($option["actions"]))				$option["actions"]							= array();
+			if(!isset($option["color"]))				$option["color"]							= array();
 			
 			if(!isset($option["actions"]["check"]))
 				$option["actions"]["check"]					="false";
@@ -1016,17 +1122,8 @@
 
 			}
 
+			$option["color"]["red"]							="$"."row[\"estatus\"]=='Rechazada en Adscripcion'";
 
-				
-			
-/*			
-			if($this->__NIVEL_SESION("=50")==true)	 // NIVEL USUARIO ADSCRIPCION 
-			{										
-			
-				$option["actions"]["write"]					="$"."row[\"f_p_recibio\"]!=''";	
-				$option["actions"]["check"]					="$"."row[\"f_p_recibio\"]==''";	
-			}
-*/										
 			$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
 			$option["actions"]["delete"]				="false";
 
@@ -1035,7 +1132,7 @@
 			
 			return $this->__VIEW_REPORT($option);
 		}						
-
+/*
    		public function __REPORT_ESPECIFICO()
     	{
 			$this->sys_fields["departamento_id"]	=array("title"             => "Departamento");
@@ -1071,12 +1168,9 @@
 			
 			#$option["echo"]="REPORT1";
 			
-			/*
-			99062212    1ra de junio    Ma sara marquez preciado			
-			*/						
 			return $this->__VIEW_REPORT($option);
 		}				
-
+*/
    		public function __REPORT_GENERAL()
     	{
 			$this->sys_fields["unidad"]=array("title"             => "Unidad");

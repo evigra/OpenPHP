@@ -200,7 +200,40 @@
 		$data										= $objeto->__REPORT_RECIBIDO();
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
-    }    
+    }  
+    elseif($objeto->sys_private["action"]=="report_calculo")
+    {
+    
+		#BOTONES SECCION DERECHA
+		$module_right=array(
+		    array("create"=>"Crear"),
+		    #array("write"=>"Modificar"),
+		    #array("kanban"=>"Kanban"),
+		    array("report"=>"Reporte"),
+		);
+		
+		#CARGANDO VISTA PARTICULAR Y CAMPOS			
+		$data										= $objeto->__REPORT_CALCULO();
+		$objeto->words["module_body"]				=$data["html"];
+		$module_title								="Reporte de Pendientes de ";
+    }      
+    elseif($objeto->sys_private["action"]=="report_rechazo")
+    {
+    
+		#BOTONES SECCION DERECHA
+		$module_right=array(
+		    array("create"=>"Crear"),
+		    #array("write"=>"Modificar"),
+		    #array("kanban"=>"Kanban"),
+		    array("report"=>"Reporte"),
+		);
+		
+		#CARGANDO VISTA PARTICULAR Y CAMPOS			
+		$data										= $objeto->__REPORT_RECHAZO();
+		$objeto->words["module_body"]				=$data["html"];
+		$module_title								="Reporte de Pendientes de ";
+    }      
+
     elseif($objeto->sys_private["action"]=="report_enviar")
     {
     
@@ -295,10 +328,18 @@
 				array("action_cancelar"=>"Cancelar"),
 			);	 		
 		*/
-		$module_center[]=array("report_pendiente"	=>"Por Recibir",	"icon"=>"ui-icon-arrowthick-1-s");
-		$module_center[]=array("report_recibido"	=>"Recibido",		"icon"=>"ui-icon-arrowthickstop-1-s");
-		$module_center[]=array("report_enviar"		=>"Por Enviar",		"icon"=>"ui-icon-arrowthick-1-n");
-		$module_center[]=array("report_enviado"		=>"Enviado",		"icon"=>"ui-icon-arrowthickstop-1-n");
+		if(!($objeto->sys_private["section"]=="create" OR $objeto->sys_private["section"]=="write"))
+		{
+			$module_center[]=array("report_pendiente"	=>"Por Recibir",	"icon"=>"ui-icon-arrowthick-1-s");
+			$module_center[]=array("report_recibido"	=>"Recibido",		"icon"=>"ui-icon-arrowthickstop-1-s");
+			$module_center[]=array("report_calculo"		=>"Calculo",		"icon"=>"ui-icon-check");
+			$module_center[]=array("report_rechazo"		=>"Calculo",		"icon"=>"ui-icon-closethick");
+		}
+		
+		
+		
+		#$module_center[]=array("report_enviar"		=>"Por Enviar",		"icon"=>"ui-icon-arrowthick-1-n");
+		#$module_center[]=array("report_enviado"		=>"Enviado",		"icon"=>"ui-icon-arrowthickstop-1-n");
 	}				
 	if($objeto->__NIVEL_SESION("==60")==true)	 // NIVEL USUAIRO SINDICATO 
 	{
