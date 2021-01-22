@@ -578,7 +578,8 @@
 			
 			if($this->sys_private["section"]=="create")    		
 			{
-				$datas["estatus"]		="Reclamacion Solicitada";	
+				$datas["estatus"]		="Reclamacion Solicitada";
+				$datas["d_estatus"]		="Entregaste documentacion para solicitar una reclamacion con tu representante sindicato";		
 				$datas["registro"]		=$this->sys_date;
 				
 				$datas["elaboro"]		=$_SESSION["user"]["name"];
@@ -845,7 +846,8 @@
 						$data_recibido					=array();
 
 						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
-						$data_recibido["estatus"]			="Recibida por la delegacion";	
+						$data_recibido["estatus"]			="Recibida por la delegacion";
+						$data_recibido["d_estatus"]			="La delegacion recibio la solicitud de reclamacion por parte de tu adscripcion";		
 						
 						$data_recibido["d_recibio"]			=$_SESSION["user"]["name"];
 						$data_recibido["m_d_recibio"]		=$_SESSION["user"]["email"];				
@@ -870,6 +872,7 @@
 
 						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
 						$data_recibido["estatus"]			="Reclamacion Generada";	
+						$data_recibido["d_estatus"]			="El Departamento de personal de tu adscripcion, genero la documentacion para enviar la solicitu de reclamacion a la delegacion";	
 						
 						$data_recibido["f_calculo"]			=$_SESSION["var"]["datetime"];
 						
@@ -890,8 +893,11 @@
 						$data_recibido					=array();
 
 						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
-						$data_recibido["estatus"]			="Rechazada en Adscripcion";	
+						$data_recibido["estatus"]			="Devuelta por Adscripcion";
 												
+						if($data["data"][0]["d_calculo"]=="")
+							$data_recibido["d_estatus"]		="Esta solicitud es devuelta por falta de documentacion.";
+																							
 						$this->__SAVE($data_recibido);				
 					}
 				}			
@@ -911,6 +917,7 @@
 
 						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
 						$data_recibido["estatus"]			="Recibida por la adscripcion";	
+						$data_recibido["d_estatus"]			="Tu representante sindical entrega la documentacion al departamento de personal de tu adscripcion";	
 						
 						$data_recibido["p_recibio"]			=$_SESSION["user"]["name"];
 						$data_recibido["m_p_recibio"]		=$_SESSION["user"]["email"];				
@@ -935,7 +942,7 @@
 			
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 2 days')) < date('Y-m-d')";
-			$option["color"]["black"]		="1==1";
+			#$option["color"]["black"]		="1==1";
 			
 			
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
@@ -969,7 +976,7 @@
 						
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
-			$option["color"]["black"]		="1==1";
+			#$option["color"]["black"]		="1==1";
 			
 			
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
@@ -1000,7 +1007,7 @@
 										
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
-			$option["color"]["black"]		="1==1";
+			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
@@ -1024,11 +1031,11 @@
 			$option["where"]	=array();
 			$option["color"]	=array();
 												
-			$option["where"][]				="estatus = 'Rechazada en Adscripcion'";						
+			$option["where"][]				="estatus = 'Devuelta por Adscripcion'";						
 										
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
-			$option["color"]["black"]		="1==1";
+			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
@@ -1054,7 +1061,7 @@
 						
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
-			$option["color"]["black"]		="1==1";
+			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
@@ -1078,10 +1085,10 @@
 						
 			$option["where"][]				="f_d_recibio != ''";				
 			
-			
+			#$option["color"]["red"]							="$"."row[\"estatus\"]=='Devuelta por Adscripcion'";
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 2 days')) < date('Y-m-d')";
-			$option["color"]["black"]		="1==1";
+			#$option["color"]["black"]		="1==1";
 			
 			
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
@@ -1122,7 +1129,12 @@
 
 			}
 
-			$option["color"]["red"]							="$"."row[\"estatus\"]=='Rechazada en Adscripcion'";
+			$option["color"]["red"]					="$"."row[\"estatus\"]=='Devuelta por Adscripcion'";
+			$option["color"]["black"]				="1==1";
+			
+			
+
+			#array_unshift($option["color"], "red""$"."row[\"estatus\"]=='Rechazada en Adscripcion'";			
 
 			$option["actions"]["show"]					="$"."row[\"estatus\"]!='CANCELADO'";			
 			$option["actions"]["delete"]				="false";

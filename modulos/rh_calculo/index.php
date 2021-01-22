@@ -170,9 +170,9 @@
     	$objeto->words["module_body"]               =$objeto->__VIEW_KANBAN($template_body,$data["data"]);	
     }    
     ###################################################
-    elseif($objeto->sys_private["action"]=="report_pendiente")
-    {
     
+    elseif($objeto->sys_private["section"]=="section_pendiente")
+    {    
 		#BOTONES SECCION DERECHA
 		$module_right=array(
 		    array("create"=>"Crear"),
@@ -186,7 +186,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }
-    elseif($objeto->sys_private["action"]=="report_recibido")
+    elseif($objeto->sys_private["section"]=="section_recibido")
     {    
 		#BOTONES SECCION DERECHA
 		$module_right=array(
@@ -201,7 +201,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }  
-    elseif($objeto->sys_private["action"]=="report_calculo")
+    elseif($objeto->sys_private["section"]=="section_calculo")
     {
     
 		#BOTONES SECCION DERECHA
@@ -217,7 +217,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }      
-    elseif($objeto->sys_private["action"]=="report_rechazo")
+    elseif($objeto->sys_private["section"]=="section_rechazo")
     {
     
 		#BOTONES SECCION DERECHA
@@ -234,7 +234,7 @@
 		$module_title								="Reporte de Pendientes de ";
     }      
 
-    elseif($objeto->sys_private["action"]=="report_enviar")
+    elseif($objeto->sys_private["section"]=="section_enviar")
     {
     
 		#BOTONES SECCION DERECHA
@@ -250,7 +250,7 @@
 		$objeto->words["module_body"]				=$data["html"];
 		$module_title								="Reporte de Pendientes de ";
     }
-    elseif($objeto->sys_private["action"]=="report_enviado")
+    elseif($objeto->sys_private["section"]=="section_enviado")
     {
     
 		#BOTONES SECCION DERECHA
@@ -330,10 +330,21 @@
 		*/
 		if(!($objeto->sys_private["section"]=="create" OR $objeto->sys_private["section"]=="write"))
 		{
+			$module_center[]=array("section_pendiente"		=>"Por Recibir",			"icon"=>"ui-icon-arrowthick-1-s");
+			$module_center[]=array("section_recibido"		=>"Recibido",				"icon"=>"ui-icon-arrowthickstop-1-s");
+			$module_center[]=array("section_calculo"		=>"Calculo Procedente",		"icon"=>"ui-icon-check" , "text"=>"false");
+			$module_center[]=array("section_rechazo"		=>"Devolucion de calculo",	"icon"=>"ui-icon-arrowreturnthick-1-w", "text"=>"false" );
+			$module_center[]=array("section_improceedente"	=>"Calculo Improcedente",	"icon"=>"ui-icon-closethick", "text"=>"false" , );
+			
+			
+			
+
+			/*
 			$module_center[]=array("report_pendiente"	=>"Por Recibir",	"icon"=>"ui-icon-arrowthick-1-s");
 			$module_center[]=array("report_recibido"	=>"Recibido",		"icon"=>"ui-icon-arrowthickstop-1-s");
 			$module_center[]=array("report_calculo"		=>"Calculo",		"icon"=>"ui-icon-check");
 			$module_center[]=array("report_rechazo"		=>"Calculo",		"icon"=>"ui-icon-closethick");
+			*/
 		}
 		
 		
@@ -349,8 +360,13 @@
 				array("action_cancelar"=>"Cancelar"),
 			);	 		
 		*/
-		$module_center[]=array("report_pendiente"=>"Por Enviar","icon"=>"ui-icon-arrowthick-1-n");
-		$module_center[]=array("report_recibido"=>"Enviado","icon"=>"ui-icon-arrowthickstop-1-n");
+		$module_center[]=array("section_pendiente"	=>"Por Enviar","icon"=>"ui-icon-arrowthick-1-n");
+		$module_center[]=array("section_recibido"	=>"Enviado","icon"=>"ui-icon-arrowthickstop-1-n");
+
+		$module_center[]=array("section_calculo"		=>"Calculo Procedente",	"icon"=>"ui-icon-check" , "text"=>"false");
+		$module_center[]=array("section_rechazo"		=>"Devolucion",			"icon"=>"ui-icon-arrowreturnthick-1-w", "text"=>"false" );
+		$module_center[]=array("section_improceedente"	=>"Calculo Improcedente","icon"=>"ui-icon-closethick", "text"=>"false" , );
+		
 	}				
     
     ###########################################################################################################

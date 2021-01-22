@@ -1,6 +1,6 @@
 <?php
 
-        $this->sys_fields_l18n["id"]                ="";
+        $this->sys_fields_l18n["id"]                ="ID";
         $this->sys_fields_l18n["name"]              ="Nombre";
         $this->sys_fields_l18n["email"]             ="Matricula";
         $this->sys_fields_l18n["password"]          ="Password";

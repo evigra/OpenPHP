@@ -821,6 +821,10 @@
 		##############################################################################
 		public function __REQUEST_AUX($campo,$valor)
 		{  
+			#if($campo=="password")
+			#	$this->__PRINT_R($valor);
+				
+			
 			if(isset($this->sys_fields["$campo"]) AND !isset($this->sys_fields["$campo"]["htmlentities"]) AND !is_array($valor))	
 				$this->sys_fields["$campo"]["htmlentities"]="true";
 								
@@ -869,6 +873,8 @@
 			# ASIGNA TODAS LAS VARIABLES QUE CONTENGAN VALOR
 			# AL ARRAY DECLARADO $this->sys_fields EN EL MODEDLO
 			# O CREANDO UNA NUEVA PROPIEDAD 
+			
+			#$this->__PRINT_R($_REQUEST);
 						
 			if(is_array(@$this->sys_fields))
 			{
@@ -880,9 +886,19 @@
 					
 					if(isset($_REQUEST[$request_campo]))
 					{
+						#if($_REQUEST[$request_campo]=="alealonso")
+						#	$this->__PRINT_R($_REQUEST[$request_campo]);
+						
 						$valor					=$_REQUEST[$request_campo];
 						$valor					=$this->__REQUEST_AUX($campo,$valor);
+						
+						
 						$this->sys_fields["$campo"]["value"]	=$valor;
+
+						#if($_REQUEST[$request_campo]=="alealonso")
+						#	$this->__PRINT_R($this);
+
+
 						
 						unset($_REQUEST["$request_campo"]);
 					}
@@ -949,8 +965,7 @@
 					$this->request["files"]			=$valor;						
 				}
 				*/	
-			}	
-						
+			}							
 			if(!isset($this->request["sys_view"]))	$this->request["sys_view"]	="";	
 			
 		} 
@@ -2321,7 +2336,12 @@
                     $colors					=array();
                     if(substr(@$this->sys_private["action"],0,5)!="print")	    $actions["sys_class"]	=$class;
 	                else    								                    $actions["style_tr"]	=$style;
-                                        				
+
+					$show	="";
+					$write	="";
+					$delete	="";
+					$check	="";
+                                        				                                        				
                     if(isset($this->sys_memory) AND $this->sys_memory!="")
 					{
 						$show	="<font class_field=\"{$this->sys_memory}\" class_field_id=\"$row_id\" id=\"{id}\" class_one=\"{$this->class_one}\" data=\"&sys_section_{$this->sys_name}=show&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={id}\" class=\"sys_report_memory ui-icon ui-icon-contact\"></font>";	
@@ -2330,11 +2350,14 @@
 						$check	="<input class=\"view_report\" class_field=\"{$this->sys_memory}\" class_field_id=\"$row_id\" id=\"{id}\" class_one=\"{$this->class_one}\" type=\"checkbox\" id=\"{$option["name"]}\" name=\"{$option["name"]}[{id}]\" value=\"{id}\">";
 					}				
 					else	
-					{			
-						$show	="<font data=\"&sys_section_{$this->sys_name}=show&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={{$this->sys_private["field"]}}\"  class=\"sys_report ui-icon ui-icon-contact\"></font>";
-						$write	="<font data=\"&sys_section_{$this->sys_name}=write&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={{$this->sys_private["field"]}}\"  class=\"sys_report ui-icon ui-icon-pencil\"></font>";
-						$delete	="<font data=\"&sys_section_{$this->sys_name}=delete&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={{$this->sys_private["field"]}}\"  class=\"sys_report ui-icon ui-icon-trash\"></font>";
-						$check	="<input class=\"view_report\" type=\"checkbox\" id=\"{$option["name"]}\" name=\"{$option["name"]}[{id}]\" value=\"{{$this->sys_private["field"]}}\">";
+					{	
+						if(isset($this->sys_private["field"]))
+						{							
+							$show	="<font data=\"&sys_section_{$this->sys_name}=show&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={{$this->sys_private["field"]}}\"  class=\"sys_report ui-icon ui-icon-contact\"></font>";
+							$write	="<font data=\"&sys_section_{$this->sys_name}=write&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={{$this->sys_private["field"]}}\"  class=\"sys_report ui-icon ui-icon-pencil\"></font>";
+							$delete	="<font data=\"&sys_section_{$this->sys_name}=delete&sys_action_{$this->sys_name}=&sys_id_{$this->sys_name}={{$this->sys_private["field"]}}\"  class=\"sys_report ui-icon ui-icon-trash\"></font>";
+							$check	="<input class=\"view_report\" type=\"checkbox\" id=\"{$option["name"]}\" name=\"{$option["name"]}[{id}]\" value=\"{{$this->sys_private["field"]}}\">";
+						}
 					}	
                     
                     if(!is_null($option))
@@ -2758,7 +2781,7 @@
 		{
 			if($option["type_view"]=="report")
 			{
-			    if($this->sys_private["action"]=="__clean_session")
+			    if($this->sys_private["action"]=="__clean_session" OR $this->sys_private["action"]=="seach")
 			    {
 				    if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/report_title";
 				    if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/report_body";			
@@ -3800,6 +3823,9 @@
 			    	$action		=0;
 			    	$titulo		="";
 					$sys_input	="";
+					$text	="";
+
+
 					
 					if(isset($data["icon"]))		$icon	=$data["icon"];
 					if(isset($data["text"]))		$text	=$data["text"];
@@ -3828,19 +3854,19 @@
 			        		
 		        			if(in_array($etiqueta,array("create","write","report","kanban","graph")))	
 		        			{	##### ICONO #################
-		        				$text	="false";
+		        				if($text=="")				$text	="false";
 		        				$action	="1";
 		        				$name	="$etiqueta";
 		        			}
 		        			elseif(in_array(substr($etiqueta,0,5),array("creat","write","repor","kanba","actio","graph")))	
 		        			{	##### TEXTO #################
-		        				$text	="true";
+			        			if($text=="")				$text	="true";
 		        				$action	="1";
 		        				$name	="$etiqueta";
 		        			}
 		        			else
 		        			{
-		        				$text	="true";
+		        				if($text=="")				$text	="true";
 		        				$name	="$etiqueta";
 		        			}			        			
 
@@ -3858,12 +3884,21 @@
 							if($titulo=="")	$titulo=$valor;							
 			        	}
 			        }
+
+
 			        
 			        	
 			        if(@$name=="action")    
 			        {
 			        	$sys_input.="$(\"#sys_action_{$this->sys_name}\").val(\"__SAVE\");";
 			        }	
+					elseif(in_array(substr($name,0,7),array("section")))	    
+			        {
+			        	$action	="1";
+			        	$sys_input.="
+			        		$(\"#sys_section_{$this->sys_name}\").val(\"$name\");
+			        	";			        	
+			        }			        
 			        elseif(in_array($etiqueta,array("create","write","report","kanban","graph")))	
 			        {
 			        	$sys_input.="

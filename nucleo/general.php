@@ -6,7 +6,7 @@
 		##############################################################################		
 		public function __CONSTRUCT($option=array())
 		{
-		    #$this->__PRINT_R($_FILES);
+
 		    //unset($_SESSION);			
 		    
 			if(!isset($option))							$option				=array();
@@ -55,7 +55,6 @@
 			    
 			    ini_set('display_errors', 1);				
 			    
-			    #$this->__PRINT_R($_SERVER["SERVER_NAME"]);
 			    
 			    if(isset($_SESSION["var"]["server_error"]) AND in_array(@$_SERVER["SERVER_NAME"],@$_SESSION["var"]["server_error"]))
 			    {	
@@ -72,6 +71,7 @@
 			    if($this->sys_name!="general" AND $this->sys_recursive<3)
 			    {
 				    $this->__REQUEST();		
+
 				    
 				    $this->__CREATE_OBJ();
 					@include("nucleo/l18n/" . @$_SESSION["user"]["l18n"].".php");			    
@@ -100,19 +100,32 @@
 				    {
 					    $this->__PRE_DELETE(@$this->sys_private["id"]);				
 				    }
+
+
+
 				    
 				    $this->__FIND_FIELD_ID();		
+				    
+				    
+				    
+				    
 				    $this->__FIND_FIELDS();
+
+
+
+
 								    
 				    if(@$_SESSION["var"]["vpath"]==$this->sys_name."/")
 				    {	
 					    $this->__PRE_SAVE();
 				    }									
 				    $this->__FIND_FIELDS(@$this->sys_private["id"]);
+				    
+			    
+				    
+				    
 			    }
-        	}
-        	
-        	#$this->__PRINT_R($_SESSION["group"]);
+        	}        
 		}
 		public function __BROWSE($option=array())
     	{    	
@@ -375,8 +388,6 @@
    			}
    			$return["data"] 	= $this->__EXECUTE($this->sys_sql);
 
-            #$this->__PRINT_R($return["data"]);
-
 			if(is_array(@$return["data"][0]))
 			{			
 				foreach($return["data"][0] as $campo => $title)
@@ -493,7 +504,6 @@
 		##############################################################################		 		
 		public function __SAVE($datas=NULL,$option=NULL)
     	{
-    		#$this->__PRINT_R($this);
     		if(!isset($this->sys_private["field"]) OR $this->sys_private["field"]=="")
 	    		$this->__FIND_FIELD_ID();
     	
@@ -523,7 +533,6 @@
 					$option_browse=array();
 					$option_browse["where"]=array("{$this->sys_private["field"]}='{$this->sys_private["id"]}'");
 					$data_anterior=$this->__BROWSE($option_browse);				
-					#$this->__PRINT_R($data_anterior);
 				}		
 				if(is_array($datas))
 				{
@@ -550,12 +559,6 @@
 						}
 						else			
 						{					
-							#$this->__PRINT_R("$campo='$valor'");
-																
-							#$this->__PRINT_R("$campo = $campo_anterior != $valor'   ");
-							
-							
-							
 							if(isset($data_anterior) AND is_array($data_anterior) AND isset($data_anterior["data"]))
 							{
 								$campo_anterior=$data_anterior["data"][0]["$campo"];
@@ -563,9 +566,7 @@
 								
 								
 								if($campo_anterior!=$valor)
-								{
-									#$this->__PRINT_R("$campo_anterior!=$valor");				
-																		
+								{																	
 									$title=$this->sys_fields["$campo"]["title"];
 									if($campo_anterior=="")
 									{
@@ -612,8 +613,7 @@
 						$data_historicos="descripcion='<font>$user_name</font><font><b>CREO</b> El registro</font>'";					
 					}						
 					else 
-					{		
-						#$this->__PRINT_R($modificados);					
+					{					
 						$this->sys_sql	="UPDATE {$this->sys_table} SET $fields WHERE {$this->sys_private["field"]}='{$this->sys_private["id"]}'";					
 						if(@$modificados!="")
 						{
@@ -632,9 +632,7 @@
 					#$option_conf["close"]	=1;
 					
 					$this->__EXECUTE($this->sys_sql,$option);
-					
-					#$this->__PRINT_R($this->sys_sql);
-					
+										
 					if(@$this->OPHP_conexion->error=="")
 					{					
 						unset($option["open"]);
@@ -740,7 +738,7 @@
 					$class_field	=$datas["class_field"];
 					$class_section	=$datas["class_section"];
 					
-					#$this->__PRINT_R($datas);
+
 					
 					if(!isset($_SESSION["SAVE"]["$class_one"][$class_field]))
 					{	
@@ -848,7 +846,7 @@
 			{						
 				while($datos = $resultado->fetch_assoc())
 				{							    
-				    #$this->__PRINT_R($datos);    
+
 					foreach($datos as $field =>$value)
 					{					
 						if(is_string($field) AND !is_null($field))
@@ -866,7 +864,7 @@
        		if(isset($this->OPHP_conexion->error) AND $this->OPHP_conexion->error!="")
        		{       			
        			$sql="INSERT INTO sql_errores SET sql=\"$comando_sql\", modelo=\"{$this->sys_object}\"";
-       			#$this->__PRINT_R($this->OPHP_conexion->error);
+
 				#@mysql_query($comando_sql);
        		    #$this->__MESSAGE_EXECUTE    =$error;
        		}
