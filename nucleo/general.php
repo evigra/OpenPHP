@@ -1,4 +1,9 @@
 <?php
+	/*
+		EXPRECIONES REGULARES
+		^[DROP TABLE]+[a-z` _]+[`;]+$   	Para borrar DROP TABLE IF EXISTS `alert`; de la expertacion
+	*/
+
 	class general extends auxiliar
 	{   
 		##############################################################################	
@@ -94,8 +99,6 @@
 				    if(!isset($_SESSION["pdf"]["PDF_HEADER_LOGO_WIDTH"]))	$_SESSION["pdf"]["PDF_HEADER_LOGO_WIDTH"]	=20;   	
 				    if(!isset($_SESSION["pdf"]["PDF_MARGIN_TOP"]))			$_SESSION["pdf"]["PDF_MARGIN_TOP"]			=50;   	
 
-
-								    
 				    if(@$this->sys_private["section"]=="delete")
 				    {
 					    $this->__PRE_DELETE(@$this->sys_private["id"]);				
@@ -109,7 +112,7 @@
 				    
 				    
 				    
-				    $this->__FIND_FIELDS();
+				    //$this->__FIND_FIELDS();
 
 
 
@@ -536,6 +539,7 @@
 				}		
 				if(is_array($datas))
 				{
+					
 					$modificados="";
 					foreach($datas as $campo=>$valor)
 					{					

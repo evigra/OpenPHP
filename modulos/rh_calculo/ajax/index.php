@@ -1,18 +1,17 @@
 <?php
 	require_once("../../../nucleo/sesion.php");	
 	$option				=array();	
-	$option["name"]		="p_txt";	
+	$option["name"]		="rh_c";	
 	
-	$objeto				=new personal_txt($option);	
-	#$objeto->__PRINT_R($option);
-	#$objeto->__PRINT_R($objeto);
-
+	$objeto				=new rh_calculo($option);	
 	
 	$option["actions"]	="false";
-	$option["where"]	=array("trabajador_clave='{$_GET["matricula"]}'","dias LIKE '%/". date("n")."/%'");
+	$option["where"]	=array(
+		"trabajador_clave='{$_GET["matricula"]}'",
+		"left(registro,7)=left('{$_GET["fecha"]}',7)",
+	);
 				
-	$data										= $objeto->__REPORT_SUSTITUTO($option);
+	$data										= $objeto->__REPORTE($option);
 	
 	echo $data["html"];
-	
 ?>

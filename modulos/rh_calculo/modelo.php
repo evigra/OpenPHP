@@ -12,6 +12,12 @@
 			    "showTitle"         => "si",
 			    "type"              => "primary key",
 			),
+			"folio"	    =>array(
+			    "title"             => "Folio",
+			    "title_filter"      => "Folio",
+			    "type"              => "input",
+			),
+
 			"estatus"	    =>array(
 			    "title"             => "Estatus",
 			    "showTitle"         => "si",
@@ -33,9 +39,11 @@
 				"title_filter"      => "Nombre",
 			    "showTitle"         => "si",
 			    "type"              => "input",
+			    /*
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
-			    ),			    			    
+			    ),
+			    */			    			    
   			    "style"             => array(			    	
 					"color"=>array("red"=>"1==1"),
 					"font-size"=>array("25px"=>"1==1"),					
@@ -50,14 +58,21 @@
 			    "attr"             => array(		
 					"required",					
 			    ),				
+  			    "style"             => array(			    	
+					"color"=>array("red"=>"1==1"),
+					"font-size"=>array("25px"=>"1==1"),					
+			    ),			    			    
+			    
 			),
 			"trabajador_horario"	    =>array(
 			    "title"             => "Horario",
 			    "showTitle"         => "si",
 			    "type"              => "input",
+			    /*
   			    "attr"             => array(
 			    	"readonly"=>"readonly"
-			    ),			    			    
+			    ),	
+			    */		    			    
 			),			
 			"trabajador_horario_1"	    =>array(
 			    "title"             => "Horario",
@@ -71,9 +86,11 @@
 			    "title"             => "Puesto",
 			    "showTitle"         => "si",
 			    "type"              => "input",
+			    /*
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
-			    ),			    			    			    
+			    ),			    	
+			    */		    			    
 			),
 			"trabajador_puesto_1"	    =>array(
 			    "title"             => "Puesto",
@@ -465,7 +482,16 @@
 			    "type"              => "input",
 			    "default"           => "",
 			    "value"             => "",			    
-			),				
+			),	
+			"f_autorizo"	    =>array(
+			    "title"             => "Autorizo",
+			    "showTitle"         => "si",
+			    "type"              => "input",
+			    "default"           => "",
+			    "value"             => "",			    
+			),	
+						
+						
 			"cptos_fijos"	    =>array(
 			    "title"             => "CF",
 			    "showTitle"         => "si",
@@ -553,40 +579,50 @@
 		##############################################################################	
 		##  Metodos	
 		##############################################################################
-        
+        /*
 		public function __CONSTRUCT()
 		{	
 			parent::__CONSTRUCT();		
 			#$this->__PRINT_R($_SESSION);
 			
 		}
+		*/
 		#/*
    		public function __SAVE($datas=NULL,$option=NULL)
     	{
+    		#$this->__PRINT_R($datas);
+    		
 		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    		   
 		    $datas["company_id"]    	=@$_SESSION["company"]["id"];
     	    	
     	    $datas["f_estatus"]		=$_SESSION["var"]["datetime"];	
-    		## GUARDAR USUARIO
-    		/*
-			if($datas["estatus"]=="APROVADO")
-			{
-				$datas["autorizo"]		=$_SESSION["user"]["name"];
-				$datas["m_autorizo"]	=$_SESSION["user"]["email"];								
-			}				
-			*/
-			
+
+			$nroDia 	= date("j", strtotime($datas["registro"]));
+			$nroMes 	= date("n", strtotime($datas["registro"]));			
+			if($nroDia<16)	$quincena	= 1;
+			else			$quincena	= 2;			
+		   	$quincena				= ($nroMes * 2) - 2 + $quincena; 	
+		   	
+		   	$datas["quincena"]		=$quincena;	
+		   	
 			if($this->sys_private["section"]=="create")    		
 			{
+				$option_folio["variable"]		="RHRE";
+				$option_folio["subvariable"]	=date("Y");
+				$option_folio["tipo"]			="RH";
+				$option_folio["subtipo"]		="Reclamaciones";
+			
+				$datas["folio"]			=$this->__FOLIOS($option_folio);
+							
 				$datas["estatus"]		="Reclamacion Solicitada";
 				$datas["d_estatus"]		="Entregaste documentacion para solicitar una reclamacion con tu representante sindicato";		
-				$datas["registro"]		=$this->sys_date;
+				#$datas["registro"]		=$this->sys_date;
 				
 				$datas["elaboro"]		=$_SESSION["user"]["name"];
 				$datas["m_elaboro"]		=$_SESSION["user"]["email"];				
 				$datas["f_elaboro"]		=$_SESSION["var"]["datetime"];
 				
-								
+				/*				
 				$datas_mail=array(
 					"title"		=>"Sistema IMSS",
 					"to"		=>"evigra@gmail.com",
@@ -594,28 +630,31 @@
 					
 				);
 				#$this->send_mail($datas_mail);
+				$this->send_mail($datas_mail);
+				*/
 
-				
-				
-				
-			}
-			
+				/*
+				$data_wa["number"]		="5213121340216";
+				$data_wa["number"]		="5213141182618";
+				$data_wa["text"]		="PRUEBA DE MENSAJE";
+
+				$this->__WA($data_wa);				
+				*/
+			}			
 			#$datas["cptos_fijos"]		=count($datas["fijos_ids"]);		
 			#$datas["cpto_1vez"]			=count($datas["conceptos_ids"]);		
 			#$datas["hist_acum"]			=count($datas["historicos_ids"]);		
-			
-			
+						
 			#$option["echo"]=$datas["total"];
 			
-			#$this->__PRINT_R($datas);
+
 			##########################33    		
     	    $save	= parent::__SAVE($datas,$option);
 
     	    
 			if($this->sys_private["section"]=="create")    		
 			{				
-				$_SESSION["pdf"]["formato"]		="sitio_web/html/PDF_FORMATO_SNTSS";			
-			
+				$_SESSION["pdf"]["formato"]		="sitio_web/html/PDF_FORMATO_SNTSS";						
 				$option_print=array(
 					"id"		=>"$save",
 					"section"	=>"impresion_sindicato",
@@ -881,6 +920,52 @@
 				}			
 			}    	
 		}
+   		public function __CALCULO_RECIBIDO()
+    	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_calculo"]=="" AND $data["data"][0]["f_p_recibio"]!="")
+					{											
+						$data_recibido					=array();
+
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Reclamacion Recibida";	
+						$data_recibido["d_estatus"]			="La delegacion del estado, recibio la documentacion de tu solicitud de reclamacion";	
+						
+						$data_recibido["f_calculo"]			=$_SESSION["var"]["datetime"];
+						
+						$this->__SAVE($data_recibido);				
+					}
+				}			
+			}    	
+		}
+		
+   		public function __CALCULO_IMPROCEDENTE()
+    	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_calculo"]=="")
+					{											
+						$data_recibido					=array();
+
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Improcedente por Adscripcion";
+												
+						if($data["data"][0]["d_calculo"]=="")
+							$data_recibido["d_estatus"]		="Esta solicitud es improcedente, porque no hay evidencia para sustentar la solicitud.";
+																							
+						$this->__SAVE($data_recibido);				
+					}
+				}			
+			}    	
+		}	
+
    		public function __CALCULO_RECHAZO()
     	{
 			if(isset($this->request["rh_calculo"]))
@@ -941,7 +1026,7 @@
 			
 			
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 			
 			
@@ -962,32 +1047,44 @@
 		############################################################################################################
    		public function __REPORT_RECIBIDO() // PASO 2
     	{
-    		$this->__RECIBIR_ADSCRIPCION();
-    		
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
 			
-			#$option["echo"]		="REPORT RECIBIDO";		
 			
-						
-			$option["where"][]				="f_p_recibio != ''";					
-			$option["where"][]				="f_calculo is NULL";		
-						
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
-			#$option["color"]["black"]		="1==1";
-			
-			
-			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
-			{					
-				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
-			}
-				
-			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			if($this->__NIVEL_SESION(">=50")==true)	 // NIVEL USUARIO SINDICATO Y ADSCRIPCION			
 			{			
-				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
-				$option["actions"]["check"]		="$"."row[\"f_p_recibio\"]!= ''";	
+				$this->__RECIBIR_ADSCRIPCION();
+				$option["where"][]				="f_p_recibio != ''";					
+				$option["where"][]				="f_calculo is NULL";		
+							
+				$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+				$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
+
+				if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+				{										
+					$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+				}				
+				elseif($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+				{			
+					$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+					$option["actions"]["check"]		="$"."row[\"f_p_recibio\"]!= ''";	
+				}
+			}	
+			elseif($this->__NIVEL_SESION("==40")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				$this->__RECIBIR_DELEGACION();
+			
+				$option["where"][]				="f_d_recibio != ''";					
+				//$option["where"][]				="f_calculo is NULL";		
+							
+				$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+				$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
+
+
+				//$this->__RECIBIR_ADSCRIPCION();
+				$option["actions"]["write"]		="$"."row[\"f_d_recibio\"]!=''";	
+				$option["actions"]["check"]		="$"."row[\"f_d_recibio\"]!= ''";	
 			}
 			
 
@@ -996,7 +1093,7 @@
 		############################################################################################################
    		public function __REPORT_CALCULO() // PASO 3 -1
     	{
-    		$this->__CALCULO_PROCESADO();
+    		//$this->__CALCULO_PROCESADO();
     		
 			$option				=array();			
 			$option["where"]	=array();
@@ -1005,20 +1102,29 @@
 			$option["where"][]				="f_calculo != ''";						
 			$option["where"][]				="f_d_recibio is NULL";					
 										
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_calculo\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_calculo\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
-				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
-			}
 				
-			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}				
+			elseif($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 			{			
+				$this->__CALCULO_PROCESADO();
 				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
 			}
+			elseif($this->__NIVEL_SESION("==40")==true)	 // NIVEL USUARIO DELEGACION 
+			{			
+				$this->__CALCULO_RECIBIDO();
+				$option["actions"]["check"]		="$"."row[\"f_calculo\"] != ''";	
+				#$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			}
+			
+			
 			
 			return $this->__REPORTE($option);
 		}						
@@ -1034,7 +1140,7 @@
 			$option["where"][]				="estatus = 'Devuelta por Adscripcion'";						
 										
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
@@ -1050,6 +1156,63 @@
 			
 			return $this->__REPORTE($option);
 		}	
+
+   		public function __REPORT_IMPROCEDENTE() // PASO 3 - 2
+    	{
+    		#$this->__CALCULO_IMPROCEDENTE();
+    		
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+												
+			$option["where"][]				="estatus = 'Improcedente por Adscripcion'";						
+										
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
+			#$option["color"]["black"]		="1==1";
+						
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			}
+			
+			return $this->__REPORTE($option);
+		}	
+   		public function __REPORT_PROCEDENTE() // PASO 3 - 2
+    	{
+    		#$this->__CALCULO_IMPROCEDENTE();
+    		
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+												
+			$option["where"][]				="estatus = 'Improcedente por Adscripcion'";						
+										
+			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
+			#$option["color"]["black"]		="1==1";
+						
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+			}
+			
+			return $this->__REPORTE($option);
+		}	
+
+		
 		############################################################################################################
    		public function __REPORT_ENVIAR()
     	{
@@ -1060,7 +1223,7 @@
 			$option["where"][]				="f_p_recibio != ''";										
 						
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
@@ -1087,7 +1250,7 @@
 			
 			#$option["color"]["red"]							="$"."row[\"estatus\"]=='Devuelta por Adscripcion'";
 			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 2 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 			
 			

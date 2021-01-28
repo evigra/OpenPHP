@@ -7,8 +7,7 @@
 		}
 		else			
 		{			
-			$("div.diferente").show();
-					
+			$("div.diferente").show();					
 		}	
 	
 	}
@@ -19,7 +18,8 @@
 		$("#che_plaza").click(function(){
 			muestra_diferente(this);
 		});
-		
+	
+		/*	
 		if($("#action_aprovar").length>0) 
 		{
 			$("#action_aprovar").click(function()
@@ -36,7 +36,8 @@
 				str_url="../personal_checadas/&sys_filter_personal_checadas_matricula=" + $("#trabajador_clave").val();
 				window.open(str_url);	
 			});			
-		}		
+		}
+		
 		if($("#action_cancelar").length>0) 
 		{
 			$("#action_cancelar").click(function()
@@ -46,6 +47,9 @@
 				$("form").submit();									
 			});			
 		}		
+ 
+		
+		
 		if($("#action_incumplir").length>0) 
 		{
 			
@@ -56,10 +60,11 @@
 				$("form").submit();									
 			});			
 		}		
-		
+		*/
 		$("#trabajador_clave").focusout(function() 
 		{		
-			///*
+
+
 			$.ajax({
 				type: 'GET',
 				url: '../modulos/personal/ajax/personal_calculo.php',
@@ -70,7 +75,21 @@
 					var obj = $.parseJSON( response);
 					valida_matricula("trabajador", obj);
 				}
-			});			
+			});		
+
+			$.ajax({
+				type: 'GET',
+				url: '../modulos/rh_calculo/ajax/index.php',
+				contentType:"application/json",
+				data:"&matricula="+$(this).val()+"&fecha="+$("input#registro").val(),				
+				success: function (res) 
+				{
+					$("div#REPORT").html(res);
+
+				}
+			});
+
+				
 			//*/
 			/*
 		    $.ajax({
@@ -203,5 +222,21 @@
 			
 		}	
 	}		
+	function reporte_ajax(obj)
+	{
+		$.ajax({
+			type: 'GET',
+			url: '../modulos/rh_calculo/ajax/index.php',
+			contentType:"application/json",
+			data:"&matricula="+$(obj).val()+"&sys_action="+sys_action,				
+			success: function (res) 
+			{
+				$("div#REPORT").html(res);
+				sys_action="";
+			}
+		});
+		sys_action="";
+	}
+	
     
     // ###########################################################################

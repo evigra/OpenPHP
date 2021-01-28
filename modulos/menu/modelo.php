@@ -35,7 +35,11 @@
 			"parent"	    =>array(
 			    "title"             => "Padre",
 			    "type"              => "input",
-			),											
+			),
+			"adjuntar_menu"	    =>array(
+			    "title"             => "Externo",
+			    "type"              => "checkbox",
+			),														
 		);				
 		##############################################################################	
 		##  Metodos	

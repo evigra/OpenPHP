@@ -94,6 +94,7 @@
 			#$data["ip"]	="172.24.20.17";	
 			#$data["ip"]	="172.24.20.18";	
 			$data["ip"]	="172.24.20.19";		
+			$data["ip"]	="11.1.6.13";	
 					
 					
 			#$this->__PRINT_R("CHECADASss");		
@@ -112,7 +113,7 @@
 			
 			$url = "http://{$data["ip"]}/csl/check";
 			
-			
+			/*
 			curl_setopt($ch,CURLOPT_URL,$url);
 			curl_setopt($ch,CURLOPT_POST, 1);                //0 for a get request
 			curl_setopt($ch,CURLOPT_POSTFIELDS,$postvars);
@@ -122,25 +123,34 @@
 			$response = curl_exec($ch);
 
 			$response="";
-	
+			*/
+			
+			
 			$postvars = "sdate={$data["inicio"]}&edate={$data["fin"]}&period=1";
-			for($a=1; $a<50; $a++)
+			
+			for($cien=0; $cien<3; $cien++)
 			{
-				$postvars.= "&uid=$a";					
+				for($a=1; $a<100; $a++)
+				{
+					$val= $cien*100 + $a;
+					$postvars.= "&uid=$val";					
+				}
+				$this->__PRINT_R($val);
+				$url = "http://{$data["ip"]}/form/Download  ";
+				curl_setopt($ch,CURLOPT_URL,$url);
+				curl_setopt($ch,CURLOPT_POST, 1);                //0 for a get request
+				curl_setopt($ch,CURLOPT_POSTFIELDS,$postvars);
+				curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch,CURLOPT_CONNECTTIMEOUT ,3);
+				curl_setopt($ch,CURLOPT_TIMEOUT, 40);
+				$response	= curl_exec($ch);
+				
+				$rows		=explode("\n",$response);		
+				
+				$this->__PRINT_R($rows);
+
 			}			
 			
-			$url = "http://{$data["ip"]}/form/Download  ";
-			curl_setopt($ch,CURLOPT_URL,$url);
-			curl_setopt($ch,CURLOPT_POST, 1);                //0 for a get request
-			curl_setopt($ch,CURLOPT_POSTFIELDS,$postvars);
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch,CURLOPT_CONNECTTIMEOUT ,3);
-			curl_setopt($ch,CURLOPT_TIMEOUT, 40);
-			$response	= curl_exec($ch);
-			
-			$rows		=explode("\n",$response);		
-			
-			$this->__PRINT_R($rows);
 			$todo=array();
 			foreach($rows as $row)
 			{

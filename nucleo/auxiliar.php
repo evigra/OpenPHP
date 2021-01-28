@@ -595,13 +595,21 @@
 				    $option_html                ="";
 				    foreach($datas_menu as $data_menu)
 				    {
-				        $link								=$data_menu["link"]."&sys_menu=".$data_menu["id"] . $data_menu["variables"];				
+				        $link			=$data_menu["link"];
+				        if($data_menu["adjuntar_menu"]!=1)	
+				        {			    				        	
+					        $link	.="&sys_menu=".$data_menu["id"] . $data_menu["variables"];								
+					    }			
+					    else
+					    {
+					    	$open_link		="target=\"_blank\"";   
+					    }		    
 					    if($_SESSION["var"]["menu"]==$data_menu["id"])
 
 						    $menu_principal=$data_menu["name"];
 					    
 					    @$option_html	.="
-						    <li><a href=\"{$link}\">{$data_menu["name"]}</a></li>
+						    <li><a href=\"{$link}\" $open_link >{$data_menu["name"]}</a></li>
 					    ";
 				    }
 				    if(count($datas_menu)>1)
@@ -696,22 +704,42 @@
 					    $option_html	="";
 					    foreach($datas_opcion as $data_opcion)
 					    {
-
-						    $link			=$data_opcion["link"]."&sys_menu={$sys_menu}" . $data_opcion["variables"];
+					    	$open_link		="";
+						    $link			=$data_opcion["link"];						    
+						    if($data_opcion["adjuntar_menu"]!=1)				       
+						    {
+							    $link		.="&sys_menu={$sys_menu}" . $data_opcion["variables"];
+						    }
+							else
+							{
+								$open_link		="target=\"_blank\"";   
+							}		    
+						    
 						    $option_html	.="
-							    <li><a href=\"{$link}\">{$data_opcion["name"]}</a></li>
+							    <li><a href=\"{$link}\" $open_link >{$data_opcion["name"]}</a></li>
 						    ";
 					    }	
 					    
+					    $open_link		="";
 					    
 					    if($menu_web==0)    $link="#";					    
-					    else                $link			=$data_submenu["link"]."&sys_menu={$sys_menu}" . $data_submenu["variables"];
+					    else                
+					    {					    	
+						    $link			=$data_submenu["link"];
 					    
-					    
+						    if($data_submenu["adjuntar_menu"]!=1)				       
+						    {
+							    $link			="&sys_menu={$sys_menu}" . $data_submenu["variables"];
+					    	}
+							else
+							{
+								$open_link		="target=\"_blank\"";   
+							}		    					    	
+					    }
 					    
 					    
 					    $submenu_html	.="
-						    <li><a href=\"$link\"><b>{$data_submenu["name"]}</b></a>
+						    <li><a href=\"$link\" $open_link ><b>{$data_submenu["name"]}</b></a>
 							    <ul class=\"submenu\">
 								    $option_html
 							    </ul>
@@ -2564,7 +2592,7 @@
 			
 			if(count($datas)>0)
 				$sql    	="
-					UPDATE configuracion SET valor=LPAD(valor+1,6,'0')						
+					UPDATE configuracion SET valor=LPAD(valor+1,4,'0')						
 					WHERE 1=1 
 						AND company_id='{$option["company_id"]}' 
 						AND variable='{$option["variable"]}' 
@@ -2576,7 +2604,7 @@
 			else	
 				$sql    	="
 					INSERT INTO configuracion SET 
-						valor=LPAD(1,6,'0'),					 
+						valor=LPAD(1,4,'0'),					 
 						company_id='{$option["company_id"]}',
 						variable='{$option["variable"]}', 
 						subvariable='{$option["subvariable"]}' ,
@@ -2599,7 +2627,13 @@
 			";
 			$datas   	= $this->__EXECUTE("$sql");
 			
-			return $datas[0]["valor"];		    	
+			$return=$datas[0]["variable"];
+			if($datas[0]["subvariable"]!="")
+				$return.="/".$datas[0]["subvariable"];
+
+			$return.="/".$datas[0]["valor"];
+				
+			return $return;		    	
     	}
 		###################################    	
 		public function __VIEW_HEAD($option)
