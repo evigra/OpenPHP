@@ -9,7 +9,6 @@
 		var $sys_fields		=array( 
 			"id"	    =>array(
 			    "title"             => "Folio",
-			    "showTitle"         => "si",
 			    "type"              => "primary key",
 			),
 			"folio"	    =>array(
@@ -20,25 +19,30 @@
 
 			"estatus"	    =>array(
 			    "title"             => "Estatus",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),			
 			"f_estatus"	    =>array(
 			    "title"             => "Actualizado",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			),			
 			"d_estatus"	    =>array(
 			    "title"             => "Descripcion Estatus",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			),			
+			),						
+			"firma_adscripcion"	    =>array(
+			    "title"             => "Firma Elaboro",
+			    "type"              => "input",
+			),						
+
 			
 			"trabajador_nombre"	    =>array(
 			    "title"             => "Trabajador",
 				"title_filter"      => "Nombre",
-			    "showTitle"         => "si",
 			    "type"              => "input",
+			    "attr"             => array(		
+					"required",					
+			    ),				
+
 			    /*
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
@@ -53,7 +57,6 @@
 			"trabajador_clave"	    =>array(
 			    "title"             => "Matricula",
 				"title_filter"      => "Matricula",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			    "attr"             => array(		
 					"required",					
@@ -66,7 +69,6 @@
 			),
 			"trabajador_horario"	    =>array(
 			    "title"             => "Horario",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			    /*
   			    "attr"             => array(
@@ -76,7 +78,6 @@
 			),			
 			"trabajador_horario_1"	    =>array(
 			    "title"             => "Horario",
-			    "showTitle"         => "si",
 			    "type"              => "input",
   			    "attr"             => array(
 			    	"readonly"=>"readonly"
@@ -84,7 +85,6 @@
 			),
 			"trabajador_puesto"	    =>array(
 			    "title"             => "Puesto",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			    /*
 			    "attr"             => array(
@@ -94,7 +94,6 @@
 			),
 			"trabajador_puesto_1"	    =>array(
 			    "title"             => "Puesto",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
@@ -102,12 +101,10 @@
 			),			
 			"trabajador_puesto_id"	    =>array(
 			    "title"             => "Puesto",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),			
 			"trabajador_puesto_id_1"	    =>array(
 			    "title"             => "Puesto",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			    "attr"             => array(
 			    	"readonly"=>"readonly"
@@ -115,56 +112,39 @@
 			),				
 			"trabajador_departamento"	    =>array(
 			    "title"             => "Departamento",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			),			
 			"trabajador_dependencia"	    =>array(
 			    "title"             => "Dependencia",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),				
 			"trabajador_departamento_id"	    =>array(
 			    "title"             => "DepartamentoID",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),			
 			"sueldo"	    =>array(
 			    "title"             => "Sueldo",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),
 			"sueldo_1"	    =>array(
 			    "title"             => "Sueldo",
-			    "showTitle"         => "si",
 			    "type"              => "hidden",
 			),			
 			"trabajador_plaza"	    =>array(
 			    "title"             => "Plaza",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"trabajador_plaza_1"	   =>array(
 			    "title"             => "Plaza",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),			
 			"turno"	    =>array(
 			    "title"             => "turno",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",	  			    
 			),		
 			"turno_1"	    =>array(
 			    "title"             => "turno",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",	  			    
 			    "attr"             => array(							
 					"tabindex"		=>"2",
 			    ),				
@@ -173,12 +153,10 @@
 			"b2"	    =>array(
 			    "title"             => "b2",			    
 			    "type"              => "hidden",
-				"value"             => "",
 			),
 			"b2_1"	    =>array(
 			    "title"             => "b2",			    
 			    "type"              => "hidden",
-				"value"             => "",
 			),				
 			"b3"	    =>array(
 			    "title"             => "b3",			    
@@ -242,18 +220,12 @@
 
 			"che_plaza"	    =>array(
 			    "title"             => "Plaza Diferente",
-			    "showTitle"         => "si",
 			    "type"              => "checkbox",
-			    "default"           => "",
-			    "value"             => "",	
 				
 			),
 			"che_pago"	    =>array(
 			    "title"             => "Pago",
-			    "showTitle"         => "si",
 			    "type"              => "checkbox",
-			    "default"           => "",
-			    "value"             => "",	
 			    "attr"             => array(							
 					"tabindex"		=>"3",
 			    ),				
@@ -263,8 +235,6 @@
 			    "title"             => "Pago",
 			    "showTitle"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"4",
 			    ),				
@@ -272,10 +242,7 @@
 			),
 			"che_descuento"	    =>array(
 			    "title"             => "Descuento",
-			    "showTitle"         => "si",
 			    "type"              => "checkbox",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"5",
 			    ),								
@@ -284,8 +251,6 @@
 			    "title"             => "Descuento",
 			    "showTitle"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"6",
 			    ),				
@@ -295,8 +260,6 @@
 			    "title"             => "Reintegro",
 			    "showTitle"         => "si",
 			    "type"              => "checkbox",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"7",
 			    ),				
@@ -306,8 +269,6 @@
 			    "title"             => "Reintegro",
 			    "showTitle"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"8",
 			    ),				
@@ -315,10 +276,7 @@
 			),
 			"che_exclusion"	    =>array(
 			    "title"             => "Exclusion",
-			    "showTitle"         => "si",
 			    "type"              => "checkbox",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"9",
 			    ),				
@@ -328,8 +286,6 @@
 			    "title"             => "Exclusion",
 			    "showTitle"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"10",
 			    ),				
@@ -339,8 +295,6 @@
 			    "title"             => "Ajuste",
 			    "showTitle"         => "si",
 			    "type"              => "checkbox",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"11",
 			    ),				
@@ -348,10 +302,7 @@
 			),
 			"d_ajuste"	    =>array(
 			    "title"             => "Ajuste",
-			    "showTitle"         => "no",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"12",
 			    ),				
@@ -359,11 +310,7 @@
 			),			
 			"incidencia"	    =>array(
 			    "title"             => "Incidencia",
-				"title_filter"      => "Incidencia",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			    "attr"             => array(							
 					"tabindex"		=>"13",
 			    ),				
@@ -371,7 +318,6 @@
 			),				
 			"proceso"	    =>array(
 			    "title"             => "Proceso",
-			    "showTitle"         => "si",
 			    "type"              => "input",
 			    "attr"             => array(							
 					"tabindex"		=>"14",
@@ -380,7 +326,6 @@
 			),				
 			"del"	    =>array(
 			    "title"             => "Del",
-			    "showTitle"         => "si",
 			    "type"              => "date",
 			    "attr"             => array(							
 					"tabindex"		=>"15",
@@ -389,7 +334,6 @@
 			),
 			"al"	    =>array(
 			    "title"             => "Al",
-			    "showTitle"         => "si",
 			    "type"              => "date",
 			    "attr"             => array(							
 					"tabindex"		=>"16",
@@ -398,7 +342,6 @@
 			),
 			"motivo"	    =>array(
 			    "title"             => "Motivo",
-			    "showTitle"         => "si",
 			    "type"              => "textarea",
 			    "attr"             => array(
 			    	"style"=>"height:100px;",
@@ -410,8 +353,7 @@
 			    "type"              => "date",
 			    "attr"				=>array(
 			    	"placeholder"=>"AAAA-MM-DD",
-			    	"required",					
-			    
+			    	"required",								    
 			    ),
 
 			),			
@@ -427,7 +369,7 @@
 			    "type"              => "input",
 			),	
 			"f_elaboro"	    =>array(
-			    "title"             => "Elaboracion",
+			    "title"             => "Elaborado",
 			    "type"              => "date",
 			),
 			"p_recibio"	    =>array(
@@ -465,97 +407,66 @@
 			    "type"              => "date",
 			),
 
-
-
-			
 						
 			"autorizo"	    =>array(
 			    "title"             => "Autorizo",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),				
 			"m_autorizo"	    =>array(
 			    "title"             => "Autorizo",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),	
 			"f_autorizo"	    =>array(
 			    "title"             => "Autorizo",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),	
 						
 						
 			"cptos_fijos"	    =>array(
 			    "title"             => "CF",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),	
 			"cpto_1vez"	    =>array(
 			    "title"             => "C1V",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
 			),				
 			"hist_acum"	    =>array(
 			    "title"             => "HA",
-			    "showTitle"         => "si",
 			    "type"              => "input",
-			    "default"           => "",
-			    "value"             => "",			    
-			),				
-			/*
+			),							
 			"conceptos_ids"	    =>array(
 			    "title"             => "Horario",
-			    "showTitle"         => "si",
 			    "type"              => "form",
-			    "default"           => "",
-			    "value"             => "",
-			    "relation"          => "many2one",			    
-			    "class_name"       	=> "personal_cptos1vez",			    
-				#"class_template"  	=> "many2one_lateral",			    
+			    "relation"          => "many2one",
+			    "relation"          => "one2many",			    			    
+			    
+			    "class_name"       	=> "rh_calculo_cptos1vez",			    
 				"class_report" 		=> "kanban",			    
 			    "class_field_o"    	=> "id",
 			    "class_field_m"    	=> "calculo_id",				
-				#"class_field_l"    	=> "horario",	
 			),
-			#/*
+			
 			"fijos_ids"	    =>array(
 			    "title"             => "Horario",
 			    "showTitle"         => "si",
 			    "type"              => "form",
-			    "default"           => "",
-			    "value"             => "",
-			    "relation"          => "many2one",			    
-			    "class_name"       	=> "personal_cptosfijos",			    
-				#"class_template"  	=> "many2one_lateral",			    
+			    "relation"          => "many2one",
+			    "relation"          => "one2many",			    
+			    "class_name"       	=> "rh_calculo_cptosfijos",			    
 				"class_report" 		=> "kanban",			    
 			    "class_field_o"    	=> "id",
 			    "class_field_m"    	=> "calculo_id",				
-				#"class_field_l"    	=> "horario",	
 			),			
+			#/*
 			"historicos_ids"	    =>array(
 			    "title"             => "Horario",
 			    "showTitle"         => "si",
 			    "type"              => "form",
-			    "default"           => "",
-			    "value"             => "",
-			    "relation"          => "many2one",			    
-			    "class_name"       	=> "personal_cptoshistoricos",			    
-				#"class_template"  	=> "many2one_lateral",			    
+			    "relation"          => "one2many",			    
+			    "class_name"       	=> "rh_calculo_cptoshistoricos",			    
 				"class_report" 		=> "kanban",			    
 			    "class_field_o"    	=> "id",
 			    "class_field_m"    	=> "calculo_id",				
-				#"class_field_l"    	=> "horario",	
 			),						
 			#*/
 			
@@ -569,12 +480,77 @@
 			),						
 			"reclamacion"	    =>array(
 			    "title"             => "Descripcion",
-			    "type"              => "textarea",
+			    "type"              => "input",
+			    "attr"             => array(		
+					"required",					
+			    ),				    
 			),			
 			"f_calculo"	    =>array(
 			    "title"             => "Calculo Procesado",
 			    "type"              => "input",
 			),					
+			"calculo"	    =>array(
+			    "title"             => "Calculo",
+			    "type"              => "input",
+			),					
+			"m_calculo"	    =>array(
+			    "title"             => "Calculo",
+			    "type"              => "input",
+			),					
+			
+			"m_oficial_asignado"	    =>array(
+			    "title"             => "M. Oficial",
+			    "type"              => "input",
+			),		
+						
+			"autoriza_ads"	    =>array(
+			    "title"             => "Autoriza",
+			    "type"              => "input",
+			),		
+			"m_autoriza_ads"	    =>array(
+			    "title"             => "Matricula",
+			    "type"              => "input",
+			),		
+			"f_autoriza_ads"	    =>array(
+			    "title"             => "Autoriza",
+			    "type"              => "input",
+			),		
+			"observacion_ads"	    =>array(
+			    "title"             => "Observaciones",
+			    "type"              => "input",
+			),		
+			"devuelve"	    =>array(
+			    "title"             => "Devuelve",
+			    "type"              => "input",
+			),				
+			"f_devuelve"	    =>array(
+			    "title"             => "Devuelve",
+			    "type"              => "input",
+			),				
+			"m_devuelve"	    =>array(
+			    "title"             => "Devuelve",
+			    "type"              => "input",
+			),				
+			"m_devuelve"	    =>array(
+			    "title"             => "Devuelve",
+			    "type"              => "input",
+			),	
+			"che_014"	    =>array(
+			    "title"             => "014 Infecto No Medico",
+			    "type"              => "checkbox",				
+			),
+			"che_023"	    =>array(
+			    "title"             => "023 Infecto Medico",
+			    "type"              => "checkbox",				
+			),
+			"che_085"	    =>array(
+			    "title"             => "085 Nota de merito",
+			    "type"              => "checkbox",				
+			),
+			"che_086"	    =>array(
+			    "title"             => "086 Guardia Covid",
+			    "type"              => "checkbox",				
+			),			
 		);				
 		##############################################################################	
 		##  Metodos	
@@ -588,25 +564,34 @@
 		}
 		*/
 		#/*
-   		public function __SAVE($datas=NULL,$option=NULL)
+   		public function __OBTENER_QUINCENA($fecha)
     	{
-    		#$this->__PRINT_R($datas);
-    		
-		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    		   
-		    $datas["company_id"]    	=@$_SESSION["company"]["id"];
-    	    	
-    	    $datas["f_estatus"]		=$_SESSION["var"]["datetime"];	
-
-			$nroDia 	= date("j", strtotime($datas["registro"]));
-			$nroMes 	= date("n", strtotime($datas["registro"]));			
+			$nroAnio 	= date("Y", strtotime($fecha));
+			$nroDia 	= date("j", strtotime($fecha));
+			$nroMes 	= date("n", strtotime($fecha));			
 			if($nroDia<16)	$quincena	= 1;
 			else			$quincena	= 2;			
-		   	$quincena				= ($nroMes * 2) - 2 + $quincena; 	
-		   	
-		   	$datas["quincena"]		=$quincena;	
-		   	
+
+			$quincena	=($nroMes * 2) - 2 + $quincena; 	
+			
+		   	return $nroAnio . str_pad($quincena, 3, "0", STR_PAD_LEFT);
+		}			
+   		public function __SAVE($datas=NULL,$option=NULL)
+    	{    		    		
+		    if(!isset($_SESSION["company"]["id"]))     $_SESSION["company"]["id"]=1;    		    		   
+		    $datas["company_id"]    	=@$_SESSION["company"]["id"];    	    	
+    	    $datas["f_estatus"]		=$_SESSION["var"]["datetime"];	
+
+
+
+			if(isset($datas["trabajador_nombre"]))	$datas["trabajador_nombre"]		=strtoupper($datas["trabajador_nombre"]);
+			if(isset($datas["reclamacion"]))		$datas["reclamacion"]			=strtoupper($datas["reclamacion"]);
+
+
 			if($this->sys_private["section"]=="create")    		
-			{
+			{				
+				if(isset($datas["registro"]))		$datas["incidencia"]		=$this->__OBTENER_QUINCENA($datas["registro"]);		
+			
 				$option_folio["variable"]		="RHRE";
 				$option_folio["subvariable"]	=date("Y");
 				$option_folio["tipo"]			="RH";
@@ -675,7 +660,7 @@
 			$_SESSION["pdf"]["save_name"]			="";
 			$_SESSION["pdf"]["PDF_MARGIN_TOP"]		=10;
 			
-			$_SESSION["pdf"]["template"]			=$this->__FORMATO($this->sys_primary_id);
+			$_SESSION["pdf"]["template"]			=$this->__FORMATO($this->sys_private["id"]);
 		}		
    		public function __FORMATO($option)
     	{
@@ -707,19 +692,29 @@
 				$hoja2=0;
 				if(is_array($words) AND count($words)>0)
 				{	
-					$template								.=$this->__TEMPLATE("sitio_web/html/PDF_FORMATO_IMSS");							
+					$template								.=$this->__TEMPLATE("sitio_web/html/PDF_FORMATO_qr");
 					
-					$words									=array_merge(array("sys_modulo" => $this->__TEMPLATE($this->sys_module . "html/PDF_FORMATO")),$words);
+					$words									=array_merge(array("sys_modulo" => $this->__TEMPLATE($this->sys_var["module_path"]. "html/PDF_FORMATO")),$words);
 					
-					$words["sys_titulo"]					="COORDINACION DE GESTION DE RECURSOS HUMANOS";		
-					$words["sys_subtitulo"]					="DEPARTAMENTO DELEGACIONAL DE PERSONAL";					
+					$words["sys_title"]						="COORDINACION DE GESTION DE RECURSOS HUMANOS";		
+					$words["sys_subtitle"]					="DEPARTAMENTO DELEGACIONAL DE PERSONAL";		
+					
+					$words["qr"]							=$this->words["qr"];
+
+			
 				
-					if(@$dato["trabajador_departamento_id"])
-						$words["lugar"]						=$this->lugar(substr($dato["trabajador_departamento_id"],0,6));		
+					#if(@$dato["trabajador_departamento_id"])
+					#	$words["lugar"]						=$this->lugar(substr($dato["trabajador_departamento_id"],0,6));		
 					$words["fecha"]							=$this->sys_date;		
 					
 					#####################################
-					$datas_conceptos=$this->conceptos_ids_obj->__BROWSE($conceptos_ids_options);		
+					
+					
+					
+					
+					
+					$datas_conceptos=$this->sys_fields["conceptos_ids"]["obj"]->__BROWSE($conceptos_ids_options);		
+					
 					if($datas_conceptos["total"]>0)
 					{						
 						$a=0;
@@ -731,7 +726,7 @@
 								if($a==2 AND $hoja2==0)	
 								{	
 									$hoja2=1;
-									$template					.="<br><br>".$this->__TEMPLATE($this->sys_module . "html/PDF_FORMATO2");						
+									$template					.="<br><br>".$this->__TEMPLATE($this->sys_var["module_path"]. "html/PDF_FORMATO2");						
 								}	
 								$words["CP1V_matricula$a"]	=$datos[0]["trabajador_clave"];
 								$words["CP1V_con$a"]			=$data_conceptos["con"];
@@ -749,8 +744,10 @@
 							}
 						}
 					}				
+					
 					#####################################
-					$datas_fijos=$this->fijos_ids_obj->__BROWSE($conceptos_ids_options);					
+					$datas_fijos=$this->sys_fields["fijos_ids"]["obj"]->__BROWSE($conceptos_ids_options);		
+					#$datas_fijos=@$this->fijos_ids_obj->__BROWSE($conceptos_ids_options);					
 					if($datas_fijos["total"]>0)
 					{								
 						$a=0;
@@ -762,7 +759,7 @@
 								if($a==2 AND $hoja2==0)	
 								{	
 									$hoja2=1;
-									$template					.="<br><br>".$this->__TEMPLATE($this->sys_module . "html/PDF_FORMATO2");						
+									$template					.="<br><br>".$this->__TEMPLATE($this->sys_var["module_path"]. "html/PDF_FORMATO2");						
 								}	
 								$words["CPF1_matricula$a"]		=$datos[0]["trabajador_clave"];
 								$words["CPF1_con$a"]			=@$data_conceptos["con"];
@@ -777,8 +774,10 @@
 
 						}
 					}						
+					#/*
 					#####################################
-					$datas_fijos=$this->historicos_ids_obj->__BROWSE($conceptos_ids_options);					
+					#$datas_fijos=@$this->historicos_ids_obj->__BROWSE($conceptos_ids_options);					
+					$datas_fijos=$this->sys_fields["historicos_ids"]["obj"]->__BROWSE($conceptos_ids_options);		
 					if($datas_fijos["total"]>0)
 					{								
 						$a=0;
@@ -790,7 +789,7 @@
 								if($a==2 AND $hoja2==0)	
 								{	
 									$hoja2=1;
-									$template					.="<br><br>".$this->__TEMPLATE($this->sys_module . "html/PDF_FORMATO2");						
+									$template					.="<br><br>".$this->__TEMPLATE($this->sys_var["module_path"]. "html/PDF_FORMATO2");						
 								}	
 								$words["H1_matricula$a"]		=$datos[0]["trabajador_clave"];
 								$words["H1_con$a"]				=@$data_conceptos["con"];
@@ -805,7 +804,7 @@
 							}
 						}
 					}						
-					
+					#*/
 					for($a=1; $a<7;$a++)
 					{	
 						if(!isset($words["CPF1_matricula$a"]))
@@ -852,7 +851,8 @@
 							$words["CP1V_fin$a"]		="";							
 						}						
 						
-					}						
+					}	
+				
 					$template								=$this->__REPLACE($template,$words);
 					
 					#$this->__PRINT_R($datas_conceptos);	
@@ -913,8 +913,11 @@
 						$data_recibido["estatus"]			="Reclamacion Generada";	
 						$data_recibido["d_estatus"]			="El Departamento de personal de tu adscripcion, genero la documentacion para enviar la solicitu de reclamacion a la delegacion";	
 						
-						$data_recibido["f_calculo"]			=$_SESSION["var"]["datetime"];
 						
+						$data_recibido["calculo"]			=$_SESSION["user"]["name"];
+						$data_recibido["m_calculo"]			=$_SESSION["user"]["email"];				
+						$data_recibido["f_calculo"]			=$_SESSION["var"]["datetime"];
+												
 						$this->__SAVE($data_recibido);				
 					}
 				}			
@@ -927,7 +930,7 @@
 				foreach($this->request["rh_calculo"] as $id)
 				{
 					$data=$this->__BROWSE($id);	
-					if(isset($data["data"][0]) AND $data["data"][0]["f_calculo"]=="" AND $data["data"][0]["f_p_recibio"]!="")
+					if(isset($data["data"][0]) AND $data["data"][0]["f_calculo"]=="" AND $data["data"][0]["f_d_recibio"]!="")
 					{											
 						$data_recibido					=array();
 
@@ -965,6 +968,32 @@
 				}			
 			}    	
 		}	
+   		public function __CALCULO_PROCEDENTE()
+    	{
+			if(isset($this->request["rh_calculo"]))
+			{
+				foreach($this->request["rh_calculo"] as $id)
+				{
+					$data=$this->__BROWSE($id);	
+					if(isset($data["data"][0]) AND $data["data"][0]["f_d_recibio"]!="")
+					{											
+						$data_recibido					=array();
+
+						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
+						$data_recibido["estatus"]			="Procedente en Delegacion";
+												
+						if($data["data"][0]["d_calculo"]=="")
+							$data_recibido["d_estatus"]		="Esta solicitud es procedente, porque se tiene evidencia para sustentar la reclamacion.";
+
+						$data_recibido["autorizo"]			=$_SESSION["user"]["name"];
+						$data_recibido["m_autorizo"]		=$_SESSION["user"]["email"];				
+						$data_recibido["f_autorizo"]		=$_SESSION["var"]["datetime"];
+																							
+						$this->__SAVE($data_recibido);				
+					}
+				}			
+			}    	
+		}	
 
    		public function __CALCULO_RECHAZO()
     	{
@@ -979,10 +1008,14 @@
 
 						$data_recibido["f_estatus"]			=$_SESSION["var"]["datetime"];
 						$data_recibido["estatus"]			="Devuelta por Adscripcion";
+
+						$data_recibido["devuelve"]			=$_SESSION["user"]["name"];
+						$data_recibido["m_devuelve"]		=$_SESSION["user"]["email"];				
+						$data_recibido["f_devuelve"]		=$_SESSION["var"]["datetime"];
 												
 						if($data["data"][0]["d_calculo"]=="")
 							$data_recibido["d_estatus"]		="Esta solicitud es devuelta por falta de documentacion.";
-																							
+							
 						$this->__SAVE($data_recibido);				
 					}
 				}			
@@ -995,8 +1028,11 @@
 			{
 				foreach($this->request["rh_calculo"] as $id)
 				{
-					$data=$this->__BROWSE($id);	
-					if(isset($data["data"][0]) AND $data["data"][0]["f_p_recibio"]=="")
+					$data=$this->__BROWSE($id);
+					
+					
+						
+					if(isset($data["data"][0]) AND $data["data"][0]["f_p_recibio"]=="" OR $data["data"][0]["f_devolucion"]!="0000-00-00 00:00:00")
 					{											
 						$data_recibido					=array();
 
@@ -1013,8 +1049,8 @@
 				}			
 			}    	
 		}	
-		############################################################################################################
-   		public function __REPORT_PENDIENTE()    // PASO 1
+
+   		public function __REPORT_FILTRO($option)    // PASO 1
     	{
 			$option				=array();			
 			$option["where"]	=array();
@@ -1025,7 +1061,7 @@
 			$option["where"][]				="f_p_recibio is NULL";				
 			
 			
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 			
@@ -1044,6 +1080,46 @@
 
 			return $this->__REPORTE($option);
 		}	
+
+
+		############################################################################################################
+		
+   		public function __REPORT_PENDIENTE()    // PASO 1
+    	{
+			$option				=array();			
+			$option["where"]	=array();
+			$option["color"]	=array();
+			
+			#$option["where"]=array("estatus =''");
+			
+			$option["where"][]				="f_p_recibio is NULL";				
+			
+			
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_elaboro\"]. ' + 3 days')) < date('Y-m-d')";
+			#$option["color"]["black"]		="1==1";
+			
+			
+			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
+			{					
+				$option["where"][]				="1=1 OR estatus='Devuelta por Adscripcion'";
+			
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+				$this->words["module_title"]	="";
+								
+			}
+				
+			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
+			{			
+				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+				$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] == ''";	
+				
+				$this->words["module_title"]	="Reporte de Solicitudes de Reclamaciones Pendientes por Recibir";
+			}
+			
+
+			return $this->__REPORTE($option);
+		}	
 		############################################################################################################
    		public function __REPORT_RECIBIDO() // PASO 2
     	{
@@ -1052,35 +1128,59 @@
 			$option["color"]	=array();
 			
 			
-			if($this->__NIVEL_SESION(">=50")==true)	 // NIVEL USUARIO SINDICATO Y ADSCRIPCION			
+			if($this->__NIVEL_SESION("==0")==true)	 // EDUARDO VIZCAINO
 			{			
-				$this->__RECIBIR_ADSCRIPCION();
 				$option["where"][]				="f_p_recibio != ''";					
 				$option["where"][]				="f_calculo is NULL";		
 							
-				$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+				$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+				$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
+			}	
+			else if($this->__NIVEL_SESION(">=50")==true)	 // NIVEL USUARIO SINDICATO Y ADSCRIPCION			
+			{			
+				
+				$option["where"][]				="f_p_recibio != ''";					
+				$option["where"][]				="f_calculo is NULL";		
+				$option["where"][]				="estatus ='Recibida por la adscripcion'";
+							
+				$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 				$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 
+				#$option["echo"]		="Entregado";	
 				if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
-				{										
-					$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+				{	
+					$this->sys_fields["f_p_recibio"]["title_filter"]      = "F Entrega";
+														
+					$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";
+					
+						
 				}				
 				elseif($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 				{			
+					$this->__RECIBIR_ADSCRIPCION();
+					
+					
+					
+					
+					$this->sys_fields["f_p_recibio"]["title_filter"]      = "F Recepcion";				
+					#$option["where"][]				="f_devuelve is null";
+						    	    
 					$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
 					$option["actions"]["check"]		="$"."row[\"f_p_recibio\"]!= ''";	
+					$this->words["module_title"]	="Solicitudes de Reclamaciones Recibidas en Adscripcion";
 				}
 			}	
-			elseif($this->__NIVEL_SESION("==40")==true)	 // NIVEL USUARIO ADSCRIPCION 
+
+			elseif($this->__NIVEL_SESION("==40")==true)	 // NIVEL USUARIO DELEGACION 
 			{			
 				$this->__RECIBIR_DELEGACION();
 			
 				$option["where"][]				="f_d_recibio != ''";					
+				
 				//$option["where"][]				="f_calculo is NULL";		
 							
-				$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-				$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
-
+				$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+				$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 
 				//$this->__RECIBIR_ADSCRIPCION();
 				$option["actions"]["write"]		="$"."row[\"f_d_recibio\"]!=''";	
@@ -1093,7 +1193,7 @@
 		############################################################################################################
    		public function __REPORT_CALCULO() // PASO 3 -1
     	{
-    		//$this->__CALCULO_PROCESADO();
+    		//$this->__CALCULO_PROCESADO();    	    		
     		
 			$option				=array();			
 			$option["where"]	=array();
@@ -1102,7 +1202,7 @@
 			$option["where"][]				="f_calculo != ''";						
 			$option["where"][]				="f_d_recibio is NULL";					
 										
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_calculo\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_calculo\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_calculo\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
@@ -1139,7 +1239,7 @@
 												
 			$option["where"][]				="estatus = 'Devuelta por Adscripcion'";						
 										
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
@@ -1153,6 +1253,8 @@
 				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
 				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
 			}
+			$option["actions"]["check"]		="1==1";	
+			$option["actions"]["write"]		="1==1";	
 			
 			return $this->__REPORTE($option);
 		}	
@@ -1167,7 +1269,7 @@
 												
 			$option["where"][]				="estatus = 'Improcedente por Adscripcion'";						
 										
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
@@ -1186,27 +1288,27 @@
 		}	
    		public function __REPORT_PROCEDENTE() // PASO 3 - 2
     	{
-    		#$this->__CALCULO_IMPROCEDENTE();
+    		$this->__CALCULO_PROCEDENTE();
     		
 			$option				=array();			
 			$option["where"]	=array();
 			$option["color"]	=array();
 												
-			$option["where"][]				="estatus = 'Improcedente por Adscripcion'";						
+			$option["where"][]				="estatus = 'Procedente en Delegacion'";						
 										
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
-			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
+			#$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			#$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
 			if($this->__NIVEL_SESION("==60")==true)	 // NIVEL USUARIO SINDICATO 			
 			{					
-				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
+				#$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]==''";	
 			}
 				
 			if($this->__NIVEL_SESION("==50")==true)	 // NIVEL USUARIO ADSCRIPCION 
 			{			
-				#$option["actions"]["check"]		="$"."row[\"f_p_recibio\"] != ''";	
-				$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
+
+				#$option["actions"]["write"]		="$"."row[\"f_p_recibio\"]!=''";	
 			}
 			
 			return $this->__REPORTE($option);
@@ -1222,7 +1324,7 @@
 						
 			$option["where"][]				="f_p_recibio != ''";										
 						
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_p_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 						
@@ -1249,7 +1351,7 @@
 			$option["where"][]				="f_d_recibio != ''";				
 			
 			#$option["color"]["red"]							="$"."row[\"estatus\"]=='Devuelta por Adscripcion'";
-			$option["color"]["orange"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
+			$option["color"]["purple"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 5 days')) < date('Y-m-d')";
 			$option["color"]["blue"]		="date('Y-m-d', strtotime($"."row[\"f_d_recibio\"]. ' + 3 days')) < date('Y-m-d')";
 			#$option["color"]["black"]		="1==1";
 			
@@ -1291,11 +1393,9 @@
 				$option["actions"]["write"]					="true";	
 
 			}
-
-			$option["color"]["red"]					="$"."row[\"estatus\"]=='Devuelta por Adscripcion'";
-			$option["color"]["black"]				="1==1";
-			
-			
+			if($this->sys_private["section"]!="section_rechazo")
+				$option["color"]["red"]					="$"."row[\"estatus\"]=='Devuelta por Adscripcion'";
+			$option["color"]["black"]				="1==1";						
 
 			#array_unshift($option["color"], "red""$"."row[\"estatus\"]=='Rechazada en Adscripcion'";			
 

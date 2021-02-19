@@ -2,7 +2,7 @@
     <div class="module_subtitle">Propiedades generales</div>
 	<table border="0">
 		<tr>
-		    <td width="16%">                        
+		    <td width="16%">
 		        {id}
 		    </td>        				    
 		    <td colspan="3">
@@ -33,7 +33,19 @@
 					<li  class="form"><a href="#tabs-1">Permisos</a></li>
 				
 				</ul>
-				<div id="tabs-1" class="form">{permisos}</div>				
+				<div id="tabs-1" class="form">
+					<table  width="100%">
+						<tr>
+							<td>
+							{permisos}
+							</td>
+							<td>
+							{firma_b64}
+							</td>
+						</tr>
+					</table>
+				
+				</div>				
 			</div>
   <script>
   $(function() {

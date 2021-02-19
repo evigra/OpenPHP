@@ -9,7 +9,8 @@
 	$objeto->words["system_module"]	=	$objeto->__TEMPLATE($objeto->sys_html."system_module");
 	
 	# CARGA DE ARCHIVOS EXTERNOS JS, CSS
-	$objeto->words["html_head_js"]	=	$objeto->__FILE_JS();
+	$objeto->words["html_head_js"]	=	$objeto->__FILE_JS(array("index","firma"));
+	#$objeto->words["html_head_js"]	=	$objeto->__FILE_JS();
 	#$objeto->words["html_head_css"]	=	$objeto->__FILE_CSS(array("../sitio_web/css/basicItems"));
 		
 	$module_center	="";	

@@ -971,6 +971,49 @@
 							$this->sys_fields["$campo"]["value"]		="0";						
 						}		
 					}			
+					
+					/*					
+					if(@$this->sys_fields[$campo]["type"]=="firma" AND $this->sys_fields["$campo"]["value"]!="")
+					{								
+
+						if(isset($this->sys_fields["$campo"]["value"]) AND $this->sys_fields["$campo"]["value"]!="")
+						{
+							$v_b64=explode(",",$datas["firma_b64"]);			
+							$ifp = fopen("modulos/files/firmas/". $datas["email"] . '.png', "wb" ); 
+							fwrite( $ifp, base64_decode($v_b64[1]) ); 
+							fclose( $ifp ); 				
+						}						
+
+
+					}			
+					*/
+					
+					
+					
+					
+					
+					
+					
+					
+					
+/*					
+				if(isset($datas["firma_b64"]) AND $datas["firma_b64"]!="")
+				{
+					$v_b64=explode(",",$datas["firma_b64"]);			
+					$ifp = fopen("modulos/files/firmas/". $datas["email"] . '.png', "wb" ); 
+					fwrite( $ifp, base64_decode($v_b64[1]) ); 
+					fclose( $ifp ); 				
+				}						
+*/				
+					
+					
+					
+					
+					
+					
+					
+					
+					
 				}
 			}	
 			
@@ -1065,6 +1108,7 @@
 				#/*
 	    		if(@$this->sys_private["action"]=="print_pdf")
 	    		{
+	    			
 	    			$archivo = $form.'_pdf.html';
 					if(@file_exists($archivo))			    			
 						$return 						= file_get_contents($archivo);		    
@@ -1077,6 +1121,8 @@
 					elseif(@file_exists("../../../../".$archivo))			    			
 						$return 						= file_get_contents("../../../../".$archivo);		    		    				    			    		
 					else $archivo = $form.'.html';	
+					
+					#$return.="PRUEBA DE PDF#####";
 	    		}
 	    		#*/
 				if($return=="")	    				    	
@@ -1299,9 +1345,7 @@
 			$pdf->SetFont('helvetica', '', 9);
 			
 			if(!is_array($_SESSION["pdf"]["template"]))
-			{
-				
-			
+			{						
 				$_SESSION["pdf"]["template"]			=array(
 					array(
 						"format"		=>"A4",					
@@ -1310,12 +1354,17 @@
 					),			
 				);	
 			}	
+			
+			
 						
 			$datos=$_SESSION["pdf"]["template"];
 			foreach($datos as $dato)
 			{
+				
 				$pdf->AddPage($dato["orientation"],$dato["format"]);	
+				
 				$pdf->writeHTML($dato["html"], true, 0, true, 0);
+				$pdf->Image('sitio_web/img/fondo_completo_logo.png',-55,20, 330,240);
 			}
 			$pdf->lastPage();			
 
@@ -1424,6 +1473,9 @@
 			        if(!isset($valor["source"]))	   	$valor["source"]		="";			        
 			        if(!isset($valor["attr"]))	   		$valor["attr"]			="";
 					if(!isset($valor["style"]))	   		$valor["style"]			="";
+					
+					if(!is_array($valor["value"]))
+						$words["lbl_$campo"]  		="{$valor["value"]}";
 
 					$class="$campo ";
 					$style="style=\"" . $this->__VALOR($valor) . "\""; 				
@@ -1470,7 +1522,7 @@
 								}	
 								else
 								{					        
-									$words["$campo"]  		="<input id=\"$campo\" $style autocomplete=\"off\" type=\"text\" $attr name=\"{$this->sys_name}_$campo\" value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} {$this->sys_object} $class\">{$valor["br"]}$titulo";
+									$words["$campo"]  		="<input id=\"$campo\" $style autocomplete=\"off\" type=\"text\" $attr name=\"{$this->sys_name}_$campo\" value=\"{$valor["value"]}\" txt=\"{$valor["title"]	}\" class=\"formulario {$this->sys_name} {$this->sys_object} $class\">{$valor["br"]}$titulo";
 									$words["$campo.md5"]  	="<input id=\"$campo\" $style autocomplete=\"off\" type=\"text\" $attr name=\"{$this->sys_name}_$campo\" value=\"" . md5($valor["value"]) . "\" class=\"formulario {$this->sys_name} {$this->sys_object} $class\">{$valor["br"]}$titulo";
 								}					        										
 							}
@@ -1490,7 +1542,7 @@
 									$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";
 								else					        
 									$words["$campo"]  ="
-										<input id=\"$campo\" $style type=\"text\" name=\"{$this->sys_name}_$campo\" $attr value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo
+										<input id=\"$campo\" $style type=\"text\" name=\"{$this->sys_name}_$campo\" $attr txt=\"{$valor["title"]	}\" value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo
 										<script>
 											$(\"input#$campo".".{$this->sys_name}\").datepicker({
 												dateFormat:\"yy-mm-dd\",
@@ -1504,6 +1556,59 @@
 							}					        	
 					        else	$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";	
 					    } 
+					    if($valor["type"]=="firma")	
+					    {
+					    	$js_auto="";
+					        if(!in_array(@$this->sys_private["action"],$_SESSION["var"]["print"]))					        
+					        {
+								if(@$this->sys_private["section"]=="show")
+									$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";
+								else
+								{
+									$words["firma_$campo"]  ="<img src=\"{$valor["value"]}\">";					        
+									$words["$campo"]  ="
+										<input id=\"$campo\" $style type=\"hidden\" name=\"{$this->sys_name}_$campo\" $attr value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">
+										<div class=\"sigPad\" id=\"firma$campo\" style=\"width:400px;\">
+											<table border=\"1\">	
+												<tr>
+													<td><font class=\"firmar\">FIRMAR</font></td>
+													<td><font class=\"clearButton\" >Borrar</font></td>
+												</tr>										
+												<tr>
+													<td colspan=\"2\">
+														<div style=\"width:250px; height:130px; position:relative;\">
+															<canvas class=\"pad\" width=\"250\" height=\"130\"></canvas>
+															<div id=\"div_$campo\" style=\"width:250px; height:130px; position:absolute; left:0px; top:0px;\">
+																<img src=\"{$valor["value"]}\">
+															</div>															
+														</div>
+													</td>
+												</tr>										
+											</table>
+										</div>
+
+										<script>
+											var instance= $(\"#firma$campo\").signaturePad(
+											{
+												drawOnly:true, 
+												drawBezierCurves:true, 
+												variableStrokeWidth:true, 
+												lineTop:100
+											});
+											$(\".firmar\").click(function(){
+												$(\"input#$campo".".{$this->sys_name}\").val(instance.getSignatureImage());
+											});
+											$(\".clearButton\").click(function(){
+												$(\"#div_$campo\").hide();
+											});
+
+										</script>			            	
+							    	";
+						    	}
+							}					        	
+					        else	$words["$campo"]  ="<img src=\"{$valor["value"]}\">";	
+					    } 
+
 					    ################################
 					    if($valor["type"]=="datetime")	
 					    {
@@ -1514,7 +1619,7 @@
 									$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";
 								else					        
 							    $words["$campo"]  ="
-							    	<input id=\"$campo\" $style type=\"text\" name=\"{$this->sys_name}_$campo\" $attr value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo
+							    	<input id=\"$campo\" $style type=\"text\" txt=\"{$valor["title"]	}\" name=\"{$this->sys_name}_$campo\" $attr value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo
 					    			<script>
 										$(\"input#$campo".".{$this->sys_name}\").datetimepicker({
 											dateFormat: 	\"yy-mm-dd\",
@@ -1559,7 +1664,7 @@
 									$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";
 								else							
 							    $words["$campo"]  ="
-							    	<input id=\"$campo\" $style type=\"text\" name=\"{$this->sys_name}_$campo\"  $attr class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo
+							    	<input id=\"$campo\" $style type=\"text\" txt=\"{$valor["title"]	}\" name=\"{$this->sys_name}_$campo\"  $attr class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo
 					    			<script>
 										$(\"input#$campo".".{$this->sys_name}\").multiDatesPicker(
 										{
@@ -1580,7 +1685,7 @@
 							
 					    	$words["$campo"]  = 
 					        "<div class=\"checkbox-2\">
-		    					<input type=\"checkbox\" id=\"{$this->sys_name}_$campo\"  $checked value=\"1\" name=\"{$this->sys_name}_$campo\" />
+		    					<input type=\"checkbox\" id=\"{$this->sys_name}_$campo\" txt=\"{$valor["title"]	}\" $checked value=\"1\" name=\"{$this->sys_name}_$campo\" />
 		    					<label for=\"{$this->sys_name}_$campo\">".""."</label>
 							</div>$titulo
 							{$valor["br"]}
@@ -1589,7 +1694,7 @@
 					    ################################     
 					    if($valor["type"]=="file")	
 					    {					        
-					        $words["$campo"]  ="<input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo";
+					        $words["$campo"]  ="<input id=\"$campo\" $attr txt=\"{$valor["title"]	}\" name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo";
 					        $agua="";
 					        $facebook="";
 					        if(in_array(@$valor["agua"],$_SESSION["var"]["true"]))
@@ -1623,7 +1728,7 @@
                                         $agua
                                         $facebook
                                         <td>
-                                            <input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo
+                                            <input id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" txt=\"{$valor["title"]	}\" type=\"file\" class=\"formulario {$this->sys_name} $class\" >{$valor["br"]}$titulo
                                         </td>
                                     </tr>
                                 </table>
@@ -1667,7 +1772,7 @@
 								}	
 								else
 								{					        
-									$words["$campo"]  	="<textarea id=\"$campo\" name=\"{$this->sys_name}_$campo\" $attr class=\"formulario {$this->sys_name} $class\">{$valor["value"]}</textarea>{$valor["br"]}$titulo";
+									$words["$campo"]  	="<textarea id=\"$campo\" txt=\"{$valor["title"]	}\" name=\"{$this->sys_name}_$campo\" $attr class=\"formulario {$this->sys_name} $class\">{$valor["value"]}</textarea>{$valor["br"]}$titulo";
 								}					        										
 							}
 					        else	
@@ -1700,7 +1805,7 @@
 					    	if(@$this->sys_private["section"]=="show")
 					    		$words["$campo"]  ="*********{$valor["br"]}$titulo";					    							    	    
 					    	else					    
-					        $words["$campo"]  ="<input type=\"password\" $style id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo";
+					        $words["$campo"]  ="<input type=\"password\" txt=\"{$valor["title"]	}\" $style id=\"$campo\" $attr name=\"{$this->sys_name}_$campo\" value=\"{$valor["value"]}\" class=\"formulario {$this->sys_name} $class\">{$valor["br"]}$titulo";
 					    }    
 					    ################################
 					    if($valor["type"]=="flow")	
@@ -1746,7 +1851,7 @@
 								if(@$this->sys_private["section"]=="show")
 									$words["$campo"]  ="{$valor["value"]}{$valor["br"]}$titulo";
 								else							    			            
-									$words["$campo"]  ="<select id=\"$campo\" $style name=\"{$this->sys_name}_$campo\"  $attr class=\"formulario {$this->sys_name} $class\">
+									$words["$campo"]  ="<select id=\"$campo\" $style name=\"{$this->sys_name}_$campo\" txt=\"{$valor["title"]	}\" $attr class=\"formulario {$this->sys_name} $class\">
 											$options
 										</select>{$valor["br"]}$titulo
 									";
@@ -1898,6 +2003,7 @@
 						#/*
 					    if($valor["type"]=="form")	
 					    {					    
+					    	
 							if(isset($valor["relation"]) AND $valor["relation"]=="one2many")
 							{			
 								if(!isset($valor["class_template"]))		$valor["class_template"]="many2one_standar";					
@@ -2354,11 +2460,18 @@
                     	$class="even";
                     	$style="background-color:#D5D5D5; height:30px;";	
                     }	
-                    else                
+                    elseif($class=="even")   
                     {
                     	$class="odd";
-                    	$style="background-color:#E5E5E5; heigth:30px;";	
+                    	$style="background-color:#E5E5E5; height:30px;";	
                     }	
+                    /*
+                    else                
+                    {
+                    	$class="even";
+                    	$style="background-color:#A5A5A5; heigth:30px;";	
+                    }
+                    */	
                     
                     $actions				=array();
                     $colors					=array();
@@ -2815,17 +2928,21 @@
 		{
 			if($option["type_view"]=="report")
 			{
-			    if($this->sys_private["action"]=="__clean_session" OR $this->sys_private["action"]=="seach")
+			    if($this->sys_private["action"]=="__clean_session" OR $this->sys_private["action"]=="seach"  OR $this->sys_private["section"]=="report")
 			    {
 				    if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/report_title";
 				    if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/report_body";			
 				}
+				elseif($this->sys_private["section"]!="")    
+			    {
+				    if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/{$this->sys_private["section"]}/report_title";
+				    if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/{$this->sys_private["section"]}/report_body";		
+				}				
 				else    
 			    {
 				    if(!isset($option["template_title"]))	$option["template_title"]	=$this->sys_var["module_path"]."html/{$this->sys_private["action"]}/report_title";
 				    if(!isset($option["template_body"]))	$option["template_body"]	=$this->sys_var["module_path"]."html/{$this->sys_private["action"]}/report_body";		
 				}
-
 			}
 			elseif($option["type_view"]=="kanban" )
 			{
@@ -3361,19 +3478,35 @@
 		##############################################################################   
 		public function __VIEW_TEMPLATE_TITLE($option)
 		{
-			$return="";	
+			$return="PASA";	
+
+			/*
+                    if($class=="odd")   
+                    {
+                    	$class="even";
+                    	$style="background-color:#D5D5D5; height:30px;";	
+                    }	
+                    elseif($class=="even")   
+                    {
+                    	$class="odd";
+                    	$style="background-color:#E5E5E5; height:30px;";	
+                    }	
+                    
+                    $actions				=array();
+                    $colors					=array();
+                    if(substr(@$this->sys_private["action"],0,5)!="print")	    $actions["sys_class"]	=$class;
+	                else    								                    $actions["style_tr"]	=$style;
+			*/
 
 			if(isset($option["template_title"]) AND $option["template_title"] != "")
 			{
+				
 				$view_title     				=$this->__TEMPLATE($option["template_title"]);					//  HTML DEL REPORTE
 				$view_title						=str_replace("<td>", "<td class=\"title\">", $view_title);      // AGREGA la clase titulo
 				
 				$this->sys_title["style_tr"]	="background-color:#b5b5b5; heigth:60px;";
 				$this->sys_title["style_tr"]	="background-color:#b5b5b5;";
-				#$this->sys_title["sys_class"]	="background-color:#D5D5D5; height:30px;";
-				
-				
-				
+				$this->sys_title["sys_class"]	="background-color:#A5A5A5; height:100px;";
 			} 
 			if(isset($this->sys_title))
 			{
@@ -3677,9 +3810,11 @@
 		        foreach($data as $field=>$valor)
 				{    		    													   
 				    if(is_string($valor) AND $valor=="maps")                $file="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHdbkivyRpHCuGZUbQ-DAM7MmHf_lLvwI";
+				    elseif(is_string($valor) AND $valor=="index")           $file="../" . $this->sys_var["module_path"] . "js/index.js";
+				    elseif(is_string($valor) AND $valor=="firma")           $file="../sitio_web/js/numeric-1.js";
 				    elseif(is_string($valor) AND $valor=="vue")             $file="../sitio_web/js/vue.js";
 				    elseif(is_string($valor) AND $valor=="adapter")         $file="../sitio_web/js/adapter.min.js";
-				    elseif(is_string($valor) AND $valor=="instascan")         $file="../sitio_web/js/instascan.min.js";
+				    elseif(is_string($valor) AND $valor=="instascan")       $file="../sitio_web/js/instascan.min.js";
 				    elseif(is_string($valor) AND $valor=="responsivevoice") $file="https://code.responsivevoice.org/responsivevoice.js";
 				    elseif(is_string($valor) AND $valor=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
 				    elseif(is_string($field) AND $field=="graph")  			$file="https://www.gstatic.com/charts/loader.js";
@@ -3696,6 +3831,15 @@
 				    		<script src=\"../sitio_web/js/maplabel-compiled.js\"></script>
 				    	";    		    
 				    }
+				    if(is_string($valor) AND $valor=="firma")	
+				    {
+				    	$return.="					    	
+							<script src=\"../sitio_web/js/bezier.js\"></script>
+							<script src=\"../sitio_web/js/json2.js\"></script>  
+							<script src=\"../sitio_web/js/jquery.js\"></script>
+				    	";    		    
+				    }
+
 				    if(is_string($field) AND $field=="graph")	
 				    {
 				    	foreach($valor as $data_graph)
@@ -3986,14 +4130,18 @@
 										enviar	=true;		
 									}								
 									if($(\"[class*='required'][class*='{$this->sys_name}']\").length>0)
-									{				
+									{		
+										var mensaje=\"\";		
 										$(\"[class*='required'][class*='{$this->sys_name}']\").each(function(){
 											if(   $(this).val()==\"\"   )
 											{
+
+												var txt	=\" > \" + $(this).attr(\"txt\");
+												mensaje	+=\"<br>\"+txt;
 												enviar=false;	
 											}										
 										});	
-										var form=\"Favor de verificar los campos faltantes</font>\";								
+										var form=\"Favor de verificar los campos faltantes</font><br>\"+mensaje;								
 									}
 								}
 								
@@ -4001,6 +4149,7 @@
 								else 
 								{
 									$(\"#message\")
+									.attr({\"title\":\"MENSAJE DEL SISTEMA\"})
 									.html(form)
 									.dialog({
 										width:\"400\",

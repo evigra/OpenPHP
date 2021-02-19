@@ -42,6 +42,16 @@
 		WHERE pe.matricula='{$_REQUEST["matricula"]}'
         LIMIT 1	
 	";		
+
+	$comando_sql        ="
+		SELECT *
+        FROM plazas pl 
+        WHERE pl.matricula='{$_REQUEST["matricula"]}'
+        LIMIT 1	;
+	";		
+
+
+	#echo $comando_sql;
 	$data =$objeto->__EXECUTE($comando_sql, "DEVICE MODELO");	
 	
 	#$objeto->__PRINT_R($data);

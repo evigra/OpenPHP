@@ -2,9 +2,16 @@
 	if(!isset($_SESSION))
 	{
 		$usuarios_sesion						="PHPSESSID";
+		
+		session_cache_expire(10);
+		@session_cache_limiter('nocache,private');
+		#@session_cache_limiter('private');
+		#echo session_cache_expire();
+		
 		session_name($usuarios_sesion);
 		@session_start();
-		@session_cache_limiter('nocache,private');					
+						
+
 	}
 	
 	if(!isset($_SESSION))		$_SESSION=array();
@@ -80,10 +87,12 @@
 		{
 			$_SESSION["var"]["action"]="cerrar_sesion";
 			
-			setcookie('SolesGPS', '', time() - (60 * 60 * 24 * 365));
+			#setcookie('SolesGPS', '', time() - (60 * 60 * 24 * 365));
 			session_destroy();
+			#session_destroy();
 			$destino= "../sesion/";				
 			Header ("Location: $destino");			
+			session_destroy();
 		}	
 	}
 	$pre_path="";

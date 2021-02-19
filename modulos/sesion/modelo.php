@@ -61,6 +61,7 @@
 		##############################################################################
 		public function __CONSTRUCT($option=null)
 		{			
+			$this->words["mensaje_sesion"]="";
 			$return = parent::__CONSTRUCT($option);			
 
 			if(isset($_GET["cookie"]) AND isset($_COOKIE['SolesGPS']) AND !isset($_SESSION["var"]["action"]))
@@ -151,8 +152,8 @@
 							<td>
 								<img src=\"../modulos/sesion/img/noCheck.png\" alt=\"\" />
 							</td>
-							<td style = \"padding-left: 10px;\">
-								Error de Sesion. Verifique Sus Datos.
+							<td style = \"padding-left: 15px;\">
+								Verifique Sus Datos.
 							</td>    														 
 						</tr>    													
 					</table>    												
@@ -183,9 +184,6 @@
 											<td style = \"padding-left: 10px;\">
 												Datos Correctos. Iniciando Sesion...
 											</td>				    														   														
-											<td style = \"padding-left: 10px;\">
-												<img src=\"../modulos/sesion/img/gps.gif\" alt=\"\" />
-											</td>
 										</tr>    													
 									</table>    												
 								</div>

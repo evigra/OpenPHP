@@ -28,6 +28,14 @@
         left:                   65px; 
         width:                  120px;
     }
+    div.logo_central
+    {           
+        top:                    0px;        
+        position:               absolute;  
+        left:                   -170px; 
+        width:                  900px;
+    }
+
     .cabecera{
         height:                 230px; 
     }
@@ -276,11 +284,18 @@ form
 	color:                  white;
 }
 .fondo1
-{     
-    background: linear-gradient(to right, rgba(0, 89, 76,0.8), rgb(0, 89, 76,1)), url("../img/fondo_logo.png");
+{   
+    background: linear-gradient(to right, rgba(0, 89, 76,0.8), rgb(0, 89, 76,1)), url("../img/fondo_logo.png");    
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 100%;    
 }
+.fondo1_2
+{   
+    background: linear-gradient(to right, rgb(0, 89, 76,1), rgba(0, 89, 76,0.85)), url("../img/fondo_logo2.png");    
+    background-repeat: no-repeat;
+    background-size: 100% 100%;    
+}
+
 
 .color2 {
 	background-color:       #9F2241;
@@ -289,6 +304,7 @@ form
 .fondo2
 {     
     background: linear-gradient(to right, rgba(159, 34, 65,0.8), rgb(159, 34, 65,1)), url("../img/fondo_logo.png");
+	
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }

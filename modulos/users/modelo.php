@@ -27,6 +27,11 @@
 			    "type"              => "password",
 			    #"attr"              => array("required"),
 			),			
+			"firma_b64"	    =>array(
+			    "title"             => "Firma",
+			    "type"              => "firma",		    
+			),			
+
 			"celular"	    =>array(
 			    "title"             => "Celular",
 			    "type"              => "input",
@@ -102,7 +107,15 @@
 			    if(isset($datas["password"]) AND $datas["password"]!="")
 				    $datas["password"]		=md5($datas["password"]);
 				else
-					unset($datas["password"]);    
+					unset($datas["password"]);  
+					  
+				if(isset($datas["firma_b64"]) AND $datas["firma_b64"]!="")
+				{
+					$v_b64=explode(",",$datas["firma_b64"]);			
+					$ifp = @fopen("modulos/files/firmas/". $datas["email"] . '.png', "wb" ); 
+					@fwrite( $ifp, base64_decode($v_b64[1]) ); 
+					@fclose( $ifp ); 				
+				}	
 
 			    $user_id=parent::__SAVE($datas,$option);
 			    

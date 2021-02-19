@@ -1,12 +1,12 @@
-<table width="100%" border ="1" style="padding:3px;" align="left">
+<table width="100%" border ="1" style="padding:3px; font-size:8px;" align="left">
 	<tr>
 		<td colspan="10">DEPENDENCIA<br><b>{trabajador_dependencia}</b></td>
 		<td colspan="4">FECHA<br><b>{registro}</b></td>
-		<td colspan="6"></td>
+		<td colspan="6">FOLIO<br><b>{folio}</b></td>
 	</tr>	
 </table>
 <br><br>
-<table width="100%" border ="1" style="padding:3px;" align="left">		
+<table width="100%" border ="1" style="padding:3px; font-size:8px;" align="left">		
 	<tr><td colspan="20" align="center" style="background-color:#bbb; color:#fff;"><b>DATOS DEL TRABAJADOR</b></td></tr>	
 	<tr>
 		<td colspan="14">NOMBRE<br><b>{trabajador_nombre}</b></td>
@@ -56,7 +56,7 @@
 		<td colspan="7"		align="center"><b>{d_ajuste}</b></td>		
 		<td colspan="6"></td>			
 	</tr>				
-	<tr><td colspan="20"  height="50">MOTIVO<br><b>{motivo}</b></td></tr>	
+	<tr><td colspan="20"  height="30">MOTIVO<br><b>{motivo}</b></td></tr>	
 	<tr>		
 		<td colspan="10" align="center">
 			<table>
@@ -73,7 +73,7 @@
 	</tr>			
 </table>
 <br><br>
-<table width="100%" border ="1" style="padding:3px;" align="left">	
+<table width="100%" border ="1" style="padding:3px; font-size:6px;" align="left">	
 	<tr><td colspan="20" align="center" style="background-color:#bbb; color:#fff;"><b>DATOS DEL REPORTE PARA USO EXCLUSIVO DEL DEPARTAMENTO DELEGACIONAL DE PERSONAL</b></td></tr>	
 	<tr>		
 		<td colspan="7" align="center" style="background-color:#eee;">CONCEPTOS FIJOS</td>
@@ -173,9 +173,11 @@
 	</tr>		
 	<tr>				
 		<td colspan="7" align="center">
-			<table>
-				<tr><td height="60">ELABORO REPORTE</td></tr>
-				<tr><td><b>{elaboro}<br>{m_elaboro}</b></td></tr>			
+			<table border="0">
+				<tr><td height="60">ELABORO REPORTE<br>						
+							<img height="60" src="modulos/files/firmas/{m_p_recibio}.png">							
+					</td></tr>
+				<tr><td><b>{p_recibio}<br>{m_p_recibio}</b></td></tr>			
 			</table>		
 		</td>		
 		<td colspan="6" align="center">
@@ -192,3 +194,6 @@
 		</td>
 	</tr>		
 </table>
+<img  height="50" src="{firma_adscripcion}">
+
+

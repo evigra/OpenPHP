@@ -12,59 +12,41 @@
 	
 	}
 	$(document).ready(function()
-	{		
-	
-		muestra_diferente($("#che_plaza"));
-		$("#che_plaza").click(function(){
+	{					
+		$("font#autorizacion").click(function(){
+			$.ajax({
+				type: 'GET',
+				url: '../modulos/rh_calculo/ajax/autorizar_reclamacion_ads.php',
+				contentType:"application/json",
+				data:"&fecha=",
+				success: function (res) 
+				{
+					$("div#message").html(res);
+					$("div#message").dialog({
+						width:"700px"									
+					});															
+				}
+			});
+
+			
+			
+
+		});
+		reporte_ajax($("input#trabajador_clave").val(),$("input#registro").val());
+		
+		muestra_diferente($("#rh_calculo_che_plaza"));
+		$("#rh_calculo_che_plaza").click(function(){
+		
 			muestra_diferente(this);
 		});
 	
-		/*	
-		if($("#action_aprovar").length>0) 
-		{
-			$("#action_aprovar").click(function()
-			{
-				$("#estatus").val("APROVADO");
-				$("#sys_action_personal_calculo").val("__SAVE");				
-				$("form").submit();					
-			});			
-		}	
-		if($("#ver_biometrico").length>0) 
-		{
-			$("#ver_biometrico").click(function()
-			{
-				str_url="../personal_checadas/&sys_filter_personal_checadas_matricula=" + $("#trabajador_clave").val();
-				window.open(str_url);	
-			});			
-		}
-		
-		if($("#action_cancelar").length>0) 
-		{
-			$("#action_cancelar").click(function()
-			{
-				$("#estatus").val("CANCELADO");
-				$("#sys_action_personal_txt").val("__SAVE");				
-				$("form").submit();									
-			});			
-		}		
- 
-		
-		
-		if($("#action_incumplir").length>0) 
-		{
-			
-			$("#action_incumplir").click(function()
-			{				
-				$("#estatus").val("INCUMPLIDO");
-				$("#sys_action_personal_txt").val("__SAVE");				
-				$("form").submit();									
-			});			
-		}		
-		*/
+
+		$("#registro").change(function() 
+		{		
+			reporte_ajax($("input#trabajador_clave").val(),$(this).val());
+		});
 		$("#trabajador_clave").focusout(function() 
 		{		
-
-
 			$.ajax({
 				type: 'GET',
 				url: '../modulos/personal/ajax/personal_calculo.php',
@@ -76,36 +58,7 @@
 					valida_matricula("trabajador", obj);
 				}
 			});		
-
-			$.ajax({
-				type: 'GET',
-				url: '../modulos/rh_calculo/ajax/index.php',
-				contentType:"application/json",
-				data:"&matricula="+$(this).val()+"&fecha="+$("input#registro").val(),				
-				success: function (res) 
-				{
-					$("div#REPORT").html(res);
-
-				}
-			});
-
-				
-			//*/
-			/*
-		    $.ajax({
-			    type:           "GET",
-			    url:            "../modulos/plazas/ajax/index.php?time=" + Date.now(),
-			    contentType:    "application/json",
-			    data:           "&matricula="+$(this).val(),				
-			    success:        function (response) 
-			    {
-					var obj = $.parseJSON( response);
-					valida_matricula("trabajador", obj);
-			    }
-		    });
-			*/
-
-
+			reporte_ajax($(this).val(),$("input#registro").val());
 		});	
 		$("#trabajador_plaza_1").focusout(function() 
 		{	
@@ -141,24 +94,18 @@
 	{
 		if(obj.length>0)
 		{		
-			/*
-                        $("#ocupante").val(obj[0].ocupante);
-                        $("#categoria").val(obj[0].categoria);
-                        $("#horario").val(obj[0].horario);
-                        $("#plaza_id").val(obj[0].plaza_id);
-                        $("#adscripcion2").val(obj[0].adscripcion2);
-                        $("#ar2").val(obj[0].ar2);
-                        $("#ads_progra").val(obj[0].ads_progra);
-			*/
-		
-		
 			$("#"+tipo+"_nombre").val(obj[0].nombre);
-			if($("#"+tipo+"_puesto").length)			$("#"+tipo+"_puesto").val(obj[0].puesto);
+			
+			$("#"+tipo+"_nombre").val(obj[0].ocupante);
+			
+			if($("#"+tipo+"_puesto").length)			$("#"+tipo+"_puesto").val(obj[0].categoria);
+			
 			if($("#"+tipo+"_puesto_id").length)			$("#"+tipo+"_puesto_id").val(obj[0].puesto_id);
 			if($("#"+tipo+"_horario").length)			$("#trabajador_horario").val(obj[0].horario);
-			if($("#"+tipo+"_departamento").length)		$("#"+tipo+"_departamento").val(obj[0].departamento);
+			if($("#"+tipo+"_departamento").length)		$("#"+tipo+"_departamento").val(obj[0].adscripcion2);
 			if($("#"+tipo+"_departamento_id").length)	$("#"+tipo+"_departamento_id").val(obj[0].departamento_id);
-			if($("#"+tipo+"_plaza").length)				$("#"+tipo+"_plaza").val(obj[0].clave);
+			//if($("#"+tipo+"_plaza").length)				$("#"+tipo+"_plaza").val(obj[0].clave);
+			if($("#"+tipo+"_plaza").length)				$("#"+tipo+"_plaza").val(obj[0].plaza_id);
 			
 			if($("#sueldo").length)						$("#sueldo").val(obj[0].sueldo/2);
 						
@@ -171,10 +118,6 @@
 					$("#turno").attr({'title':'1:matutino, 2:vespertino, 3:nocturno, 4:mixto, 5:Jorn Acum'});
 					$("#turno").attr({'style':'border:1px solid red;'});										
 				}
-				else
-				{						
-					
-				}								
 			}
 			bases(obj);
 		}	
@@ -183,6 +126,9 @@
 			$("#"+tipo+"_nombre").val("");
 			if($("#"+tipo+"_puesto").length)	$("#"+tipo+"_puesto").val("");
 			if($("#"+tipo+"_horario").length)	$("#"+tipo+"_horario").val("");		
+			if($("#"+tipo+"_plaza").length)		$("#"+tipo+"_plaza").val("");
+			if($("#"+tipo+"_departamento").length)		$("#"+tipo+"_departamento").val("");
+			$("#turno").val("");
 		}		
 	}	
 	
@@ -194,10 +140,10 @@
 		{		
 			if($("#sueldo"+grupo).length)						$("#sueldo"+grupo).val(obj[0].sueldo);
 			if($("#turno"+grupo).length)						$("#turno"+grupo).val(obj[0].turno);
-			if($("#trabajador_puesto"+grupo).length)			$("#trabajador_puesto"+grupo).val(obj[0].puesto);
+			if($("#trabajador_puesto"+grupo).length)			$("#trabajador_puesto"+grupo).val(obj[0].categoria);
 			if($("#trabajador_puesto_id"+grupo).length)			$("#trabajador_puesto_id"+grupo).val(obj[0].puesto_id);
 			if($("#trabajador_horario"+grupo).length)			$("#trabajador_horario"+grupo).val(obj[0].horario);			
-			if($("#trabajador_departamento").length)			$("#trabajador_departamento").val(obj[0].departamento);
+			if($("#trabajador_departamento").length)			$("#trabajador_departamento").val(obj[0].adscripcion2);
 			if($("#trabajador_dependencia").length)				$("#trabajador_dependencia").val(obj[0].dependencia );
 			
 			
@@ -222,20 +168,18 @@
 			
 		}	
 	}		
-	function reporte_ajax(obj)
+	function reporte_ajax(matricula,fecha)
 	{
 		$.ajax({
 			type: 'GET',
-			url: '../modulos/rh_calculo/ajax/index.php',
+			url: '../modulos/rh_calculo/ajax/verificar_reclamacion_unica.php',
 			contentType:"application/json",
-			data:"&matricula="+$(obj).val()+"&sys_action="+sys_action,				
+			data:"&sys_section_rh_calculo=section_rechazo&matricula="+matricula+"&fecha="+fecha,
 			success: function (res) 
 			{
 				$("div#REPORT").html(res);
-				sys_action="";
 			}
 		});
-		sys_action="";
 	}
 	
     
